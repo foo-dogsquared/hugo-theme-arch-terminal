@@ -1,0 +1,352 @@
+= Terminal Plus-Minus
+
+A fork of the 
+original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme] 
+with some of its original feature set being removed to 
+be replaced for new ones.
+
+
+
+== Differences from the original
+
+Being a fork of a theme, there are some differences.
+Here are the feature highlights (and removals) that 
+the theme offers:
+
+- A recreation of the theme
+- Easy configuration and customization with SCSS
+- Different approach of content organization 
+- Suitable for creating a quick single homepage template and blogging
+- Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
+- Reduced internationalization (i18n) support (for now, anyway)
+- Removed selection of available themes 
+- Removed Node dependencies from the original theme
+- Removed syntax highlighting support (for now)
+
+CAUTION: If you are going to make content mainly with Asciidoctor, 
+the support for syntax highlighting is quite bare with the native experience. 
+Pretty much only https://gohugo.io/content-management/shortcodes/[shortcode] 
+for syntax highlighting is working as of this writing (late August 2019).
+
+
+
+== Installation
+
+Since this theme uses SASS/SCSS asset bundling, it requires 
+the extended version of Hugo. 
+In order to check whether or not you have the extended 
+version installed, just run `hugo version` and check for 
+the keyword `extended` after the version number.
+
+For future references and safety purposes, make sure that 
+the version is at least `v0.57.2`
+
+Assuming you have installed the appropriate programs and 
+using https://git-scm.com/[Git], you can clone it directly 
+to your Hugo folder:
+
+[source,bash]
+----
+git clone https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus.git themes/terminal-plus-minus
+----
+
+If you don't want to make any radical changes, the above command 
+is the best option since you can simply update it 
+(i.e. `cd themes/terminal-plus-minus && git fetch`) whenever updates 
+are available.
+
+You can also include it as a 
+https://git-scm.com/book/en/v2/Git-Tools-Submodules[git submodule]:
+
+[source,bash]
+----
+git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus.git themes/terminal-plus-minus
+----
+
+
+
+== How to configure
+
+The theme doesn't require any advanced configuration. 
+You can copy the sample configuration below and try to experiment 
+with it.
+https://gohugo.io/getting-started/configuration/[Default configuration settings] 
+also apply here. 
+
+NOTE: From this point, this assumes that you want to create the 
+config as a TOML file.
+Please change the format according to your chosen data format for 
+your configuration file.
+
+[source,toml]
+----
+baseURL = "https://example.github.io/"
+languageCode = "en-us"
+title = "Muh blog"
+description = "It's muh blog!"
+summaryLength = 20
+copyright = "Unless explicitly stated, all content released here are licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/4.0'>CC BY-NC-SA 4.0</a>."
+
+[author]
+    name = "Gabriel Arazas"
+    alias = "foo-dogsquared"
+
+[menu]
+    [[menu.main]]
+        identifier = "blog"
+        name = "Blog"
+        url = "blog/"
+
+[params]
+    subtitle = "Blogger"
+    keywords = ["blogger", "bloggr", "portfolio"]
+    tagline = "Your very ordinary tagline!"
+----
+
+
+=== Single homepage template
+
+This theme is suitable for creating a single portfolio page.
+Here are the main fields on the site configuration file for creating a 
+single homepage:
+
+* `title`
+** This is the title to appear in the header logo.
+Also appears in the `<title>` of the web page.
+
+* `params.tagline`
+** This will appear in the homepage as the first header to be seen.
+
+* `params.keywords`
+** Quite important if you consider search engine optimization (SEO).
+
+* `params.subtitle`
+** The subtitle for your blog.
+Usually, this is where you put your position, occupation, or 
+whatever. 
+Also appears in the `<title>` of the web page in the format 
+`<TITLE> - <SUBTITLE>` in the homepage.
+
+
+=== Adding projects
+
+You can also add some projects to your data by adding a 
+data file named `projects` (i.e. `projects.json`, `projects.yaml`, etc.) 
+into your data folder.
+Make sure that the data file contains a single key/field named 
+`list` that holds an array/list.
+
+When there's at least one project, a projects section will 
+be added into your homepage and the data added in the 
+appropriate folder is added under it.
+
+Anyhow, here's the following keys/fields that the theme 
+look for:
+
+[cols="4*",options="header"]
+|===
+| Key
+| Description
+| Optional
+| Additional notes
+
+| `id`
+| The identifier for the project.
+| 
+| 
+
+| `name`
+| The name of the project. 
+This is the name that'll appear in the homepage. 
+| 
+| 
+
+| `link`
+| The website/homepage of the working project. 
+| Yes
+| This is not where the link to the remote repository of the project. 
+
+| `repo`
+| The link to the repo of the project.
+| Yes 
+| 
+
+| `description`
+| The description of the project.
+| Yes
+| 
+
+|===
+
+If you want to see a live example of it, you can check out my 
+https://github.com/foo-dogsquared/foo-dogsquared.github.io[the repo of my own site] 
+and check the output of it in https://foo-dogsquared.github.io/[my site].
+
+
+=== Adding contact
+
+If you want to add some links to your other stuff like 
+GitHub, GitLab, Twitter, and whatnot, you can add a 
+data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) 
+in the data folder.
+Make sure that the data file contains a single key/field named 
+`list` that holds an array/list.
+
+Here's a table of the following key/fields that theme looks for:
+
+[cols="4*",options="header"]
+|===
+| Key
+| Description
+| Optional
+| Additional notes
+
+| `id`
+| The identifier for the object.
+| 
+| This ID will be used as the `symbol` in the SVG spritesheet file in 
+`static/social-icons.svg` in the theme folder. 
+The social icons are extracted from 
+https://github.com/simple-icons/simple-icons[Simple Icons set]. 
+
+| `url`
+| The hyperlink of the additional contact.
+| 
+| 
+
+| `name`
+| The name of the contact link.
+| Yes
+| If the links are set to be text, the value of this key will be used.
+Otherwise, if the links are set to be text and there's no value to this 
+key, the `id` will be used, instead.
+
+|===
+
+The data will be used in the footer as a collection of links 
+with their appropriate icon. 
+
+By default, the hyperlinks for your contacts are in text. 
+If you want to make it into an icon, you could set the 
+parameter `params.useLinkIcons` to `true` in the site config file.
+Be cautious of using this, since any unavailable icons will 
+not be rendered. 
+In order to see how this works, it basically relies on using 
+https://css-tricks.com/svg-symbol-good-choice-icons/[SVG spritesheets] 
+in `static/social-icons.svg` (in the theme folder) with symbols.
+
+NOTE: The whole spritesheet is extracted from the 
+https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
+
+
+=== Making a blog site
+This theme is also suitable to be a blogging theme. 
+With this function, content organization should be a breeze.
+(Of course, as long as it follows the way of 
+https://gohugo.io/content-management/organization/[organizing content from Hugo].)
+
+Unlike the original theme, it doesn't find a name of the 
+folder to list its pages. 
+Instead, all of the files and directories under `content/` 
+should be able to be listed (except for the top-level files 
+probably).
+
+If you want to make a post series, you could either put 
+the content files under `posts/` and assign the same category 
+to all of them or simply make a folder named after the series 
+and put the content files there.
+
+There are some parameters in the site configuration you might 
+want to try out if you're using it for blogging. 
+
+[cols="4*",options="header"]
+|===
+| Key
+| Description
+| Optional
+| Additional notes
+
+| `showPostsOnHome`
+| Indicates if the homepage should show the pages 
+from the content folder.
+| Yes
+| 
+
+| `listFoldersOnHome`
+| Indicates if the homepage should list the 
+site sections 
+instead of the pages 
+| Yes
+| 
+
+|===
+
+
+
+
+== How to run your site
+
+From your Hugo root directory, run the following command:
+
+[source,bash]
+----
+hugo server -t terminal-plus-minus
+----
+
+You can also add the following line to `config.toml`:
+
+[source,toml]
+----
+theme = "terminal-plus-minus"
+----
+
+
+
+== How to edit the theme
+
+If you want to change common styles like the background color, 
+text color, or the main color, you can add a `config.scss` file 
+in `assets/scss` in your Hugo project directory.
+You can view the link:assets/scss/config.scss[default SCSS config file] 
+for a reference to what variables should be filled.
+
+If you want to override the styles, you can create a file named 
+`extend.scss` in `assets/scss` of your Hugo project directory. 
+From there, you can simply add/modify/remove some styling rules yourself. 
+
+For those who haven't encountered SCSS yet, it's almost like a superset 
+of CSS but with additional stuff. 
+Here's a https://sass-lang.com/guide[guide] and the 
+https://sass-lang.com/documentation/[documentation] page to get started. 
+
+
+
+== How to contribute
+
+If you spot some bugs or want to suggest a feature, feel 
+free to file an issue in the issue tracker. 
+You can also create a pull request if you want to implement the 
+feature yourself and add it into the codebase.
+
+If you're going to update the codebase, make sure you mind the 
+following guidelines:
+
+* The documentations have to be written in 
+https://asciidoctor.org/[Asciidoctor].
+* The codebase follows the http://getbem.com/naming/[BEM naming convention] 
+for the CSS naming.
+* Using https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines[semantic HTML] 
+should be observed.
+
+
+
+== License
+
+For the original theme, copyright goes to Radosław Kozieł 
+(https://twitter.com/panr[@panr]).
+
+
+The theme is released under the MIT License. 
+Check the 
+https://github.com/panr/hugo-theme-terminal/blob/master/LICENSE.md[original theme license]
+for additional licensing information.
