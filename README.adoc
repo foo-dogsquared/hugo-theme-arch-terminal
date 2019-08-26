@@ -1,4 +1,5 @@
 = Terminal Plus-Minus
+:toc:
 
 A fork of the 
 original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme] 
@@ -13,7 +14,7 @@ Being a fork of a theme, there are some differences.
 Here are the feature highlights (and removals) that 
 the theme offers:
 
-- A recreation of the , almost built from scratch
+- A recreation of the original theme, almost built from scratch
 - Easy configuration and customization with SCSS
 - Different approach of content organization 
 - Suitable for creating a quick single homepage template and blogging
@@ -65,7 +66,7 @@ git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-min
 
 
 
-== How to configure
+== Configuration
 
 The theme doesn't require any advanced configuration. 
 You can copy the sample configuration below and try to experiment 
@@ -123,7 +124,7 @@ https://sass-lang.com/documentation/[documentation] page to get started.
 
 
 
-== Single homepage template
+== Making a portfolio site
 
 This theme is suitable for creating a single portfolio page.
 Here are the main fields on the site configuration file for creating a 
@@ -162,35 +163,41 @@ appropriate folder is added under it.
 Anyhow, here's the following keys/fields that the theme 
 look for:
 
-[cols="4*",options="header"]
+[cols="5*",options="header"]
 |===
 | Key
+| Data type
 | Description
 | Optional
 | Additional notes
 
 | `id`
+| string
 | The identifier for the project.
 | 
 | 
 
 | `name`
+| string
 | The name of the project. 
 This is the name that'll appear in the homepage. 
 | 
 | 
 
 | `link`
+| string
 | The website/homepage of the working project. 
 | Yes
 | This is not where the link to the remote repository of the project. 
 
 | `repo`
+| string
 | The link to the repo of the project.
 | Yes 
 | 
 
 | `description`
+| string
 | The description of the project.
 | Yes
 | 
@@ -213,14 +220,16 @@ Make sure that the data file contains a single key/field named
 
 Here's a table of the following key/fields that theme looks for:
 
-[cols="4*",options="header"]
+[cols="5*",options="header"]
 |===
 | Key
+| Data type
 | Description
 | Optional
 | Additional notes
 
 | `id`
+| string
 | The identifier for the object.
 | 
 | This ID will be used as the `symbol` in the SVG spritesheet file in 
@@ -229,11 +238,13 @@ The social icons are extracted from
 https://github.com/simple-icons/simple-icons[Simple Icons set]. 
 
 | `url`
+| string
 | The hyperlink of the additional contact.
 | 
 | 
 
 | `name`
+| string
 | The name of the contact link.
 | Yes
 | If the links are set to be text, the value of this key will be used.
@@ -253,6 +264,12 @@ not be rendered.
 In order to see how this works, it basically relies on using 
 https://css-tricks.com/svg-symbol-good-choice-icons/[SVG spritesheets] 
 in `static/social-icons.svg` (in the theme folder) with symbols.
+
+.`useLinkIcons` set to `true`
+image::docs/show-link-icons-enabled.png[width=100%]
+
+.`useLinkIcons` set to `false` (recommended)
+image::docs/show-link-icons-disabled.png[width=100%]
 
 NOTE: The whole spritesheet is extracted from the 
 https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
@@ -278,34 +295,68 @@ and put the content files there.
 There are some parameters in the site configuration you might 
 want to try out if you're using it for blogging. 
 
-[cols="4*",options="header"]
+[cols="5*",options="header"]
 |===
 | Key
+| Data type
 | Description
 | Optional
 | Additional notes
 
 | `showPostsOnHome`
+| boolean
 | Indicates if the homepage should show the pages 
 from the content folder.
 | Yes
 | 
 
-| `listFoldersOnHome`
+| `listSiteSectionsOnHome`
+| boolean
 | Indicates if the homepage should list the 
-site sections 
+site sections (top-level directories of the site)
 instead of the pages 
 | Yes
 | You need to have `showPostsOnHome` set to `true` to 
 make have this effect visible.
 
+| `showPageTypeIcon`
+| boolean
+| Shows the icon for page type (either if it's a folder or a file in 
+the content folder) in the home page.
+| Yes, completely
+| For the theme, a page is a "folder" if its base filename is `_index`. 
+
 | `contentIsStyled`
+| boolean
 | Makes the single page template content to have 
 some styles into them (see the resulting headers, for example).
 | Yes
 | This is just for decorative purposes.
 
 |===
+
+Here are some screenshots of the effects of the given options above:
+
+.`showPostsOnHome` set as `false`
+image::docs/show-posts-on-home-disabled.png[width=100%,height=512]
+
+.`showPostsOnHome` set as `true`
+image::docs/show-posts-on-home-enabled.png[width=100%,height=512]
+
+.`listSiteSectionsOnHome` set as `true` (you need to have `showPostsOnHome` enabled as well)
+image::docs/list-site-sections-on-home-enabled.png[width=100%,height=512]
+
+.`showPageTypeIcon` set as `true` with a "file" type page
+image::docs/page-type-icon-file.png[width=100%]
+
+.`showPageTypeIcon` set as `true` with a "folder" type page
+image::docs/page-type-icon-folder.png[width=100%]
+
+.`contentIsStyled` set as `true`
+image::docs/content-is-styled-enabled.png[width=100%]
+
+.`contentIsStyled` set as `false`
+image::docs/content-is-styled-disabled.png[width=100%]
 
 
 === Content frontmatter
@@ -436,8 +487,9 @@ information on how to properly include copyright notices.
 
 In other words:
 
-Copyright © 2019 panr - for the original theme
-Copyright © 2019 foo-dogsquared - for the modification and extended 
+© 2019 panr - for the original theme
+
+© 2019 foo-dogsquared - for the modification and extended 
 parts of the theme 
 
 (IDK how to proceed with licensing so feel free to correct me pls -_-)
