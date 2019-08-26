@@ -1,0 +1,19 @@
+
+<!-- SUPPORT section -->
+{{- with $.Site.Data.Support.list -}}
+<section class="support">
+    <h2 class="support__header">Support</h2>
+    <p>
+        You can support me through the following links. It'll help me 
+        get started on doing my project ideas a reality and hopefully help 
+        some people with my creations.
+    </p>
+    <ul class="support__links">
+    {{- range . -}}
+        <li class="support__link">
+            <a href="{{ .url }}">{{ .name }}</a>
+        </li>
+    {{- end -}}
+    </ul>
+</section>
+{{- end -}}

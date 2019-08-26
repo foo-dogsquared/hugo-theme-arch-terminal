@@ -1,0 +1,28 @@
+{{- if $.Site.DisqusShortname -}}
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        function loadDisqus() {
+            // Don't ever inject Disqus on localhost--it creates unwanted
+            // discussions from 'localhost:1313' on your Disqus account...
+            if (window.location.hostname == "localhost") {
+                const devWarning = "You're in a development environment. Disqus will not load here.";
+                const disqusThread = document.querySelector("#disqus_thread");
+                
+                console.log(devWarning);
+                disqusThread.textContent = devWarning;
+                return;
+            }
+
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            var disqus_shortname = '{{ $.Site.DisqusShortname }}';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
+    <button onclick="toggleVisibilityEvent({ event, oneTime: true, callback: loadDisqus })">
+        Load comments
+    </button>
+</div>
+{{ end }}

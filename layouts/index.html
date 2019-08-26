@@ -1,0 +1,16 @@
+{{ define "main" }}
+{{- with $.Site.Params.tagline -}}
+<h2 class="tagline">{{- . -}}</h2>
+{{- end -}}
+
+{{- .Content -}}
+
+{{- partial "author/projects.html" . -}}
+
+{{- partial "author/support.html" . -}}
+
+{{- $showPosts := eq $.Site.Params.showPostsOnHome true -}}
+{{- if $showPosts -}}
+{{- partial "posts.html" . -}}
+{{- end -}}
+{{- end -}}

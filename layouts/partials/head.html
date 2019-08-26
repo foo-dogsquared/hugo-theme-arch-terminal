@@ -1,0 +1,31 @@
+<meta name="author" content="{{ .Site.Author.name }}">
+<meta name="application-name" content="{{ .Site.Title }}">
+<meta name="description" content="{{ .Site.Params.Subtitle }}">
+<meta name="robots" content="noodp"/>
+{{- with .Site.Params.keywords -}}
+{{- $keywords := delimit . ", " -}}
+<meta name="keywords" content="{{ $keywords }}">
+{{- end -}}
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ else }}{{ .Title }} :: {{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ end }}" />
+<meta name="twitter:description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
+<meta name="twitter:site" content="{{ $.Site.BaseURL }}" />
+<meta name="twitter:creator" content="{{ .Params.Author }}" />
+<meta name="twitter:image" content="{{ with .Params.Cover }}{{ . | absURL }}{{ end }}">
+
+<!-- Metadata -->
+<meta property="og:type" content="website" />
+<meta property="og:name" content="{{ .Site.Author.name }}">
+<meta property="og:title" content="{{ .Site.Title }}">
+<meta property="og:description" content="{{ .Site.Params.Subtitle }}">
+<meta property="og:url" content="{{ .Site.BaseURL }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+
+{{ $style := resources.Get "scss/main.scss" | resources.ToCSS | resources.Minify }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+
+{{- if $.Site.GoogleAnalytics -}}
+{{- template "_internal/google_analytics.html" . -}}
+{{- end -}}

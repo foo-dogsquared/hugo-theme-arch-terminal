@@ -1,0 +1,21 @@
+<!-- PROJECTS section -->
+{{- with $.Site.Data.projects.list -}}
+<section class="projects">
+    <h2>Projects</h2>
+    <div class="project">
+        {{- $projects := (sort . "id" "asc") -}}
+        {{- range $projects -}}
+        <h3 class="project__name">{{- .name -}}</h3>
+        {{- if .url -}}
+        <p class="project__link">LINK: <a href="{{ .url }}" target="_blank" rel="noopener">{{ .url }}</a></p>
+        {{- end -}}
+
+        {{- if .repo -}}
+        <p class="project__repo">REPO: <a href="{{ .repo }}" target="_blank" rel="noopener">{{ .repo }}</a></p>
+        {{- end -}}
+
+        <p class="project__description">{{- .description -}}</p>
+        {{- end -}}
+    </div>
+</section>
+{{- end -}}

@@ -1,0 +1,244 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing:inherit
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-size: var(--fontSize);
+    font-family: var(--fontFamily);
+    line-height: 1.8rem;
+    word-wrap: break-word;
+}
+
+// Text formatting
+p { margin: 1.2rem auto; }
+
+a { color: currentColor; }
+
+pre { 
+    --border: var(--primaryBorder) var(--accent);
+    background: var(--background-light);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    padding: 1rem;
+    overflow: auto;
+
+  code {
+    background: unset;
+    color: unset;
+    font-size: inherit;
+  }
+}
+
+code {
+    background: var(--accent-dark);
+    color: var(--accent);
+    padding: 0.25rem; 
+}
+
+h1, h2, h3, 
+h4, h5, h6 {
+    margin-bottom: 1rem;
+}
+
+h1 { 
+    font-size: 2.15rem;
+    margin-top: 4rem;
+}
+
+h2 { 
+    font-size: 1.6rem;
+    margin-top: 3.5rem;
+}
+
+h3 { 
+    font-size: 1.5rem;
+    margin-top: 3rem;
+}
+
+h4, h5, h6 {
+    margin-top: 2.5rem;
+}
+
+h4 { 
+    font-size: 1.4rem;
+}
+
+h5 {
+    font-size: 1.25rem; 
+}
+
+h6 { 
+    font-size: 1.1rem;
+}
+
+blockquote {
+    --border: var(--primaryBorder) var(--accent);
+    margin: 2rem 0;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    padding: 1rem;
+
+    & > p::before {
+        color: var(--accent);
+        content: "> ";
+        margin-left: -1rem;
+    }
+}
+
+ol, ul {
+    margin: 2.2rem;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+
+    li {
+        margin-bottom: 1rem;
+
+        &::before {
+            content: "\25BA";
+            color: var(--accent);
+            position: absolute;
+            margin-left: -1.1em;
+        }
+    }
+
+    & ul, & ol {
+        margin: 1rem;
+    }
+}
+
+ol {
+    li {
+        margin-bottom: 1rem;
+    }
+
+    & ul, & ol {
+        margin: 1rem;
+    }
+}
+
+// Table
+table { 
+    border: var(--secondaryBorder); 
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+table, td, th {
+	border: var(--secondaryBorder) var(--accent);
+	padding: 1.2rem;
+}
+
+// Document structure
+nav {
+    & > * { margin: 1rem; }
+}
+
+main {
+    & > * {
+        margin-bottom: 1rem;
+        &:first-child { margin-top: 0; }
+        &:last-child { margin-bottom: 0; }
+    }
+
+    & h1 {
+        padding-bottom: 0.25rem;
+        border-bottom: var(--primaryBorder) var(--accent);
+        
+    }
+
+    & h2 {
+        padding-bottom: 0.25rem;
+        border-bottom: var(--primaryBorder) var(--foreground);
+    }
+}
+
+footer {
+    margin-bottom: 1.5rem;
+    padding-bottom: 2rem;
+    text-align: center;
+
+    & > * {
+        &:first-child { margin-top: 0; }
+        &:last-child { margin-bottom: 0; }
+    }
+
+    &::before {
+        background-image: repeating-linear-gradient(-45deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
+        display: block;
+        content: "";
+        margin: 2.5rem auto;
+        height: 2rem;
+    } 
+}
+
+// Multimedia
+iframe {
+    width: 100%;
+    height: auto;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+audio {
+    width: 100%;
+    height: auto;
+}
+
+svg {
+    fill: currentColor;
+}
+
+// Form control
+button {
+    background: var(--background);
+    border: var(--primaryBorder) currentColor;
+    color: var(--accent);
+    font-family: var(--fontFamily);
+    font-size: 1.1rem;
+    padding: 0.75rem;
+
+    &:hover {
+        background: var(--foreground);
+        color: var(--background);
+        cursor: pointer;
+    }
+}
+
+input {
+    font-size: var(--fontSize);
+    width: 100%;
+    padding: 0.5rem;
+
+    &:focus {
+        outline-width: 0.5rem;
+        outline-color: var(--accent);
+    }
+}

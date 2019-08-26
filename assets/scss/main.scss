@@ -1,0 +1,53 @@
+// Importing the config.
+@import "config";
+
+:root {
+    // Core appearance options
+    --background: #{$background};
+    --background-dark: #{darken($background, 15%)};
+    --background-light: #{lighten($background, 15%)};
+
+    --foreground: #{$foreground};
+    --foreground-dark: #{darken($foreground, 35%)};
+    --foreground-light: #{lighten($foreground, 35%)};
+
+    --borderColor: #{$borderColor};
+    
+    --accent: #{$accent};
+    --accent-light: #{lighten($accent, 40%)};
+    --accent-dark: #{darken($accent, 40%)};
+    
+    --fontFamily: #{$fontFamily};
+    --fontSize: #{$fontSize};
+    --iconSize: #{$iconSize};
+    
+    // Main breakpoints
+    --phoneWidth: #{$phoneWidth};
+    --desktopWidth: #{$desktopWidth};
+    
+    // Content appearance options
+    --maxWidth: #{$maxWidth};
+    --sidePadding: #{$sidePadding};
+    --contentPadding: #{$contentPadding};
+    
+    // Border options
+    // It only missing the color so you should provide one.
+    --primaryBorder: #{$primaryBorder};
+    --secondaryBorder: #{$secondaryBorder};
+}
+
+// Importing the fonts.
+@import "fonts";
+
+// Importing the customized style for the different text formatting languages.
+@import 
+    "asciidoctor"
+;
+
+// The main stylesheets.
+@import 
+    "base", 
+    "layout"
+;
+
+@import "extend";

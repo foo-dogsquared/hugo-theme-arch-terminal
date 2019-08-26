@@ -1,0 +1,22 @@
+// Core appearance options
+$background: #080a0e;
+$foreground: #dbdbdb;
+$borderColor: $foreground;
+$accent: #d59783;
+$fontFamily: "Fira Code","Monaco","Consolas","Ubuntu Mono",monospace;
+$fontSize: 1.1rem;
+$iconSize: 1.5rem;
+
+// Main breakpoints
+$phoneWidth: 600px;
+$desktopWidth: 1024px;
+
+// Content appearance options
+$maxWidth: 900px;
+$sidePadding: 1.25rem;
+$contentPadding: 1rem;
+
+// Border options
+// It only missing the color so you should provide one.
+$primaryBorder: solid 1px;
+$secondaryBorder: dashed 1px;

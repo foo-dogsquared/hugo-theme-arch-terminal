@@ -1,0 +1,232 @@
+// States
+.hidden {
+    display: none;
+}
+
+// Main components
+.wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: var(--maxWidth);
+    height: inherit;
+    margin: 0 auto;
+
+    padding: 1rem;
+
+    & > *:not(:last-child) {
+        margin: 0;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.header__logo {
+    background-image: repeating-linear-gradient(-45deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: stretch;
+    align-content: center;
+
+    & > * { 
+        background: var(--accent);
+        color: var(--background);
+        padding: 0.6rem;
+    }
+}
+
+.header__title {
+    min-width: 40%;
+    text-decoration: none;
+}
+
+.nav__links {
+    margin: var(--sidePadding) 0;
+
+    & > * {
+        & { margin: 0.5rem; }
+        &:first-child { margin-left: 0; }
+        &:last-child { margin-right: 0; }
+    }
+}
+
+.footer__links {
+    & > * { margin: 1rem; }
+}
+
+.footer__link {
+    &:hover { color: var(--accent); }
+}
+
+// Posts
+.post {
+    margin-top: 4rem;
+
+    & > * { margin-bottom: 1rem; }
+}
+
+.post--regulation {
+    h1 {
+      justify-content: center;
+    }
+  
+    h2 {
+      justify-content: center;
+      margin-bottom: 10px;
+  
+      &+ h2 {
+        margin-top: -10px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+.post__header {
+    display: flex;
+}
+
+.post__title {
+    border-bottom: dotted var(--accent) 0.25rem;
+    flex-grow: 10;
+    margin: 0;
+    margin-bottom: inherit;
+    font-size: 1.7rem;
+    padding-bottom: 0.5rem;
+    
+    & > * {
+        text-decoration: none;
+        padding: 0;
+    }
+}
+
+.post__icon {
+    --size: 3rem;
+    width: var(--size);
+    min-width: 5em;
+    height: var(--size);
+    flex-grow: 1;
+    display: none;
+
+    @media screen and (min-width: $phoneWidth) {
+        display: block;
+    }
+}
+
+.post__date {
+    color: var(--accent);
+}
+
+.post__tags {
+    color: var(--foreground-dark);
+}
+
+.post__tag {
+    text-decoration: none;
+}
+
+// Pagination
+.pagination {
+    margin-top: 3rem;
+
+    & > * { 
+        margin-bottom: 1em;
+        width: 100%; 
+    }
+}
+
+.pagination__header {
+    font-size: 0.9rem;
+    margin: 8rem 0 1rem;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.pagination__buttons {
+    $size: 4rem;
+    border-bottom: var(--primaryBorder) var(--foreground);
+    border-top: var(--primaryBorder) var(--foreground);
+    display: inline-flex;
+    flex-flow: column nowrap;
+    padding: $size 0 $size;
+
+    @media screen and (min-width: $phoneWidth) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+}
+
+.pagination__button {
+    width: 100%;
+    margin: 2rem auto;
+    text-align: center;
+    text-decoration: none;
+    word-wrap: break-word;
+
+    .button.icon { 
+        background: var(--accent);
+        border-radius: 1em;
+        color: var(--background);
+        padding: 1rem;
+    }
+
+    .button.text {
+        text-decoration: underline;
+    }
+
+    @media screen and (min-width: $phoneWidth) {
+        display: inline-flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: unset;
+        margin: unset;
+
+        & > * { margin: 0.5rem; }
+    }
+}
+
+// Custom classes
+.content {
+    flex-grow: 2;
+}
+
+.tagline {
+    text-align: center;
+    border: none;
+
+    &::before, &::after {
+        margin: 0.25rem;
+    }
+
+    &::before { content: "\201C"; }
+    &::after { content: "\201D"; }
+
+}
+
+.comments {
+    --border: var(--secondaryBorder) currentColor;
+    
+    align-items: center;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 1.75rem auto;
+    min-height: 10rem;
+    padding: 1.5rem 0;
+
+    & > * {
+        margin-bottom: 1rem;
+    }
+}
+
+svg.icon {
+    --size: 2.2rem;
+    width: var(--size);
+    height: var(--size);
+    fill: currentColor;
+
+    &:hover {
+        color: var(--accent);
+    }
+}

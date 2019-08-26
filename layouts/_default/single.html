@@ -1,0 +1,59 @@
+{{- define "main" -}}
+<h1 class="post__title">
+  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
+<div class="post__meta">
+    {{ if .Params.Date }}
+  <span class="post__date">
+    {{ .Date.Format "2006-01-02" }}
+  </span>
+  {{ end }}
+  {{ with .Params.Author }}
+  <span class="post__author">::
+    {{ . }}
+  </span>
+  {{ end }}
+</div>
+
+{{ if .Params.tags }}
+<span class="post__tags">
+  {{ range .Params.tags }}
+  #<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+  {{ end }}
+</span>
+{{ end }}
+
+{{- with .Params.Cover -}}
+<img src="{{ . | absURL }}" class="post__cover" />
+{{- end -}}
+
+<div class="post__content">
+  {{ .Content }}
+</div>
+{{ if or .NextInSection .PrevInSection }}
+<div class="pagination">
+  <div class="pagination__header">
+    {{ with $.Site.Params.ReadOtherPosts }}{{ . }}{{ else }}Read more{{ end }}
+  </div>
+  <div class="pagination__buttons">
+    {{ if .NextInSection }}
+    <a class="pagination__button previous" href="{{ .NextInSection.Permalink }}">
+      <span class="button icon">←</span>
+      <span class="button text">{{ .NextInSection.Title }}</span>
+    </a>
+    {{ else }}
+    <span></span>
+    {{ end }}
+    {{ if .PrevInSection }}
+    <a class="pagination__button next" href="{{ .PrevInSection.Permalink }}">
+      <span class="button text">{{ .PrevInSection.Title }}</span>
+      <span class="button icon">→</span>
+    </a>
+    {{ else }}
+    <span></span>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ partial "comments.html" . }}
+{{- end -}}

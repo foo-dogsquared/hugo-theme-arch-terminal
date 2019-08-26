@@ -1,0 +1,20 @@
+<footer>
+    {{- with $.Site.Data.contact.list -}}
+    <div class="footer__links">
+    {{- $willUseIcons := (eq $.Site.Params.useLinkIcons true) -}}
+    {{- $socialIcons := "social-icons.svg" | absURL -}}
+    {{- $socialLinks := (sort . "id" "asc") -}}
+    {{- range $socialLinks -}}
+    <a class="footer__link" href="{{ .url }}">
+        {{- if $willUseIcons -}}
+        <svg class="icon">
+            <use xlink:href="{{ $socialIcons }}#{{ .id }}"></use></svg>
+        {{- else -}}
+        {{- if .name -}}{{ .name }}{{- else -}}{{ .id }}{{- end -}}
+        {{- end -}}
+    </a>
+    {{- end -}}
+    </div>
+    {{ end }}
+    <p class="footer__sign">{{- $.Site.Copyright | safeHTML -}}</p>
+</footer>
