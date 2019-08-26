@@ -1,0 +1,9 @@
+---
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+---
+
+= {{ replace .Name "-" " " | title }}
+{{ .Site.Author.name }} {{ with .Site.Author.email }}<{{ . }}>{{ end }}
+{{ dateFormat "2006-01-02" .Date }}

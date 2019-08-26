@@ -1,0 +1,13 @@
+---
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+tags: 
+    - tag
+categories:
+    - post
+---
+
+= {{ replace .Name "-" " " | title }}
+Gabriel Arazas <foo.dogsquared@gmail.com>
+{{ dateFormat "2006-01-02" .Date }}
