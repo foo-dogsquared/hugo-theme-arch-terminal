@@ -13,7 +13,7 @@ Being a fork of a theme, there are some differences.
 Here are the feature highlights (and removals) that 
 the theme offers:
 
-- A recreation of the theme
+- A recreation of the , almost built from scratch
 - Easy configuration and customization with SCSS
 - Different approach of content organization 
 - Suitable for creating a quick single homepage template and blogging
@@ -21,7 +21,7 @@ the theme offers:
 - Reduced internationalization (i18n) support (for now, anyway)
 - Removed selection of available themes 
 - Removed Node dependencies from the original theme
-- Removed syntax highlighting support (for now)
+- Removed syntax highlighting support from https://prismjs.com/[PrismJS]
 
 CAUTION: If you are going to make content mainly with Asciidoctor, 
 the support for syntax highlighting is quite bare with the native experience. 
@@ -104,7 +104,26 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 ----
 
 
-=== Single homepage template
+=== Changing appearance
+
+If you want to change common styles like the background color, 
+text color, or the main color, you can add a `config.scss` file 
+in `assets/scss` in your Hugo project directory.
+You can view the link:assets/scss/config.scss[default SCSS config file] 
+for a reference to what variables should be filled.
+
+If you want to override the styles, you can create a file named 
+`extend.scss` in `assets/scss` of your Hugo project directory. 
+From there, you can simply add/modify/remove some styling rules yourself. 
+
+For those who haven't encountered SCSS yet, it's almost like a superset 
+of CSS but with additional stuff. 
+Here's a https://sass-lang.com/guide[guide] and the 
+https://sass-lang.com/documentation/[documentation] page to get started. 
+
+
+
+== Single homepage template
 
 This theme is suitable for creating a single portfolio page.
 Here are the main fields on the site configuration file for creating a 
@@ -239,7 +258,7 @@ NOTE: The whole spritesheet is extracted from the
 https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
 
 
-=== Making a blog site
+== Making a blog site
 This theme is also suitable to be a blogging theme. 
 With this function, content organization should be a breeze.
 (Of course, as long as it follows the way of 
@@ -277,10 +296,84 @@ from the content folder.
 site sections 
 instead of the pages 
 | Yes
-| 
+| You need to have `showPostsOnHome` set to `true` to 
+make have this effect visible.
+
+| `contentIsStyled`
+| Makes the single page template content to have 
+some styles into them (see the resulting headers, for example).
+| Yes
+| This is just for decorative purposes.
 
 |===
 
+
+=== Content frontmatter
+
+Assuming you didn't modify the theme in any way, here are 
+some of the keys in the content frontmatter used by the 
+theme:
+
+[cols="5*",options="header"]
+|===
+| Key
+| Description
+| Optional
+| Additional notes
+| Example
+
+| `title`
+| The title of the post.
+| Yes but actually no
+| If the given data is null or not valid, it'll appear 
+with no title at all and it'll be a pain to sort this out so 
+you're on your own, pal.
+| `"Markdown Syntax Guide"`
+
+| `date`
+| The publication date of the post.
+| Yes but actually no
+| If the given data does not result to a proper date format 
+or if it's null value, its publication date will appear as 
+published on 2001-01-01 (January 1, 2001).
+Also a pain to sort this out. 
+| `2019-08-25T21:06:56+08:00`
+
+| `categories`
+| The categories associated with the post. 
+*Must be an array composed of only one string.* 
+This is mostly for the default setting from 
+https://jekyllrb.com/[Jekyll]. 
+Mainly useful to establish general grouping for your posts.
+| Yes 
+| One of the 
+https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies].
+I recommend to format it as an array composed of one string.
+| `["guide"]`
+
+| `tags`
+| The tags associated with the post. 
+*Must be an array with at least one string.* 
+Mostly useful for establishing some indexes for the posts.
+| Yes
+| Also one of the 
+https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies]. 
+| `["markdown", "guide"]`
+
+
+| `author`
+| The author of the particular post.
+| Yes 
+| Use this if you have a guest post or has multiple authors in the site.
+| `"Rob Pike"`
+
+| `cover`
+| The banner image of the post. 
+| Yes
+| Accepts URL or a relative path to the image.
+| `http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
+
+|===
 
 
 
@@ -293,31 +386,12 @@ From your Hugo root directory, run the following command:
 hugo server -t terminal-plus-minus
 ----
 
-You can also add the following line to `config.toml`:
+You can also add the following line to site config file:
 
 [source,toml]
 ----
 theme = "terminal-plus-minus"
 ----
-
-
-
-== How to edit the theme
-
-If you want to change common styles like the background color, 
-text color, or the main color, you can add a `config.scss` file 
-in `assets/scss` in your Hugo project directory.
-You can view the link:assets/scss/config.scss[default SCSS config file] 
-for a reference to what variables should be filled.
-
-If you want to override the styles, you can create a file named 
-`extend.scss` in `assets/scss` of your Hugo project directory. 
-From there, you can simply add/modify/remove some styling rules yourself. 
-
-For those who haven't encountered SCSS yet, it's almost like a superset 
-of CSS but with additional stuff. 
-Here's a https://sass-lang.com/guide[guide] and the 
-https://sass-lang.com/documentation/[documentation] page to get started. 
 
 
 
@@ -332,7 +406,11 @@ If you're going to update the codebase, make sure you mind the
 following guidelines:
 
 * The documentations have to be written in 
-https://asciidoctor.org/[Asciidoctor].
+https://asciidoctor.org/[Asciidoctor]. 
+If you're not familiar with it, here's the 
+https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[quick reference page] for 
+a rundown and their https://asciidoctor.org/docs/user-manual/[user manual] for 
+deep details.
 * The codebase follows the http://getbem.com/naming/[BEM naming convention] 
 for the CSS naming.
 * Using https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines[semantic HTML] 
@@ -345,8 +423,21 @@ should be observed.
 For the original theme, copyright goes to Radosław Kozieł 
 (https://twitter.com/panr[@panr]).
 
-
-The theme is released under the MIT License. 
+The original theme is released under the MIT License. 
 Check the 
 https://github.com/panr/hugo-theme-terminal/blob/master/LICENSE.md[original theme license]
 for additional licensing information.
+
+This fork is maintained by https://foo-dogsquared.github.io/[foo-dogsquared] 
+and the extended theme is released under MIT license. 
+Copyright applies to my own modifications of the project. 
+Please see the previously linked license of the theme for more 
+information on how to properly include copyright notices.
+
+In other words:
+
+Copyright © 2019 panr - for the original theme
+Copyright © 2019 foo-dogsquared - for the modification and extended 
+parts of the theme 
+
+(IDK how to proceed with licensing so feel free to correct me pls -_-)
