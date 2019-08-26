@@ -14,7 +14,9 @@
         <p class="project__repo">REPO: <a href="{{ .repo }}" target="_blank" rel="noopener">{{ .repo }}</a></p>
         {{- end -}}
 
+        {{- if .description -}}
         <p class="project__description">{{- .description -}}</p>
+        {{- end -}}
         {{- end -}}
     </div>
 </section>
