@@ -1,5 +1,5 @@
 {{- if or .Paginator.HasNext .Paginator.HasPrev -}}
-{{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listFoldersOnHome true)) -}}
+{{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
 {{- $pages := cond ($isListSectionsOnHome) (.Paginate .Site.Sections).Pages .Data.Pages -}}
 <div class="pagination">
   <div class="pagination__buttons">

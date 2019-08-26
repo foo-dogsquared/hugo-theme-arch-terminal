@@ -16,5 +16,5 @@
     {{- end -}}
     </div>
     {{ end }}
-    <p class="footer__sign">{{- $.Site.Copyright | safeHTML -}}</p>
+    <p class="footer__sign">{{ with $.Site.Copyright }}{{ . | safeHTML }}{{ else }}© {{ now.Year }} {{ $.Site.Author.name }}{{ end }}</p>
 </footer>

@@ -1,6 +1,6 @@
 <div class="site__pages">
     {{- $blogIcons := "blog-icons.svg" | absURL -}}
-    {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listFoldersOnHome true)) -}}
+    {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
     {{- $pages := cond ($isListSectionsOnHome) .Site.Sections .Pages -}}
     {{- range (.Paginate $pages).Pages -}}
     <div class="site__page">
@@ -8,12 +8,17 @@
         <h1 class="page__title">
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
         </h1>
-        {{- with .File -}}
-        <svg class="page__icon">
-            {{- $isFolder := or (eq .BaseFileName "_index") (eq .BaseFileName "") -}}
-            {{- $contentType := cond $isFolder "folder" "file" -}}
-            <use xlink:href="{{ $blogIcons }}#{{ $contentType }}"></use>
-        </svg>
+
+        {{- if $.Site.Params.showPageTypeIcon -}}
+            <svg class="page__icon">
+            {{- with .File -}}
+                {{- $isFolder := or (eq .BaseFileName "_index") (eq .BaseFileName nil) -}}
+                {{- $contentType := cond $isFolder "folder" "file" -}}
+                <use xlink:href="{{ $blogIcons }}#{{ $contentType }}"></use>
+            {{- else -}}
+                <use xlink:href="{{ $blogIcons }}#folder"></use>
+            {{- end -}}
+            </svg>
         {{- end -}}
         </div>
         <div class="page__meta">
