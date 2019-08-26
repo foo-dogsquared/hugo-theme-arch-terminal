@@ -1,37 +1,37 @@
-<div class="posts">
+<div class="site__pages">
     {{- $blogIcons := "blog-icons.svg" | absURL -}}
     {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listFoldersOnHome true)) -}}
-    {{- $pages := cond ($isListSectionsOnHome) .Site.Sections .Data.Pages -}}
+    {{- $pages := cond ($isListSectionsOnHome) .Site.Sections .Pages -}}
     {{- range (.Paginate $pages).Pages -}}
-    <div class="post">
-        <div class="post__header">
-        <h1 class="post__title">
+    <div class="site__page">
+        <div class="page__header">
+        <h1 class="page__title">
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
         </h1>
         {{- with .File -}}
-        <svg class="post__icon">
+        <svg class="page__icon">
             {{- $isFolder := or (eq .BaseFileName "_index") (eq .BaseFileName "") -}}
             {{- $contentType := cond $isFolder "folder" "file" -}}
             <use xlink:href="{{ $blogIcons }}#{{ $contentType }}"></use>
         </svg>
         {{- end -}}
         </div>
-        <div class="post__meta">
-        <span class="post__date">
+        <div class="page__meta">
+        <span class="page__date">
             {{ .Date.Format "2006-01-02" }}
         </span>
-        {{- with .Params.Author -}}<span class="post__author">::
+        {{- with .Params.Author -}}<span class="page__author">::
             {{ . }}</span>{{- end -}}
         </div>
 
         {{- if .Params.categories -}}
-        <p class="post__category">{{ index .Params.categories 0 }}</p>
+        <p class="page__category">{{ index .Params.categories 0 }}</p>
         {{- end -}}
     
         {{- if .Params.tags -}}
-        <div class="post__tags">
+        <div class="page__tags">
         {{ range .Params.tags }}
-        #<a class="post__tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
+        #<a class="page__tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
             {{- . -}}
         </a>&nbsp;
         {{ end }}
@@ -39,10 +39,10 @@
         {{- end -}}
     
         {{- with .Params.Cover -}}
-        <img src="{{ . | absURL }}" class="post__cover" />
+        <img src="{{ . | absURL }}" class="page__cover" />
         {{- end -}}
     
-        <div class="post__content">
+        <div class="page__content">
         {{ if .Description }}
         {{ .Description | markdownify }}
         {{ else }}
