@@ -38,9 +38,23 @@ body {
 }
 
 // Text formatting
-p { margin: 1.2rem auto; }
+p { 
+    margin: 1.2rem auto; 
+}
 
-a { color: currentColor; }
+a { 
+    color: currentColor; 
+}
+
+kbd {
+    padding: 0.2rem;
+    border: var(--primaryBorder) var(--foreground);
+}
+
+mark {
+    background: var(--accent-light);
+    color: var(--background-dark);
+}
 
 pre { 
     --border: var(--primaryBorder) var(--accent);

@@ -8,8 +8,8 @@
     --background-light: #{lighten($background, 15%)};
 
     --foreground: #{$foreground};
-    --foreground-dark: #{darken($foreground, 35%)};
-    --foreground-light: #{lighten($foreground, 35%)};
+    --foreground-dark: #{darken($foreground, 25%)};
+    --foreground-light: #{lighten($foreground, 25%)};
 
     --borderColor: #{$borderColor};
     

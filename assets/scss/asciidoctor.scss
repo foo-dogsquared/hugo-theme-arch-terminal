@@ -1,6 +1,9 @@
 // Admonition blocks
 .admonitionblock {
     td.icon {
+        background: var(--accent);
+        color: var(--background);
+        text-align: center;
         width: 20%;
     }
 }
