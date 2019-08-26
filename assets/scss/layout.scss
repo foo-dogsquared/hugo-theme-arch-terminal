@@ -4,7 +4,7 @@
 }
 
 // Main components
-.wrapper {
+.site {
     display: flex;
     flex-flow: column nowrap;
     max-width: var(--maxWidth);
@@ -17,6 +17,69 @@
         margin: 0;
         margin-bottom: 1.25rem;
     }
+}
+
+.site__links {
+    margin: var(--sidePadding) 0;
+
+    & > * {
+        & { margin: 0.5rem; }
+        &:first-child { margin-left: 0; }
+        &:last-child { margin-right: 0; }
+    }
+}
+
+.site__content {
+    flex-grow: 2;
+}
+
+.site__tagline {
+    text-align: center;
+    border: none;
+
+    &::before, &::after {
+        margin: 0.25rem;
+    }
+
+    &::before { content: "\201C"; }
+    &::after { content: "\201D"; }
+}
+
+.site__comments {
+    --border: var(--secondaryBorder) currentColor;
+    
+    align-items: center;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 1.75rem auto;
+    min-height: 10rem;
+    padding: 1.5rem 0;
+
+    & > * {
+        margin-bottom: 1rem;
+    }
+}
+
+.site__footer {
+    margin-bottom: 1.5rem;
+    padding-bottom: 2rem;
+    text-align: center;
+
+    & > * {
+        &:first-child { margin-top: 0; }
+        &:last-child { margin-bottom: 0; }
+    }
+
+    &::before {
+        background-image: repeating-linear-gradient(-45deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
+        display: block;
+        content: "";
+        margin: 2.5rem auto;
+        height: 2rem;
+    } 
 }
 
 .header__logo {
@@ -39,16 +102,6 @@
     text-decoration: none;
 }
 
-.nav__links {
-    margin: var(--sidePadding) 0;
-
-    & > * {
-        & { margin: 0.5rem; }
-        &:first-child { margin-left: 0; }
-        &:last-child { margin-right: 0; }
-    }
-}
-
 .footer__links {
     & > * { margin: 1rem; }
 }
@@ -58,13 +111,16 @@
 }
 
 // Posts
-.post {
+.site__page {
     margin-top: 4rem;
 
-    & > * { margin-bottom: 1rem; }
+    & > * { 
+        $margin: 0.5rem;
+        margin: $margin 0 $margin; 
+    }
 }
 
-.post--regulation {
+.page--regulation {
     h1 {
       justify-content: center;
     }
@@ -80,17 +136,18 @@
     }
   }
 
-.post__header {
+.page__header {
     display: flex;
 }
 
-.post__title {
+.page__title {
     border-bottom: dotted var(--accent) 0.25rem;
     flex-grow: 10;
+    font-size: calc(var(--fontSize) * 1.5);
     margin: 0;
     margin-bottom: inherit;
-    font-size: 1.7rem;
     padding-bottom: 0.5rem;
+    text-decoration: none;
     
     & > * {
         text-decoration: none;
@@ -98,7 +155,7 @@
     }
 }
 
-.post__icon {
+.page__icon {
     --size: 3rem;
     width: var(--size);
     min-width: 5em;
@@ -111,16 +168,39 @@
     }
 }
 
-.post__date {
+.page__date {
     color: var(--accent);
 }
 
-.post__tags {
+.page__tags {
     color: var(--foreground-dark);
 }
 
-.post__tag {
+.page__tag {
     text-decoration: none;
+}
+
+.page__cover {
+    border: solid 1.5rem var(--accent);
+    padding: 1.5rem;
+}
+
+.page__content {
+    &[data-is-styled="true"] h1::before {
+        content: "> ";
+    }
+
+    &[data-is-styled="true"] h2::before {
+        content: ">> ";
+    }
+
+    &[data-is-styled="true"] h3::before {
+        content: ">>> ";
+    }
+
+    & > * {
+        margin-bottom: 1rem;
+    }
 }
 
 // Pagination
@@ -135,7 +215,7 @@
 
 .pagination__header {
     font-size: 0.9rem;
-    margin: 8rem 0 1rem;
+    margin: 5rem 0 1rem;
     position: relative;
     text-align: center;
     text-transform: uppercase;
@@ -156,10 +236,13 @@
 }
 
 .pagination__button {
-    width: 100%;
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-around;
     margin: 2rem auto;
     text-align: center;
     text-decoration: none;
+    width: 100%;
     word-wrap: break-word;
 
     .button.icon { 
@@ -174,9 +257,6 @@
     }
 
     @media screen and (min-width: $phoneWidth) {
-        display: inline-flex;
-        justify-content: space-evenly;
-        align-items: center;
         width: unset;
         margin: unset;
 
@@ -185,41 +265,6 @@
 }
 
 // Custom classes
-.content {
-    flex-grow: 2;
-}
-
-.tagline {
-    text-align: center;
-    border: none;
-
-    &::before, &::after {
-        margin: 0.25rem;
-    }
-
-    &::before { content: "\201C"; }
-    &::after { content: "\201D"; }
-
-}
-
-.comments {
-    --border: var(--secondaryBorder) currentColor;
-    
-    align-items: center;
-    border-top: var(--border);
-    border-bottom: var(--border);
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    margin: 1.75rem auto;
-    min-height: 10rem;
-    padding: 1.5rem 0;
-
-    & > * {
-        margin-bottom: 1rem;
-    }
-}
-
 svg.icon {
     --size: 2.2rem;
     width: var(--size);

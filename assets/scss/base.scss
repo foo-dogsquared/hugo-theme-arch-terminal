@@ -15,6 +15,19 @@ html {
     box-sizing:inherit
 }
 
+a, abbr, acronym, address, applet, article, aside, audio, 
+b, big, blockquote, body, canvas, caption, center, cite, code, 
+del, details, dfn, div, em, embed, fieldset, figcaption, 
+figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, 
+i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, 
+ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, 
+strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, 
+tr, tt, u, ul, var, video {
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
 body {
     background: var(--background);
     color: var(--foreground);
@@ -32,8 +45,7 @@ a { color: currentColor; }
 pre { 
     --border: var(--primaryBorder) var(--accent);
     background: var(--background-light);
-    border-top: var(--border);
-    border-bottom: var(--border);
+    border: var(--border);
     padding: 1rem;
     overflow: auto;
 
@@ -89,14 +101,12 @@ h6 {
 blockquote {
     --border: var(--primaryBorder) var(--accent);
     margin: 2rem 0;
-    border-top: var(--border);
-    border-bottom: var(--border);
+    border: var(--border);
     padding: 1rem;
 
     & > p::before {
         color: var(--accent);
         content: "> ";
-        margin-left: -1rem;
     }
 }
 
@@ -108,19 +118,20 @@ ol, ul {
 ul {
     list-style: none;
 
-    li {
+    & > li {
         margin-bottom: 1rem;
 
         &::before {
             content: "\25BA";
             color: var(--accent);
             position: absolute;
-            margin-left: -1.1em;
+            margin-left: -1.5em;
         }
     }
 
     & ul, & ol {
         margin: 1rem;
+        margin-left: 1.2rem;
     }
 }
 
@@ -131,6 +142,7 @@ ol {
 
     & ul, & ol {
         margin: 1rem;
+        margin: 1.2rem;
     }
 }
 
@@ -172,24 +184,6 @@ main {
     }
 }
 
-footer {
-    margin-bottom: 1.5rem;
-    padding-bottom: 2rem;
-    text-align: center;
-
-    & > * {
-        &:first-child { margin-top: 0; }
-        &:last-child { margin-bottom: 0; }
-    }
-
-    &::before {
-        background-image: repeating-linear-gradient(-45deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
-        display: block;
-        content: "";
-        margin: 2.5rem auto;
-        height: 2rem;
-    } 
-}
 
 // Multimedia
 iframe {
