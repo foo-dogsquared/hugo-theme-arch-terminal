@@ -123,6 +123,10 @@
 }
 
 .footer__links {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+
     & > * { margin: 1rem; }
 }
 
@@ -259,23 +263,22 @@
     border-bottom: var(--primaryBorder) var(--foreground);
     border-top: var(--primaryBorder) var(--foreground);
     display: inline-flex;
-    flex-flow: column nowrap;
-    padding: $size 0 $size;
+    flex-flow: row nowrap;
+    padding: ($size - 2rem) 0;
 
     @media screen and (min-width: $phoneWidth) {
-        flex-flow: row nowrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 }
 
 .pagination__button {
     align-items: center;
     display: inline-flex;
-    justify-content: space-around;
-    margin: 2rem auto;
+    justify-content: space-evenly;
+    margin: 1rem auto;
     text-align: center;
     text-decoration: none;
-    width: 100%;
+    width: none;
     word-wrap: break-word;
 
     .button.icon { 
@@ -286,14 +289,17 @@
     }
 
     .button.text {
+        display: none;
         text-decoration: underline;
     }
 
     @media screen and (min-width: $phoneWidth) {
         width: unset;
-        margin: unset;
+        margin: 2rem auto;
 
         & > * { margin: 0.5rem; }
+
+        .button.text { display: unset; }
     }
 }
 
