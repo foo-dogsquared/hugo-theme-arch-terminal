@@ -2,8 +2,15 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
+
+categories:
+    - "category1"
+tags: 
+    - "tag1"
+    - "tag2"
 ---
 
 = {{ replace .Name "-" " " | title }}
 {{ .Site.Author.name }} {{ with .Site.Author.email }}<{{ . }}>{{ end }}
 {{ dateFormat "2006-01-02" .Date }}
+:stem: latexmath
