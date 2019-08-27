@@ -1,6 +1,13 @@
 {{- define "main" -}}
+
+{{- if $.Site.Params.enableBreadcrumbs -}}
+{{- partial "breadcrumb.html" . -}}
+{{- end -}}
+
 <h1 class="page__title">
-  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
+  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+</h1>
+
 <div class="page__meta">
     {{ if .Params.Date }}
   <span class="page__date">
