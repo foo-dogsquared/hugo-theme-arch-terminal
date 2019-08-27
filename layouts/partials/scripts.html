@@ -5,4 +5,10 @@
 <script type="text/javascript" src="{{ $prismJs.Permalink }}"></script>
 {{- end -}}
 
+<!-- MathJax -->
+{{ partial "config/mathjax.html" . }}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+<!-- The custom script -->
 <script type="text/javascript" src="{{ $global.Permalink }}"></script>
