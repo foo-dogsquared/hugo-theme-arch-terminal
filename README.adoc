@@ -19,10 +19,10 @@ the theme offers:
 - Different approach of content organization 
 - Suitable for creating a quick single homepage template and blogging
 - Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
+- Retained syntax highlighting support from https://prismjs.com/[PrismJS]
 - Reduced internationalization (i18n) support (for now, anyway)
 - Removed selection of available themes 
 - Removed Node dependencies from the original theme
-- Removed syntax highlighting support from https://prismjs.com/[PrismJS]
 
 CAUTION: If you are going to make content mainly with Asciidoctor, 
 the support for syntax highlighting is quite bare with the native experience. 
@@ -253,9 +253,6 @@ key, the `id` will be used, instead.
 
 |===
 
-The data will be used in the footer as a collection of links 
-with their appropriate icon. 
-
 By default, the hyperlinks for your contacts are in text. 
 If you want to make it into an icon, you could set the 
 parameter `params.useLinkIcons` to `true` in the site config file.
@@ -277,7 +274,9 @@ https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
 
 == Making a blog site
 This theme is also suitable to be a blogging theme. 
-With this function, content organization should be a breeze.
+Most of the stuff from making a single homepage site also applies here.
+
+With the focus on blogging, content organization should be a breeze.
 (Of course, as long as it follows the way of 
 https://gohugo.io/content-management/organization/[organizing content from Hugo].)
 
@@ -303,14 +302,14 @@ want to try out if you're using it for blogging.
 | Optional
 | Additional notes
 
-| `showPostsOnHome`
+| `params.showPostsOnHome`
 | boolean
 | Indicates if the homepage should show the pages 
 from the content folder.
 | Yes
 | 
 
-| `listSiteSectionsOnHome`
+| `params.listSiteSectionsOnHome`
 | boolean
 | Indicates if the homepage should list the 
 site sections (top-level directories of the site)
@@ -319,32 +318,49 @@ instead of the pages
 | You need to have `showPostsOnHome` set to `true` to 
 make have this effect visible.
 
-| `showPageTypeIcon`
+| `params.showPageTypeIcon`
 | boolean
 | Shows the icon for page type (either if it's a folder or a file in 
 the content folder) in the home page.
 | Yes, completely
 | For the theme, a page is a "folder" if its base filename is `_index`. 
 
-| `contentIsStyled`
+| `params.contentIsStyled`
 | boolean
 | Makes the single page template content to have 
 some styles into them (see the resulting headers, for example).
 | Yes
 | This is just for decorative purposes.
 
+| `params.syntaxHighlighting`
+| boolean
+| Enables "native" syntax highlighting without relying to the 
+built-in highlight shortcode.
+This uses https://prismjs.com/[PrismJS] for the highlight feature.
+| Yes
+| This also enables native syntax highlighting for Asciidoctor! 
+Hallejulah!
+
+| `params.enableBreadcrumbs`
+| boolean
+| Enables 
+https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/[site breadcrumbs] 
+in the posts (single page templates) that'll appear at the top of the post.
+| Yes
+| 
+
 |===
 
 Here are some screenshots of the effects of the given options above:
 
 .`showPostsOnHome` set as `false`
-image::docs/show-posts-on-home-disabled.png[width=100%,height=512]
+image::docs/show-posts-on-home-disabled.png[width=100%]
 
 .`showPostsOnHome` set as `true`
-image::docs/show-posts-on-home-enabled.png[width=100%,height=512]
+image::docs/show-posts-on-home-enabled.png[width=100%]
 
 .`listSiteSectionsOnHome` set as `true` (you need to have `showPostsOnHome` enabled as well)
-image::docs/list-site-sections-on-home-enabled.png[width=100%,height=512]
+image::docs/list-site-sections-on-home-enabled.png[width=100%]
 
 .`showPageTypeIcon` set as `true` with a "file" type page
 image::docs/page-type-icon-file.png[width=100%]
@@ -395,20 +411,20 @@ Also a pain to sort this out.
 *Must be an array composed of only one string.* 
 This is mostly for the default setting from 
 https://jekyllrb.com/[Jekyll]. 
-Mainly useful to establish general grouping for your posts.
 | Yes 
 | One of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies].
 I recommend to format it as an array composed of one string.
+Mainly useful to establish general grouping for your posts.
 | `["guide"]`
 
 | `tags`
 | The tags associated with the post. 
 *Must be an array with at least one string.* 
-Mostly useful for establishing some indexes for the posts.
 | Yes
 | Also one of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies]. 
+Mostly useful for establishing some indexes for the posts.
 | `["markdown", "guide"]`
 
 
@@ -425,6 +441,46 @@ https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxo
 | `http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
 
 |===
+
+
+=== Syntax highlighting (without the `highlight` shortcode)
+
+Syntax highlighting is supported through https://prismjs.com/[PrismJS]. 
+PrismJS follows the
+https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] 
+in order to color the syntax.
+
+Fortunately, both of the default Markdown parsers and Asciidoctor 
+outputs semantic HTML for code listings so both of them are supported. 
+
+By default, the native syntax highlighting is disabled. 
+To enable native syntax highlighting, enable the `syntaxHighlighting` under 
+`params` in your site config file.
+
+Assuming you're using a TOML as your config file.
+
+[source,toml]
+----
+[params]
+    // ...
+    syntaxHighlighting = true
+----
+
+If you're curious to the files being used, the PrismJS library 
+file is at `assets/js/lib` of the theme folder. 
+
+The CSS used for PrismJS syntax highlighting is at 
+`assets/css/prism.css` file. 
+You can replace the theme by going to 
+https://prismjs.com/download.html[the PrismJS download page], select 
+the theme you want, and overwriting the file at the aforementioned 
+CSS file. 
+
+NOTE: The PrismJS script file contains the core, all of the 
+languages offered as of v1.16.0, and no plugins. 
+In order to update PrismJS, you need to download the script file yourself 
+at https://prismjs.com/download.html[the PrismJS download page] and 
+select the languages it'll support.
 
 
 
@@ -466,6 +522,16 @@ deep details.
 for the CSS naming.
 * Using https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines[semantic HTML] 
 should be observed.
+
+
+
+== TODO
+
+Here are some of the features that are considered to be 
+implemented.
+
+* Easy GitHub projects integration (for quickly creating your portfolio site)
+* https://dev.to/[dev.to] integration (very low on consideration)
 
 
 
