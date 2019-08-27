@@ -1,0 +1,8 @@
+{{ $global := resources.Get "js/toggle-node.js" | minify }}
+
+{{- if $.Site.Params.syntaxHighlighting -}}
+{{ $prismJs := resources.Get "js/lib/prism.js" | minify }}
+<script type="text/javascript" src="{{ $prismJs.Permalink }}"></script>
+{{- end -}}
+
+<script type="text/javascript" src="{{ $global.Permalink }}"></script>
