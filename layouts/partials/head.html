@@ -23,8 +23,8 @@
 <meta property="og:url" content="{{ .Site.BaseURL }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 
-{{ $style := resources.Get "scss/main.scss" | resources.ToCSS | resources.Minify }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ $style := resources.Get "scss/main.scss" | toCSS | minify }}
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 
 {{- if $.Site.GoogleAnalytics -}}
 {{- template "_internal/google_analytics.html" . -}}

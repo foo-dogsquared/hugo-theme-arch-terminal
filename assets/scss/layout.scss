@@ -45,17 +45,37 @@
     &::after { content: "\201D"; }
 }
 
+.site__breadcrumbs {
+    margin: 2rem 0;
+
+    & > * { 
+        margin: 0.125rem;
+    }
+
+    & > *:first-child {
+        margin-left: 0;
+    }
+
+    & > *:last-child {
+        margin-right: 0;
+    } 
+}
+
+.site__breadcrumb--active {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bolder;
+}
+
 .site__comments {
     --border: var(--secondaryBorder) currentColor;
     
     align-items: center;
-    border-top: var(--border);
-    border-bottom: var(--border);
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     margin: 1.75rem auto;
-    min-height: 10rem;
+    min-height: 5rem;
     padding: 1.5rem 0;
 
     & > * {
@@ -111,6 +131,14 @@
 }
 
 // Posts
+.site__pages {
+    margin: 3rem 0;
+
+    & > .site__page:first-child {
+        margin-top: 0;
+    }
+}
+
 .site__page {
     margin-top: 4rem;
 
@@ -183,6 +211,11 @@
 .page__cover {
     border: solid 1.5rem var(--accent);
     padding: 1.5rem;
+    display: none;
+
+    @media screen and (min-width: $phoneWidth) {
+        display: block;
+    }
 }
 
 .page__content {
@@ -215,14 +248,14 @@
 
 .pagination__header {
     font-size: 0.9rem;
-    margin: 5rem 0 1rem;
+    margin: 5rem 0 0.25rem;
     position: relative;
     text-align: center;
     text-transform: uppercase;
 }
 
 .pagination__buttons {
-    $size: 4rem;
+    $size: 2.75rem;
     border-bottom: var(--primaryBorder) var(--foreground);
     border-top: var(--primaryBorder) var(--foreground);
     display: inline-flex;
@@ -274,4 +307,13 @@ svg.icon {
     &:hover {
         color: var(--accent);
     }
+}
+
+// PrismJS style override
+pre[class*="language-"] {
+    margin: 0;
+}
+
+code[class*="language-"] {
+    border: 0;
 }

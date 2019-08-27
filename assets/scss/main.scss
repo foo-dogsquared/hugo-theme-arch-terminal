@@ -44,6 +44,11 @@
     "asciidoctor"
 ;
 
+// Importing the Prism theme and other PrismJS-related styles
+@import 
+    "prism"
+;    
+
 // The main stylesheets.
 @import 
     "base", 

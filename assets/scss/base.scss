@@ -12,7 +12,7 @@ html {
 *,
 *::after,
 *::before {
-    box-sizing:inherit
+    box-sizing: border-box;
 }
 
 a, abbr, acronym, address, applet, article, aside, audio, 
@@ -74,6 +74,7 @@ code {
     background: var(--accent-dark);
     color: var(--accent);
     padding: 0.25rem; 
+    font-size: 0.95rem; 
 }
 
 h1, h2, h3, 
@@ -117,11 +118,6 @@ blockquote {
     margin: 2rem 0;
     border: var(--border);
     padding: 1rem;
-
-    & > p::before {
-        color: var(--accent);
-        content: "> ";
-    }
 }
 
 ol, ul {
@@ -162,11 +158,11 @@ ol {
 
 // Table
 table { 
-    border: var(--secondaryBorder); 
-    table-layout: fixed;
     border-collapse: collapse;
-    width: 100%;
     margin: 2rem 0;
+    overflow: auto;
+    table-layout: fixed;
+    width: 100%;
 }
 
 table, td, th {

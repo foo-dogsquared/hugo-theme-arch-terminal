@@ -1,7 +1,7 @@
 {{- if or .Paginator.HasNext .Paginator.HasPrev -}}
 {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
 {{- $pages := cond ($isListSectionsOnHome) (.Paginate .Site.Sections).Pages .Data.Pages -}}
-<div class="pagination">
+<section class="pagination">
   <div class="pagination__buttons">
   {{ if .Paginator.HasPrev }}
   <a class="pagination__button previous" href="{{ .Paginator.Prev.URL }}">
@@ -22,5 +22,5 @@
   <span></span>
   {{ end }}
   </div>
-</div>
+</section>
 {{- end -}}

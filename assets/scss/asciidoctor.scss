@@ -1,13 +1,55 @@
+$sidePadding: 0.75rem;
+
 // Admonition blocks
 .admonitionblock {
+    table {
+        border: none;
+    }
+
     td.icon {
         background: var(--accent);
+        border: var(--primaryBorder) var(--accent);
         color: var(--background);
         text-align: center;
         width: 20%;
+        vertical-align: middle;
     }
 }
 
+// Listing block
+* > * {
+
+    &.title {
+        background: var(--accent);
+        color: var(--background);
+        padding: $sidePadding;
+    }
+
+    &.attribution {
+        background: var(--accent);
+        color: var(--background);
+        padding: $sidePadding;
+    }
+
+    &.content {
+        border: var(--primaryBorder) var(--accent);
+
+        & > *:not(img):not(pre) {
+            margin: $sidePadding;
+        }
+    }
+}
+
+// Quote block
+.quoteblock {
+    margin: 1rem 0 1rem;
+
+    blockquote {
+        margin: auto 0 0;
+    }
+}
+
+// Callouts
 .colist {
     td:first-of-type {
         width: 15%;
@@ -17,4 +59,13 @@
 // Multimedia blocks
 .videoblock {
     margin: 0 auto;
+}
+
+// Footnotes
+#footnotes {
+    margin: 2rem auto;
+}
+
+.listingblock .content {
+    border: 0;
 }
