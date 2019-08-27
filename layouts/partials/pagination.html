@@ -3,24 +3,34 @@
 {{- $pages := cond ($isListSectionsOnHome) (.Paginate .Site.Sections).Pages .Data.Pages -}}
 <section class="pagination">
   <div class="pagination__buttons">
-  {{ if .Paginator.HasPrev }}
-  <a class="pagination__button previous" href="{{ .Paginator.Prev.URL }}">
-    <span class="button icon">←</span>
-    <span class="button text">Newer posts</span>
-  </a>
-  {{ else }}
-  <span></span>
-  {{ end }}
+  {{- if .Paginator.HasPrev -}}
+    <a class="pagination__button previous" href="{{ .Paginator.First.URL }}">
+      <span class="button icon">&lt;&lt;</span>
+      <span class="button text">First page</span>
+    </a>
+
+    {{- if not (eq .Paginator.First .Paginator.Prev) -}}  
+    <a class="pagination__button previous" href="{{ .Paginator.Prev.URL }}">
+      <span class="button icon">&lt;</span>
+      <span class="button text">Newer posts</span>
+    </a>
+    {{- end -}}
+  {{- end -}}
 
   
-  {{ if .Paginator.HasNext }}
+  {{- if .Paginator.HasNext -}}
+    {{- if not (eq .Paginator.Last .Paginator.Next) -}}
     <a class="pagination__button next" href="{{ .Paginator.Next.URL }}">
       <span class="button text">Older posts</span>
-      <span class="button icon">→</span>
+      <span class="button icon">&gt;</span>
     </a>
-  {{ else }}
-  <span></span>
-  {{ end }}
+    {{- end -}}
+
+    <a class="pagination__button next" href="{{ .Paginator.Last.URL }}">
+      <span class="button text">Last page</span>
+      <span class="button icon">&gt;&gt;</span>
+    </a>
+  {{- end -}}
   </div>
 </section>
 {{- end -}}
