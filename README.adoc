@@ -42,6 +42,9 @@ the keyword `extended` after the version number.
 For future references and safety purposes, make sure that 
 the version is at least `v0.57.2`
 
+
+=== Adding it as a clone
+
 Assuming you have installed the appropriate programs and 
 using https://git-scm.com/[Git], you can clone it directly 
 to your Hugo folder:
@@ -51,13 +54,18 @@ to your Hugo folder:
 git clone https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus.git themes/terminal-plus-minus
 ----
 
-If you don't want to make any radical changes, the above command 
-is the best option since you can simply update it 
+If you don't want to make any radical changes, this is the best option 
+since you can simply update it 
 (i.e. `cd themes/terminal-plus-minus && git fetch`) whenever updates 
 are available.
 
+
+=== Adding it as a submodule  
+
 You can also include it as a 
-https://git-scm.com/book/en/v2/Git-Tools-Submodules[git submodule]:
+https://git-scm.com/book/en/v2/Git-Tools-Submodules[git submodule]. 
+This option is mostly suitable if you want to make changes to the 
+theme from its layouts, partials, and assets. 
 
 [source,bash]
 ----
@@ -127,25 +135,64 @@ https://sass-lang.com/documentation/[documentation] page to get started.
 == Making a portfolio site
 
 This theme is suitable for creating a single portfolio page.
-Here are the main fields on the site configuration file for creating a 
-single homepage:
+Please continue to the following sections for the available options 
+and other stuff you might need to know.
 
-* `title`
-** This is the title to appear in the header logo.
+
+=== Related configuration options 
+
+Here are the main site config options you may want to look out 
+for if you want to create a single page portfolio site:
+
+[cols="5*",options="header"]
+|===
+| Key
+| Data type
+| Description
+| Optional
+| Additional notes
+
+| `title`
+| string
+| This is the title to appear in the header logo.
 Also appears in the `<title>` of the web page.
+| 
+| 
 
-* `params.tagline`
-** This will appear in the homepage as the first header to be seen.
+| `author.name`
+| string
+| The real name of the author.
+| 
+| 
 
-* `params.keywords`
-** Quite important if you consider search engine optimization (SEO).
+| `author.alias`
+| string
+| The handle/username/alias of the author.
+| Yes 
+|
 
-* `params.subtitle`
-** The subtitle for your blog.
+| `params.tagline`
+| string
+| This will appear in the homepage as the first header to be seen.
+| Yes
+| 
+
+| `params.keywords`
+| array[string]
+| A list of keywords related to your site. 
+| Yes
+| Quite important if you consider search engine optimization (SEO).
+
+| `params.subtitle`
+| string
+| The subtitle for your blog.
 Usually, this is where you put your position, occupation, or 
 whatever. 
-Also appears in the `<title>` of the web page in the format 
+| Yes
+| Also appears in the `<title>` of the web page in the format 
 `<TITLE> - <SUBTITLE>` in the homepage.
+
+|===
 
 
 === Adding projects
@@ -159,6 +206,7 @@ Make sure that the data file contains a single key/field named
 When there's at least one project, a projects section will 
 be added into your homepage and the data added in the 
 appropriate folder is added under it.
+
 
 Anyhow, here's the following keys/fields that the theme 
 look for:
@@ -291,6 +339,9 @@ the content files under `posts/` and assign the same category
 to all of them or simply make a folder named after the series 
 and put the content files there.
 
+
+=== Related configuration options 
+
 There are some parameters in the site configuration you might 
 want to try out if you're using it for blogging. 
 
@@ -351,28 +402,35 @@ in the posts (single page templates) that'll appear at the top of the post.
 
 |===
 
-Here are some screenshots of the effects of the given options above:
 
-.`showPostsOnHome` set as `false`
-image::docs/show-posts-on-home-disabled.png[width=100%]
+=== Content organization
+
+The way how the theme organizes content (and encourages) 
+is simple. 
+The theme considers all of the pages and sections except for 
+the top-level pages. 
+
+By default, the theme does not list posts in the homepage. 
+In order to do so, set the `params.showPostsOnHome` to `true` on 
+your site config file. 
+All of the posts (except for the top-level pages) are now 
+listed in the homepage. 
+
+NOTE: Folders with an `_index` file is considered a 
+section so it'll be listed. Make sure any pages that shouldn't 
+normally appear in the post list be a single page. 
 
 .`showPostsOnHome` set as `true`
 image::docs/show-posts-on-home-enabled.png[width=100%]
 
-.`listSiteSectionsOnHome` set as `true` (you need to have `showPostsOnHome` enabled as well)
-image::docs/list-site-sections-on-home-enabled.png[width=100%]
+If you want to list sections instead of the page, you should 
+enable the `params.listSiteSectionsOnHome` to `true` on the site 
+config file. 
+Take note that the `params.showPostsOnHome` also needs to be 
+enabled for this setting to work.
 
-.`showPageTypeIcon` set as `true` with a "file" type page
-image::docs/page-type-icon-file.png[width=100%]
-
-.`showPageTypeIcon` set as `true` with a "folder" type page
-image::docs/page-type-icon-folder.png[width=100%]
-
-.`contentIsStyled` set as `true`
-image::docs/content-is-styled-enabled.png[width=100%]
-
-.`contentIsStyled` set as `false`
-image::docs/content-is-styled-disabled.png[width=100%]
+.`listSiteSectionsOnHome` set as `true` 
+image::docs/list-site-sections-on-home-enabled.png[width=100%] 
 
 
 === Content frontmatter
@@ -483,6 +541,112 @@ at https://prismjs.com/download.html[the PrismJS download page] and
 select the languages it'll support.
 
 
+=== Other tidbits
+
+There are a couple of options for miscellaneous stuff and info that you 
+might want to find out.
+
+==== MathJax support
+
+MathJax is included with the theme and needs almost no configuration 
+in order for it to work. 
+
+However, take note that it uses the default configuration so there 
+might be some need to configure it.
+In case that you do need configuration, you can create a file in 
+`layouts/partials/config/mathjax.html` and do your stuff there.
+
+Assuming you didn't change the configuration or anything, here are 
+the breakdown for writing LaTeX in the web according to the 
+https://docs.mathjax.org/en/latest/start.html#tex-and-latex-input[MathJax documentation].
+
+
+For Markdown-based files:
+
+* Inline math content should be delimited with a pair of backslash 
+and parenthesis (\\(...\\)).
+* Display/block math mode should be delimited with a pair of 
+square brackets (\\[\\]) or two dollar signs (\$\$). 
+You may have to escape it with a backslash (\).
+
+.Example of math content in a Markdown file
+[source,markdown]
+----
+For inline math, you could make dollar signs-delimited content blocks like
+the following example and it'll appear like $a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}$.
+
+For display/block math mode, make the content block delimited with two dollar signs.
+
+\[\LaTeX\]
+----
+
+
+For Asciidoctor-based files:
+
+* Math support is included in Asciidoctor but 
+https://asciidoctor.org/docs/user-manual/#activating-stem-support[you have to enable it by putting `:stem:` in the preamble]. 
+The theme already takes care of that for you by including it in the archetype template. 
+* Since the theme uses the default setting for MathJax, the stem interpreter is explicitly 
+set to `latexmath`. 
+* Inline math content should be put in the `stem` macro. 
+* Display/block math content should be put in the stem block. 
+
+.Example of math content in a Asciidoctor file
+[source,asciidoc]
+----
+= Document title
+:stem: latexmath
+
+For inline math, you could make dollar signs-delimited content blocks like
+the following example and it'll appear like stem:[a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}].
+
+For display/block math mode, make a stem block.
+
+[stem]
+++++
+\LaTeX
+++++
+----
+
+==== Site breadcrumbs in post
+The most useful one is the breadcrumbs feature that'll appear in 
+the top of your posts.
+
+.Breadcrumbs in the post
+image::docs/post-breadcrumbs-enabled.png[]
+
+In order to be able to use it, set the `params.enableBreadcrumbs` to 
+`true` in your site config file. 
+
+==== Icon on post list
+
+Another one of the features you could try it out is the icons that'll 
+appear in the side of the post list. 
+This indicates whether or not the list item is a page or a section. 
+It could be useful for navigating your site.
+
+.`showPageTypeIcon` set as `true` with a "file" type page
+image::docs/page-type-icon-file.png[width=100%]
+
+.`showPageTypeIcon` set as `true` with a "folder" type page
+image::docs/page-type-icon-folder.png[width=100%]
+
+In order to enable it, set the `params.showPageTypeIcon` to `true`.
+
+==== Stylized content in the post
+
+This might be the most useless feature I've ever done. 
+Anyways, this'll make certain header types to have some sort 
+of style put into them.
+
+.Stylized content headers
+image::docs/content-is-styled-enabled.png[width=100%]
+
+In order to enable it, set `contentIsStyled`
+
+.`contentIsStyled` set as `false`
+image::docs/content-is-styled-disabled.png[width=100%]
+
 
 == How to run your site
 
@@ -530,8 +694,19 @@ should be observed.
 Here are some of the features that are considered to be 
 implemented.
 
+* RSS template
+* Internationalization (i18n) support
+* https://www.mathjax.org/[MathJax] support
+* Different https://gohugo.io/content-management/archetypes/[archetypes] 
+and content organization
 * Easy GitHub projects integration (for quickly creating your portfolio site)
-* https://dev.to/[dev.to] integration (very low on consideration)
+
+
+
+== Inspirations
+
+* https://github.com/panr/hugo-theme-terminal[Terminal theme], of course
+* https://github.com/Lednerb/bilberry-hugo-theme/[Bilberry Hugo theme] for the content organization
 
 
 
