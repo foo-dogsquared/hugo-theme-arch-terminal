@@ -400,6 +400,12 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
+| `params.readMore` 
+| string 
+| Replaces the "Read more" text at the very end of the summary of each post.
+| Absolutely 
+| 
+
 |===
 
 
@@ -541,12 +547,7 @@ at https://prismjs.com/download.html[the PrismJS download page] and
 select the languages it'll support.
 
 
-=== Other tidbits
-
-There are a couple of options for miscellaneous stuff and info that you 
-might want to find out.
-
-==== MathJax support
+=== MathJax support
 
 MathJax is included with the theme and needs almost no configuration 
 in order for it to work. 
@@ -607,6 +608,48 @@ For display/block math mode, make a stem block.
 \LaTeX
 ++++
 ----
+
+
+=== Post archive page
+
+You can make a quick archive page by creating a content file with 
+the content type as `archive`. 
+Assuming that you have `content/archives.md` as the page for the 
+archive, create a frontmatter similar to the following.
+
+[source,yaml]
+----
+---
+title: "Archives"
+date: 2019-08-28T14:32:44+08:00
+type: "archive"
+---
+----
+
+Don't forget to edit the site config file accordingly. 
+In this case, the added setting should be an additional 
+item in the navigation menu which is controlled 
+by the `menu` parameter. 
+
+[source,toml]
+----
+[menu]
+    // ...
+    [[menu.main]]
+        identifier = "archives"
+        name = "Archives"
+        url = "archives/"
+----
+
+Here's a sample of the archive page in the site.
+
+image::docs/archive-sample-page.png[width:100%]
+
+
+=== Other tidbits
+
+There are a couple of options for miscellaneous stuff and info that you 
+might want to find out.
 
 ==== Site breadcrumbs in post
 The most useful one is the breadcrumbs feature that'll appear in 
