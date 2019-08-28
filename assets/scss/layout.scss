@@ -23,7 +23,7 @@
     margin: var(--sidePadding) 0;
 
     & > * {
-        & { margin: 0.5rem; }
+        & { margin: 1rem; }
         &:first-child { margin-left: 0; }
         &:last-child { margin-right: 0; }
     }
@@ -49,11 +49,21 @@
     margin: 2rem 0;
 
     & > * { 
-        margin: 0.125rem;
+        margin: 0;
+    }
+
+    & > *:not(:last-child) {
+
+        &::after {
+            color: var(--foreground);
+            content: ">";
+            display: inline-block;
+            margin: 0 1rem;
+        }
     }
 
     & > *:first-child {
-        margin-left: 0;
+        margin: 0;
     }
 
     & > *:last-child {
@@ -223,16 +233,23 @@
 }
 
 .page__content {
-    &[data-is-styled="true"] h1::before {
+    a {
+        color: var(--accent);
+    }
+
+    &[data-is-styled="true"] h4::before {
         content: "> ";
+        color: var(--accent);
     }
 
-    &[data-is-styled="true"] h2::before {
+    &[data-is-styled="true"] h5::before {
         content: ">> ";
+        color: var(--accent);
     }
 
-    &[data-is-styled="true"] h3::before {
+    &[data-is-styled="true"] h6::before {
         content: ">>> ";
+        color: var(--accent);
     }
 
     & > * {
@@ -300,6 +317,19 @@
         & > * { margin: 0.5rem; }
 
         .button.text { display: unset; }
+    }
+}
+
+// Archives
+.archive-post {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 1rem;
+
+    @media screen and (min-width: $phoneWidth) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        width: 100%;    
     }
 }
 

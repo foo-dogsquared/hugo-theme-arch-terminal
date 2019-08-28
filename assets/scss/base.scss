@@ -185,7 +185,10 @@ main {
     & h1 {
         padding-bottom: 0.25rem;
         border-bottom: var(--primaryBorder) var(--accent);
-        
+    }
+
+    & h1:first-child {
+        margin-top: 0;
     }
 
     & h2 {
