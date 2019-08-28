@@ -1,7 +1,7 @@
 {{- define "main" -}}
 
 {{- if $.Site.Params.enableBreadcrumbs -}}
-{{- partial "breadcrumb.html" . -}}
+{{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
 {{- end -}}
 
 <h1 class="page__title">
@@ -33,9 +33,9 @@
 <img src="{{ . | absURL }}" class="page__cover" />
 {{- end -}}
 
-<div class="page__content" data-is-styled="{{ with $.Site.Params.contentIsStyled }}true{{ end }}">
+<article class="page__content" data-is-styled="{{ with $.Site.Params.contentIsStyled }}true{{ end }}">
   {{ .Content }}
-</div>
+</article>
 {{ if or .NextInSection .PrevInSection }}
 <div class="pagination">
   <div class="pagination__header">
@@ -62,5 +62,7 @@
 </div>
 {{ end }}
 
-{{ partial "comments.html" . }}
+{{- if not (eq .File.Dir "/") -}}
+{{ partial "optional/comments.html" . }}
+{{- end -}}
 {{- end -}}

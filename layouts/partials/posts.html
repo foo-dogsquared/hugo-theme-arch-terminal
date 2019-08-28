@@ -1,7 +1,8 @@
+{{- $blogIcons := "blog-icons.svg" | absURL -}}
+{{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
+{{- $pages := cond ($isListSectionsOnHome) .Site.Sections .RegularPages -}}
+
 <section class="site__pages">
-    {{- $blogIcons := "blog-icons.svg" | absURL -}}
-    {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
-    {{- $pages := cond ($isListSectionsOnHome) .Site.Sections .RegularPages -}}
     {{- range (.Paginate (where $pages "File.Dir" "!=" "/")).Pages -}}
     <div class="site__page">
         <div class="page__header">
