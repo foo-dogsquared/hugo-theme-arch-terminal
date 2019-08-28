@@ -1,0 +1,29 @@
+{{- define "main" -}}
+
+{{- if $.Site.Params.enableBreadcrumbs -}}
+{{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
+{{- end -}}
+
+<h1>{{ .Title }}</h1>
+
+<section class="site__archives">
+{{ range $.Site.RegularPages.GroupByPublishDate "2006" }}
+    {{ if ne .Key "0001" }}
+        <div class="archive">
+            <h2 class="archive__year" id="{{ .Key }}">{{ .Key }}</h2> 
+            <div class="archive__posts">
+            {{- range .Pages -}}
+                {{- if ne .File.Dir "/" -}}
+                <div class="archive-post">
+                    <a class="archive-post__title" href="{{ .Permalink }}">{{ .Title }}</a>
+                    <date class="archive-post__date">{{ .Date.Format "2006-01-02" }}</date> 
+                </div>
+                {{- end -}}
+            {{- end -}}
+            </div>
+        </div>
+    {{ end }}
+{{ end }}
+</section>
+
+{{- end -}}
