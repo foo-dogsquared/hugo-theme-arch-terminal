@@ -9,15 +9,13 @@
   {{ end }}
   {{ partial "head.html" . }}
 </head>
-<body>
-<div class="site">
+<body class="site">
   {{ partial "header.html" . }}
   <main class="site__content">
     {{ block "main" . }}
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
-</div>
 
 {{ partial "scripts.html" . }}
 </body>
