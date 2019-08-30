@@ -10,9 +10,9 @@
 
 <div class="page__meta">
     {{ if .Params.Date }}
-  <span class="page__date">
+  <date class="page__date">
     {{ .Date.Format "2006-01-02" }}
-  </span>
+  </date>
   {{ end }}
   {{ with .Params.Author }}
   <span class="page__author">::
