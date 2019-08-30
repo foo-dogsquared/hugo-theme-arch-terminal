@@ -32,6 +32,18 @@ for syntax highlighting is working as of this writing (late August 2019).
 
 
 
+
+== Changelog
+
+To keep up with the changes and latest features, you can view the 
+link:docs/CHANGELOG.adoc[changelog]. 
+
+All future features has to be implemented in a separate development 
+branch (`develop`) and you can view the pending changes there. 
+
+
+
+
 == Installation
 
 Since this theme uses SASS/SCSS asset bundling, it requires 
