@@ -16,13 +16,13 @@ $sidePadding: 0.75rem;
     }
 }
 
-
 .admonitionblock td.icon [class^="fa icon-"]{
     font-family: "Font Awesome 5 Free";
     font-size:2.5em;
     cursor:default;
     font-style: unset;
 }
+
 .admonitionblock td.icon .icon-note::before{ content:"\f05a"; }
 .admonitionblock td.icon .icon-tip::before{ content:"\f0eb"; }
 .admonitionblock td.icon .icon-warning::before{ content:"\f071"; }
