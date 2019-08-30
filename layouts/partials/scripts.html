@@ -1,6 +1,6 @@
 {{ $global := resources.Get "js/toggle-node.js" | minify }}
 
-{{- if $.Site.Params.syntaxHighlighting -}}
+{{- if $.Site.Params.enableSyntaxHighlighting -}}
 {{ $prismJs := resources.Get "js/lib/prism.js" | minify }}
 <script type="text/javascript" src="{{ $prismJs.Permalink }}"></script>
 {{- end -}}
@@ -8,7 +8,6 @@
 <!-- MathJax -->
 {{ partial "config/mathjax.html" . }}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
-
 
 <!-- The custom script -->
 <script type="text/javascript" src="{{ $global.Permalink }}"></script>

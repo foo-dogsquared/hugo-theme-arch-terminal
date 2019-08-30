@@ -19,7 +19,11 @@
 <meta property="og:type" content="website" />
 <meta property="og:name" content="{{ .Site.Author.name }}">
 <meta property="og:title" content="{{ .Site.Title }}">
-<meta property="og:description" content="{{ .Site.Params.Subtitle }}">
+
+{{- with .Site.Params.Description -}}
+<meta property="og:description" content="{{ . }}">
+{{- end -}}
+
 <meta property="og:url" content="{{ .Site.BaseURL }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 

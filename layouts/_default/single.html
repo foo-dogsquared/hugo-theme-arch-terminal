@@ -62,7 +62,10 @@
 </div>
 {{ end }}
 
-{{- if not (eq .File.Dir "/") -}}
-{{ partial "optional/comments.html" . }}
+{{- with .File -}}
+  {{ if ne .Dir "/" }}
+    {{ partial "optional/comments.html" $ }}
+  {{- end -}}
 {{- end -}}
+
 {{- end -}}
