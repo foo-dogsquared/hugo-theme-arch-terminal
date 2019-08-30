@@ -1,0 +1,25 @@
+= Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
+and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
+
+== [Unreleased] 
+=== Added
+* This changelog. ;p
+* https://prismjs.com/plugins/keep-markup/[Keep Markup plugin] to 
+https://prismjs.com/[PrismJS] to fix the Asciidoctor callouts and style them 
+appropriately.
+* Style to callouts for improved reader experience. 
+* https://highlightjs.org/[`highlightjs`] is added as an additional syntax 
+highlighter. 
+* `syntaxHighlighter` site config option as setting the syntax highlighter. 
+This time `highlightjs` is the default. 
+* Sample articles made in both Asciidoctor and Markdown. (Demo will be out soon.)
+
+=== Changed
+* `syntaxHighlighting` name to `enableSyntaxHighlighting` for consistent option 
+naming in the site configurations.
+* Refactored some layouts.
+* Moved the CSS files into their appropriate locations at `asset/css`. 
