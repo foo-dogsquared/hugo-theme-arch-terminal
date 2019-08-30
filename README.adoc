@@ -8,6 +8,7 @@ be replaced for new ones.
 
 
 
+
 == Differences from the original
 
 Being a fork of a theme, there are some differences.
@@ -40,7 +41,10 @@ version installed, just run `hugo version` and check for
 the keyword `extended` after the version number.
 
 For future references and safety purposes, make sure that 
-the version is at least `v0.57.2`
+the version is at least `v0.57.2`.
+
+If you're using Asciidoctor, make sure that the version is at 
+least `v2.0.10`.
 
 
 === Adding it as a clone
@@ -383,7 +387,7 @@ some styles into them (see the resulting headers, for example).
 | Yes
 | This is just for decorative purposes.
 
-| `params.syntaxHighlighting`
+| `params.enableSyntaxHighlighting`
 | boolean
 | Enables "native" syntax highlighting without relying to the 
 built-in highlight shortcode.
@@ -507,108 +511,6 @@ Mostly useful for establishing some indexes for the posts.
 |===
 
 
-=== Syntax highlighting (without the `highlight` shortcode)
-
-Syntax highlighting is supported through https://prismjs.com/[PrismJS]. 
-PrismJS follows the
-https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] 
-in order to color the syntax.
-
-Fortunately, both of the default Markdown parsers and Asciidoctor 
-outputs semantic HTML for code listings so both of them are supported. 
-
-By default, the native syntax highlighting is disabled. 
-To enable native syntax highlighting, enable the `syntaxHighlighting` under 
-`params` in your site config file.
-
-Assuming you're using a TOML as your config file.
-
-[source,toml]
-----
-[params]
-    // ...
-    syntaxHighlighting = true
-----
-
-If you're curious to the files being used, the PrismJS library 
-file is at `assets/js/lib` of the theme folder. 
-
-The CSS used for PrismJS syntax highlighting is at 
-`assets/css/prism.css` file. 
-You can replace the theme by going to 
-https://prismjs.com/download.html[the PrismJS download page], select 
-the theme you want, and overwriting the file at the aforementioned 
-CSS file. 
-
-NOTE: The PrismJS script file contains the core, all of the 
-languages offered as of v1.16.0, and no plugins. 
-In order to update PrismJS, you need to download the script file yourself 
-at https://prismjs.com/download.html[the PrismJS download page] and 
-select the languages it'll support.
-
-
-=== MathJax support
-
-MathJax is included with the theme and needs almost no configuration 
-in order for it to work. 
-
-However, take note that it uses the default configuration so there 
-might be some need to configure it.
-In case that you do need configuration, you can create a file in 
-`layouts/partials/config/mathjax.html` and do your stuff there.
-
-Assuming you didn't change the configuration or anything, here are 
-the breakdown for writing LaTeX in the web according to the 
-https://docs.mathjax.org/en/latest/start.html#tex-and-latex-input[MathJax documentation].
-
-
-For Markdown-based files:
-
-* Inline math content should be delimited with a pair of backslash 
-and parenthesis (\\(...\\)).
-* Display/block math mode should be delimited with a pair of 
-square brackets (\\[\\]) or two dollar signs (\$\$). 
-You may have to escape it with a backslash (\).
-
-.Example of math content in a Markdown file
-[source,markdown]
-----
-For inline math, you could make dollar signs-delimited content blocks like
-the following example and it'll appear like $a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}$.
-
-For display/block math mode, make the content block delimited with two dollar signs.
-
-\[\LaTeX\]
-----
-
-
-For Asciidoctor-based files:
-
-* Math support is included in Asciidoctor but 
-https://asciidoctor.org/docs/user-manual/#activating-stem-support[you have to enable it by putting `:stem:` in the preamble]. 
-The theme already takes care of that for you by including it in the archetype template. 
-* Since the theme uses the default setting for MathJax, the stem interpreter is explicitly 
-set to `latexmath`. 
-* Inline math content should be put in the `stem` macro. 
-* Display/block math content should be put in the stem block. 
-
-.Example of math content in a Asciidoctor file
-[source,asciidoc]
-----
-= Document title
-:stem: latexmath
-
-For inline math, you could make dollar signs-delimited content blocks like
-the following example and it'll appear like stem:[a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}].
-
-For display/block math mode, make a stem block.
-
-[stem]
-++++
-\LaTeX
-++++
-----
-
 
 === Post archive page
 
@@ -691,6 +593,156 @@ In order to enable it, set `contentIsStyled`
 image::docs/content-is-styled-disabled.png[width=100%]
 
 
+
+
+== MathJax support
+
+MathJax is included with the theme and needs almost no configuration 
+in order for it to work. 
+
+However, take note that it uses the default configuration so there 
+might be some need to configure it.
+In case that you do need configuration, you can create a file in 
+`layouts/partials/config/mathjax.html` and do your stuff there.
+
+Assuming you didn't change the configuration or anything, here are 
+the breakdown for writing LaTeX in the web according to the 
+https://docs.mathjax.org/en/latest/start.html#tex-and-latex-input[MathJax documentation].
+
+
+For Markdown-based files:
+
+* Inline math content should be delimited with a pair of backslash 
+and parenthesis (\\(...\\)).
+* Display/block math mode should be delimited with a pair of 
+square brackets (\\[\\]) or two dollar signs (\$\$). 
+You may have to escape it with a backslash (\).
+
+.Example of math content in a Markdown file
+[source,markdown]
+----
+For inline math, you could make dollar signs-delimited content blocks like
+the following example and it'll appear like $a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}$.
+
+For display/block math mode, make the content block delimited with two dollar signs.
+
+\[\LaTeX\]
+----
+
+
+For Asciidoctor-based files:
+
+* Math support is included in Asciidoctor but 
+https://asciidoctor.org/docs/user-manual/#activating-stem-support[you have to enable it by putting `:stem:` in the preamble]. 
+The theme already takes care of that for you by including it in the archetype template. 
+* Since the theme uses the default setting for MathJax, the stem interpreter is explicitly 
+set to `latexmath`. 
+* Inline math content should be put in the `stem` macro. 
+* Display/block math content should be put in the stem block. 
+
+.Example of math content in a Asciidoctor file
+[source,asciidoc]
+----
+= Document title
+:stem: latexmath
+
+For inline math, you could make dollar signs-delimited content blocks like
+the following example and it'll appear like stem:[a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}].
+
+For display/block math mode, make a stem block.
+
+[stem]
+++++
+\LaTeX
+++++
+----
+
+
+
+
+== Syntax highlighting (without the `highlight` shortcode)
+
+Syntax highlighting is supported through https://prismjs.com/[PrismJS] 
+and https://highlightjs.org/[highlight.js]. 
+Both of the syntax highlighters follows the
+https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] 
+in order to color the syntax.
+
+Fortunately, both of the default Markdown parsers and Asciidoctor 
+outputs semantic HTML for code listings so both of them are supported. 
+
+By default, the native syntax highlighting is disabled. 
+To enable native syntax highlighting, enable the `enableSyntaxHighlighting` under 
+`params` in your site config file. 
+This uses highlight.js by default. 
+In order to use PrismJS, set `params.syntaxHighlighter` with the value 
+`"prismjs"`. 
+
+Assuming you're using a TOML as your config file.
+
+[source,toml]
+----
+[params]
+    # ...
+    enableSyntaxHighlighting = true
+
+    # if you want to set PrismJS as the syntax highlighter
+    # syntaxHighlighter = "prismjs"
+----
+
+If you're curious to the files being used, the script for 
+the syntax highlighters is at `assets/js/lib` of the theme folder. 
+
+
+=== Changing themes 
+
+The CSS used for syntax highlighting is at `assets/css/` file. 
+There should be separate stylesheet for each syntax highlighters with 
+the same name (i.e. `highlightjs.css`, `prism.css`). 
+
+For highlight.js, you can change the theme by having `highlightjs.css` 
+in the `assets/css` folder. 
+You can look for different themes in 
+https://github.com/highlightjs/highlight.js/tree/master/src/styles[their GitHub page].
+
+For PrismJS, you can replace the theme by having `prism.css` in the 
+`assets/css` folder. 
+You can replace the theme by going to 
+https://prismjs.com/download.html[the PrismJS download page], select 
+the theme you want and putting it in the aforementioned file.  
+
+NOTE: The PrismJS script file contains the core, all of the 
+languages offered as of v1.16.0, and the 
+https://prismjs.com/plugins/keep-markup/[Keep Markup plugin] 
+(this plugin is important if you want to use 
+https://asciidoctor.org/docs/user-manual/#callouts[callouts in Asciidoctor]). 
+In order to update PrismJS, you need to download the script file yourself 
+at https://prismjs.com/download.html[the PrismJS download page] and 
+select the languages it'll support.
+
+
+
+
+== Issues with Asciidoctor and other stuff
+
+* First and foremost, the HTML output of Asciidoctor doesn't observe
+proper semantics. 
+Therefore, some additional styling may be done. 
+This also affects the screen reading accessibility so take 
+utmost caution when creating a workaround like 
+https://blog.anoff.io/2019-02-17-hugo-render-asciidoc/[this shadow executable hack done by a blogger with Hugo and Asciidoctor].
+
+* Using callouts with the `:icons: font` attribute enabled will 
+bring out some problems regarding to rendering the highlighted syntax with 
+https://prismjs.com/[PrismJS], it is advised to use 
+https://highlightjs.org/[HighlightJS] instead.
+
+* https://highlightjs.org/[HighlightJS] background doesn't style well 
+with the theme.
+
+
+
+
 == How to run your site
 
 From your Hugo root directory, run the following command:
@@ -706,6 +758,7 @@ You can also add the following line to site config file:
 ----
 theme = "terminal-plus-minus"
 ----
+
 
 
 
@@ -732,6 +785,7 @@ should be observed.
 
 
 
+
 == TODO
 
 Here are some of the features that are considered to be 
@@ -746,10 +800,12 @@ and content organization
 
 
 
+
 == Inspirations
 
 * https://github.com/panr/hugo-theme-terminal[Terminal theme], of course
 * https://github.com/Lednerb/bilberry-hugo-theme/[Bilberry Hugo theme] for the content organization
+
 
 
 
