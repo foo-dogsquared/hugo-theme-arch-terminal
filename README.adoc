@@ -214,7 +214,7 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 If you want to change common styles like the background color, 
 text color, or the main color, you can add a `config.scss` file 
 in `assets/scss` in your Hugo project directory.
-You can view the link:assets/scss/config.scss[default SCSS config file] 
+You can view the link:assets/scss/default.scss[default SCSS config file] 
 for a reference to what variables should be filled.
 
 If you want to override the styles, you can create a file named 

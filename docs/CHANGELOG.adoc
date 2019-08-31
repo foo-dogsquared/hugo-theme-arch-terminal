@@ -7,6 +7,18 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+
+
+
+== [1.1.1] - 2019-08-31 
+=== Changed
+* Corrected the SCSS configuration by migrating the default config to 
+`default.scss` at SCSS assets folder (link:assets/scss[`assets/scss`]). 
+* Revised the layouts. 
+
+
+
+
 == [1.1.0] - 2019-08-30  
 === Added
 * This changelog. ;p

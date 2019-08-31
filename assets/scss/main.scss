@@ -1,4 +1,7 @@
-// Importing the config.
+// Importing the default config
+@import "default";
+
+// Importing the user-defined config.
 @import "config";
 
 :root {
