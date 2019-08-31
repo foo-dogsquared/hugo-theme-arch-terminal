@@ -8,8 +8,8 @@ be replaced for new ones.
 
 Aimed for technical writers, programmers, and tech enthusiasts. 
 This theme combines retro vibes with modern-looking styles. 
-When settling with this theme, you should know more about 
-configuring stuff. 
+When settling with this theme, you should be prepared for some 
+tweaking of the settings. 
 
 
 
@@ -17,7 +17,7 @@ configuring stuff.
 == Demo 
 
 Here's a 
-https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/articles/asciidoctor-syntax-guide/[demo] 
+https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/[demo] 
 of the theme. 
 
 The raw files can be easily seen in 
@@ -45,16 +45,17 @@ Being a fork of a theme, there are some differences.
 Here are the feature highlights (and removals) that 
 the theme offers:
 
-- A recreation of the original theme, almost built from scratch
-- Easy configuration and customization with https://sass-lang.com/[SCSS]
-- Different approach of content organization 
-- Suitable for creating a quick single homepage template and blogging
-- Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
-- Retained syntax highlighting support from https://highlightjs.org/[highlight.js] 
+* A recreation of the original theme, almost built from scratch
+* Easy configuration and customization with https://sass-lang.com/[SCSS]
+* Different approach of content organization 
+* Suitable for creating a quick single homepage template and blogging
+* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
+* Includes https://www.mathjax.org/[MathJax] support
+* Retained syntax highlighting support from https://highlightjs.org/[highlight.js] 
 and https://prismjs.com/[PrismJS]
-- Reduced internationalization (i18n) support (for now, anyway)
-- Removed selection of available themes 
-- Removed https://nodejs.org/[Node] dependencies from the original theme 
+* Reduced internationalization (i18n) support (for now, anyway)
+* Removed selection of available themes 
+* Removed https://nodejs.org/[Node] dependencies from the original theme 
 
 
 
@@ -83,6 +84,13 @@ the version is at least `v0.57.2`.
 
 If you're using Asciidoctor, make sure that the version is at 
 least `v2.0.10`.
+
+For future references, here is the list for the libraries 
+included with this theme along with their version:
+
+* MathJax v2.7.6 
+* highlight.js v9.15.10 
+* PrismJS v1.17.1 
 
 
 === Adding it as a clone
@@ -577,8 +585,7 @@ https://jekyllrb.com/[Jekyll].
 | Yes 
 | One of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies].
-I recommend to format it as an array composed of one string.
-Mainly useful to establish general grouping for your posts.
+Mainly useful to establish general grouping for your posts. 
 | `["guide"]`
 
 | `tags`
@@ -686,6 +693,18 @@ In order to enable it, set `contentIsStyled`
 
 .`contentIsStyled` set as `false`
 image::docs/content-is-styled-disabled.png[width=100%]
+
+
+
+
+== Custom 404 page
+
+If you want to change it, simply copy link:layouts/404.html[`layouts/404.html`] 
+from the theme folder to your own `layouts` folder and change it from there. 
+
+As the official documentation has said, you can only see the 404 page in the 
+server mode by visiting `localhost:1313/404` (or something similar if you have 
+different ports for your `localhost`).
 
 
 
