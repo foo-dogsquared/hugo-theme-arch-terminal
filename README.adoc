@@ -9,7 +9,32 @@ be replaced for new ones.
 Aimed for technical writers, programmers, and tech enthusiasts. 
 This theme combines retro vibes with modern-looking styles. 
 When settling with this theme, you should know more about 
-configuring stuff.
+configuring stuff. 
+
+
+
+
+== Demo 
+
+Here's a 
+https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/articles/asciidoctor-syntax-guide/[demo] 
+of the theme. 
+
+The raw files can be easily seen in 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/[my GitHub repo]. 
+It should give you an idea of using it in a real-life example. 
+The demo also utilizes 
+https://travis-ci.com/[Travis CI] as the deployment tool. 
+Check out the 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/.travis.yml[config file] 
+of it to get an example. 
+
+You can also get the 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/config.toml[configuration] 
+of the theme used from the demo. 
+It should be usable and can be a great starting point to explore 
+the available options and can be used to experiment along reading through the 
+documentation. 
 
 
 
