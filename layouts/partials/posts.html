@@ -29,10 +29,6 @@
         {{- with .Params.Author -}}<span class="page__author">::
             {{ . }}</span>{{- end -}}
         </div>
-
-        {{- if .Params.categories -}}
-        <p class="page__category">{{ index .Params.categories 0 }}</p>
-        {{- end -}}
     
         {{- if .Params.tags -}}
         <div class="page__tags">

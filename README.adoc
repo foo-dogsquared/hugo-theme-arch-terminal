@@ -6,6 +6,36 @@ original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme]
 with some of its original feature set being removed to 
 be replaced for new ones.
 
+Aimed for technical writers, programmers, and tech enthusiasts. 
+This theme combines retro vibes with modern-looking styles. 
+When settling with this theme, you should be prepared for some 
+tweaking of the settings. 
+
+
+
+
+== Demo 
+
+Here's a 
+https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/[demo] 
+of the theme. 
+
+The raw files can be easily seen in 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/[my GitHub repo]. 
+It should give you an idea of using it in a real-life example. 
+The demo also utilizes 
+https://travis-ci.com/[Travis CI] as the deployment tool. 
+Check out the 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/.travis.yml[config file] 
+of it to get an example. 
+
+You can also get the 
+https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/config.toml[configuration] 
+of the theme used from the demo. 
+It should be usable and can be a great starting point to explore 
+the available options and can be used to experiment along reading through the 
+documentation. 
+
 
 
 
@@ -15,20 +45,17 @@ Being a fork of a theme, there are some differences.
 Here are the feature highlights (and removals) that 
 the theme offers:
 
-- A recreation of the original theme, almost built from scratch
-- Easy configuration and customization with SCSS
-- Different approach of content organization 
-- Suitable for creating a quick single homepage template and blogging
-- Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
-- Retained syntax highlighting support from https://prismjs.com/[PrismJS]
-- Reduced internationalization (i18n) support (for now, anyway)
-- Removed selection of available themes 
-- Removed Node dependencies from the original theme
-
-CAUTION: If you are going to make content mainly with Asciidoctor, 
-the support for syntax highlighting is quite bare with the native experience. 
-Pretty much only https://gohugo.io/content-management/shortcodes/[shortcode] 
-for syntax highlighting is working as of this writing (late August 2019).
+* A recreation of the original theme, almost built from scratch
+* Easy configuration and customization with https://sass-lang.com/[SCSS]
+* Different approach of content organization 
+* Suitable for creating a quick single homepage template and blogging
+* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
+* Includes https://www.mathjax.org/[MathJax] support
+* Retained syntax highlighting support from https://highlightjs.org/[highlight.js] 
+and https://prismjs.com/[PrismJS]
+* Reduced internationalization (i18n) support (for now, anyway)
+* Removed selection of available themes 
+* Removed https://nodejs.org/[Node] dependencies from the original theme 
 
 
 
@@ -57,6 +84,13 @@ the version is at least `v0.57.2`.
 
 If you're using Asciidoctor, make sure that the version is at 
 least `v2.0.10`.
+
+For future references, here is the list for the libraries 
+included with this theme along with their version:
+
+* MathJax v2.7.6 
+* highlight.js v9.15.10 
+* PrismJS v1.17.1 
 
 
 === Adding it as a clone
@@ -105,27 +139,73 @@ your configuration file.
 
 [source,toml]
 ----
-baseURL = "https://example.github.io/"
+baseURL = "https://example.com/"
 languageCode = "en-us"
-title = "Muh blog"
-description = "It's muh blog!"
-summaryLength = 20
-copyright = "Unless explicitly stated, all content released here are licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/4.0'>CC BY-NC-SA 4.0</a>."
+title = "Terminal Plus-Minus"
+description = "Generic description!"
+summaryLength = 15
+paginate = 5
+disqusShortname = "doogo"
+copyright = "Unless explicitly stated, all content released here are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0)."
 
 [author]
-    name = "Gabriel Arazas"
-    alias = "foo-dogsquared"
+    name = "John Dodo"
+    alias = "ordinary-extinction"
+    email = "johndodo@example.com"
 
 [menu]
     [[menu.main]]
-        identifier = "blog"
-        name = "Blog"
-        url = "blog/"
+        identifier = "articles"
+        name = "Articles"
+        url = "articles/"
+
+    [[menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "about/"
+
+    [[menu.main]]
+        identifier = "archives"
+        name = "Archives"
+        url = "archives/"
+
+    [[menu.main]]
+        identifier = "rss"
+        name = "RSS"
+        url = "index.xml/"
 
 [params]
+    # The subtitle of the blog. Mostly appears in the <title> tag.
     subtitle = "Blogger"
-    keywords = ["blogger", "bloggr", "portfolio"]
-    tagline = "Your very ordinary tagline!"
+    keywords = ["John Dodo", "ordinary-extinction", "blog"]
+
+    # The tagline that'll appear in the homepage as the first header. 
+    tagline = "Making near destructive blogs all around the world."
+        
+    # Show posts on home. :)
+    showPostsOnHome = true
+    
+    # Indicates if the site sections should be listed instead.
+    # Requires `showPostsOnHome` to be enabled.
+    # listSiteSectionsOnHome = true 
+
+    # Enables syntax highlighting. ;p
+    enableSyntaxHighlighting = true
+
+    # Set the syntax highlighter to be used. 
+    # Only valid options are "highlighterjs" or "prismjs".
+    # By default, it uses highlighter.js as the syntax highlighter if there's no set value. 
+    # syntaxHighlighter = "prismjs"
+    
+    # Indicates to show the icon whether the link leads to a page or a section. 
+    # The effect is visible if `showPostsOnHome` is at least enabled. 
+    # showPageTypeIcon = true
+    
+    # Shows breadcrumbs in the post.
+    # enableBreadcrumbs = true
+
+    # Indicates if certain headers have to be styled.
+    # contentIsStyled = true
 ----
 
 
@@ -215,7 +295,7 @@ whatever.
 
 You can also add some projects to your data by adding a 
 data file named `projects` (i.e. `projects.json`, `projects.yaml`, etc.) 
-into your data folder.
+into your https://gohugo.io/templates/data-templates/[data folder].
 Make sure that the data file contains a single key/field named 
 `list` that holds an array/list.
 
@@ -278,7 +358,7 @@ and check the output of it in https://foo-dogsquared.github.io/[my site].
 If you want to add some links to your other stuff like 
 GitHub, GitLab, Twitter, and whatnot, you can add a 
 data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) 
-in the data folder.
+in the https://gohugo.io/templates/data-templates/[data folder].
 Make sure that the data file contains a single key/field named 
 `list` that holds an array/list.
 
@@ -408,6 +488,17 @@ This uses https://prismjs.com/[PrismJS] for the highlight feature.
 | This also enables native syntax highlighting for Asciidoctor! 
 Hallejulah!
 
+| `params.syntaxHighlighter` 
+| string 
+| Sets the syntax highlighter to be used. 
+Valid options include `highlightjs` and `prismjs`. 
+When no value is given, it'll use highlight.js as the default 
+syntax highlighter.
+| Yes 
+| Despite being the same in goal (coloring syntax), it has subtle 
+differences in results. 
+See the "Issues in Asciidoctor and other stuff" section. 
+
 | `params.enableBreadcrumbs`
 | boolean
 | Enables 
@@ -494,8 +585,7 @@ https://jekyllrb.com/[Jekyll].
 | Yes 
 | One of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies].
-I recommend to format it as an array composed of one string.
-Mainly useful to establish general grouping for your posts.
+Mainly useful to establish general grouping for your posts. 
 | `["guide"]`
 
 | `tags`
@@ -603,6 +693,18 @@ In order to enable it, set `contentIsStyled`
 
 .`contentIsStyled` set as `false`
 image::docs/content-is-styled-disabled.png[width=100%]
+
+
+
+
+== Custom 404 page
+
+If you want to change it, simply copy link:layouts/404.html[`layouts/404.html`] 
+from the theme folder to your own `layouts` folder and change it from there. 
+
+As the official documentation has said, you can only see the 404 page in the 
+server mode by visiting `localhost:1313/404` (or something similar if you have 
+different ports for your `localhost`).
 
 
 
@@ -737,19 +839,28 @@ select the languages it'll support.
 
 == Issues with Asciidoctor and other stuff
 
+Since Asciidoctor only recieves basic support through 
+https://gohugo.io/content-management/formats/#additional-formats-through-external-helpers[external helpers], 
+there are some imperfections with this theme 
+(rather, overall) when using with Hugo.
+
 * First and foremost, the HTML output of Asciidoctor doesn't observe
 proper semantics. 
-Therefore, some additional styling may be done. 
+Therefore, some additional styling may be done since it 
+goes against usual content formatting compared to other 
+outputs from other content formats like Markdown. 
 This also affects the screen reading accessibility so take 
 utmost caution when creating a workaround like 
-https://blog.anoff.io/2019-02-17-hugo-render-asciidoc/[this shadow executable hack done by a blogger with Hugo and Asciidoctor].
+using https://github.com/jirutka/asciidoctor-html5s[an Asciidoctor backend with semantics in design] 
+and 
+https://blog.anoff.io/2019-02-17-hugo-render-asciidoc/[using a shadow executable hack done by a blogger with Hugo and Asciidoctor].
 
 * Using callouts with the `:icons: font` attribute enabled will 
 bring out some problems regarding to rendering the highlighted syntax with 
 https://prismjs.com/[PrismJS], it is advised to use 
-https://highlightjs.org/[HighlightJS] instead.
+https://highlightjs.org/[highlight.js] instead.
 
-* https://highlightjs.org/[HighlightJS] background doesn't style well 
+* https://highlightjs.org/[highlight.js] background doesn't style well 
 with the theme.
 
 
@@ -803,9 +914,7 @@ should be observed.
 Here are some of the features that are considered to be 
 implemented.
 
-* RSS template
 * Internationalization (i18n) support
-* https://www.mathjax.org/[MathJax] support
 * Different https://gohugo.io/content-management/archetypes/[archetypes] 
 and content organization
 * Easy GitHub projects integration (for quickly creating your portfolio site)
