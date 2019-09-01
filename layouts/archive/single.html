@@ -9,7 +9,7 @@
 <section class="site__archives">
 {{ range $.Site.RegularPages.GroupByPublishDate "2006" }}
     {{ if ne .Key "0001" }}
-        <div class="archive">
+        <section class="archive">
             <h2 class="archive__year" id="{{ .Key }}">{{ .Key }}</h2> 
             <div class="archive__posts">
             {{- range .Pages -}}
@@ -21,7 +21,7 @@
                 {{- end -}}
             {{- end -}}
             </div>
-        </div>
+        </section>
     {{ end }}
 {{ end }}
 </section>

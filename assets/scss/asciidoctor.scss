@@ -46,6 +46,7 @@ $sidePadding: 0.75rem;
 
     &.content {
         border: var(--primaryBorder) var(--accent);
+        overflow: auto;
 
         & > *:not(code) {
             padding: $sidePadding;
