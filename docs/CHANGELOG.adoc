@@ -6,6 +6,11 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
 and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
 == [Unreleased]
+
+
+
+
+== [1.2.0] - 2019-09-02 
 === Added
 * `index.json` template that is mainly going to be used as a search engine index. 
 * A search function that could be used without Algolia or any similar services 
@@ -18,6 +23,8 @@ to certain links.
 https://gohugo.io/hugo-pipes/bundling/[Hugo asset bundling] to reduce requests 
 needed for the whole site. 
 * Updated MathJax and Asciidoctor-based stylesheets. 
+
+
 
 
 == [1.1.1] - 2019-08-31 
