@@ -1,19 +1,18 @@
-{{ $global := resources.Get "js/toggle-node.js" | minify }}
+{{ $array := slice }}
 
 {{- if $.Site.Params.enableSyntaxHighlighting -}}
     {{- if (eq $.Site.Params.syntaxHighlighter "prismjs") }}
         {{ $highlighter := resources.Get "js/lib/prism.js" }}
         {{ $highlighterStyle := resources.Get "css/prism.css" | minify }}
 
-        <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}">
-        <script type="text/javascript" src="{{ $highlighter.Permalink }}"></script>
+        <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}"> 
+        {{ $array = $array | append $highlighter }}    
     {{- else -}}
         {{ $highlighter := resources.Get "js/lib/highlight.pack.js" }}
         {{ $highlighterStyle := resources.Get "css/highlightjs.css" | minify }}
     
         <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}">
-        <script type="text/javascript" src="{{ $highlighter.Permalink }}"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        {{ $array = $array | append $highlighter }}
     {{- end -}}
 {{- end -}}
 
@@ -22,4 +21,24 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
 
 <!-- The custom script -->
-<script type="text/javascript" src="{{ $global.Permalink }}"></script>
+{{ $global := resources.Get "js/toggle-node.js" | minify }}
+{{- $array = $array | append $global -}}
+
+{{- if $.Site.Params.enableSiteSearch -}}
+{{ $searchEngineLib := resources.Get "js/lib/fuse.min.js" | minify  }}
+{{ $searchEngineSearchScript := resources.Get "js/search-post.js" | minify }}
+{{ $array = $array | append $searchEngineLib $searchEngineSearchScript }}
+{{- end -}}
+
+{{ $script := $array | resources.Concat "js/script.js" }}
+<script type="text/javascript" src="{{ $script.Permalink }}"></script>
+
+{{- if (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) -}}
+<script>hljs.initHighlightingOnLoad();</script>
+{{- end -}}
+
+{{- if $.Site.Params.enableSiteSearch -}}
+<script type="text/javascript">
+    loadIndex("{{ $.Site.BaseURL }}/index.json")
+</script>
+{{- end -}}
