@@ -4,7 +4,7 @@
 
 <section class="site__pages">
     {{- range (.Paginate (where $pages "File.Dir" "!=" "/")).Pages -}}
-    <div class="site__page">
+    <section class="site__page">
         <div class="page__header">
         <h1 class="page__title">
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
@@ -33,7 +33,7 @@
         {{- if .Params.tags -}}
         <div class="page__tags">
         {{ range .Params.tags }}
-        #<a class="page__tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
+        #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
             {{- . -}}
         </a>&nbsp;
         {{ end }}
@@ -57,7 +57,7 @@
         <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMore }}{{ . }}{{ else }}Read more{{ end }} →</a>
         </div>
         {{- end -}}
-    </div>
+    </section>
     {{- end -}}
     
     {{- partial "pagination.html" . -}}

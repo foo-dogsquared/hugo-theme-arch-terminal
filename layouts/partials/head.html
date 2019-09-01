@@ -1,11 +1,12 @@
 <meta name="author" content="{{ .Site.Author.name }}">
 <meta name="application-name" content="{{ .Site.Title }}">
-<meta name="description" content="{{ .Site.Params.Subtitle }}">
+<meta name="description" content="{{ .Site.Params.Description }}">
 <meta name="robots" content="noodp"/>
 {{- with .Site.Params.keywords -}}
 {{- $keywords := delimit . ", " -}}
 <meta name="keywords" content="{{ $keywords }}">
 {{- end -}}
+<link href="{{ .Permalink }}" rel="canonical">
 
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary" />

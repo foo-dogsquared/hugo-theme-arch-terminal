@@ -24,7 +24,7 @@
 {{ if .Params.tags }}
 <span class="page__tags">
   {{ range .Params.tags }}
-  #<a class="page__tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+  #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
   {{ end }}
 </span>
 {{ end }}
@@ -32,6 +32,12 @@
 {{- with .Params.Cover -}}
 <img src="{{ . | absURL }}" class="page__cover" />
 {{- end -}}
+
+{{ if .Params.toc }}
+<div class="page__toc">
+  {{ .TableOfContents }}
+</div>
+{{ end }}
 
 <article class="page__content" data-is-styled="{{ with $.Site.Params.contentIsStyled }}true{{ end }}">
   {{ .Content }}
@@ -43,7 +49,7 @@
   </div>
   <div class="pagination__buttons">
     {{ if .NextInSection }}
-    <a class="pagination__button previous" href="{{ .NextInSection.Permalink }}">
+    <a class="pagination__button previous" rel="prev" href="{{ .NextInSection.Permalink }}">
       <span class="button icon">←</span>
       <span class="button text">{{ .NextInSection.Title }}</span>
     </a>
@@ -51,7 +57,7 @@
     <span></span>
     {{ end }}
     {{ if .PrevInSection }}
-    <a class="pagination__button next" href="{{ .PrevInSection.Permalink }}">
+    <a class="pagination__button next" rel="next" href="{{ .PrevInSection.Permalink }}">
       <span class="button text">{{ .PrevInSection.Title }}</span>
       <span class="button icon">→</span>
     </a>

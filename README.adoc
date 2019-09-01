@@ -47,6 +47,7 @@ the theme offers:
 
 * A recreation of the original theme, almost built from scratch
 * Easy configuration and customization with https://sass-lang.com/[SCSS]
+* Aims on supporting engineering and technical content
 * Different approach of content organization 
 * Suitable for creating a quick single homepage template and blogging
 * Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
@@ -85,12 +86,6 @@ the version is at least `v0.57.2`.
 If you're using Asciidoctor, make sure that the version is at 
 least `v2.0.10`.
 
-For future references, here is the list for the libraries 
-included with this theme along with their version:
-
-* MathJax v2.7.6 
-* highlight.js v9.15.10 
-* PrismJS v1.17.1 
 
 
 === Adding it as a clone
@@ -121,6 +116,20 @@ theme from its layouts, partials, and assets.
 ----
 git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus.git themes/terminal-plus-minus
 ----
+
+
+
+
+== Libraries used
+
+For future references, here is the list for the libraries 
+included with this theme along with their version:
+
+* https://www.mathjax.org/[MathJax] v2.7.6 
+* https://highlightjs.org/[highlight.js] v9.15.10 
+* https://prismjs.com/[PrismJS] v1.17.1 
+* https://fusejs.io/[Fuse.js] v3.4.5 
+
 
 
 
@@ -220,6 +229,10 @@ for a reference to what variables should be filled.
 If you want to override the styles, you can create a file named 
 `extend.scss` in `assets/scss` of your Hugo project directory. 
 From there, you can simply add/modify/remove some styling rules yourself. 
+
+If you want to add some custom fonts, make sure you'll define them through
+https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face[`@font-face`] rule. 
+For placing font files, you can put them in the `static/fonts` folder. 
 
 For those who haven't encountered SCSS yet, it's almost like a superset 
 of CSS but with additional stuff. 
@@ -507,6 +520,16 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
+| `params.enableSiteSearch`
+| boolean
+| Enables navigation through searching. 
+The search widget is located at the bottom of the page. 
+| Yes
+| This feature is experimental. 
+Don't expect a lot of stability with this. 
+If your site is large enough, I recommend to integrate with stronger tools 
+such as Algolia.
+
 | `params.readMore` 
 | string 
 | Replaces the "Read more" text at the very end of the summary of each post.
@@ -648,6 +671,45 @@ by the `menu` parameter.
 Here's a sample of the archive page in the site.
 
 image::docs/archive-sample-page.png[width:100%]
+
+
+=== Site search widget
+
+This theme offers a site-wide search navigation widget with 
+https://fusejs.io/[Fuse.js] as the search engine. 
+You can include it by setting an alternative output for the homepage 
+with `JSON` and setting `params.enableSiteSearch` to `true` 
+in your site config. 
+
+Here's what the site config file should have (assuming it is in TOML): 
+
+[source,toml]
+----
+# ... 
+
+[outputs]
+    home = ["HTML", "JSON"] # You can add more, if you want 
+
+# ...
+
+[params]
+    # ... 
+
+    enableSiteSearch = true
+----
+
+The feature uses https://fusejs.io/[Fuse.js] as the search engine. 
+The file can be found on link:assets/js/lib/fuse.min.js[`assets/js/lib/fuse.min.js`].
+
+.The site-wide search widget
+image::docs/enable-site-search-widget.png[]
+
+CAUTION: Do take note that this feature is not recommended for large 
+sites since the index built will be very large and can be 
+detrimental for visitors. 
+Instead, I recommend to use https://www.algolia.com/[Algolia] 
+for something like it. 
+
 
 
 === Other tidbits
@@ -889,8 +951,20 @@ theme = "terminal-plus-minus"
 
 If you spot some bugs or want to suggest a feature, feel 
 free to file an issue in the issue tracker. 
-You can also create a pull request if you want to implement the 
-feature yourself and add it into the codebase.
+
+If you want to contribute through code, you can do the following 
+to set up the repo into your computer:
+
+* Fork this repository 
+* Clone the forked repository 
+* Checkout to the development branch (`develop`) 
+* Create another branch from the development branch which you can 
+freely implement your own stuff 
+
+Make sure the new branch name is appropriately named. 
+
+If creating a pull request, you have to pass it through the 
+development branch. 
 
 If you're going to update the codebase, make sure you mind the 
 following guidelines:
@@ -912,8 +986,12 @@ should be observed.
 == TODO
 
 Here are some of the features that are considered to be 
-implemented.
+implemented. 
+Any help with this task list by pull requests are very 
+appreciated. 
 
+* Algolia integration
+* Focus support for engineering and technical content 
 * Internationalization (i18n) support
 * Different https://gohugo.io/content-management/archetypes/[archetypes] 
 and content organization
@@ -925,6 +1003,8 @@ and content organization
 == Inspirations
 
 * https://github.com/panr/hugo-theme-terminal[Terminal theme], of course
+* https://github.com/achary/engimo[Engimo theme] for the focus in engineering content 
+* https://sourcethemes.com/academic[Hugo Academic theme] for the focus in academic content 
 * https://github.com/Lednerb/bilberry-hugo-theme/[Bilberry Hugo theme] for the content organization
 
 

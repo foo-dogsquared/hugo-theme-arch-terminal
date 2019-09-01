@@ -4,13 +4,13 @@
 <section class="pagination">
   <div class="pagination__buttons">
   {{- if .Paginator.HasPrev -}}
-    <a class="pagination__button previous" href="{{ .Paginator.First.URL }}">
+    <a class="pagination__button previous" rel="first" href="{{ .Paginator.First.URL }}">
       <span class="button icon">&lt;&lt;</span>
       <span class="button text">First page</span>
     </a>
 
     {{- if not (eq .Paginator.First .Paginator.Prev) -}}  
-    <a class="pagination__button previous" href="{{ .Paginator.Prev.URL }}">
+    <a class="pagination__button previous" rel="next" href="{{ .Paginator.Prev.URL }}">
       <span class="button icon">&lt;</span>
       <span class="button text">Newer posts</span>
     </a>
@@ -20,13 +20,13 @@
   
   {{- if .Paginator.HasNext -}}
     {{- if not (eq .Paginator.Last .Paginator.Next) -}}
-    <a class="pagination__button next" href="{{ .Paginator.Next.URL }}">
+    <a class="pagination__button next" rel="prev" href="{{ .Paginator.Next.URL }}">
       <span class="button text">Older posts</span>
       <span class="button icon">&gt;</span>
     </a>
     {{- end -}}
 
-    <a class="pagination__button next" href="{{ .Paginator.Last.URL }}">
+    <a class="pagination__button next" rel="last" href="{{ .Paginator.Last.URL }}">
       <span class="button text">Last page</span>
       <span class="button icon">&gt;&gt;</span>
     </a>

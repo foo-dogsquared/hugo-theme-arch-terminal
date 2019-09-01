@@ -10,6 +10,23 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+== [1.2.0] - 2019-09-02 
+=== Added
+* `index.json` template that is mainly going to be used as a search engine index. 
+* A search function that could be used without Algolia or any similar services 
+(though not recommended for large sites).
+
+=== Changed
+* Revised the layout to be semantic and SEO-friendly like adding `rel` attributes 
+to certain links. 
+* Scripts are now concatenated using 
+https://gohugo.io/hugo-pipes/bundling/[Hugo asset bundling] to reduce requests 
+needed for the whole site. 
+* Updated MathJax and Asciidoctor-based stylesheets. 
+
+
+
+
 == [1.1.1] - 2019-08-31 
 === Changed
 * Corrected the SCSS configuration by migrating the default config to 

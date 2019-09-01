@@ -15,6 +15,10 @@
     {{ block "main" . }}
     {{ end }}
   </main>
+  {{- if .Site.Params.enableSiteSearch -}}
+    {{ partial "optional/search" . }}
+  {{- end -}}
+  
   {{ partial "footer.html" . }}
 
 {{ partial "scripts.html" . }}

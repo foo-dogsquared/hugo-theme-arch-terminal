@@ -232,6 +232,10 @@
     }
 }
 
+.page__toc {
+    margin: 2.2rem;
+}
+
 .page__content {
     a {
         color: var(--accent);
@@ -352,4 +356,58 @@ pre[class*="language-"] {
 
 code[class*="language-"] {
     border: 0;
+}
+
+// Forms
+.form__label {
+    display: block;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.form__input {
+    display: block;
+}
+
+// Search bar
+.site__search {
+    position: relative;
+    width: 100%;
+}
+
+.site__search-bar {
+    $borderStyle: 0.5rem solid;
+    border: $borderStyle var(--accent);
+
+    &:focus {
+        border: $borderStyle var(--foreground);
+    }
+}
+
+.site__search-bar-results {
+    border: var(--primaryBorder) var(--accent);
+    border-top: 0;
+    background: var(--background);
+    position: absolute;
+    top: 100%;
+    width: inherit;
+    max-height: 10rem;
+    overflow: auto;
+
+    & > * {
+        &:hover {
+            background: var(--foreground);
+            color: var(--background);
+        }
+    }
+}
+
+.search-results__item {
+    padding: 0.75rem;
+    display: block;
+}
+
+// Mermaid.js styles
+.language-mermaid {
+    background: var(--foreground) !important;
 }
