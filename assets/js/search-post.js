@@ -22,7 +22,7 @@ function searchEvent(event) {
             const searchResultItemElement = document.createElement("a");
             searchResultItemElement.classList.add("search-results__item");
             searchResultItemElement.href = searchResult.url
-            searchResultItemElement.textContent = searchResult.name
+            searchResultItemElement.textContent = searchResult.title
 
             searchResultsNode.appendChild(searchResultItemElement);
         }
@@ -39,11 +39,12 @@ async function loadIndex(url, container) {
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: [
-            "name"
+            "title",
+            "url"
         ]
     }
 
-    const fuse = new Fuse(json, options);
+    const fuse = new Fuse(json["items"], options);
     search = fuse;
     
     const searchBars = document.querySelectorAll(".site__search");
