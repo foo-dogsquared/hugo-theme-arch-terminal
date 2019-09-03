@@ -549,6 +549,24 @@ syntax highlighter.
 differences in results. 
 See the "Issues in Asciidoctor and other stuff" section. 
 
+| `params.enableBreadcrumbs`
+| boolean
+| Enables 
+https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/[site breadcrumbs] 
+in the posts (single page templates) that'll appear at the top of the post.
+| Yes
+| 
+
+| `params.enableSiteSearch`
+| boolean
+| Enables navigation through searching. 
+The search widget is located at the bottom of the page. 
+| Yes
+| This feature is experimental. 
+Don't expect a lot of stability with this. 
+If your site is large enough, I recommend to integrate with stronger tools 
+such as Algolia.
+
 | `params.readMore` 
 | string 
 | Replaces the "Read more" text at the very end of the summary of each post.

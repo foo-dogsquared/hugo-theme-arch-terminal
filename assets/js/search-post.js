@@ -45,6 +45,7 @@ async function loadIndex(url, container) {
     }
 
     const fuse = new Fuse(json["items"], options);
+
     search = fuse;
     
     const searchBars = document.querySelectorAll(".site__search");
