@@ -5,7 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
 and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
-== [Unreleased]
+== [Unreleased] 
+
+
+
+== [1.3.0] - 2019-09-03 
+=== Added 
+* Support for RSS, Atom, and JSON feeds. 
+** `params.feedLimit` parameter has been added to the site configuration for 
+controlling the number of output for your feeds. 
+** Related files can be found at `index.atom`, `index.json`, `index.rss` at the layout folder. 
+** Feeds for list templates can be found at `_default/list.*` as well.
+
+=== Changed
+* `index.json` schema has been changed and as a result of supporting JSON feeds, it'll be 
+used as the template for the https://jsonfeed.org/[JSON feed]. 
+* Tweaked built-in search engine settings (thankfully, it only needs a few things to change). 
+
+=== Fixed
+* Disqus comments not showing up. 
 
 
 
