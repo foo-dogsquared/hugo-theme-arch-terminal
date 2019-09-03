@@ -49,6 +49,7 @@ the theme offers:
 * Easy configuration and customization with https://sass-lang.com/[SCSS]
 * Aims on supporting engineering and technical content
 * Different approach of content organization 
+* Support RSS, Atom, and JSON feeds
 * Suitable for creating a quick single homepage template and blogging
 * Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
 * Includes https://www.mathjax.org/[MathJax] support
@@ -280,10 +281,13 @@ Also appears in the `<title>` of the web page.
 | Yes 
 |
 
-| `params.tagline`
-| string
-| This will appear in the homepage as the first header to be seen.
-| Yes
+| `copyright`
+| string 
+| The string to appear in the copyright part of the page 
+which is in the very bottom. 
+It'll be converted to Markdown so valid Markdown string 
+can be put in the file.
+| Yes 
 | 
 
 | `params.keywords`
@@ -300,6 +304,12 @@ whatever.
 | Yes
 | Also appears in the `<title>` of the web page in the format 
 `<TITLE> - <SUBTITLE>` in the homepage.
+
+| `params.tagline`
+| string
+| This will appear in the homepage as the first header to be seen.
+| Yes
+| 
 
 |===
 
@@ -341,6 +351,12 @@ This is the name that'll appear in the homepage.
 | 
 | 
 
+| `description`
+| string
+| The description of the project.
+| Yes
+| 
+
 | `link`
 | string
 | The website/homepage of the working project. 
@@ -351,12 +367,6 @@ This is the name that'll appear in the homepage.
 | string
 | The link to the repo of the project.
 | Yes 
-| 
-
-| `description`
-| string
-| The description of the project.
-| Yes
 | 
 
 |===
@@ -394,12 +404,6 @@ Here's a table of the following key/fields that theme looks for:
 The social icons are extracted from 
 https://github.com/simple-icons/simple-icons[Simple Icons set]. 
 
-| `url`
-| string
-| The hyperlink of the additional contact.
-| 
-| 
-
 | `name`
 | string
 | The name of the contact link.
@@ -407,6 +411,12 @@ https://github.com/simple-icons/simple-icons[Simple Icons set].
 | If the links are set to be text, the value of this key will be used.
 Otherwise, if the links are set to be text and there's no value to this 
 key, the `id` will be used, instead.
+
+| `url`
+| string
+| The hyperlink of the additional contact.
+| 
+| 
 
 |===
 
@@ -462,55 +472,12 @@ want to try out if you're using it for blogging.
 | Optional
 | Additional notes
 
-| `params.showPostsOnHome`
-| boolean
-| Indicates if the homepage should show the pages 
-from the content folder.
-| Yes
-| 
-
-| `params.listSiteSectionsOnHome`
-| boolean
-| Indicates if the homepage should list the 
-site sections (top-level directories of the site)
-instead of the pages 
-| Yes
-| You need to have `showPostsOnHome` set to `true` to 
-make have this effect visible.
-
-| `params.showPageTypeIcon`
-| boolean
-| Shows the icon for page type (either if it's a folder or a file in 
-the content folder) in the home page.
-| Yes, completely
-| For the theme, a page is a "folder" if its base filename is `_index`. 
-
 | `params.contentIsStyled`
 | boolean
 | Makes the single page template content to have 
 some styles into them (see the resulting headers, for example).
 | Yes
 | This is just for decorative purposes.
-
-| `params.enableSyntaxHighlighting`
-| boolean
-| Enables "native" syntax highlighting without relying to the 
-built-in highlight shortcode.
-This uses https://prismjs.com/[PrismJS] for the highlight feature.
-| Yes
-| This also enables native syntax highlighting for Asciidoctor! 
-Hallejulah!
-
-| `params.syntaxHighlighter` 
-| string 
-| Sets the syntax highlighter to be used. 
-Valid options include `highlightjs` and `prismjs`. 
-When no value is given, it'll use highlight.js as the default 
-syntax highlighter.
-| Yes 
-| Despite being the same in goal (coloring syntax), it has subtle 
-differences in results. 
-See the "Issues in Asciidoctor and other stuff" section. 
 
 | `params.enableBreadcrumbs`
 | boolean
@@ -529,6 +496,58 @@ The search widget is located at the bottom of the page.
 Don't expect a lot of stability with this. 
 If your site is large enough, I recommend to integrate with stronger tools 
 such as Algolia.
+
+| `params.enableSyntaxHighlighting`
+| boolean
+| Enables "native" syntax highlighting without relying to the 
+built-in highlight shortcode.
+This uses https://prismjs.com/[PrismJS] for the highlight feature.
+| Yes
+| This also enables native syntax highlighting for Asciidoctor! 
+Hallejulah! 
+
+| `params.feedLimit` 
+| boolean 
+| Specifies how many posts should be listed at a time in the 
+output formats (i.e. RSS, Atom, etc.). 
+Default value is 10. 
+Values less than or equal to 0 is also considered to the default value. 
+| Yes 
+| 
+
+| `params.listSiteSectionsOnHome`
+| boolean
+| Indicates if the homepage should list the 
+site sections (top-level directories of the site)
+instead of the pages 
+| Yes
+| You need to have `showPostsOnHome` set to `true` to 
+make have this effect visible.
+
+| `params.showPageTypeIcon`
+| boolean
+| Shows the icon for page type (either if it's a folder or a file in 
+the content folder) in the home page.
+| Yes, completely
+| For the theme, a page is a "folder" if its base filename is `_index`. 
+
+| `params.showPostsOnHome`
+| boolean
+| Indicates if the homepage should show the pages 
+from the content folder.
+| Yes
+| 
+
+| `params.syntaxHighlighter` 
+| string 
+| Sets the syntax highlighter to be used. 
+Valid options include `highlightjs` and `prismjs`. 
+When no value is given, it'll use highlight.js as the default 
+syntax highlighter.
+| Yes 
+| Despite being the same in goal (coloring syntax), it has subtle 
+differences in results. 
+See the "Issues in Asciidoctor and other stuff" section. 
 
 | `params.readMore` 
 | string 
@@ -609,6 +628,7 @@ https://jekyllrb.com/[Jekyll].
 | One of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies].
 Mainly useful to establish general grouping for your posts. 
+Categories are not included in building feeds. 
 | `["guide"]`
 
 | `tags`
@@ -617,7 +637,8 @@ Mainly useful to establish general grouping for your posts.
 | Yes
 | Also one of the 
 https://gohugo.io/content-management/taxonomies/#default-taxonomies[default taxonomies]. 
-Mostly useful for establishing some indexes for the posts.
+Mostly useful for establishing some indexes for the posts. 
+Also used for the output format feeds (RSS, Atom, JSON feed). 
 | `["markdown", "guide"]`
 
 
@@ -899,6 +920,99 @@ select the languages it'll support.
 
 
 
+== RSS, Atom, and JSON output feed 
+
+This is mostly applicable for those who use the theme for blogging. 
+The theme support RSS, Atom, and JSON feeds. 
+
+For future references, here are the following documents used to refer in 
+creating the feed templates: 
+
+* https://tools.ietf.org/html/rfc4287[Atom 1.0 - IETF RFC4287]
+* https://jsonfeed.org/version/1[JSON Feed version 1 specifications]
+* https://cyber.harvard.edu/rss/rss.html[RSS 2.0 specifications] 
+
+The generated RSS and Atom output has been tested against the 
+https://validator.w3.org/feed/[W3C feed validator] and it has been valid so far. 
+For JSON feeds, it has been tested on 
+https://json-feed-validator.herokuapp.com/validate[a JSON feed validator] and 
+produces the same valid result.
+
+NOTE: Personally, I recommend using Atom feeds since it is widely recognized 
+and 
+http://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared[it does have a better format than RSS]. 
+
+In order to enable it, utilize custom formats in your site configuration. 
+
+The output format template is in the layout folder named `index` with their 
+respective file extensions (`.rss`, `.atom`, `.json`). 
+They also have a list counterpart at `_default/list` with the same respective 
+file extension. 
+
+All of them support outputs for the homepage (from `index.$FILE_EXT`) and 
+lists (from `list.$FILE_EXT`). 
+
+Here's an example which will make all of the feeds appear at `index.rss`, 
+`index.atom`, and `index.json`. 
+
+[source,toml]
+----
+
+# Visit the following for more information:
+# https://gohugo.io/templates/output-formats
+
+# Defining the media type of the output formats
+# For JSON format, it doesn't need to be since it's already built-in into Hugo
+[mediaTypes]
+    [mediaTypes."application/atom+xml"]
+        suffixes = ["atom", "atom.xml"] # You can remove the "atom.xml" if you want
+        noUgly = true
+    
+    # Redefining RSS media type for the additional suffix
+    # You can omit this one if you wish, IDK why I put this one
+    [mediaTypes."application/rss+xml"]
+        suffixes = ["rss", "rss.xml"] # You can remove the "rss.xml" if you want
+        noUgly = true
+
+
+# Including all of the feed output formats in the build
+[outputFormats]
+    [outputFormats.Rss]
+        mediaType = "application/rss+xml"
+        baseName = "index"
+
+    [outputFormats.Atom]
+        mediaType = "application/atom+xml"
+        baseName = "index"
+
+# Indicating what output formats shall be included 
+# for the following kinds
+[outputs]
+    # .Site.BaseURL/index.* is available 
+    home = ["HTML", "JSON", "RSS", "ATOM"]
+
+    # .Site.BaseURL/$section/index.* is available
+    section = ["HTML", "JSON", "RSS", "ATOM"] 
+----
+
+
+
+=== Limitations 
+
+In order to prevent diving into complexity, there is a set of limitations you 
+have to keep in mind.
+
+* No pagination. 
+Only the first 10 (or given `params.feedLimit`) shall be shown at any time. 
+* It doesn't support multiple site authors. 
+It always assumed that the site only has one author. 
+* The same deal for posts. 
+In case that there is an `author` field in the frontmatter of the post, 
+it'll only support one author, not an array of them. 
+
+
+
+
 == Issues with Asciidoctor and other stuff
 
 Since Asciidoctor only recieves basic support through 
@@ -952,6 +1066,10 @@ theme = "terminal-plus-minus"
 If you spot some bugs or want to suggest a feature, feel 
 free to file an issue in the issue tracker. 
 
+
+
+=== Setting up for development
+
 If you want to contribute through code, you can do the following 
 to set up the repo into your computer:
 
@@ -966,19 +1084,25 @@ Make sure the new branch name is appropriately named.
 If creating a pull request, you have to pass it through the 
 development branch. 
 
+
+
+=== Project style guides
+
 If you're going to update the codebase, make sure you mind the 
 following guidelines:
 
-* The documentations have to be written in 
-https://asciidoctor.org/[Asciidoctor]. 
+* The documentations have to be written in https://asciidoctor.org/[Asciidoctor]. 
 If you're not familiar with it, here's the 
 https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[quick reference page] for 
 a rundown and their https://asciidoctor.org/docs/user-manual/[user manual] for 
-deep details.
+deep details. 
 * The codebase follows the http://getbem.com/naming/[BEM naming convention] 
 for the CSS naming.
 * Using https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines[semantic HTML] 
 should be observed.
+* Not really a requirement but use the https://editorconfig.org/[EditorConfig] 
+plugin for your text editor. 
+If you don't have any, try to follow according to the `.editorconfig` rules. 
 
 
 
