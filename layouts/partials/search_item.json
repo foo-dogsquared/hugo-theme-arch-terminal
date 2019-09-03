@@ -1,7 +1,0 @@
-{{- if .IsPage -}}
-{
-  "name": "{{ .Title }}",
-  "description": "{{ with .Params.description }}{{ plainify . | replaceRE "\n" "$1" | replaceRE "\\\\" "\\\\" | htmlEscape }}{{ else }}{{ replaceRE "\\\\" "\\\\" .Summary | plainify | replaceRE "\n" "$1" | htmlEscape }}{{ end }}",
-  "url": "{{ .Permalink }}"
-}
-{{- end -}}

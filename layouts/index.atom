@@ -1,0 +1,29 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" | safeHTML }}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>{{ with .Site.Params.Subtitle }}
+  <subtitle type="html">{{ . | safeHTML }}</subtitle>{{ end }}
+  <link rel="alternate" type="text/html" href="{{ .Site.BaseURL }}"/>
+  <link rel="self" type="application/atom+xml" href="{{ with .OutputFormats.Get "ATOM" }}{{ .Permalink }}{{ end }}"/>
+  <rights>{{ with .Site.Copyright }}{{ . }}{{ else }}© {{ now.Year }} {{ $.Site.Author.name }}{{ end }}</rights>
+  <generator>Hugo -- gohugo.io</generator>
+  <updated>{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}</updated>
+  <author>
+    <name>{{ .Site.Author.name }}</name>{{ with .Site.Author.email }}
+    <email>{{ . }}</email>{{ end }}
+  </author>
+  <id>{{ .Permalink }}</id>
+  {{ $limit := cond (gt .Site.Params.feedLimit 0) .Site.Params.feedLimit 10 }}
+  {{ range first $limit (where .RegularPages "File.Dir" "!=" "/") }}
+  <entry>
+    <id>{{ .Permalink }}</id>
+    <title type="text">{{ .Title }}</title>
+    <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Site.Language.Lang }}" title="{{ .Title | safeHTML }}"/>{{ with .Params.author }}
+    <author><name>{{ . }}<name></author>{{ end }}{{ range .Params.tags }}
+    <category term="{{ . }}"/>{{ end }}
+    <published>{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}</published>
+    <updated>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}</updated>{{ with .Params.license }}
+    <rights type="html">{{ . | safeHTML }}<rights>{{ end }}
+    <content type="html">{{ .Content | html }}</content>
+  </entry>
+  {{ end }}
+</feed>
