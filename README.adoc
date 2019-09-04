@@ -65,7 +65,7 @@ and https://prismjs.com/[PrismJS]
 == Changelog
 
 To keep up with the changes and latest features, you can view the 
-link:docs/CHANGELOG.adoc[changelog]. 
+link:CHANGELOG.adoc[changelog]. 
 
 All future features has to be implemented in a separate development 
 branch (`develop`) and you can view the pending changes there. 
@@ -219,6 +219,7 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 ----
 
 
+
 === Changing appearance
 
 If you want to change common styles like the background color, 
@@ -242,11 +243,13 @@ https://sass-lang.com/documentation/[documentation] page to get started.
 
 
 
+
 == Making a portfolio site
 
 This theme is suitable for creating a single portfolio page.
 Please continue to the following sections for the available options 
 and other stuff you might need to know.
+
 
 
 === Related configuration options 
@@ -311,7 +314,15 @@ whatever.
 | Yes
 | 
 
+| `params.enableThemeToggle` 
+| boolean 
+| Enables theme toggling. 
+Puts an additional theme toggle button at the header logo. 
+| Yes (but no for others) 
+| 
+
 |===
+
 
 
 === Adding projects
@@ -319,8 +330,8 @@ whatever.
 You can also add some projects to your data by adding a 
 data file named `projects` (i.e. `projects.json`, `projects.yaml`, etc.) 
 into your https://gohugo.io/templates/data-templates/[data folder].
-Make sure that the data file contains a single key/field named 
-`list` that holds an array/list.
+Make sure that the data file holds an array/list of objects/dictionaries with 
+the specified fields.
 
 When there's at least one project, a projects section will 
 be added into your homepage and the data added in the 
@@ -382,8 +393,8 @@ If you want to add some links to your other stuff like
 GitHub, GitLab, Twitter, and whatnot, you can add a 
 data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) 
 in the https://gohugo.io/templates/data-templates/[data folder].
-Make sure that the data file contains a single key/field named 
-`list` that holds an array/list.
+Like the `projects` data file, make sure that it contains an array/list 
+of objects/dictionaries with the specified fields. 
 
 Here's a table of the following key/fields that theme looks for:
 
@@ -439,7 +450,29 @@ NOTE: The whole spritesheet is extracted from the
 https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
 
 
+
+=== Color scheme toggle configuration 
+
+You can have theme toggling (or dark mode as others might call it) 
+for your site. 
+It is disabled by default but you can enable it by setting `params.enableThemeToggle` 
+on your site configuration. 
+
+You can also customize your second theme from its background to its 
+font (actually, I think that's it). 
+See the link:assets/scss/default.scss[`assets/scss/default.scss`] file 
+to see the variables needed for the second theme. 
+
+If the second theme is not explicitly configured, it'll be derived from the 
+first theme. 
+Beware as it will usually get ugly results. 
+Manually configuring it yourself is still the best way. 
+
+
+
+
 == Making a blog site
+
 This theme is also suitable to be a blogging theme. 
 Most of the stuff from making a single homepage site also applies here.
 
@@ -457,6 +490,7 @@ If you want to make a post series, you could either put
 the content files under `posts/` and assign the same category 
 to all of them or simply make a folder named after the series 
 and put the content files there.
+
 
 
 === Related configuration options 
@@ -495,7 +529,13 @@ The search widget is located at the bottom of the page.
 | This feature is experimental. 
 Don't expect a lot of stability with this. 
 If your site is large enough, I recommend to integrate with stronger tools 
-such as Algolia.
+such as Algolia. 
+
+| `params.enableMathjax`
+| boolean
+| Enables MathJax in the page.  
+| Yes (but not for me) 
+| For performance reasons, it'll be used through a CDN. 
 
 | `params.enableSyntaxHighlighting`
 | boolean
@@ -712,43 +752,6 @@ Here's a sample of the archive page in the site.
 image::docs/archive-sample-page.png[width:100%]
 
 
-=== Site search widget
-
-This theme offers a site-wide search navigation widget with 
-https://fusejs.io/[Fuse.js] as the search engine. 
-You can include it by setting an alternative output for the homepage 
-with `JSON` and setting `params.enableSiteSearch` to `true` 
-in your site config. 
-
-Here's what the site config file should have (assuming it is in TOML): 
-
-[source,toml]
-----
-# ... 
-
-[outputs]
-    home = ["HTML", "JSON"] # You can add more, if you want 
-
-# ...
-
-[params]
-    # ... 
-
-    enableSiteSearch = true
-----
-
-The feature uses https://fusejs.io/[Fuse.js] as the search engine. 
-The file can be found on link:assets/js/lib/fuse.min.js[`assets/js/lib/fuse.min.js`].
-
-.The site-wide search widget
-image::docs/enable-site-search-widget.png[]
-
-CAUTION: Do take note that this feature is not recommended for large 
-sites since the index built will be very large and can be 
-detrimental for visitors. 
-Instead, I recommend to use https://www.algolia.com/[Algolia] 
-for something like it. 
-
 
 
 === Other tidbits
@@ -814,9 +817,19 @@ different ports for your `localhost`).
 
 MathJax is included with the theme and needs almost no configuration 
 in order for it to work. 
+Like most of the highlighted features here, it's disabled by default. 
+You can enable by setting `params.enableMathjax` to `true`. 
 
-However, take note that it uses the default configuration so there 
-might be some need to configure it.
+NOTE: For performance reasons, it'll rely on a CDN instead of saving it 
+locally. 
+
+By default, it uses v2.7.6 which is the latest production 
+version as of 2019-09-05. 
+If you're feeling adventurous, you can use MathJax v3 which is under 
+beta (as of 2019-09-05) with this theme by setting `params.setMathjaxToV3` to `true`. 
+
+Take note that it uses the default configuration so there 
+might be some need to configure it. 
 In case that you do need configuration, you can create a file in 
 `layouts/partials/config/mathjax.html` and do your stuff there.
 
@@ -984,13 +997,10 @@ Here's an example which will make all of the feeds appear at `index.rss`,
 [mediaTypes]
     [mediaTypes."application/atom+xml"]
         suffixes = ["atom", "atom.xml"] # You can remove the "atom.xml" if you want
-        noUgly = true
     
     # Redefining RSS media type for the additional suffix
-    # You can omit this one if you wish, IDK why I put this one
     [mediaTypes."application/rss+xml"]
         suffixes = ["rss", "rss.xml"] # You can remove the "rss.xml" if you want
-        noUgly = true
 
 
 # Including all of the feed output formats in the build
@@ -1031,6 +1041,67 @@ it'll only support one author, not an array of them.
 
 
 
+== Site search widget
+
+This theme offers a site-wide search navigation widget with 
+https://fusejs.io/[Fuse.js] as the search engine. 
+
+How it works is simply through building a static search engine index 
+in `{{ $.Site.BaseURL }}/index.search.json` and utilizing the search engine 
+library when the reader visits a web page. 
+
+CAUTION: This is not recommended for large sites since the search engine 
+will run entirely on the visitor's device. 
+Instead, I recommend to use a server-sided search indexing service 
+like https://www.algolia.com/[Algolia]. 
+
+It requires two steps setup to enable it.
+
+* Setting `params.enableSiteSearch` to `true` in your site config. 
+* Adding a custom output format for the search index to be built. 
+
+Here's what the site config file should have (assuming it is in TOML): 
+
+[source,toml]
+----
+# ... 
+
+[mediaTypes]
+    # You can set any media type you want but make sure it doesn't have any conflict with 
+    # other media types (that'll be used by your site, anyway).
+    # Here's the list of registered media types for a reference.
+    # https://www.iana.org/assignments/media-types/media-types.xhtml
+    [mediaTypes."x-application/search+json"]
+        suffixes = ["search.json"]
+
+[outputFormats]
+    # ...
+
+    [outputFormats.SearchIndex]
+        mediaType = "x-application/search+json"
+        baseName = "index"
+
+[outputs]
+    home = ["HTML", "SEARCHINDEX"] 
+
+# ...
+
+[params]
+    # ... 
+
+    enableSiteSearch = true
+----
+
+The feature uses https://fusejs.io/[Fuse.js] as the search engine. 
+The file can be found on link:assets/js/lib/fuse.min.js[`assets/js/lib/fuse.min.js`].
+
+.The site-wide search widget
+image::docs/enable-site-search-widget.png[The site-wide search widget]
+
+
+
+
+
 == Issues with Asciidoctor and other stuff
 
 Since Asciidoctor only recieves basic support through 
@@ -1053,9 +1124,6 @@ https://blog.anoff.io/2019-02-17-hugo-render-asciidoc/[using a shadow executable
 bring out some problems regarding to rendering the highlighted syntax with 
 https://prismjs.com/[PrismJS], it is advised to use 
 https://highlightjs.org/[highlight.js] instead.
-
-* https://highlightjs.org/[highlight.js] background doesn't style well 
-with the theme.
 
 
 
