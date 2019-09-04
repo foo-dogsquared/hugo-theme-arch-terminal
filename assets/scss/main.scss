@@ -39,6 +39,22 @@
     --secondaryBorder: #{$secondaryBorder};
 }
 
+.theme-2:root {
+    --background: #{$background-2nd};
+    --background-dark: #{darken($background-2nd, 15%)};
+    --background-light: #{lighten($background-2nd, 15%)};
+
+    --foreground: #{$foreground-2nd};
+    --foreground-dark: #{darken($foreground-2nd, 25%)};
+    --foreground-light: #{lighten($foreground-2nd, 25%)};
+    
+    --accent: #{$accent-2nd};
+    --accent-light: #{lighten($accent-2nd, 40%)};
+    --accent-dark: #{darken($accent-2nd, 40%)};
+
+    --fontFamily: #{$fontFamily-2nd};
+}
+
 // Importing the fonts.
 @import "fonts";
 
