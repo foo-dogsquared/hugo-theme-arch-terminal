@@ -1,5 +1,5 @@
 <footer class="site__footer">
-    {{- with $.Site.Data.contact.list -}}
+    {{- with $.Site.Data.contact -}}
     <div class="footer__links">
     {{- $willUseIcons := (eq $.Site.Params.useLinkIcons true) -}}
     {{- $socialIcons := "social-icons.svg" | absURL -}}

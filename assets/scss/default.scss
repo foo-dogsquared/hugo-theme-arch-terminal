@@ -10,10 +10,16 @@
 $background: #080a0e !default;
 $foreground: #dbdbdb !default;
 $borderColor: $foreground !default;
-$accent: #d59783 !default;
-$fontFamily: "Fira Code","Monaco","Consolas","Ubuntu Mono",monospace !default;
+$accent: #d59783 !default; 
+$fontFamily: "Fira Code","Monaco","Consolas","Ubuntu Mono","Bitstream Vera Sans Mono",monospace !default;
 $fontSize: 1.1rem !default;
-$iconSize: 1.5rem !default;
+$iconSize: 1.5rem !default; 
+
+// 2nd theme variables
+$background-2nd: $foreground !default;
+$foreground-2nd: $background !default;
+$accent-2nd: complement($accent) !default;
+$fontFamily-2nd: $fontFamily !default;
 
 // Main breakpoints
 $phoneWidth: 600px !default;

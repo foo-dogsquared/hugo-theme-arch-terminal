@@ -17,19 +17,23 @@
 <meta name="twitter:image" content="{{ with .Params.Cover }}{{ . | absURL }}{{ end }}">
 
 <!-- Metadata -->
-<meta property="og:type" content="website" />
-<meta property="og:name" content="{{ .Site.Author.name }}">
-<meta property="og:title" content="{{ .Site.Title }}">
-
-{{- with .Site.Params.Description -}}
-<meta property="og:description" content="{{ . }}">
-{{- end -}}
-
-<meta property="og:url" content="{{ .Site.BaseURL }}">
-<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:type" content="{{ if (eq .File.Dir "/") }}website{{ else }}article{{ end }}" />
+<meta property="og:locale" content="{{ .Site.Language.Lang }}" />
+<meta property="og:name" content="{{ .Site.Author.name }}" />
+<meta property="og:title" content="{{ .Site.Title }}" />
+<meta property="og:url" content="{{ .Site.BaseURL }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:description" content="{{ if .IsHome }}Homey{{ else }}{{ .Summary | plainify }}{{ end }}" />
 
 {{ $style := resources.Get "scss/main.scss" | toCSS | minify }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+<script>
+// Checking for the 
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
 
 {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
