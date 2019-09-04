@@ -6,7 +6,7 @@ function getJson(url) {
 
 function searchEvent(event) {
     const { target } = event;
-    
+
     if (target.classList.contains("site__search-bar")) {
         const searchResultsNode = target.parentNode.parentNode.querySelector(".site__search-bar-results");
         
@@ -17,6 +17,16 @@ function searchEvent(event) {
         while (searchResultsNode.firstElementChild) {searchResultsNode.removeChild(searchResultsNode.firstElementChild)}
         
         const searchResults = search.search(target.value)
+
+        if (event.key === "Escape") {
+            target.value = "";
+            target.blur();
+            while (searchResultsNode.firstElementChild) {searchResultsNode.removeChild(searchResultsNode.firstElementChild)}
+            return;
+        }
+        else if (event.key === "Enter" && searchResults.length === 1) {
+            window.location.href = searchResults[0].url
+        }
         
         for (const searchResult of searchResults) {
             const searchResultItemElement = document.createElement("a");
@@ -61,7 +71,7 @@ async function loadIndex(url, container) {
 
     for (const searchBar of searchBars) { 
         const searchBarNode = searchBar.querySelector(".site__search-bar.form__input");
-        searchBar.addEventListener("input", searchEvent);
+        searchBar.addEventListener("keyup", searchEvent);
     }
 
     console.log("Site-wide search engine successfully activated.")
