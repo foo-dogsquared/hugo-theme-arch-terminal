@@ -407,7 +407,7 @@ code[class*="language-"] {
     display: block;
 }
 
-// Mermaid.js styles
-.language-mermaid {
-    background: var(--foreground) !important;
+// Disqus threads
+#disqus_thread {
+    width: 100%;
 }

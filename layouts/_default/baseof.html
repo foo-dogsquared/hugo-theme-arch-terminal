@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $.Site.Language }}">
+<html lang="{{ $.Site.Language }}" >
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +7,20 @@
   {{ block "title" . }}
     <title>{{ if .IsHome }}{{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ else }}{{ .Title }} :: {{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ end }}</title>
   {{ end }}
-  {{ partial "head.html" . }}
+  {{ partialCached "head.html" . }}
 </head>
 <body class="site">
-  {{ partial "header.html" . }}
+  {{ partialCached "header.html" . }}
   <main class="site__content">
     {{ block "main" . }}
     {{ end }}
   </main>
   {{- if .Site.Params.enableSiteSearch -}}
-    {{ partial "optional/search" . }}
+    {{ partialCached "optional/search" . }}
   {{- end -}}
   
-  {{ partial "footer.html" . }}
+  {{ partialCached "footer.html" . }}
 
-{{ partial "scripts.html" . }}
+{{ partialCached "scripts.html" . }}
 </body>
 </html>

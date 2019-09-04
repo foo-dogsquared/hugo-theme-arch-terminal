@@ -48,7 +48,7 @@ $sidePadding: 0.75rem;
         border: var(--primaryBorder) var(--accent);
         overflow: auto;
 
-        & > *:not(code) {
+        & > *:not(code):not(.highlight) {
             padding: $sidePadding;
         }
     }

@@ -46,9 +46,9 @@
     
         <div class="page__content">
         {{ if .Description }}
-        {{ .Description | markdownify }}
+        {{ .Description | safeHTML }}
         {{ else }}
-        {{ .Summary | markdownify }}
+        {{ .Summary | safeHTML }}
         {{ end }}
         </div>
     
