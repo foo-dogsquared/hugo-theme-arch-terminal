@@ -1,7 +1,7 @@
 let search = {};
 
 function getJson(url) {
-    return fetch(url).then(response => response.json()).catch(error => [])
+    return fetch(url).then(response => response.json()).catch(error => console.error(error))
 }
 
 function searchEvent(event) {
@@ -31,6 +31,9 @@ function searchEvent(event) {
 
 async function loadIndex(url, container) {
     const json = await getJson(url);
+    
+    console.log("Search index successfully fetched.")
+    
     const options = {
         shouldSort: true,
         threshold: 0.6,
@@ -43,15 +46,23 @@ async function loadIndex(url, container) {
             "url"
         ]
     }
-
-    const fuse = new Fuse(json["items"], options);
-
-    search = fuse;
     
     const searchBars = document.querySelectorAll(".site__search");
+
+    if (searchBars.length <= 0) {
+        console.error("There's no site search widgets. Cancelling search engine activation.");
+        return;
+    }
+
+    // Setting up Fuse search engine
+    const fuse = new Fuse(json, options);
+    search = fuse;
+    
 
     for (const searchBar of searchBars) { 
         const searchBarNode = searchBar.querySelector(".site__search-bar.form__input");
         searchBar.addEventListener("input", searchEvent);
     }
+
+    console.log("Site-wide search engine successfully activated.")
 }
