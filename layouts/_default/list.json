@@ -9,11 +9,12 @@
     "author": {
         "name": "{{ with .Site.Author.name }}{{ . }}{{ end }}"
     },
-    "items": [
+    "items":
         {{- $limit := cond (gt .Site.Params.feedLimit 0) .Site.Params.feedLimit 10 -}}
         {{- $pages := first $limit (where .RegularPages "File.Dir" "!=" "/") -}}
-        {{- $objects := apply $pages "partial" "json_feed_entry.json" "." -}}
-        {{- $clean := apply $objects "chomp" "." -}}
-        {{- delimit $clean "," -}}
-    ]
+        {{- $.Scratch.Add "index" slice -}}
+        {{- range $pages -}}
+            {{- $.Scratch.Add "index" (dict "id" .Permalink "url" .Permalink "title" .Title "summary" .Summary "content_html" .Content "tags" .Params.tags "date_published" (.Date.Format "2006-01-02T15:04:05Z07:00"  | safeHTML)  "date_modified" ( .Date.Format "2006-01-02T15:04:05Z07:00"  | safeHTML ) ) -}}
+        {{- end -}}
+        {{- $.Scratch.Get "index" | jsonify -}}
 }
