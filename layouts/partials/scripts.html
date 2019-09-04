@@ -17,8 +17,16 @@
 {{- end -}}
 
 <!-- MathJax -->
-{{ partial "config/mathjax.html" . }}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
+{{ if $.Site.Params.enableMathjax -}}
+    {{ if $.Site.Params.setMathjaxToV3 -}}
+        <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    {{ else -}}
+    {{ partial "config/mathjax.html" . }}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
+    {{- end -}}
+{{- end -}}
 
 <!-- The custom script -->
 {{ $global := resources.Get "js/toggle-node.js" | minify }}
@@ -33,7 +41,7 @@
 {{ $script := $array | resources.Concat "js/script.js" }}
 <script type="text/javascript" src="{{ $script.Permalink }}"></script>
 
-{{- if (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) -}}
+{{ if (and (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) $.Site.Params.enableSyntaxHighlighting) -}}
 <script>hljs.initHighlightingOnLoad();</script>
 {{- end -}}
 
