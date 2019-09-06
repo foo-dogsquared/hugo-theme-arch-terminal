@@ -33,7 +33,7 @@ $sidePadding: 0.75rem;
 * > * {
 
     &.title {
-        background: var(--accent);
+        background: var(--accent-light);
         color: var(--background);
         padding: $sidePadding;
     }
@@ -45,7 +45,7 @@ $sidePadding: 0.75rem;
     }
 
     &.content {
-        border: var(--primaryBorder) var(--accent);
+        border: var(--primaryBorder) var(--accent-light);
         overflow: auto;
 
         & > *:not(code):not(.highlight) {
@@ -73,6 +73,11 @@ $sidePadding: 0.75rem;
 // Multimedia blocks
 .videoblock {
     margin: 0 auto;
+}
+
+// Stem blocks 
+.stemblock {
+    overflow: auto;
 }
 
 // Footnotes

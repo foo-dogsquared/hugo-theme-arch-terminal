@@ -44,6 +44,10 @@ p {
 
 a { 
     color: currentColor; 
+
+    code { 
+        border: dashed 0.15rem var(--accent-light);
+    }
 }
 
 kbd {
@@ -52,12 +56,12 @@ kbd {
 }
 
 mark {
-    background: var(--accent-light);
-    color: var(--background-dark);
+    background: var(--foreground-light);
+    color: var(--background-light);
 }
 
 pre { 
-    --border: var(--primaryBorder) var(--accent);
+    --border: var(--primaryBorder) var(--accent-light);
     background: var(--background-light);
     border: var(--border);
     padding: 1rem;
@@ -71,8 +75,8 @@ pre {
 }
 
 code {
-    background: var(--accent-dark);
-    color: var(--accent);
+    background: var(--accent);
+    color: var(--background-light);
     padding: 0.25rem; 
     font-size: 0.95rem; 
 }
@@ -167,8 +171,26 @@ table {
 }
 
 table, td, th {
-	border: var(--secondaryBorder) var(--accent);
-	padding: 1.2rem;
+	border: var(--primaryBorder) var(--accent);
+    padding: 1.2rem;
+}
+
+thead {
+    background: var(--accent);
+    color: var(--foreground-light);
+    font-weight: bolder;
+}
+
+tbody {
+    tr {
+        &:nth-child(odd) {
+            background: var(--background-dark);
+        }
+    
+        &:nth-child(even) {
+            background: var(--background-light);
+        }
+    }
 }
 
 // Document structure

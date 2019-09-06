@@ -407,6 +407,14 @@ code[class*="language-"] {
     display: block;
 }
 
+// taxonomy search list
+.term__link {
+    &::before {
+        content: attr(data-search-site);
+        margin-right: 1rem;
+    }
+}
+
 // Disqus threads
 #disqus_thread {
     width: 100%;
