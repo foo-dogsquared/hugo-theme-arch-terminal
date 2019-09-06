@@ -9,7 +9,8 @@ be replaced for new ones.
 Aimed for technical writers, programmers, and tech enthusiasts. 
 This theme combines retro vibes with modern-looking styles. 
 When settling with this theme, you should be prepared for some 
-tweaking of the settings. 
+tweaking of the settings like how you customize your precious 
+text editors and OS configs. 
 
 
 
@@ -39,25 +40,48 @@ documentation.
 
 
 
-== Differences from the original
+== Feature highlights
 
-Being a fork of a theme, there are some differences.
-Here are the feature highlights (and removals) that 
+Here are the different feature highlights that 
 the theme offers:
 
-* A recreation of the original theme, almost built from scratch
-* Easy configuration and customization with https://sass-lang.com/[SCSS]
-* Aims on supporting engineering and technical content
-* Different approach of content organization 
-* Support RSS, Atom, and JSON feeds
-* Suitable for creating a quick single homepage template and blogging
-* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
-* Includes https://www.mathjax.org/[MathJax] support
-* Retained syntax highlighting support from https://highlightjs.org/[highlight.js] 
-and https://prismjs.com/[PrismJS]
-* Reduced internationalization (i18n) support (for now, anyway)
-* Removed selection of available themes 
-* Removed https://nodejs.org/[Node] dependencies from the original theme 
+* A recreation of the original theme, almost built from scratch.
+* Focuses on being minimal while being customizable enough for you. 
+The choice of bloating your website is in your hands! :) 
+* Easy configuration and customization with https://sass-lang.com/[SCSS].
+* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor]. 
+* Different approach of content organization. 
+* Aims on supporting engineering and technical content. 
+* Removed https://nodejs.org/[Node] dependencies from the original theme. 
+
+The theme aims to be minimal but provides a variety of customizability like 
+having a set of building blocks. 
+This also holds the philosophy of (almost) full customization to the user, 
+allowing them to express themselves which is why the theme provides lots of 
+optional stuff. 
+Even if you start with no options at all, it can be usable. 
+Though what's the fun if you can't tweak some settings, right? 
+
+Here's a general list of options that you can set and experiment with this theme. 
+
+* Support RSS, Atom, and JSON feeds. 
+* Suitable for creating a quick single homepage portfolio and/or blogging.
+* https://www.mathjax.org/[MathJax] support. 
+* Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
+or https://prismjs.com/[PrismJS]. 
+* Theme switch toggle (also known as dark mode).
+* Customizable normal and alternate theme appearance. The theme will also set 
+the alternate theme even if you didn't customize it yourself! 
+(Though, may result in ugly colors.) 
+* Site breadcrumbs. 
+* Customizable social links. 
+* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. 
+* Quick taxonomy search query list. 
+* Google Analytics integration. 
+* Disqus integration. 
+
+Interested to know more? 
+Please take a gander at the whole document to know your options. 
 
 
 
@@ -126,7 +150,7 @@ git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-min
 For future references, here is the list for the libraries 
 included with this theme along with their version:
 
-* https://www.mathjax.org/[MathJax] v2.7.6 
+* https://www.mathjax.org/[MathJax] v2.7.6 and v3.0.0
 * https://highlightjs.org/[highlight.js] v9.15.10 
 * https://prismjs.com/[PrismJS] v1.17.1 
 * https://fusejs.io/[Fuse.js] v3.4.5 
@@ -200,7 +224,7 @@ copyright = "Unless explicitly stated, all content released here are licensed un
     # listSiteSectionsOnHome = true 
 
     # Enables syntax highlighting. ;p
-    enableSyntaxHighlighting = true
+    enableLazySyntaxHighlighting = true
 
     # Set the syntax highlighter to be used. 
     # Only valid options are "highlighterjs" or "prismjs".
@@ -293,11 +317,33 @@ can be put in the file.
 | Yes 
 | 
 
+| `params.enableMathjax`
+| boolean
+| Enables MathJax in the page. 
+| Yes (but not for me) 
+| For performance reasons, it'll be used through a CDN. 
+Also uses version 3. 
+If you want to use the previous major version (2.7.6), 
+you can set `setMathjaxToV2` to `true`.
+
+| `params.enableThemeToggle` 
+| boolean 
+| Enables theme toggling. 
+Puts an additional theme toggle button at the header logo. 
+| Yes (but no for others) 
+| 
+
 | `params.keywords`
 | array[string]
 | A list of keywords related to your site. 
 | Yes
 | Quite important if you consider search engine optimization (SEO).
+
+| `params.setMathjaxToV2`
+| boolean
+| Set MathJax version to v2.  
+| Yes 
+| 
 
 | `params.subtitle`
 | string
@@ -314,12 +360,11 @@ whatever.
 | Yes
 | 
 
-| `params.enableThemeToggle` 
+| `params.useLocalMathjax`
 | boolean 
-| Enables theme toggling. 
-Puts an additional theme toggle button at the header logo. 
-| Yes (but no for others) 
-| 
+| Enables offline usage of MathJax. 
+| Yes 
+| For convenience and to avoid using web fonts, it uses SVG as the renderer. 
 
 |===
 
@@ -531,20 +576,20 @@ Don't expect a lot of stability with this.
 If your site is large enough, I recommend to integrate with stronger tools 
 such as Algolia. 
 
-| `params.enableMathjax`
+| `params.enableLazySyntaxHighlighting`
 | boolean
-| Enables MathJax in the page.  
-| Yes (but not for me) 
-| For performance reasons, it'll be used through a CDN. 
-
-| `params.enableSyntaxHighlighting`
-| boolean
-| Enables "native" syntax highlighting without relying to the 
+| Enables lazy syntax highlighting without relying to the 
 built-in highlight shortcode.
 This uses https://prismjs.com/[PrismJS] for the highlight feature.
 | Yes
 | This also enables native syntax highlighting for Asciidoctor! 
 Hallejulah! 
+
+| `params.enableMathjax`
+| boolean
+| Enables MathJax in the page.  
+| Yes (but not for me) 
+| For performance reasons, it'll be used through a CDN. 
 
 | `params.feedLimit` 
 | boolean 
@@ -562,7 +607,13 @@ site sections (top-level directories of the site)
 instead of the pages 
 | Yes
 | You need to have `showPostsOnHome` set to `true` to 
-make have this effect visible.
+make have this effect visible. 
+
+| `params.setMathjaxToV2`
+| boolean
+| Set the MathJax version to v2.  
+| Yes 
+| 
 
 | `params.showPageTypeIcon`
 | boolean
@@ -588,24 +639,6 @@ syntax highlighter.
 | Despite being the same in goal (coloring syntax), it has subtle 
 differences in results. 
 See the "Issues in Asciidoctor and other stuff" section. 
-
-| `params.enableBreadcrumbs`
-| boolean
-| Enables 
-https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/[site breadcrumbs] 
-in the posts (single page templates) that'll appear at the top of the post.
-| Yes
-| 
-
-| `params.enableSiteSearch`
-| boolean
-| Enables navigation through searching. 
-The search widget is located at the bottom of the page. 
-| Yes
-| This feature is experimental. 
-Don't expect a lot of stability with this. 
-If your site is large enough, I recommend to integrate with stronger tools 
-such as Algolia.
 
 | `params.readMore` 
 | string 
@@ -753,6 +786,41 @@ image::docs/archive-sample-page.png[width:100%]
 
 
 
+=== Quick taxonomy search list
+
+This featured is inspired from 
+https://www.ii.com/[this site's taxonomy pages]. 
+It provides a quick list of search queries of different sites when 
+in a https://gohugo.io/content-management/taxonomies/[taxonomy page] 
+located at the bottom of the page. 
+
+It can be customized by providing a data file named `query` which 
+holds a list of objects/dictionaries with the following keys:
+
+[cols="5*",options="header"]
+|===
+| Key
+| Data type
+| Description 
+| Optional
+| Additional notes
+
+| `id`
+| string
+| The name of the site. 
+| 
+| The list will be sorted alphabetically based from this key. 
+
+| `url`
+| string
+| The URL of the site that leads to a search results page. 
+| 
+| Requires the pattern `${{__DATA__}}` somewhere in the string to denote 
+the taxonomy term. 
+
+|===
+
+
 
 === Other tidbits
 
@@ -820,18 +888,26 @@ in order for it to work.
 Like most of the highlighted features here, it's disabled by default. 
 You can enable by setting `params.enableMathjax` to `true`. 
 
-NOTE: For performance reasons, it'll rely on a CDN instead of saving it 
-locally. 
+For performance reasons, it'll rely on a CDN instead of saving it 
+locally. If you want to use it based on your own web server, you 
+can set `params.useLocalMathjax` to `true`. No need to worry about the 
+fonts since the local MathJax script uses SVG instead for the rendering. 
 
-By default, it uses v2.7.6 which is the latest production 
-version as of 2019-09-05. 
-If you're feeling adventurous, you can use MathJax v3 which is under 
-beta (as of 2019-09-05) with this theme by setting `params.setMathjaxToV3` to `true`. 
+NOTE: `params.useLocalMathjax` is exclusive for v3. 
+
+By default, it uses v3.0.0 which is the latest production 
+version as of 2019-09-06. 
+You can still use the previous major version from v2.7.6 with this theme 
+by setting `params.setMathjaxToV2` to `true`. 
 
 Take note that it uses the default configuration so there 
 might be some need to configure it. 
 In case that you do need configuration, you can create a file in 
-`layouts/partials/config/mathjax.html` and do your stuff there.
+`layouts/partials/config/mathjax.html` and do your stuff there. 
+
+NOTE: Read the 
+https://docs.mathjax.org/en/latest/[official MathJax documentation for more information] 
+and to understand more how this theme integrates MathJax. 
 
 Assuming you didn't change the configuration or anything, here are 
 the breakdown for writing LaTeX in the web according to the 
@@ -888,9 +964,10 @@ For display/block math mode, make a stem block.
 
 
 
-== Syntax highlighting (without the `highlight` shortcode)
+== Lazy syntax highlighting
 
-Syntax highlighting is supported through https://prismjs.com/[PrismJS] 
+Lazt syntax highlighting (enabling it without the `highlight` shortcode) 
+is supported through https://prismjs.com/[PrismJS] 
 and https://highlightjs.org/[highlight.js]. 
 Both of the syntax highlighters follows the
 https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] 
@@ -899,9 +976,9 @@ in order to color the syntax.
 Fortunately, both of the default Markdown parsers and Asciidoctor 
 outputs semantic HTML for code listings so both of them are supported. 
 
-By default, the native syntax highlighting is disabled. 
-To enable native syntax highlighting, enable the `enableSyntaxHighlighting` under 
-`params` in your site config file. 
+By default, the lazy syntax highlighting is disabled. 
+To enable it, set the `enableLazySyntaxHighlighting` under 
+`params` to `true` in your site config file. 
 This uses highlight.js by default. 
 In order to use PrismJS, set `params.syntaxHighlighter` with the value 
 `"prismjs"`. 
@@ -912,14 +989,36 @@ Assuming you're using a TOML as your config file.
 ----
 [params]
     # ...
-    enableSyntaxHighlighting = true
+    enableLazySyntaxHighlighting = true
 
     # if you want to set PrismJS as the syntax highlighter
     # syntaxHighlighter = "prismjs"
 ----
 
-If you're curious to the files being used, the script for 
+NOTE: If you're curious to the files being used, the script for 
 the syntax highlighters is at `assets/js/lib` of the theme folder. 
+
+Now that lazy syntax highlighting is enabled, you can simply use the 
+normal code listings with Markdown or Asciidoctor (other formats are yet to be 
+tested) like so:
+
+.Markdown source code listing
+[source,markdown]
+----
+```js
+console.log("Hello world");
+```
+----
+
+.Asciidoctor source code listing
+[source,asciidoc]
+....
+[source,js]
+----
+console.log("Hello world");
+----
+....
+
 
 
 === Changing themes 
@@ -1124,6 +1223,18 @@ https://blog.anoff.io/2019-02-17-hugo-render-asciidoc/[using a shadow executable
 bring out some problems regarding to rendering the highlighted syntax with 
 https://prismjs.com/[PrismJS], it is advised to use 
 https://highlightjs.org/[highlight.js] instead.
+
+* Using highlight.js as the syntax highlighter doesn't style well. 
+I tried my best to style it but manual styling will be required. 
+If you're sure with using it as the syntax highlighter, 
+just add the following CSS syntax:
+
+[source,css]
+----
+pre.highlight {
+    padding: 0;
+}
+----
 
 
 
