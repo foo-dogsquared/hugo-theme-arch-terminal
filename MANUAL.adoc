@@ -1,4 +1,4 @@
-= Terminal Plus-Minus
+= Arch Terminal
 :toc:
 
 A fork of the 
@@ -6,8 +6,10 @@ original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme]
 with some of its original feature set being removed to 
 be replaced for new ones.
 
-Aimed for technical writers, programmers, and tech enthusiasts. 
-This theme combines retro vibes with modern-looking styles. 
+Aimed for technical writers, programmers, tech enthusiasts, and 
+people with a do-it-yourself (DIY) spirit. 
+This theme provides a minimal base theme while providing a lot 
+of ways to customize it. 
 When settling with this theme, you should be prepared for some 
 tweaking of the settings like how you customize your precious 
 text editors and OS configs. 
@@ -175,7 +177,7 @@ your configuration file.
 ----
 baseURL = "https://example.com/"
 languageCode = "en-us"
-title = "Terminal Plus-Minus"
+title = "Arch Terminal"
 description = "Generic description!"
 summaryLength = 15
 paginate = 5
@@ -337,7 +339,25 @@ Puts an additional theme toggle button at the header logo.
 | array[string]
 | A list of keywords related to your site. 
 | Yes
-| Quite important if you consider search engine optimization (SEO).
+| Quite important if you consider search engine optimization (SEO). 
+
+| `params.notFoundHeader`
+| string 
+| The message of the 404 header. 
+| Yes 
+| 
+
+| `params.notFoundLinkMessage`
+| string 
+| The message of the 404 link message. 
+| Yes 
+| 
+
+| `params.notFoundMessage`
+| string
+| The message of the 404 text. 
+| Yes 
+| 
 
 | `params.setMathjaxToV2`
 | boolean
@@ -646,6 +666,12 @@ See the "Issues in Asciidoctor and other stuff" section.
 | Absolutely 
 | 
 
+| `params.searchLabel`
+| string 
+| Replaces the search label in the search widget (if activated).
+| Yessir
+| 
+
 |===
 
 
@@ -867,6 +893,21 @@ In order to enable it, set `contentIsStyled`
 image::docs/content-is-styled-disabled.png[width=100%]
 
 
+
+
+== Multilingual mode support 
+
+This theme supports 
+https://gohugo.io/content-management/multilingual/[multilingual mode] 
+for your site. 
+
+Setting your 
+
+The theme supports the following languages: 
+
+NOTE: Personally, I recommend to make your site config into a 
+https://gohugo.io/getting-started/configuration/#configuration-directory[`config` folder]. 
+It's going to make site config management more organized. 
 
 
 == Custom 404 page
