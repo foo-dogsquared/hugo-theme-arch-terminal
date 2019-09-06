@@ -1,0 +1,16 @@
+{{ define "main" }}
+{{ .Content }}
+{{ partial "posts.html" . }}
+
+<section class="site__terms">
+    <h1 class="terms__header">Quick search list</h1>
+    <ul class="terms__list">
+    {{ $queries := (sort $.Site.Data.query "id" "asc") }}
+    {{- range $queries -}}
+        {{ $url := replaceRE "\\$\\{\\{__DATA__\\}\\}" $.Data.Term .url }}
+        <li class="term"><a class="term__link" data-search-site="{{ if .name }}{{ .name }}{{ else }}{{ .id }}{{ end }}" href="{{ $url }}">{{ $url | safeJS }}</a></li>
+    {{- end -}}
+    </ul>
+</section>
+
+{{ end }}
