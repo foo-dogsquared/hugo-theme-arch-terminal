@@ -6,6 +6,27 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
 and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
 == [Unreleased] 
+=== Added 
+* Add quick taxonomy search list. 
+The feature was inspired from https://www.ii.com/[this site]. 
+* Add a CDN-less MathJax usage option as `params.useLocalMathjax`. 
+
+=== Changed
+* **BREAKING CHANGE**: Update the layout code for the 
+https://github.com/gohugoio/hugo/releases/tag/v0.58.0[breaking changes at Hugo v0.58.0]. 
+__Thus, the theme now requires Hugo v0.58.0.__ 
+* **BREAKING CHANGE**: Change `params.enableSyntaxHighlighting` to 
+`params.enableLazySyntaxHighlighting`. 
+* **BREAKING CHANGE**: Remove `params.setMathjaxToV3` to be replaced with 
+`params.setMathjaxToV2` since MathJax v3 is up on production. 
+* Revise MathJax support (again) with the v2 replaced to v3 as the 
+default MathJax version. 
+
+=== Fixed
+* Update the SCSS load order to make the automatic second theming work. 
+(I forgot that SCSS variables are imperative, not declarative.)
+* Make the external scripts to run asynchronously to prevent DOM blocking and 
+improve the performance of the site. 
 
 
 
