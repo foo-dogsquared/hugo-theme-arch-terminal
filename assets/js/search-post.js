@@ -76,3 +76,5 @@ async function loadIndex(url, container) {
 
     console.log("Site-wide search engine successfully activated.")
 }
+
+loadIndex("{{ $.Site.BaseURL }}/index.search.json"); 
