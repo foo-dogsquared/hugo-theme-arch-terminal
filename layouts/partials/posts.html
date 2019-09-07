@@ -54,7 +54,7 @@
     
         {{- if not .Params.showFullContent -}}
         <div>
-        <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMore }}{{ . }}{{ else }}Read more{{ end }} →</a>
+        <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMoreLabel }}{{ . }}{{ else }}Read more{{ end }} →</a>
         </div>
         {{- end -}}
     </section>

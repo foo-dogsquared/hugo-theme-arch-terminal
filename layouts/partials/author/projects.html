@@ -1,7 +1,7 @@
 <!-- PROJECTS section -->
 {{- with $.Site.Data.projects -}}
 <section class="projects">
-    <h2>Projects</h2>
+    <h2>{{ i18n "projects_header" }}</h2>
     <div class="project">
         {{- $projects := (sort . "id" "asc") -}}
         {{- range $projects -}}

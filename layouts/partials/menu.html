@@ -1,5 +1,5 @@
 <nav class="site__links">
     {{- range $.Site.Menus.main -}}
-        <a class="site__link" href="{{ .URL | absURL }}">{{ .Name }}</a>
+        <a class="site__link" href="{{ .URL | absLangURL }}">{{ .Name }}</a>
     {{- end -}}
 </nav>
