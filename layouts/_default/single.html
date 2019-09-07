@@ -42,10 +42,12 @@
 <article class="page__content" data-is-styled="{{ with $.Site.Params.contentIsStyled }}true{{ end }}">
   {{ .Content }}
 </article>
+
+{{- if $.Site.Params.enableContentPagination -}}
 {{ if or .NextInSection .PrevInSection }}
 <div class="pagination">
   <div class="pagination__header">
-    {{ with $.Site.Params.ReadOtherPosts }}{{ . }}{{ else }}Read more{{ end }}
+    {{ with $.Site.Params.readOtherPostsLabel }}{{ . }}{{ else }}{{ i18n "read_more" }}{{ end }}
   </div>
   <div class="pagination__buttons">
     {{ if .NextInSection }}
@@ -67,6 +69,7 @@
   </div>
 </div>
 {{ end }}
+{{- end -}}
 
 {{- with .File -}}
   {{ if ne .Dir "/" }}
