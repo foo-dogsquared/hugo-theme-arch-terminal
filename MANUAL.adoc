@@ -8,11 +8,14 @@ be replaced for new ones.
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
-This theme provides a minimal base theme while providing a lot 
+This theme provides a minimal and readable base theme while providing a lot 
 of ways to customize it. 
 When settling with this theme, you should be prepared for some 
 tweaking of the settings like how you customize your precious 
 text editors and OS configs. 
+
+On an unrelated note, 
+https://github.com/foo-dogsquared/dotfiles[here are my dotfiles]. 
 
 
 
@@ -71,6 +74,7 @@ Here's a general list of options that you can set and experiment with this theme
 * https://www.mathjax.org/[MathJax] support. 
 * Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
 or https://prismjs.com/[PrismJS]. 
+* Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
 * Customizable normal and alternate theme appearance. The theme will also set 
 the alternate theme even if you didn't customize it yourself! 
@@ -586,6 +590,13 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
+| `params.enableContentPagination` 
+| boolean 
+| Enables the content pagination section in your single page templates 
+that is found at the bottom of the content section. 
+| Yes 
+| 
+
 | `params.enableSiteSearch`
 | boolean
 | Enables navigation through searching. 
@@ -629,6 +640,18 @@ instead of the pages
 | You need to have `showPostsOnHome` set to `true` to 
 make have this effect visible. 
 
+| `params.readMoreLabel` 
+| string 
+| Replaces the "Read more" text at the very end of the summary of each post.
+| Absolutely 
+| 
+
+| `params.readOtherPostsLabel`
+| string 
+| Replaces the label of the content pagination header. 
+| Yuparoo
+| 
+
 | `params.setMathjaxToV2`
 | boolean
 | Set the MathJax version to v2.  
@@ -659,12 +682,6 @@ syntax highlighter.
 | Despite being the same in goal (coloring syntax), it has subtle 
 differences in results. 
 See the "Issues in Asciidoctor and other stuff" section. 
-
-| `params.readMore` 
-| string 
-| Replaces the "Read more" text at the very end of the summary of each post.
-| Absolutely 
-| 
 
 | `params.searchLabel`
 | string 
@@ -900,10 +917,24 @@ image::docs/content-is-styled-disabled.png[width=100%]
 This theme supports 
 https://gohugo.io/content-management/multilingual/[multilingual mode] 
 for your site. 
+Please see the linked documentation and 
+https://regisphilibert.com/blog/2018/08/hugo-multilingual-part-1-managing-content-translation/[this featured blog post] 
+to get started. 
 
-Setting your 
+In order to get started, add the language(s) that you'll be hosting 
+your content with the `languages` object in your site configuration. 
+For consistency, the theme requires a language code based from 
+https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[IANA Language Subtag Registry] 
+as defined from the 
+https://www.w3.org/International/questions/qa-choosing-language-tags[W3 documentation]. 
 
-The theme supports the following languages: 
+The theme should be able to support changing the tiny details such as the 
+title and the menu as long as you provided the appropriate data. 
+
+You can find the translations files at link:./i18n[`i18n`] folder with the 
+available languages. 
+If the language you find is not available, you can help translating 
+it and add it into the supported language list. 
 
 NOTE: Personally, I recommend to make your site config into a 
 https://gohugo.io/getting-started/configuration/#configuration-directory[`config` folder]. 
@@ -1364,6 +1395,9 @@ and content organization
 
 == Inspirations
 
+* https://bestmotherfucking.website/[Best Motherfucking Website] :) 
+* https://practicaltypography.com/[Practical Typography] for a reference in 
+typography 
 * https://github.com/panr/hugo-theme-terminal[Terminal theme], of course
 * https://github.com/achary/engimo[Engimo theme] for the focus in engineering content 
 * https://sourcethemes.com/academic[Hugo Academic theme] for the focus in academic content 
