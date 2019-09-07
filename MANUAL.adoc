@@ -689,6 +689,15 @@ See the "Issues in Asciidoctor and other stuff" section.
 | Yessir
 | 
 
+| `params.useContentCounters`
+| boolean 
+| Puts a counter similar to 
+https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] for your content. 
+| Oh yes 
+| Only has a depth of 5 counters (`<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`). 
+Anything after that means you need to rethink your document structure (unless you're 
+writing technical standards/specifications). 
+
 |===
 
 
@@ -829,6 +838,25 @@ image::docs/archive-sample-page.png[width:100%]
 
 
 
+=== Content counters 
+
+You can enable content counters that behave similarly to 
+https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] by setting 
+`params.useContentCounters` to `true`. 
+
+.Content counters 
+image::docs/use-content-counters-enabled.png[width:100%]
+
+This is mostly helpful to quickly establish hierarchy 
+and not to make it confusing for your readers. 
+
+The counters are only enough to support the HTML tags `<h2>`--`<h6>` 
+(`<h1>` is assumed to be the main document title). 
+Any more than that (if that's even possible) is not supported 
+anymore and can only go through some more tweaking. 
+
+
+
 === Quick taxonomy search list
 
 This featured is inspired from 
@@ -871,6 +899,7 @@ There are a couple of options for miscellaneous stuff and info that you
 might want to find out.
 
 ==== Site breadcrumbs in post
+
 The most useful one is the breadcrumbs feature that'll appear in 
 the top of your posts.
 
