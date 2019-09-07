@@ -1,0 +1,49 @@
+# Site pagination
+[page_prev]
+other = "Previous"
+
+[page_next]
+other = "Next"
+
+[page_first]
+other = "First page"
+
+[page_last]
+other = "Last page"
+
+
+# General
+[read_more]
+other = "Read more"
+
+[search_label]
+other = "Search around the site"
+
+[taxonomy_quick_search_list]
+other = "Quick search list"
+
+[noscript_disqus]
+other = "Please enable JavaScript to view the [comments powered by Disqus](https://disqus.com/?ref_noscript)."
+
+[content_translations]
+other = "Available translations"
+
+# Author 
+[projects_header]
+other = "Projects"
+
+[support_header]
+other = "Support"
+
+[support_text]
+other = "You can support me through the following links."
+
+# 404
+[404_header]
+other = "Not found :("
+
+[404_message]
+other = "The page you're looking for is missing."
+
+[404_link_message]
+other = "Back to home."
