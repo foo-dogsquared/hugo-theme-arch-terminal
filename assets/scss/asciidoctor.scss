@@ -1,5 +1,9 @@
 $sidePadding: 0.75rem;
 
+.paragraph {
+    margin: var(--verticalRhythm) 0;
+}
+
 // Admonition blocks
 .admonitionblock {
     table {
@@ -56,7 +60,7 @@ $sidePadding: 0.75rem;
 
 // Quote block
 .quoteblock {
-    margin: 1rem 0 1rem;
+    margin: var(--verticalRhythm) 0;
 
     blockquote {
         margin: auto 0 0;
@@ -82,7 +86,7 @@ $sidePadding: 0.75rem;
 
 // Footnotes
 #footnotes {
-    margin: 2rem auto;
+    margin: var(--verticalRhythm) auto;
 }
 
 .listingblock .content {

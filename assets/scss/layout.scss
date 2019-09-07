@@ -185,10 +185,8 @@
 .page__title {
     border-bottom: dotted var(--accent) 0.25rem;
     flex-grow: 10;
-    font-size: calc(var(--fontSize) * 1.5);
     margin: 0;
     margin-bottom: inherit;
-    padding-bottom: 0.5rem;
     text-decoration: none;
     
     & > * {
@@ -257,16 +255,16 @@
     }
 
     & > * {
-        margin-bottom: 1rem;
+        margin: var(--verticalRhythm) 0;
     }
 }
 
 // Pagination
 .pagination {
-    margin-top: 3rem;
+    margin-top: calc(var(--verticalRhythm) * 2);
 
     & > * { 
-        margin-bottom: 1em;
+        margin-bottom: var(--verticalRhythm);
         width: 100%; 
     }
 }
