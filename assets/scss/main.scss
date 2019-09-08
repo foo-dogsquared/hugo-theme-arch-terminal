@@ -64,10 +64,8 @@
     "asciidoctor"
 ;
 
-// Importing the Prism theme and other PrismJS-related styles
-@import 
-    "mathjax"
-;    
+// Importing the custom styles for the third-libraries this theme offers
+@import "libraries"; 
 
 // The main stylesheets.
 @import 
