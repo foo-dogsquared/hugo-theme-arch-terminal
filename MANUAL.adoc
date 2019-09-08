@@ -1,6 +1,12 @@
 = Arch Terminal
 :toc:
 
+:prog_version: 2.0.0
+
+// Zoom image
+:zoom_image_css_selector: .page__content img
+:zoom_image_default_bg: rgba(0, 0, 0, 0.4)
+
 A fork of the 
 original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme] 
 with some of its original feature set being removed to 
@@ -17,7 +23,7 @@ text editors and OS configs.
 On an unrelated note, 
 https://github.com/foo-dogsquared/dotfiles[here are my dotfiles]. 
 
-
+This manual is for Arch Terminal version {prog_version} and above.
 
 
 == Demo 
@@ -70,7 +76,7 @@ Though what's the fun if you can't tweak some settings, right?
 Here's a general list of options that you can set and experiment with this theme. 
 
 * Support RSS, Atom, and JSON feeds. 
-* Suitable for creating a quick single homepage portfolio and/or blogging.
+* Suitable for creating a quick single homepage portfolio and/or blogging. 
 * https://www.mathjax.org/[MathJax] support. 
 * Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
 or https://prismjs.com/[PrismJS]. 
@@ -80,7 +86,13 @@ or https://prismjs.com/[PrismJS].
 the alternate theme even if you didn't customize it yourself! 
 (Though, may result in ugly colors.) 
 * Site breadcrumbs. 
+* LaTeX-like content counters. 
 * Customizable social links. 
+* Custom 404 messages. 
+* Detailed or compact list for your posts on the homepage. 
+* Custom content reader mode for easier readability for your readers. 
+* JSON+LD schema. 
+* Image zoom feature for your content.
 * Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. 
 * Quick taxonomy search query list. 
 * Google Analytics integration. 
@@ -156,11 +168,11 @@ git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-min
 For future references, here is the list for the libraries 
 included with this theme along with their version:
 
-* https://www.mathjax.org/[MathJax] v2.7.6 and v3.0.0
-* https://highlightjs.org/[highlight.js] v9.15.10 
-* https://prismjs.com/[PrismJS] v1.17.1 
-* https://fusejs.io/[Fuse.js] v3.4.5 
-
+* https://www.mathjax.org/[MathJax] v2.7.6 and v3.0.0 under Apache License Version 2.0 (all versions) 
+* https://highlightjs.org/[highlight.js] v9.15.10 under MIT License (with additional terms) 
+* https://prismjs.com/[PrismJS] v1.17.1 under MIT License 
+* https://fusejs.io/[Fuse.js] v3.4.5 under Apache License Version 2.0 
+* https://github.com/francoischalifour/medium-zoom[medium-zoom] v1.0.4 under MIT License 
 
 
 
@@ -387,6 +399,7 @@ whatever.
 | `params.useLocalMathjax`
 | boolean 
 | Enables offline usage of MathJax. 
+This only works for MathJax v3.
 | Yes 
 | For convenience and to avoid using web fonts, it uses SVG as the renderer. 
 
@@ -590,10 +603,38 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
+| `params.enableContentImageZoom` 
+| boolean 
+| Adds a Medium-like image zoom functionality in your content with the 
+https://github.com/francoischalifour/medium-zoom/[medium-zoom] library. 
+| Yes 
+| You can set the background color with `params.setContentImageZoomBackground`. 
+
 | `params.enableContentPagination` 
 | boolean 
 | Enables the content pagination section in your single page templates 
 that is found at the bottom of the content section. 
+| Yes 
+| 
+
+| `params.enableContentReaderMode`
+| boolean 
+| Previews single page templates in the theme's custom reader mode by 
+showing less post metadata and cutting off the site header.  
+| Yes 
+| Doesn't affect top-level pages. 
+
+| `params.enableCompactListMode`
+| boolean 
+| Sets the homepage content list in compact mode, allowing more posts to 
+be listed at a time (with less information, if that's okay with you). 
+| Yes 
+| 
+
+| `params.enableJsonld` 
+| boolean 
+| Creates a https://www.w3.org/TR/json-ld/[JSON+LD] schema for additional SEO 
+capabilities. 
 | Yes 
 | 
 
@@ -602,10 +643,10 @@ that is found at the bottom of the content section.
 | Enables navigation through searching. 
 The search widget is located at the bottom of the page. 
 | Yes
-| This feature is experimental. 
-Don't expect a lot of stability with this. 
-If your site is large enough, I recommend to integrate with stronger tools 
-such as Algolia. 
+| To enable built-in site-wide search widget, it requires a 
+two-step setup. 
+This is only half of the step. 
+You can find out more on the related section. 
 
 | `params.enableLazySyntaxHighlighting`
 | boolean
@@ -652,6 +693,20 @@ make have this effect visible.
 | Yuparoo
 | 
 
+| `params.searchLabel`
+| string 
+| Replaces the search label in the search widget (if activated).
+| Yessir
+| 
+
+| `params.setContentImageZoomBackground` 
+| string 
+| Sets the background of 
+https://github.com/francoischalifour/medium-zoom/[medium-zoom] image overlay. 
+Accepts any valid CSS color string including `rgb(a)`, `hsl(a)`, or hex codes. 
+| Yes 
+| 
+
 | `params.setMathjaxToV2`
 | boolean
 | Set the MathJax version to v2.  
@@ -683,12 +738,6 @@ syntax highlighter.
 differences in results. 
 See the "Issues in Asciidoctor and other stuff" section. 
 
-| `params.searchLabel`
-| string 
-| Replaces the search label in the search widget (if activated).
-| Yessir
-| 
-
 | `params.useContentCounters`
 | boolean 
 | Puts a counter similar to 
@@ -697,6 +746,13 @@ https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] for your content.
 | Only has a depth of 5 counters (`<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`). 
 Anything after that means you need to rethink your document structure (unless you're 
 writing technical standards/specifications). 
+
+| `params.useLocalMathjax`
+| boolean 
+| Enables offline usage of MathJax. 
+This only works for MathJax v3.
+| Yes 
+| For convenience and to avoid using web fonts, it uses SVG as the renderer. 
 
 |===
 
@@ -797,7 +853,18 @@ Also used for the output format feeds (RSS, Atom, JSON feed).
 | Accepts URL or a relative path to the image.
 | `http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
 
-|===
+|=== 
+
+
+
+=== Content pagination 
+
+The theme offers an optional pagination section on single page templates where 
+the previous and next entries are shown. 
+
+To enable this feature, set `params.enableContentPagination` to `true`. 
+
+image::docs/enable-content-pagination.png[Content pagination has been enabled, width=100%]
 
 
 
@@ -857,6 +924,63 @@ anymore and can only go through some more tweaking.
 
 
 
+=== Site breadcrumbs in post
+
+The most useful one is the breadcrumbs feature that'll appear in 
+the top of your posts.
+
+.Breadcrumbs in the post
+image::docs/post-breadcrumbs-enabled.png[]
+
+In order to be able to use it, set the `params.enableBreadcrumbs` to 
+`true` in your site config file. 
+
+
+
+=== Content reader mode 
+
+You can set your content (single page templates) to the theme's custom 
+reader mode to declutter your posts and to make reading experience more 
+soothing. 
+
+Enable it by setting `params.enableContentReaderMode` to `true`. 
+
+Here's the default look of the content page of the theme:
+
+image::docs/content-reader-mode-disabled.png[Content reader mode disabled, width=100%]
+
+And here's the content reader mode in action:
+
+image::docs/content-reader-mode-enabled.png[Content reader mode enabled, width=100%]
+
+NOTE: This doesn't apply to top-level pages. 
+
+
+
+=== Content image zoom  
+
+You can add an image zoom feature similar to the image zoom function 
+in Medium articles. 
+
+Of course, it's disabled by default and should be manually enabled with 
+`params.enableContentImageZoom`. 
+
+It relies on https://github.com/francoischalifour/medium-zoom/[medium-zoom] for the 
+functionality and its script can be found on `assets/js/lib/medium-zoom.js`. 
+The script is modified to only add the zoom functionality to the valid elements in 
+the CSS selector string `{zoom_image_css_selector}` which can only be found on 
+single page templates. 
+
+NOTE: The version used in the theme is at v1.0.4. 
+
+The theme offers one way of customizing the background color with 
+`params.setContentImageZoomBackground`. 
+It accepts a valid CSS color string such as a hexadecimal code, 
+RGB (and RGBA), HSL (and HSLA), and the color name. 
+The default background of the overlay is `{zoom_image_default_bg}`. 
+
+
+
 === Quick taxonomy search list
 
 This featured is inspired from 
@@ -886,8 +1010,8 @@ holds a list of objects/dictionaries with the following keys:
 | string
 | The URL of the site that leads to a search results page. 
 | 
-| Requires the pattern `${{__DATA__}}` somewhere in the string to denote 
-the taxonomy term. 
+| Requires the pattern `${{\\__DATA__}}` somewhere in the string 
+to denote the taxonomy term. 
 
 |===
 
@@ -896,18 +1020,22 @@ the taxonomy term.
 === Other tidbits
 
 There are a couple of options for miscellaneous stuff and info that you 
-might want to find out.
+might want to find out. 
 
-==== Site breadcrumbs in post
+==== "Back to top" button 
 
-The most useful one is the breadcrumbs feature that'll appear in 
-the top of your posts.
+You can simply put a simple back to top button with `params.enableBackToTopLink`. 
+It's located at the footer just before your contact links. 
 
-.Breadcrumbs in the post
-image::docs/post-breadcrumbs-enabled.png[]
+==== Compact list mode 
 
-In order to be able to use it, set the `params.enableBreadcrumbs` to 
-`true` in your site config file. 
+Simply makes the lists in sections (list templates and taxonomy templates) to have a 
+more compact look, allowing for more posts to be seen on the screen. 
+It also removes the unnecessary information and just leaves with the title and 
+the publication date of the content. 
+
+To have this feature on your site, switch the `params.enableCompactListMode` to 
+`true`. 
 
 ==== Icon on post list
 
@@ -956,6 +1084,10 @@ For consistency, the theme requires a language code based from
 https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[IANA Language Subtag Registry] 
 as defined from the 
 https://www.w3.org/International/questions/qa-choosing-language-tags[W3 documentation]. 
+
+The language selector can be found at the very bottom of the site. 
+Any content with translations are also introduced along with the content metadata and 
+the title. 
 
 The theme should be able to support changing the tiny details such as the 
 title and the menu as long as you provided the appropriate data. 

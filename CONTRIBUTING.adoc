@@ -58,14 +58,11 @@ If you don't have any, try to follow according to the `.editorconfig` rules.
 In order to prevent problems (for a theme), here are the the project 
 self-imposed limitations and its scope: 
 
-* No custom shortcodes shall be implemented. 
-This theme only serves to provide UI for the content. 
+* This theme only serves to provide UI for the content. 
+Meaning no custom shortcodes or archetypes shall be implemented. 
 This also prevents the problem of migrating the content with some of it 
 that relies on the theme. 
-I encourage the users to compile their own list of shortcodes instead. 
-
-* No additional content types (archetypes) shall be added for the same reason. 
-I encourage the users to create their own layout for their own content types. 
+I encourage the users to make their own stuff instead. 
 
 * Add only a minimal amount of custom parameters for the content frontmatter. 
 
@@ -80,3 +77,12 @@ Save it locally and use that instead.
 Be sure to document their versions for future references. 
 (There are exceptions such as MathJax and KaTeX since it can also be used by other 
 websites and could perform faster.) 
+
+* As much as possible, keep and maintain the documentation 
+inside of the project folder. 
+
+* Starting from v2.0.0, there'll be a feature freeze to avoid 
+maximum gold plating and over-engineering. 
+If there's any small features to be requested and it is too small of a scope, it is 
+encouraged to hack your own way out of this, instead. 
+(Still, don't be afraid to request new features.) 

@@ -1,15 +1,15 @@
 # Arch Terminal 
 
-Also called as Arch Terminal. 
-It's a remake of the original [Hugo Terminal theme](https://github.com/panr/hugo-theme-terminal) 
-with additional features and new development build.  
+A complete remake of the original [Hugo Terminal theme](https://github.com/panr/hugo-theme-terminal) 
+with additional features, new development build, and a totally different 
+philosophy.  
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
 This theme provides a minimal base theme while providing a lot 
 of ways to customize it. 
 Be sure to read the [manual](./MANUAL.adoc) for more details. 
-Nonetheless, the minimal configuration should be still enough to get started writing  content. 
+Nonetheless, with minimal configuration should be still enough to get started writing  content. 
 
 
 
@@ -323,6 +323,52 @@ The results from the previous example? A list of contact links in the footer.
 ![Contact links in the footer](./docs/contact-links-sample.png) 
 
 
+### Filling the rest of the content
+
+Something's missing in the portfolio. 
+Oh! It's the description (and perhaps other stuff). 
+You can simply create a new content file named `_index.{md,adoc}` and write 
+some stuff about it. 
+
+You can create another page at `content/$NAME.{md,adoc}` and write some more. 
+However, the theme will not list any top-level pages. 
+That's convenient. Though, I do need a way to make it accessible for the visitor. 
+
+A simple problem requires simple answer. We'll just add it into the main menu at 
+the header. 
+
+Configuring menus is not different from any other themes (though, nested menus 
+are not supported). 
+
+Let's say we have the following content directory structure:
+
+```sh
+content
+├── about.adoc
+├── contact.adoc
+└── _index.adoc # This is your homepage content
+```
+
+To make them accessible through a menu, simply write similar configuration that follows:
+
+```toml
+[menu]
+    [[menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "about/"
+
+    [[menu.main]]
+        identifier = "contact"
+        name = "Contact"
+        url = "contact/"
+        
+```
+
+Ta-da! Now, you have a simple and complete portfolio page with the projects, contacts, 
+stuff, and everything! 
+
+
 ### Other options 
 
 You can fiddle with other options. 
@@ -338,12 +384,15 @@ or how you could add a quick support section where you can e-beg for stuff.
 Let's say you want to make it as a blogging theme as well. 
 This theme has you covered. 
 
+Take note that most of the stuff from making the portfolio site applies to 
+this section. 
+
 Compared to configuring it as a portfolio site, this is where you'll seeing 
 [the manual](./MANUAL.adoc) multiple times. 
 Be sure to know it well so you'll have less problems settling with this theme. 
 
 Now, the theme aims to be minimal but customizable enough. 
-Unfortunately/Fortunately, the theme takes the meaning of minimal to its heart. 
+Unfortunately, the theme takes the meaning of minimal to its heart. 
 Therefore, some of the usual features you would normally see in most of the 
 Hugo themes are disabled by default and you have to manually activate it. 
 

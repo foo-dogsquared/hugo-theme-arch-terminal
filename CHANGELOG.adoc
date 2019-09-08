@@ -25,9 +25,21 @@ Thus, the following site custom parameters has been added:
 * Add content headers (similar to 
 https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters]) with the 
 `params.useContentCounters` option. 
+* Add a reader mode for your content with `params.enableContentReaderMode`. 
+* Add a compact list mode for the homepage post list with `params.enableCompactListMode`. 
+* Add a "Back to top" button on the footer with `params.enableBackToTopLink`. 
+* Add JSON+LD schema. 
+It is disabled by default so you have to manually switch the `params.enableJsonld` first. 
+* Add a image zoom feature (using 
+https://github.com/francoischalifour/medium-zoom[medium-zoom library]) that can be 
+switched with `params.enableContentImageZoom`. 
+You can also set the background color with `params.setContentImageZoomBackground`. 
 
 === Changed 
 * **IMPORTANT**: Rename the theme from "Terminal Plus-Minus" to "Arch Terminal". 
+* **IMPORTANT**: Content pagination is now disabled by default. 
+In effect, an additional site config option `params.enableContentPagination` has 
+been added. 
 * **BREAKING CHANGE**: Update the layout code for the 
 https://github.com/gohugoio/hugo/releases/tag/v0.58.0[breaking changes at Hugo v0.58.0]. 
 __Thus, the theme now requires Hugo v0.58.0.__ 
@@ -35,14 +47,12 @@ __Thus, the theme now requires Hugo v0.58.0.__
 `params.enableLazySyntaxHighlighting`. 
 * **BREAKING CHANGE**: Remove `params.setMathjaxToV3` to be replaced with 
 `params.setMathjaxToV2` since the theme will now use MathJax v3 by default. 
-* **POTENTIAL BREAKING CHANGE**: Content pagination is now disabled by default. 
-In effect, an additional site config option `params.enableContentPagination` has 
-been added. 
 * Revise MathJax support (again) with the v2 replaced to v3 as the 
 default MathJax version since MathJax v3 got the official production release. 
 * Update the stylesheet to consider consistent and pleasant typography. 
 One of the biggest change is the consideration of 
-https://zellwk.com/blog/why-vertical-rhythms/[vertical rhythms]. 
+https://zellwk.com/blog/why-vertical-rhythms/[vertical rhythms] and the absence of 
+the custom styles. 
 
 === Fixed
 * Update the SCSS load order to make the automatic second theming work. 
