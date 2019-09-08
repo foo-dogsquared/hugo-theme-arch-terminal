@@ -1,32 +1,47 @@
 {{- define "main" -}}
 
-{{- if $.Site.Params.enableBreadcrumbs -}}
-{{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
-{{- end -}}
+<div class="site__page">
+  {{- if $.Site.Params.enableBreadcrumbs -}}
+  {{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
+  {{- end -}}
 
-<h1 class="page__title">
-  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-</h1>
+  {{- $date := .Date.Format "2006-01-02" }}
+  {{ if (and $.Site.Params.enableContentReaderMode (ne .File.Dir "/")) }}
+    <h1 class="page__title--reader">{{ .Title }}</h1>
+    <div class="page__meta">
+      {{ with .Params.author }}
+      <p class="page__guest-author">By <a href="{{ with .site }}{{ . }}{{ end }}">{{ .name }}</a></p> 
+      {{ end }}
+      on <date datetime="{{ $date }}">{{ $date }}</date>
+      {{ if (ne .Lastmod .PublishDate) }}
+      (updated on {{ .Lastmod.Format "2006-01-02" }})
+      {{ end }}
+    </div>
+  {{ else }}
+  <h1 class="page__title">
+      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+  </h1>
 
-<div class="page__meta">
+  <div class="page__meta">
     {{ if .Params.Date }}
-  <date class="page__date">
+    <date class="page__date" datetime="{{ .Date.Format "2006-01-02" }}">
     {{ .Date.Format "2006-01-02" }}
-  </date>
-  {{ end }}
-  {{ with .Params.Author }}
-  <span class="page__author">::
-    {{ . }}
-  </span>
-  {{ end }}
-</div>
-
-{{ if .Params.tags }}
-<span class="page__tags">
-  {{ range .Params.tags }}
-  #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
-  {{ end }}
-</span>
+    </date>
+    {{ end }}
+    {{ with .Params.Author }}
+    <span class="page__author">::
+      {{ . }}
+    </span>
+    {{ end }}
+  
+    {{ if .Params.tags }}
+    <p class="page__tags">
+      {{ range .Params.tags }}
+      #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+      {{ end }}
+    </p>
+    {{ end }}
+  </div>
 {{ end }}
 
 {{- with .Params.Cover -}}
@@ -38,8 +53,9 @@
   {{ .TableOfContents }}
 </div>
 {{ end }}
+</div>
 
-<article class="page__content" data-is-styled="{{ with $.Site.Params.contentIsStyled }}true{{ end }}" data-use-content-counters="{{ with $.Site.Params.useContentCounters }}true{{ end }}">
+<article class="page__content" {{ with $.Site.Params.contentIsStyled }}data-is-styled="true"{{ end }} {{ with $.Site.Params.useContentCounters }}data-use-content-counters="true"{{ end }}>
   {{ .Content }}
 </article>
 
