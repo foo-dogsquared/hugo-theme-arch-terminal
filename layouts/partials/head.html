@@ -2,15 +2,26 @@
 <meta name="application-name" content="{{ .Site.Title }}">
 <meta name="description" content="{{ .Site.Params.Description }}">
 <meta name="robots" content="noodp"/>
-{{- with .Site.Params.keywords -}}
-{{- $keywords := delimit . ", " -}}
+{{ hugo.Generator }}
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+{{ with .Site.Params.keywords -}}
+{{ $keywords := delimit . ", " -}}
 <meta name="keywords" content="{{ $keywords }}">
-{{- end -}}
+{{- end }}
+{{- with $.Site.Params.contact -}}
+{{- range . -}}
+<link rel="noopener me" href="{{ .url }}" />
+{{- end }}
+{{- end }}
 <link href="{{ .Permalink }}" rel="canonical">
+{{ range .Translations -}}
+<link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Lang }}" />
+{{- end }}
 
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ else }}{{ .Title }} :: {{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ end }}" />
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }}{{ else }}This ain't home{{ end }}" />
 <meta name="twitter:description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
 <meta name="twitter:site" content="{{ $.Site.BaseURL }}" />
 <meta name="twitter:creator" content="{{ .Params.Author }}" />
@@ -20,10 +31,43 @@
 <meta property="og:type" content="{{ if (eq .File.Dir "/") }}website{{ else }}article{{ end }}" />
 <meta property="og:locale" content="{{ .Site.Language.Lang }}" />
 <meta property="og:name" content="{{ .Site.Author.name }}" />
-<meta property="og:title" content="{{ .Site.Title }}" />
+<meta property="og:title" content="{{ .Title }}" />
 <meta property="og:url" content="{{ .Site.BaseURL }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-<meta property="og:description" content="{{ if .IsHome }}Homey{{ else }}{{ .Summary | plainify }}{{ end }}" />
+<meta property="og:description" content="{{ if (and (eq .Kind "home") .IsHome) }}{{ .Site.Title }}{{ with .Site.Params.subtitle }} - {{ . }}{{ end }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
+
+<!-- Schema.org -->
+{{ if $.Site.Params.enableJsonld -}}
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}"
+      },
+      "headline": "{{ .Title }}",
+      {{ with .Params.cover -}}
+      "image": ["{{ . }}"],
+      {{- end }}
+      "datePublished": "{{ .Date.Format "2006-01-02" }}",
+      "dateModified": "{{ .Lastmod }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ with .Params.author.name }}{{ . }}{{ else }}{{ $.Site.Author.name }}{{ end }}"
+      },
+      "description": "{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ $.Site.BaseURL }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ "/logo.png" | absURL }}"
+        }
+      }
+    }
+</script>
+{{- end -}}
 
 {{ $style := resources.Get "scss/main.scss" | toCSS | minify }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
@@ -37,7 +81,7 @@ if (theme && theme !== "1") {
 
 {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-{{ end -}}
+{{- end }}
 
 {{- if $.Site.GoogleAnalytics -}}
 {{- template "_internal/google_analytics.html" . -}}

@@ -25,8 +25,11 @@ other = "Quick search list"
 [noscript_disqus]
 other = "Please enable JavaScript to view the [comments powered by Disqus](https://disqus.com/?ref_noscript)."
 
-[content_translations]
-other = "Available translations"
+[back_to_top]
+other = "Back to top"
+
+[site_pages_header]
+other = "Posts"
 
 # Author 
 [projects_header]
@@ -37,6 +40,19 @@ other = "Support"
 
 [support_text]
 other = "You can support me through the following links."
+
+# Content
+[content_translations]
+other = "Available translations"
+
+[content_by--reader]
+other = "By"
+
+[content_updated--reader]
+other = "Updated on" 
+
+[content_on--reader]
+other = "On"
 
 # 404
 [404_header]

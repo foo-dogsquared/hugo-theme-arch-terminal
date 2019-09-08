@@ -10,11 +10,21 @@
     <h1 class="page__title--reader">{{ .Title }}</h1>
     <div class="page__meta">
       {{ with .Params.author }}
-      <p class="page__guest-author">By <a href="{{ with .site }}{{ . }}{{ end }}">{{ .name }}</a></p> 
+      <p class="page__guest-author">{{ i18n "content_by--reader" }} <a href="{{ with .site }}{{ . }}{{ end }}">{{ .name }}</a></p> 
       {{ end }}
-      on <date datetime="{{ $date }}">{{ $date }}</date>
+      <p class="page__date">
+      {{ i18n "content_on--reader" }} <date datetime="{{ $date }}">{{ $date }}</date>
       {{ if (ne .Lastmod .PublishDate) }}
-      (updated on {{ .Lastmod.Format "2006-01-02" }})
+      ({{ i18n "content_updated--reader" }} {{ .Lastmod.Format "2006-01-02" }})
+      {{ end }}
+      </p>
+      {{ if .IsTranslated }}
+      <p class="page__translations">
+        {{ i18n "content_translations" }}: 
+        {{ range .Translations }}
+        <a href="{{ .Permalink }}">{{ .Lang }}</a>
+        {{ end }}
+      </p>
       {{ end }}
     </div>
   {{ else }}
@@ -38,6 +48,15 @@
     <p class="page__tags">
       {{ range .Params.tags }}
       #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+      {{ end }}
+    </p>
+    {{ end }}
+
+    {{ if .IsTranslated }}
+    <p class="page__translations">
+      {{ i18n "content_translations" }}: 
+      {{ range .Translations }}
+      <a href="{{ .Permalink }}">{{ .Lang }}</a>
       {{ end }}
     </p>
     {{ end }}

@@ -25,9 +25,11 @@ other = "Mabilis na paghahanap"
 [noscript_disqus]
 other = "Payagan ang JavaScript upang tignan ang mga [komento galing sa Disqus](https://disqus.com/?ref_noscript)."
 
-[content_translations]
-other = "Mga pagsasalin"
+[back_to_top]
+other = "Balik sa taas"
 
+[site_pages_header]
+other = "Mga nilalaman"
 # Author 
 [projects_header]
 other = "Mga proyekto"
@@ -37,6 +39,19 @@ other = "Suporta"
 
 [support_text]
 other = "Maaari mo akong suportahan sa pamamagitan ng mga sumusunod na link."
+
+# Content
+[content_translations]
+other = "Mga pagsasalin"
+
+[content_by--reader]
+other = "Mula kay"
+
+[content_on--reader]
+other = "Noong"
+
+[content_updated--reader]
+other = "Na-iupdate sa" 
 
 # 404
 [404_header]

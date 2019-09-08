@@ -93,6 +93,13 @@
     }
 }
 
+.site__languages {
+    & > * {
+        padding: calc(var(--verticalRhythm) / 2);
+        &:not(:last-child) { border-right: var(--primaryBorder) var(--foreground); }
+    }
+}
+
 .site__footer {
     margin-bottom: var(--verticalRhythm);
     padding-bottom: var(--verticalRhythm);
@@ -132,6 +139,17 @@
 .header__title {
     min-width: 40%;
     text-decoration: none;
+}
+
+.footer__extras {
+    display: flex;
+    flex-flow: column wrap;
+    
+    @media screen and (min-width: $phoneWidth) {
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
 }
 
 .footer__links {
