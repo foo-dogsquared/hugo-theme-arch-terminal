@@ -35,7 +35,7 @@ https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters]) with the
 * Add a compact list mode for the homepage post list with `params.enableCompactListMode`. 
 * Add a "Back to top" button on the footer with `params.enableBackToTopLink`. 
 * Add JSON+LD schema. 
-It is disabled by default so you have to manually switch the `params.enableJsonld` first. 
+It is disabled by default so you have to manually switch the `params.enableJsonLdSchema` first. 
 * Add a image zoom feature (using 
 https://github.com/francoischalifour/medium-zoom[medium-zoom library]) that can be 
 switched with `params.enableContentImageZoom`. 
@@ -67,6 +67,8 @@ default MathJax version since MathJax v3 got the official production release.
 One of the biggest change is the consideration of 
 https://zellwk.com/blog/why-vertical-rhythms/[vertical rhythms] and the absence of 
 the custom styles. 
+* Twitter cards and OpenGraph schema are now disabled by default and has to be 
+enabled with `params.enableTwitterCard` and `params.enableOpenGraphSchema` respectively. 
 
 === Fixed
 * Update the SCSS load order to make the automatic second theming work. 

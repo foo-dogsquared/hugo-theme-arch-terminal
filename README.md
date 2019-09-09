@@ -42,9 +42,9 @@ It's supposed to be minimal, after all.)
 
 * Support RSS, Atom, and JSON feeds. 
 * Suitable for creating a quick single homepage portfolio and/or blogging. 
-* https://www.mathjax.org/[MathJax] support. 
-* Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
-or https://prismjs.com/[PrismJS]. <sup>[[1](#footnoteref1)]</sup>
+* [MathJax](https://www.mathjax.org/) support. 
+* Lazy syntax highlighting support with [highlight.js](https://highlightjs.org/) 
+or [PrismJS](https://prismjs.com/). <sup>[[1](#footnoteref1)]</sup>
 * Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
 * Customizable normal and alternate theme appearance. The theme will also set 
@@ -58,7 +58,7 @@ the alternate theme even if you didn't customize it yourself!
 * Custom content reader mode for easier readability for your readers. 
 * JSON+LD schema. 
 * Image zoom feature for your content. <sup>[[1](#footnoteref1)]</sup>
-* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. <sup>[[1](#footnoteref1)]</sup>
+* Built-in search indexing and widget with [Fuse.js](https://fusejs.io/). <sup>[[1](#footnoteref1)]</sup>
 * Quick taxonomy search query list. 
 * Adding custom JS libraries for the whole site or for specific posts. 
 * Google Analytics integration. 
@@ -451,53 +451,29 @@ canonifyURLs = true
     # The tagline that'll appear in the homepage as the first header. 
     tagline = "Making near destructive blogs all around the world."
     
-    # Hide posts on home. :)
-    hidePostsOnHome = true
-    
     # Indicates if the site sections should be listed instead.
     # Requires `hidePostsOnHome` to be disabled.
     # listSiteSectionsOnHome = true 
 
     # Puts a pagination section on the posts linking to the previous and next posts.
     # enableContentPagination = true
-
-    # Enables syntax highlighting. ;p
-    # enableLazySyntaxHighlighting = true
-
-    # Set the syntax highlighter to be used. 
-    # Only valid options are "highlighterjs" or "prismjs".
-    # By default, it uses highlighter.js as the syntax highlighter if there's no set value. 
-    # syntaxHighlighter = "prismjs"
     
     # Indicates to show the icon whether the link leads to a page or a section. 
     # The effect is visible if `hidePostsOnHome` is at least disabled. 
     # showPageTypeIcon = true
-    
-    # Shows breadcrumbs in the post.
-    # enableBreadcrumbs = true
-
-    # Places a theme toggle button at the header logo
-    # enableThemeToggle = true
-
-    # Enable MathJax support
-    # enableMathjax = true
-
-    # If you want to use MathJax v2
-    # setMathjaxToV2 = true
 
     # 404
     notFoundHeader = "404 Not Found :("
     notFoundLinkMessage = "Now get back here."
     notFoundMessage = "I see you're an explorer. I like that."
-
-    # Enable content counters similar to LaTeX counters
-    # useContentCounters = true
 ``` 
 
 ### Advanced configuration 
 
 Here's a sample of a more advanced configuration made for configuring this theme. 
-This includes RSS, Atom, and JSON feeds, 
+This includes RSS, Atom, and JSON feeds, SEO improvements, additional configurable 
+views for your homepage and content, MathJax support, lazy syntax highlighting, 
+and other tiny stuff. 
 
 Like the starter config, you can simply uncomment/comment certain things for 
 the features that you want to enable/disable. 
@@ -562,6 +538,11 @@ canonifyURLs = true
     
     # Hide posts on home. :)
     # hidePostsOnHome = true
+
+    # SEO improvements
+    # enableTwitterCard = true 
+    # enableOpenGraphSchema = true 
+    # enableJsonLdSchema = true 
     
     # Indicates if the site sections should be listed instead.
     # Requires `hidePostsOnHome` to be disabled.
@@ -572,6 +553,12 @@ canonifyURLs = true
 
     # Enable content reader mode for decluttered interface for your visitors 
     # enableContentReaderMode = true
+
+    # Include image zoom feature similar to Medium articles
+    # enableContentImageZoom = true
+
+    # Enable compact list view for your post lists
+    # enableCompactListMode = true
 
     # Enables syntax highlighting. ;p
     # enableLazySyntaxHighlighting = true
@@ -604,9 +591,6 @@ canonifyURLs = true
 
     # Enable content counters similar to LaTeX counters
     # useContentCounters = true 
-
-    # Include image zoom feature similar to Medium articles
-    # enableContentImageZoom = true
 ```
 
 

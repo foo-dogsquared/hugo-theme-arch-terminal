@@ -99,7 +99,7 @@ the alternate theme even if you didn't customize it yourself!
 * Custom 404 messages. 
 * Detailed or compact list for your posts on the homepage. 
 * Custom content reader mode for easier readability for your readers. 
-* JSON+LD schema. 
+* Twitter cards, OpenGraph schema, and JSON+LD schema. 
 * Image zoom feature for your content. footnote:requires_hugo_extended[]
 * Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. footnote:requires_hugo_extended[]
 * Quick taxonomy search query list. 
@@ -647,7 +647,7 @@ be listed at a time (with less information, if that's okay with you).
 | Yes 
 | 
 
-| `params.enableJsonld` 
+| `params.enableJsonLdSchema` 
 | boolean 
 | Creates a https://www.w3.org/TR/json-ld/[JSON+LD] schema for additional SEO 
 capabilities. 
@@ -679,11 +679,23 @@ Hallejulah!
 | Yes (but not for me) 
 | For performance reasons, it'll be used through a CDN. 
 
+| `params.enableOpenGraphSchema` 
+| boolean 
+| Adds OpenGraph meta tags to the site for improved SEO. 
+| Yes 
+| 
+
 | `params.enableThemeToggle` 
 | boolean 
 | Enables theme toggling. 
 Puts an additional theme toggle button at the header logo. 
 | Yes (but no for others) 
+| 
+
+| `params.enableTwitterCard` 
+| boolean 
+| Adds the appropriate meta tags to be shareable for Twitter. 
+| Yes 
 | 
 
 | `params.feedLimit` 
