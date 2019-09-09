@@ -2,6 +2,7 @@
     {{ template "breadcrumbnav" (dict "p1" .context "p2" .context "childClass" .childClass) }}
 </nav>
 
+<!-- Seems like a recursive template... -->
 {{- define "breadcrumbnav" -}}
 {{- if .p1.Parent -}}
 {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 "childClass" .childClass )  }}

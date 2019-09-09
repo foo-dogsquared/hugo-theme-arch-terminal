@@ -1,5 +1,3 @@
-$sidePadding: 0.75rem;
-
 .paragraph {
     margin: var(--verticalRhythm) 0;
 }
@@ -13,7 +11,7 @@ $sidePadding: 0.75rem;
     }
 
     td.icon {
-        background: var(--accent-light);
+        background: var(--accent);
         border: var(--primaryBorder) var(--accent);
         color: var(--background);
         text-align: center;
@@ -39,24 +37,24 @@ $sidePadding: 0.75rem;
 * > * {
 
     &.title {
-        background: var(--accent-light);
+        background: var(--accent);
         color: var(--background);
-        padding: $sidePadding;
+        padding: calc(var(--verticalRhythm) / 2);
     }
 
     &.attribution {
         background: var(--accent);
         color: var(--background);
-        padding: $sidePadding;
+        padding: calc(var(--verticalRhythm) / 2);
     }
 
     &.content {
-        border: var(--primaryBorder) var(--accent-light);
+        border: var(--primaryBorder) var(--accent);
         overflow: auto;
 
         & > * {
             margin: 0; 
-            padding: var(--verticalRhythm);           
+            padding: calc(var(--verticalRhythm) / 2); 
         }
     }
 }
@@ -91,6 +89,10 @@ $sidePadding: 0.75rem;
 .sidebarblock {
     .content > * { padding: calc(var(--verticalRhythm) / 2); }
     .paragraph > p { margin: 0; }
+}
+
+.verseblock {
+    & > .content { margin-bottom: 0; }
 }
 
 // Footnotes

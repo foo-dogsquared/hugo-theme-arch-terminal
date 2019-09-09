@@ -10,7 +10,7 @@
     <h1 class="page__title--reader">{{ .Title }}</h1>
     <div class="page__meta">
       {{ with .Params.author }}
-      <p class="page__guest-author">{{ i18n "content_by--reader" }} <a href="{{ with .site }}{{ . }}{{ end }}">{{ .name }}</a></p> 
+      <p class="page__guest-author">{{ i18n "content_by--reader" }} {{ . }}</p> 
       {{ end }}
       <p class="page__date">
       {{ i18n "content_on--reader" }} <date datetime="{{ $date }}">{{ $date }}</date>
