@@ -9,8 +9,7 @@
 
     {{- partial "author/support.html" . -}}
 
-    {{- $showPosts := eq $.Site.Params.showPostsOnHome true -}}
-    {{- if $showPosts -}}
+    {{- if not $.Site.Params.hidePostsOnHome -}}
         {{- partial "posts.html" . -}}
     {{- end -}}
 {{- end -}}
