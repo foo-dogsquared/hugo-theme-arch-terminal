@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'Fira Code';
-    src: url('/fonts/FiraCode-VF.woff2') format('woff2-variations');
-    /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: fallback;
-}
+// You can set your own fonts with the @font-face query. (https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
+// Just set the appropriate fonts here and put it in the static (`static/`) folder. 
+// I recommend to make a dedicated folder for fonts as well.
