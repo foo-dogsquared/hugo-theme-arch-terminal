@@ -56,3 +56,11 @@
 <script>hljs.initHighlightingOnLoad();</script>
 {{- end -}}
 
+<!-- Site-wide user-included libraries -->
+{{ with $.Site.Data.libraries }}
+{{ $libraries := (sort . "weight" "asc") }}
+{{ range $libraries }}
+<script type="{{ .type | default "text/javascript" }}" src="{{ .url }}" {{ if .defer }}defer{{ else if (not .sync) }}async{{ end }}></script>
+{{ end }}
+
+{{- end -}}

@@ -112,4 +112,10 @@
   {{- end -}}
 {{- end -}}
 
+<!-- Page-wide user-included libraries (from the content) -->
+{{ with .Params.libs }}
+{{ range .js }}
+<script type="text/javascript" src="{{ . }}" defer></script>
+{{ end }}
+{{ end }}
 {{- end -}}
