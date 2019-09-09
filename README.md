@@ -37,21 +37,30 @@ This is more like a mini-README so please read the [manual](./MANUAL.adoc) for m
 ## Features
 
 Here's a general list of options that you can set and experiment with this theme. 
+(Note that all of the listed features needs to be manually activated. 
+It's supposed to be minimal, after all.)
 
 * Support RSS, Atom, and JSON feeds. 
-* Suitable for creating a quick single homepage portfolio and/or blogging.
-* [MathJax](https://www.mathjax.org/) support. 
-* Lazy syntax highlighting support with [highlight.js](https://highlightjs.org/) 
-or [PrismJS](https://prismjs.com/). 
+* Suitable for creating a quick single homepage portfolio and/or blogging. 
+* https://www.mathjax.org/[MathJax] support. 
+* Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
+or https://prismjs.com/[PrismJS]. <sup>[[1](#footnoteref1)]</sup>
 * Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
 * Customizable normal and alternate theme appearance. The theme will also set 
 the alternate theme even if you didn't customize it yourself! 
-(Though, may result in ugly colors.) 
+(Though, may result in ugly colors.) <sup>[[1](#footnoteref1)]</sup>
 * Site breadcrumbs. 
+* LaTeX-like content counters. 
 * Customizable social links. 
-* Built-in search indexing and widget with [Fuse.js](https://fusejs.io/). 
+* Custom 404 messages. 
+* Detailed or compact list for your posts on the homepage. 
+* Custom content reader mode for easier readability for your readers. 
+* JSON+LD schema. 
+* Image zoom feature for your content. <sup>[[1](#footnoteref1)]</sup>
+* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. <sup>[[1](#footnoteref1)]</sup>
 * Quick taxonomy search query list. 
+* Adding custom JS libraries for the whole site or for specific posts. 
 * Google Analytics integration. 
 * Disqus integration. 
 
@@ -139,6 +148,7 @@ Try to follow along the README, if you wish for a more fulfilling experience
 ### Configuring appearance 
 
 You can change the appearance of the theme. 
+**Though, you need to have Hugo extended version installed.**
 Start by copying `themes/arch-terminal/assets/scss/config.scss` to your own assets 
 with similar directory structure (`assets/scss/config.scss`). 
 
@@ -396,7 +406,7 @@ Unfortunately, the theme takes the meaning of minimal to its heart.
 Therefore, some of the usual features you would normally see in most of the 
 Hugo themes are disabled by default and you have to manually activate it. 
 
-* Listing posts on the homepage? You have to set `params.showPostsOnHome` to `true` for that. 
+* Hiding posts on the homepage? You have to set `params.hidePostsOnHome` to `true` for that. 
 
 * A theme toggle switch (dark mode toggle)? Turn the `params.enableThemeToggle` on, please. 
 
@@ -441,11 +451,11 @@ canonifyURLs = true
     # The tagline that'll appear in the homepage as the first header. 
     tagline = "Making near destructive blogs all around the world."
     
-    # Show posts on home. :)
-    showPostsOnHome = true
+    # Hide posts on home. :)
+    hidePostsOnHome = true
     
     # Indicates if the site sections should be listed instead.
-    # Requires `showPostsOnHome` to be enabled.
+    # Requires `hidePostsOnHome` to be disabled.
     # listSiteSectionsOnHome = true 
 
     # Puts a pagination section on the posts linking to the previous and next posts.
@@ -460,7 +470,7 @@ canonifyURLs = true
     # syntaxHighlighter = "prismjs"
     
     # Indicates to show the icon whether the link leads to a page or a section. 
-    # The effect is visible if `showPostsOnHome` is at least enabled. 
+    # The effect is visible if `hidePostsOnHome` is at least disabled. 
     # showPageTypeIcon = true
     
     # Shows breadcrumbs in the post.
@@ -475,9 +485,6 @@ canonifyURLs = true
     # If you want to use MathJax v2
     # setMathjaxToV2 = true
 
-    # If you don't want to rely on a CDN, you can use the theme's local copy
-    # useLocalMathjax = true
-
     # 404
     notFoundHeader = "404 Not Found :("
     notFoundLinkMessage = "Now get back here."
@@ -486,6 +493,121 @@ canonifyURLs = true
     # Enable content counters similar to LaTeX counters
     # useContentCounters = true
 ``` 
+
+### Advanced configuration 
+
+Here's a sample of a more advanced configuration made for configuring this theme. 
+This includes RSS, Atom, and JSON feeds, 
+
+Like the starter config, you can simply uncomment/comment certain things for 
+the features that you want to enable/disable. 
+
+```toml
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "Arch Terminal"
+description = "Generic description!"
+summaryLength = 15
+paginate = 5
+copyright = "Unless explicitly stated, all content released here are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0)."
+canonifyURLs = true 
+
+# Defining the media type of the RSS and Atom feeds 
+# (you don't need to configure for JSON feeds since it's set at `index.json`) 
+[mediaTypes]
+    [mediaTypes."application/atom+xml"]
+        suffixes = ["atom", "atom.xml"] # You can remove the "atom.xml" if you want
+    
+    # Redefining RSS media type for the additional suffix
+    [mediaTypes."application/rss+xml"]
+        suffixes = ["rss", "rss.xml"] # You can remove the "rss.xml" if you want
+    
+    # You can set any media type you want but make sure it doesn't have any conflict with 
+    # other media types (that'll be used by your site, anyway).
+    # Here's the list of registered media types for a reference.
+    # https://www.iana.org/assignments/media-types/media-types.xhtml
+    [mediaTypes."x-application/search+json"]
+        suffixes = ["search.json"]
+
+# Including all of the feed output formats in the build
+[outputFormats]
+    [outputFormats.Rss]
+        mediaType = "application/rss+xml"
+        baseName = "index"
+
+    [outputFormats.Atom]
+        mediaType = "application/atom+xml"
+        baseName = "index"
+    
+    [outputFormats.SearchIndex]
+        mediaType = "x-application/search+json"
+        baseName = "index"
+
+# Indicating what output formats shall be included for the following kinds
+[outputs]
+    # .Site.BaseURL/index.* is available 
+    home = ["HTML", "JSON", "RSS", "ATOM", "SEARCHINDEX"]
+
+    # .Site.BaseURL/$section/index.* is available
+    section = ["HTML", "JSON", "RSS", "ATOM"] 
+
+# Your parameters for the theme
+[params]
+    # The subtitle of the blog. Mostly appears in the <title> tag.
+    subtitle = "Blogger"
+    keywords = ["John Dodo", "ordinary-extinction", "blog"]
+
+    # The tagline that'll appear in the homepage as the first header. 
+    tagline = "Making near destructive blogs all around the world."
+    
+    # Hide posts on home. :)
+    # hidePostsOnHome = true
+    
+    # Indicates if the site sections should be listed instead.
+    # Requires `hidePostsOnHome` to be disabled.
+    # listSiteSectionsOnHome = true 
+
+    # Puts a pagination section on the posts linking to the previous and next posts.
+    # enableContentPagination = true
+
+    # Enable content reader mode for decluttered interface for your visitors 
+    # enableContentReaderMode = true
+
+    # Enables syntax highlighting. ;p
+    # enableLazySyntaxHighlighting = true
+
+    # Set the syntax highlighter to be used. 
+    # Only valid options are "highlighterjs" or "prismjs".
+    # By default, it uses highlighter.js as the syntax highlighter if there's no set value. 
+    # syntaxHighlighter = "prismjs"
+    
+    # Indicates to show the icon whether the link leads to a page or a section. 
+    # The effect is visible if `hidePostsOnHome` is at least disabled. 
+    # showPageTypeIcon = true
+    
+    # Shows breadcrumbs in the post.
+    # enableBreadcrumbs = true
+
+    # Places a theme toggle button at the header logo
+    # enableThemeToggle = true
+
+    # Enable MathJax support
+    # enableMathjax = true
+
+    # If you want to use MathJax v2
+    # setMathjaxToV2 = true
+
+    # 404
+    # notFoundHeader = "404 Not Found :("
+    # notFoundLinkMessage = "Now get back here."
+    # notFoundMessage = "I see you're an explorer. I like that."
+
+    # Enable content counters similar to LaTeX counters
+    # useContentCounters = true 
+
+    # Include image zoom feature similar to Medium articles
+    # enableContentImageZoom = true
+```
 
 
 ### RSS, Atom, and JSON feeds support 
@@ -545,4 +667,6 @@ read the [extensive manual](./MANUAL.adoc) of this theme to know more options.
 This document only opens up a part of the things that you can do with 
 this theme. 
 
-You think you can escape the manual? Not a chance.
+You think you can escape the manual? Not a chance. RTFM, boisengirls. 
+
+<a id="footnoteref1">[1]</a>: Requires Hugo extended version

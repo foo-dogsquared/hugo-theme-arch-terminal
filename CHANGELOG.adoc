@@ -6,12 +6,18 @@ The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
 and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
 == [Unreleased] 
-// 2.0.0
+
+
+
+
+== [2.0.0] - 2019-09-10 
 === Added 
 * https://gohugo.io/content-management/multilingual/[Multilingual mode] support. 
 Thus, the `i18n` folder is now added. 
 For now, the translation is only available for English (US) and Tagalog. 
 If you know some language that is not listed in the folder, feel free to contribute translating to other languages. 
+* Add asset fingerprinting to the theme assets. 
+* Add user-configured libraries list to add to your Hugo site. 
 * Add quick taxonomy search list. 
 The feature was inspired from https://www.ii.com/[this site]. 
 * Add a CDN-less MathJax usage option as `params.useLocalMathjax`. 
@@ -35,11 +41,19 @@ https://github.com/francoischalifour/medium-zoom[medium-zoom library]) that can 
 switched with `params.enableContentImageZoom`. 
 You can also set the background color with `params.setContentImageZoomBackground`. 
 
+=== Removed 
+* Remove the custom fonts and let the user customize their own. 
+This also improves the performance of the base theme. 
+
 === Changed 
-* **IMPORTANT**: Rename the theme from "Terminal Plus-Minus" to "Arch Terminal". 
+* **IMPORTANT**: Rename the theme from "Terminal Plus-Minus" to "Arch Terminal" along 
+with a slight rebrand. 
 * **IMPORTANT**: Content pagination is now disabled by default. 
 In effect, an additional site config option `params.enableContentPagination` has 
 been added. 
+* **BREAKING CHANGE**: Invert the setting to hide the posts instead of showing posts 
+manually. 
+Thus, `params.showPostsOnHome` have been replaced with `params.hidePostsOnHome`. 
 * **BREAKING CHANGE**: Update the layout code for the 
 https://github.com/gohugoio/hugo/releases/tag/v0.58.0[breaking changes at Hugo v0.58.0]. 
 __Thus, the theme now requires Hugo v0.58.0.__ 

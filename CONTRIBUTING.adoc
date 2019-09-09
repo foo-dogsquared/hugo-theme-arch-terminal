@@ -12,6 +12,12 @@ Anyways, this is already mentioned in the README but for a quick recap:
 If you spot some bugs or want to suggest a feature, feel 
 free to file an issue in the issue tracker. 
 
+Any feature requests are heavily considered since starting at v2.0.0, a 
+feature freeze is observed for the sake of improving user experience 
+(including the documentations), bug fixes, and content readability for the theme 
+as much as possible. 
+It also avoids the problem of over-engineering and gold plating since the 
+theme already has a lot of options/parameters to offer. 
 
 
 === Setting up for development

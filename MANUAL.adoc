@@ -25,6 +25,12 @@ https://github.com/foo-dogsquared/dotfiles[here are my dotfiles].
 
 This manual is for Arch Terminal version {prog_version} and above.
 
+NOTE: Some of the features are only possible (such as applying and editing SCSS) 
+with Hugo extended version. 
+Please make sure that you have it installed. 
+
+
+
 
 == Demo 
 
@@ -56,13 +62,12 @@ documentation.
 Here are the different feature highlights that 
 the theme offers:
 
-* A recreation of the original theme, almost built from scratch.
+* A recreation of the original theme, built from scratch.
 * Focuses on being minimal while being customizable enough for you. 
 The choice of bloating your website is in your hands! :) 
-* Easy configuration and customization with https://sass-lang.com/[SCSS].
+* Easy configuration and customization with https://sass-lang.com/[SCSS]. footnote:requires_hugo_extended[Requires Hugo extended version.]
 * Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor]. 
 * Different approach of content organization. 
-* Aims on supporting engineering and technical content. 
 * Removed https://nodejs.org/[Node] dependencies from the original theme. 
 
 The theme aims to be minimal but provides a variety of customizability like 
@@ -74,17 +79,20 @@ Even if you start with no options at all, it can be usable.
 Though what's the fun if you can't tweak some settings, right? 
 
 Here's a general list of options that you can set and experiment with this theme. 
+(Note that all of the listed features needs to be manually activated. 
+It's supposed to be minimal, after all.)
 
 * Support RSS, Atom, and JSON feeds. 
 * Suitable for creating a quick single homepage portfolio and/or blogging. 
 * https://www.mathjax.org/[MathJax] support. 
+* Offline MathJax usage. footnote:[Exclusive for MathJax v3.0.0] 
 * Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
-or https://prismjs.com/[PrismJS]. 
+or https://prismjs.com/[PrismJS]. footnote:requires_hugo_extended[] 
 * Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
 * Customizable normal and alternate theme appearance. The theme will also set 
 the alternate theme even if you didn't customize it yourself! 
-(Though, may result in ugly colors.) 
+(Though, may result in ugly colors.) footnote:requires_hugo_extended[]
 * Site breadcrumbs. 
 * LaTeX-like content counters. 
 * Customizable social links. 
@@ -92,9 +100,10 @@ the alternate theme even if you didn't customize it yourself!
 * Detailed or compact list for your posts on the homepage. 
 * Custom content reader mode for easier readability for your readers. 
 * JSON+LD schema. 
-* Image zoom feature for your content.
-* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. 
+* Image zoom feature for your content. footnote:requires_hugo_extended[]
+* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. footnote:requires_hugo_extended[]
 * Quick taxonomy search query list. 
+* Adding custom JS libraries for the whole site or for specific posts. 
 * Google Analytics integration. 
 * Disqus integration. 
 
@@ -117,7 +126,7 @@ branch (`develop`) and you can view the pending changes there.
 
 == Installation
 
-Since this theme uses SASS/SCSS asset bundling, it requires 
+Since this theme uses Hugo Pipes and asset bundling, it requires 
 the extended version of Hugo. 
 In order to check whether or not you have the extended 
 version installed, just run `hugo version` and check for 
@@ -127,7 +136,11 @@ For future references and safety purposes, make sure that
 the version is at least `v0.57.2`.
 
 If you're using Asciidoctor, make sure that the version is at 
-least `v2.0.10`.
+least `v2.0.10`. 
+
+
+TIP: Harnessing the full feature set such as editing and applying 
+SCSS and JavaScript files requires Hugo extended version. 
 
 
 
@@ -185,9 +198,9 @@ https://gohugo.io/getting-started/configuration/[Default configuration settings]
 also apply here. 
 
 NOTE: From this point, this assumes that you want to create the 
-config as a TOML file.
+config as a TOML file. 
 Please change the format according to your chosen data format for 
-your configuration file.
+your configuration file. 
 
 [source,toml]
 ----
@@ -235,10 +248,10 @@ copyright = "Unless explicitly stated, all content released here are licensed un
     tagline = "Making near destructive blogs all around the world."
         
     # Show posts on home. :)
-    showPostsOnHome = true
+    hidePostsOnHome = true
     
     # Indicates if the site sections should be listed instead.
-    # Requires `showPostsOnHome` to be enabled.
+    # Requires `hidePostsOnHome` to be disabled.
     # listSiteSectionsOnHome = true 
 
     # Enables syntax highlighting. ;p
@@ -250,7 +263,7 @@ copyright = "Unless explicitly stated, all content released here are licensed un
     # syntaxHighlighter = "prismjs"
     
     # Indicates to show the icon whether the link leads to a page or a section. 
-    # The effect is visible if `showPostsOnHome` is at least enabled. 
+    # The effect is visible if `hidePostsOnHome` is at least disabled. 
     # showPageTypeIcon = true
     
     # Shows breadcrumbs in the post.
@@ -262,13 +275,17 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 
 
 
-=== Changing appearance
+=== Changing appearance 
+
+NOTE: Editing and applying SCSS files is only possible with Hugo extended version. 
+If you are using the basic version, override the styles with a CSS stylesheet at 
+`static/scss/main.min.css` (or the equivalent `static` location at the assets folder). 
 
 If you want to change common styles like the background color, 
 text color, or the main color, you can add a `config.scss` file 
 in `assets/scss` in your Hugo project directory.
 You can view the link:assets/scss/default.scss[default SCSS config file] 
-for a reference to what variables should be filled.
+for a reference to what variables should be filled. 
 
 If you want to override the styles, you can create a file named 
 `extend.scss` in `assets/scss` of your Hugo project directory. 
@@ -418,7 +435,6 @@ the specified fields.
 When there's at least one project, a projects section will 
 be added into your homepage and the data added in the 
 appropriate folder is added under it.
-
 
 Anyhow, here's the following keys/fields that the theme 
 look for:
@@ -603,7 +619,7 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
-| `params.enableContentImageZoom` 
+| `params.enableContentImageZoom` footnote:requires_hugo_extended[]
 | boolean 
 | Adds a Medium-like image zoom functionality in your content with the 
 https://github.com/francoischalifour/medium-zoom/[medium-zoom] library. 
@@ -638,7 +654,7 @@ capabilities.
 | Yes 
 | 
 
-| `params.enableSiteSearch`
+| `params.enableSiteSearch` footnote:requires_hugo_extended[]
 | boolean
 | Enables navigation through searching. 
 The search widget is located at the bottom of the page. 
@@ -648,7 +664,7 @@ two-step setup.
 This is only half of the step. 
 You can find out more on the related section. 
 
-| `params.enableLazySyntaxHighlighting`
+| `params.enableLazySyntaxHighlighting` footnote:requires_hugo_extended[]
 | boolean
 | Enables lazy syntax highlighting without relying to the 
 built-in highlight shortcode.
@@ -663,6 +679,13 @@ Hallejulah!
 | Yes (but not for me) 
 | For performance reasons, it'll be used through a CDN. 
 
+| `params.enableThemeToggle` 
+| boolean 
+| Enables theme toggling. 
+Puts an additional theme toggle button at the header logo. 
+| Yes (but no for others) 
+| 
+
 | `params.feedLimit` 
 | boolean 
 | Specifies how many posts should be listed at a time in the 
@@ -672,13 +695,20 @@ Values less than or equal to 0 is also considered to the default value.
 | Yes 
 | 
 
+| `params.hidePostsOnHome`
+| boolean
+| Indicates if the homepage should hide the pages 
+from the content folder.
+| Yes
+| 
+
 | `params.listSiteSectionsOnHome`
 | boolean
 | Indicates if the homepage should list the 
 site sections (top-level directories of the site)
 instead of the pages 
 | Yes
-| You need to have `showPostsOnHome` set to `true` to 
+| You need to have `hidePostsOnHome` disabled to 
 make have this effect visible. 
 
 | `params.readMoreLabel` 
@@ -699,7 +729,7 @@ make have this effect visible.
 | Yessir
 | 
 
-| `params.setContentImageZoomBackground` 
+| `params.setContentImageZoomBackground` footnote:requires_hugo_extended[]
 | string 
 | Sets the background of 
 https://github.com/francoischalifour/medium-zoom/[medium-zoom] image overlay. 
@@ -720,14 +750,7 @@ the content folder) in the home page.
 | Yes, completely
 | For the theme, a page is a "folder" if its base filename is `_index`. 
 
-| `params.showPostsOnHome`
-| boolean
-| Indicates if the homepage should show the pages 
-from the content folder.
-| Yes
-| 
-
-| `params.syntaxHighlighter` 
+| `params.syntaxHighlighter` footnote:requires_hugo_extended[]
 | string 
 | Sets the syntax highlighter to be used. 
 Valid options include `highlightjs` and `prismjs`. 
@@ -747,7 +770,7 @@ https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] for your content.
 Anything after that means you need to rethink your document structure (unless you're 
 writing technical standards/specifications). 
 
-| `params.useLocalMathjax`
+| `params.useLocalMathjax` footnote:requires_hugo_extended[]
 | boolean 
 | Enables offline usage of MathJax. 
 This only works for MathJax v3.
@@ -764,24 +787,18 @@ is simple.
 The theme considers all of the pages and sections except for 
 the top-level pages. 
 
-By default, the theme does not list posts in the homepage. 
-In order to do so, set the `params.showPostsOnHome` to `true` on 
-your site config file. 
-All of the posts (except for the top-level pages) are now 
-listed in the homepage. 
+By default, the theme list posts in the homepage. 
+If you want to disable it, have the `params.hidePostsOnHome` set to `true`.  
 
 NOTE: Folders with an `_index` file is considered a 
 section so it'll be listed. Make sure any pages that shouldn't 
 normally appear in the post list be a single page. 
 
-.`showPostsOnHome` set as `true`
-image::docs/show-posts-on-home-enabled.png[width=100%]
-
 If you want to list sections instead of the page, you should 
 enable the `params.listSiteSectionsOnHome` to `true` on the site 
 config file. 
-Take note that the `params.showPostsOnHome` also needs to be 
-enabled for this setting to work.
+Take note that the `params.hidePostsOnHome` also needs to be 
+disabled for this setting to work.
 
 .`listSiteSectionsOnHome` set as `true` 
 image::docs/list-site-sections-on-home-enabled.png[width=100%] 
@@ -960,7 +977,7 @@ NOTE: This doesn't apply to top-level pages.
 === Content image zoom  
 
 You can add an image zoom feature similar to the image zoom function 
-in Medium articles. 
+in Medium articles. footnote:requires_hugo_extended[]
 
 Of course, it's disabled by default and should be manually enabled with 
 `params.enableContentImageZoom`. 
@@ -1056,7 +1073,7 @@ In order to enable it, set the `params.showPageTypeIcon` to `true`.
 
 This might be the most useless feature I've ever done. 
 Anyways, this'll make certain header types to have some sort 
-of style put into them.
+of style put into them. 
 
 .Stylized content headers
 image::docs/content-is-styled-enabled.png[width=100%]
@@ -1102,6 +1119,109 @@ https://gohugo.io/getting-started/configuration/#configuration-directory[`config
 It's going to make site config management more organized. 
 
 
+
+
+== Adding your own JS libraries 
+
+=== Adding it sitewide 
+
+TIP: If you want finer control, I recommend to modify the script partial of the theme 
+instead (at `theme/arch-terminal/layouts/partials/scripts.html`). 
+By doing it this way, you can add some additional scripts such as configuration 
+of your library or rearranging it. 
+However, s
+
+This theme supports adding your own libraries to your site quickly by 
+utilizing a data file named `libraries`. 
+
+By providing this feature, you can quickly add some features such as supporting 
+engineering-oriented content with https://mermaidjs.github.io/[Mermaid], 
+https://www.chartjs.org/[Chart.js], and similar libraries. 
+Or you could replace the syntax highlighters here. 
+
+Similar to adding your projects and contact links, the data file should hold a list 
+of objects with certain keys/fields. 
+
+[cols="5*",options="header"]
+|===
+| Key 
+| Data type
+| Description
+| Optional
+| Additional notes
+
+| `url` 
+| string 
+| The URL of the JS file to be loaded. 
+| 
+| 
+
+| `weight` 
+| number 
+| The order which the script will be loaded. 
+Similar to the `weight` field from Hugo menu object, 
+the less weight, the higher the precedence. 
+Make sure the more important scripts have the least weight value. 
+| 
+| 
+
+| `sync` 
+| boolean 
+| Makes the script a part of the DOM rendering. 
+Removing the `async` attribute on the process. 
+| Yes 
+| By default, custom scripts have the attribute of `async` on the 
+`<script>` element. 
+
+| `defer` 
+| boolean 
+| Adds the `defer` attribute to the corresponding `<script>` element. 
+| Yes
+| If the value is `true`, the script will be deferred no matter what. 
+
+|===
+
+
+
+=== Adding it for a specific post 
+
+TIP: If you plan on future-proofing your content, I recommend to 
+embed it on the document itself than relying on the frontmatter since this is 
+a theme-specific feature and may present some problems if you migrate it somewhere else. 
+For Markdown, you can simply write raw HTML with it. 
+On Asciidoctor, you can simply embed it with a 
+https://asciidoctor.org/docs/user-manual/#passthroughs[passthrough block]. 
+You also gain finer control on embedding your scripts this way. 
+
+You can also add a JS file to a specific document by adding a 
+`libs` object with `js` nested object on the frontmatter. 
+
+Let's say you're writing an article on https://p5js.org/[p5.js]. 
+Rather than adding the library site-wide (which is very inefficient), you can 
+add it for that specific page. 
+Here's how you can add it to your frontmatter.
+
+[source,asciidoc]
+----
+---
+title: "Testing out p5.js"
+date: 2019-09-07T02:55:46+08:00
+
+libs:
+    js:
+        - "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"
+---
+----
+
+Libraries and scripts imported this way are loaded first before the site-wide scripts. 
+Also, all of them are loaded asynchronously (with the `async` attribute) and you 
+have no way of controlling them. 
+If you're looking for finer control, I recommend to embed them into the document 
+itself instead. 
+
+
+
+
 == Custom 404 page
 
 If you want to change it, simply copy link:layouts/404.html[`layouts/404.html`] 
@@ -1123,10 +1243,17 @@ You can enable by setting `params.enableMathjax` to `true`.
 
 For performance reasons, it'll rely on a CDN instead of saving it 
 locally. If you want to use it based on your own web server, you 
-can set `params.useLocalMathjax` to `true`. No need to worry about the 
+can set `params.useLocalMathjax` footnote:requires_hugo_extended[] to `true`. No need to worry about the 
 fonts since the local MathJax script uses SVG instead for the rendering. 
 
 NOTE: `params.useLocalMathjax` is exclusive for v3. 
+Also, the generated script will be 2.5MiB larger. 
+Choose wisely for the sake of your readers. 
+
+TIP: For a quick decision, if you don't have a way of configuring your 
+server to cache or compress it (like on GitHub Pages), use the online 
+version since it also caches and can be used by other websites. 
+Thus, performance can be improved and don't have a large payload for your visitors. 
 
 By default, it uses v3.0.0 which is the latest production 
 version as of 2019-09-06. 
@@ -1161,7 +1288,8 @@ You may have to escape it with a backslash (\).
 For inline math, you could make dollar signs-delimited content blocks like
 the following example and it'll appear like $a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}$.
 
-For display/block math mode, make the content block delimited with two dollar signs.
+For display/block math mode, make the content block delimited with two dollar signs 
+or a pair of brackets.
 
 \[\LaTeX\]
 ----
@@ -1197,7 +1325,9 @@ For display/block math mode, make a stem block.
 
 
 
-== Lazy syntax highlighting
+== Lazy syntax highlighting 
+
+NOTE: This requires Hugo extended version in order to work. 
 
 Lazt syntax highlighting (enabling it without the `highlight` shortcode) 
 is supported through https://prismjs.com/[PrismJS] 
@@ -1363,7 +1493,8 @@ In order to prevent diving into complexity, there is a set of limitations you
 have to keep in mind.
 
 * No pagination. 
-Only the first 10 (or given `params.feedLimit`) shall be shown at any time. 
+Only the first 10 (or given `params.feedLimit`) shall be shown at any time to 
+prevent excessive bandwidth usage. 
 * It doesn't support multiple site authors. 
 It always assumed that the site only has one author. 
 * The same deal for posts. 
@@ -1373,7 +1504,9 @@ it'll only support one author, not an array of them.
 
 
 
-== Site search widget
+== Site search widget 
+
+NOTE: This requires Hugo extended version in order to work. 
 
 This theme offers a site-wide search navigation widget with 
 https://fusejs.io/[Fuse.js] as the search engine. 
@@ -1496,6 +1629,12 @@ theme = "terminal-plus-minus"
 If you spot some bugs or want to suggest a feature, feel 
 free to file an issue in the issue tracker. 
 
+Any feature requests are heavily considered since starting at v2.0.0, a 
+feature freeze is observed for the sake of improving user experience 
+(including the documentations), bug fixes, and content readability for the theme 
+as much as possible. 
+It also avoids the problem of over-engineering and gold plating since the 
+theme already has a lot of options/parameters to offer. 
 
 
 === Setting up for development
@@ -1545,10 +1684,6 @@ Any help with this task list by pull requests are very
 appreciated. 
 
 * Algolia integration
-* Focus support for engineering and technical content 
-* Internationalization (i18n) support
-* Different https://gohugo.io/content-management/archetypes/[archetypes] 
-and content organization
 * Easy GitHub projects integration (for quickly creating your portfolio site)
 
 
