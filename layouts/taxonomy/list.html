@@ -1,0 +1,18 @@
+{{ define "main" }}
+{{ .Content }}
+{{ partial "posts.html" . }}
+
+{{ with $.Site.Data.query }}
+<section class="site__terms">
+    <h1 class="terms__header">{{ i18n "taxonomy_quick_search_list" }}</h1>
+    <ul class="terms__list">
+    {{ $queries := (sort . "id" "asc") }}
+    {{- range $queries -}}
+        {{ $url := replaceRE "\\$\\{\\{__DATA__\\}\\}" $.Data.Term .url }}
+        <li class="term"><a class="term__link" data-search-site="{{ if .name }}{{ .name }}{{ else }}{{ .id }}{{ end }}" href="{{ $url }}">{{ $url | safeJS }}</a></li>
+    {{- end -}}
+    </ul>
+</section>
+{{ end }}
+
+{{ end }}

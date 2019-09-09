@@ -2,12 +2,8 @@
 <!-- SUPPORT section -->
 {{- with $.Site.Data.Support.list -}}
 <section class="site__support">
-    <h2 class="support__header">Support</h2>
-    <p>
-        You can support me through the following links. It'll help me 
-        get started on doing my project ideas a reality and hopefully help 
-        some people with my creations.
-    </p>
+    <h2 class="support__header">{{ i18n "support_header" }}</h2>
+    <p>{{ i18n "support_text" | markdownify }}</p>
     <ul class="support__links">
     {{- range . -}}
         <li class="support__link">

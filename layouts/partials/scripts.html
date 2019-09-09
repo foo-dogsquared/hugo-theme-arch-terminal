@@ -1,6 +1,6 @@
 {{ $array := slice }}
 
-{{- if $.Site.Params.enableSyntaxHighlighting -}}
+{{- if $.Site.Params.enableLazySyntaxHighlighting -}}
     {{- if (eq $.Site.Params.syntaxHighlighter "prismjs") }}
         {{ $highlighter := resources.Get "js/lib/prism.js" }}
         {{ $highlighterStyle := resources.Get "css/prism.css" | minify }}
@@ -18,14 +18,23 @@
 
 <!-- MathJax -->
 {{ if $.Site.Params.enableMathjax -}}
-    {{ if $.Site.Params.setMathjaxToV3 -}}
-        <script id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-        </script>
-    {{ else -}}
     {{ partial "config/mathjax.html" . }}
+    {{ if $.Site.Params.setMathjaxToV2 -}}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML" async></script>
+    {{- else -}}
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        {{- if $.Site.Params.useLocalMathjax -}}
+            {{ $mathjaxLib := resources.Get "js/lib/mathjax.js" | minify }}
+            {{ $array = $array | append $mathjaxLib }}
+        {{- else -}}
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        {{- end -}}
     {{- end -}}
+{{- end -}}
+
+{{ if $.Site.Params.enableContentImageZoom -}}
+{{ $zoomImageLib := resources.Get "js/lib/medium-zoom.js" | resources.ExecuteAsTemplate "js/_zoom.js" . | minify }}
+{{ $array = $array | append $zoomImageLib }}
 {{- end -}}
 
 <!-- The custom script -->
@@ -34,19 +43,24 @@
 
 {{- if $.Site.Params.enableSiteSearch -}}
 {{ $searchEngineLib := resources.Get "js/lib/fuse.min.js" | minify  }}
-{{ $searchEngineSearchScript := resources.Get "js/search-post.js" | minify }}
-{{ $array = $array | append $searchEngineLib $searchEngineSearchScript }}
+{{ $searchEngineSearchScript := resources.Get "js/search-post.js" | resources.ExecuteAsTemplate "js/_search.js" .| minify }}
+{{ $searchEngine := slice $searchEngineLib $searchEngineSearchScript | resources.Concat "js/_search.js" }}
+{{ $array = $array | append $searchEngine }}
 {{- end -}}
 
 {{ $script := $array | resources.Concat "js/script.js" }}
-<script type="text/javascript" src="{{ $script.Permalink }}"></script>
+{{ if (ne hugo.Environment "development")}}{{ $script = $script | resources.Fingerprint "sha512" }}{{ end }}
+<script type="text/javascript" src="{{ $script.Permalink }}" {{ with $script.Data.Integrity }}integrity="{{ . }}"{{ end }} async></script>
 
-{{ if (and (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) $.Site.Params.enableSyntaxHighlighting) -}}
+{{ if (and (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) $.Site.Params.enableLazySyntaxHighlighting) -}}
 <script>hljs.initHighlightingOnLoad();</script>
 {{- end -}}
 
-{{- if $.Site.Params.enableSiteSearch -}}
-<script type="text/javascript">
-    loadIndex("{{ $.Site.BaseURL }}/index.search.json")
-</script>
+<!-- Site-wide user-included libraries -->
+{{ with $.Site.Data.libraries }}
+{{ $libraries := (sort . "weight" "asc") }}
+{{ range $libraries }}
+<script type="{{ .type | default "text/javascript" }}" src="{{ .url }}" {{ if .defer }}defer{{ else if (not .sync) }}async{{ end }}></script>
+{{ end }}
+
 {{- end -}}

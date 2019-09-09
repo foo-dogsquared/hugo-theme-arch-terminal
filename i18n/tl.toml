@@ -1,0 +1,68 @@
+# Site pagination
+[page_prev]
+other = "Balik"
+
+[page_next]
+other = "Sunod"
+
+[page_first]
+other = "Unang pahina"
+
+[page_last]
+other = "Huling pahina"
+
+
+# General
+[read_more]
+other = "Magbasa nang higit pa"
+
+[search_label]
+other = "Maghanap sa website"
+
+[taxonomy_quick_search_list]
+other = "Mabilis na paghahanap"
+
+[noscript_disqus]
+other = "Payagan ang JavaScript upang tignan ang mga [komento galing sa Disqus](https://disqus.com/?ref_noscript)."
+
+[back_to_top]
+other = "Balik sa taas"
+
+[site_pages_header]
+other = "Mga nilalaman"
+
+[site_sections_header]
+other = "Mga pangkat"
+
+# Author 
+[projects_header]
+other = "Mga proyekto"
+
+[support_header]
+other = "Suporta"
+
+[support_text]
+other = "Maaari mo akong suportahan sa pamamagitan ng mga sumusunod na link."
+
+# Content
+[content_translations]
+other = "Mga pagsasalin"
+
+[content_by--reader]
+other = "Mula kay"
+
+[content_on--reader]
+other = "Noong"
+
+[content_updated--reader]
+other = "Na-iupdate sa" 
+
+# 404
+[404_header]
+other = "Hindi mahanap :("
+
+[404_message]
+other = "Hindi mahanap ang pahina."
+
+[404_link_message]
+other = "Balik."

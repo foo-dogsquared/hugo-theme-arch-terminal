@@ -1,7 +1,11 @@
-$sidePadding: 0.75rem;
+.paragraph {
+    margin: var(--verticalRhythm) 0;
+}
 
 // Admonition blocks
 .admonitionblock {
+    margin: var(--verticalRhythm) 0;
+
     table {
         border: none;
     }
@@ -35,28 +39,29 @@ $sidePadding: 0.75rem;
     &.title {
         background: var(--accent);
         color: var(--background);
-        padding: $sidePadding;
+        padding: calc(var(--verticalRhythm) / 2);
     }
 
     &.attribution {
         background: var(--accent);
         color: var(--background);
-        padding: $sidePadding;
+        padding: calc(var(--verticalRhythm) / 2);
     }
 
     &.content {
         border: var(--primaryBorder) var(--accent);
         overflow: auto;
 
-        & > *:not(code):not(.highlight) {
-            padding: $sidePadding;
+        & > * {
+            margin: 0; 
+            padding: calc(var(--verticalRhythm) / 2); 
         }
     }
 }
 
 // Quote block
 .quoteblock {
-    margin: 1rem 0 1rem;
+    margin: var(--verticalRhythm) 0;
 
     blockquote {
         margin: auto 0 0;
@@ -75,9 +80,28 @@ $sidePadding: 0.75rem;
     margin: 0 auto;
 }
 
+// Stem blocks 
+.stemblock, .listingblock {
+    overflow: auto;
+    margin: var(--verticalRhythm) 0;
+}
+
+.sidebarblock {
+    .content > * { padding: calc(var(--verticalRhythm) / 2); }
+    .paragraph > p { margin: 0; }
+}
+
+.verseblock {
+    & > .content { margin-bottom: 0; }
+}
+
 // Footnotes
 #footnotes {
-    margin: 2rem auto;
+    margin: var(--verticalRhythm) auto;
+
+    & .footnote {
+        margin: var(--verticalRhythm) auto;
+    }
 }
 
 .listingblock .content {
@@ -85,7 +109,7 @@ $sidePadding: 0.75rem;
 }
 
 .conum {
-    $color: var(--accent-dark) !important; 
+    $color: var(--background-light) !important; 
 
     & > * {
         display: inline-block;
@@ -94,7 +118,7 @@ $sidePadding: 0.75rem;
 
     display: inline-block;
     color: $color;
-    background-color: var(--foreground);
+    background-color: var(--foreground-dark);
     border-radius: 100px;
 
     // has to have vendor prefixes (as of 2019-08-30)

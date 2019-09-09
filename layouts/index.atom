@@ -13,7 +13,7 @@
   </author>
   <id>{{ .Permalink }}</id>
   {{ $limit := cond (gt .Site.Params.feedLimit 0) .Site.Params.feedLimit 10 }}
-  {{ range first $limit (where .RegularPages "File.Dir" "!=" "/") }}
+  {{ range first $limit (where .Site.RegularPages "File.Dir" "!=" "/") }}
   <entry>
     <id>{{ .Permalink }}</id>
     <title type="text">{{ .Title }}</title>

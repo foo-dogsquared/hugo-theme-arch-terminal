@@ -1,11 +1,15 @@
 <footer class="site__footer">
-    {{- with $.Site.Data.contact -}}
+    {{ if $.Site.Params.enableBackToTopLink -}}
+    <a href="#top">{{ i18n "back_to_top" }}</a>
+    {{- end -}}
+    
+    {{- with $.Site.Data.contacts -}}
     <div class="footer__links">
     {{- $willUseIcons := (eq $.Site.Params.useLinkIcons true) -}}
     {{- $socialIcons := "social-icons.svg" | absURL -}}
     {{- $socialLinks := (sort . "id" "asc") -}}
     {{- range $socialLinks -}}
-    <a class="footer__link" href="{{ .url }}">
+    <a rel="me" class="footer__link" href="{{ .url }}">
         {{- if $willUseIcons -}}
         <svg class="icon">
             <use xlink:href="{{ $socialIcons }}#{{ .id }}"></use></svg>
@@ -16,5 +20,14 @@
     {{- end -}}
     </div>
     {{ end }}
-    <p class="footer__sign">{{ with $.Site.Copyright }}{{ . | markdownify }}{{ else }}© {{ now.Year }} {{ $.Site.Author.name }}{{ end }}</p>
+    
+    <p class="footer__sign">{{ with $.Site.Copyright }}{{ . | markdownify }}{{ else }}© {{ now.Year }} {{ with $.Site.Author.name }}{{ . }}{{ else }}{{ $.Site.Title }}{{ end }}{{ end }}</p>
+
+    {{- if $.Site.IsMultiLingual }}
+    <div class="site__languages">
+    {{- range $.Site.Languages -}}
+    <a class="site__language" href="{{ . | relURL }}">{{ with .LanguageName }}{{ . }}{{ else }}{{ .Lang }}{{ end }}</a>
+    {{- end -}}
+    </div>
+    {{ end -}}
 </footer>

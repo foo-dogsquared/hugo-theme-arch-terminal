@@ -1,11 +1,11 @@
 <!-- PROJECTS section -->
 {{- with $.Site.Data.projects -}}
 <section class="projects">
-    <h2>Projects</h2>
+    <h2>{{ i18n "projects_header" }}</h2>
     <div class="project">
         {{- $projects := (sort . "id" "asc") -}}
         {{- range $projects -}}
-        <h3 class="project__name">{{- .name -}}</h3>
+        <h3 class="project__name">{{ with .name }}{{ . }}{{ else }}{{ .id }}{{ end }}</h3>
         {{- if .url -}}
         <p class="project__link">LINK: <a href="{{ .url }}" target="_blank" rel="noopener">{{ .url }}</a></p>
         {{- end -}}

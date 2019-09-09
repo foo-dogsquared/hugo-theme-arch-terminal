@@ -1,10 +1,29 @@
 {{- $blogIcons := "blog-icons.svg" | absURL -}}
 {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
-{{- $pages := cond ($isListSectionsOnHome) .Site.Sections .RegularPages -}}
+{{- $pages := cond ($isListSectionsOnHome) .Pages (cond .IsHome .Site.RegularPages .RegularPages) -}}
 
 <section class="site__pages">
+    {{ if .IsHome -}}
+        <h1>{{ if $.Site.Params.listSiteSectionsOnHome }}{{ i18n "site_sections_header" }}{{ else }}{{ i18n "site_pages_header" }}{{ end }}</h1>
+    {{- end -}}
+
+    <ul class="pages__list">
     {{- range (.Paginate (where $pages "File.Dir" "!=" "/")).Pages -}}
-    <section class="site__page">
+    <li>
+    {{- if $.Site.Params.enableCompactListMode -}}
+    <article class="site__page--compact">
+        <h1 class="page__title--compact">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h1>
+        <div class="page__meta--compact">
+            <date class="page__date" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</date>
+            {{ if ne .PublishDate .Lastmod -}}
+            (updated on <date class="page__modified-date" datetime="{{ .Lastmod }}">{{ .Lastmod.Format "2006-01-02" }}</date>)
+            {{- end -}}
+        </div>
+    </article>
+    {{- else -}}
+    <article class="site__page">
         <div class="page__header">
         <h1 class="page__title">
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
@@ -22,23 +41,31 @@
             </svg>
         {{- end -}}
         </div>
+
         <div class="page__meta">
         <span class="page__date">
             {{ .Date.Format "2006-01-02" }}
         </span>
         {{- with .Params.Author -}}<span class="page__author">::
             {{ . }}</span>{{- end -}}
-        </div>
-    
-        {{- if .Params.tags -}}
-        <div class="page__tags">
-        {{ range .Params.tags }}
-        #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
-            {{- . -}}
-        </a>&nbsp;
+            
+            {{- if .Params.tags -}}
+            <div class="page__tags">
+                {{ range .Params.tags -}}
+                <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">#{{- . -}}</a>
+                {{- end }}
+            </div>
+            {{- end -}}
+
+        {{ if .IsTranslated }}
+        <p class="page__translations">
+            {{ i18n "content_translations" }}: 
+            {{ range .Translations }}
+            <a href="{{ .Permalink }}">{{ .Lang }}</a>
+            {{ end }}
+        </p>
         {{ end }}
         </div>
-        {{- end -}}
     
         {{- with .Params.Cover -}}
         <img src="{{ . | absURL }}" class="page__cover" />
@@ -53,12 +80,13 @@
         </div>
     
         {{- if not .Params.showFullContent -}}
-        <div>
-        <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMore }}{{ . }}{{ else }}Read more{{ end }} →</a>
-        </div>
+        <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMoreLabel }}{{ . }}{{ else }}Read more{{ end }} →</a>
         {{- end -}}
-    </section>
+    </article>
     {{- end -}}
+    </li>
+    {{- end -}}
+    </ul>
     
     {{- partial "pagination.html" . -}}
 </section>

@@ -15,7 +15,7 @@
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
     {{ $limit := cond (gt .Site.Params.feedLimit 0) .Site.Params.feedLimit 10 }}
-    {{ range first $limit (where .RegularPages "File.Dir" "!=" "/") }}
+    {{ range first $limit (where .Site.RegularPages "File.Dir" "!=" "/") }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>{{ range .Params.tags }}

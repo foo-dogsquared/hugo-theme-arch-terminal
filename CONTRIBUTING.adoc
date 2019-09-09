@@ -1,0 +1,94 @@
+= Contributing
+:toc:
+
+Hello! 
+
+If you're reading this, you might be interested in contributing to this project. 
+
+Anyways, this is already mentioned in the README but for a quick recap:
+
+== How to contribute
+
+If you spot some bugs or want to suggest a feature, feel 
+free to file an issue in the issue tracker. 
+
+Any feature requests are heavily considered since starting at v2.0.0, a 
+feature freeze is observed for the sake of improving user experience 
+(including the documentations), bug fixes, and content readability for the theme 
+as much as possible. 
+It also avoids the problem of over-engineering and gold plating since the 
+theme already has a lot of options/parameters to offer. 
+
+
+=== Setting up for development
+
+If you want to contribute through code, you can do the following 
+to set up the repo into your computer:
+
+* Fork this repository 
+* Clone the forked repository 
+* Checkout to the development branch (`develop`) 
+* Create another branch from the development branch which you can 
+freely implement your own stuff 
+
+Make sure the new branch name is appropriately named. 
+
+If creating a pull request, you have to pass it through the 
+development branch. 
+
+
+
+=== Project style guides
+
+If you're going to update the codebase, make sure you mind the 
+following guidelines:
+
+* The documentations have to be written in https://asciidoctor.org/[Asciidoctor]. 
+If you're not familiar with it, here's the 
+https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[quick reference page] for 
+a rundown and their https://asciidoctor.org/docs/user-manual/[user manual] for 
+deep details. 
+* The codebase follows the http://getbem.com/naming/[BEM naming convention] 
+for the CSS naming.
+* Using https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines[semantic HTML] 
+should be observed.
+* Not really a requirement but use the https://editorconfig.org/[EditorConfig] 
+plugin for your text editor. 
+If you don't have any, try to follow according to the `.editorconfig` rules. 
+
+
+
+
+== Project scope
+
+In order to prevent problems (for a theme), here are the the project 
+self-imposed limitations and its scope: 
+
+* This theme only serves to provide UI for the content. 
+Meaning no custom shortcodes or archetypes shall be implemented. 
+This also prevents the problem of migrating the content with some of it 
+that relies on the theme. 
+I encourage the users to make their own stuff instead. 
+
+* Add only a minimal amount of custom parameters for the content frontmatter. 
+
+* No more fonts shall be added for performance reasons. 
+Instead, assume the most common installed system fonts and use those instead. 
+
+* Content readability above content appearance. 
+Typography practices should be strictly observed. 
+
+* Using third-party libraries through a CDN is discouraged. 
+Save it locally and use that instead. 
+Be sure to document their versions for future references. 
+(There are exceptions such as MathJax and KaTeX since it can also be used by other 
+websites and could perform faster.) 
+
+* As much as possible, keep and maintain the documentation 
+inside of the project folder. 
+
+* Starting from v2.0.0, there'll be a feature freeze to avoid 
+maximum gold plating and over-engineering. 
+If there's any small features to be requested and it is too small of a scope, it is 
+encouraged to hack your own way out of this, instead. 
+(Still, don't be afraid to request new features.) 

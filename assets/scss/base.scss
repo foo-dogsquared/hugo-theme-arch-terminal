@@ -2,7 +2,6 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
 }
 
 html {
@@ -15,35 +14,28 @@ html {
     box-sizing: border-box;
 }
 
-a, abbr, acronym, address, applet, article, aside, audio, 
-b, big, blockquote, body, canvas, caption, center, cite, code, 
-del, details, dfn, div, em, embed, fieldset, figcaption, 
-figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, 
-i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, 
-ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, 
-strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, 
-tr, tt, u, ul, var, video {
-	margin: 0;
-	padding: 0;
-	vertical-align: baseline;
-}
-
 body {
     background: var(--background);
     color: var(--foreground);
     font-size: var(--fontSize);
     font-family: var(--fontFamily);
-    line-height: 1.8rem;
+    line-height: var(--verticalRhythm);
+    text-rendering: optimizeLegibility;
     word-wrap: break-word;
 }
 
 // Text formatting
 p { 
-    margin: 1.2rem auto; 
+    margin: var(--verticalRhythm) auto; 
 }
 
 a { 
+    position: relative;
     color: currentColor; 
+
+    code { 
+        border: dashed 0.15rem var(--accent-light);
+    }
 }
 
 kbd {
@@ -52,15 +44,16 @@ kbd {
 }
 
 mark {
-    background: var(--accent-light);
-    color: var(--background-dark);
+    background: var(--foreground-light);
+    color: var(--background-light);
 }
 
 pre { 
-    --border: var(--primaryBorder) var(--accent);
+    --border: var(--primaryBorder) var(--accent-light);
     background: var(--background-light);
     border: var(--border);
-    padding: 1rem;
+    margin: var(--verticalRhythm) 0;
+    padding: calc(var(--verticalRhythm) / 2);
     overflow: auto;
 
   code {
@@ -71,34 +64,33 @@ pre {
 }
 
 code {
-    background: var(--accent-dark);
-    color: var(--accent);
+    background: var(--accent);
+    color: var(--background-light);
     padding: 0.25rem; 
     font-size: 0.95rem; 
 }
 
 h1, h2, h3, 
 h4, h5, h6 {
-    margin-bottom: 1rem;
+    margin-bottom: var(--verticalRhythm);
 }
 
 h1 { 
-    font-size: 2.15rem;
-    margin-top: 4rem;
+    font-size: 2rem;
+    margin-top: calc(var(--verticalRhythm) * 2);
+    line-height: calc(var(--verticalRhythm) * 2);
+}
+
+h2, h3, h4, h5, h6 {
+    margin-top: var(--verticalRhythm);
 }
 
 h2 { 
-    font-size: 1.6rem;
-    margin-top: 3.5rem;
+    font-size: 1.85rem;
 }
 
 h3 { 
     font-size: 1.5rem;
-    margin-top: 3rem;
-}
-
-h4, h5, h6 {
-    margin-top: 2.5rem;
 }
 
 h4 { 
@@ -120,55 +112,36 @@ blockquote {
     padding: 1rem;
 }
 
-ol, ul {
-    margin: 2.2rem;
-    padding: 0;
-}
-
-ul {
-    list-style: none;
-
-    & > li {
-        margin-bottom: 1rem;
-
-        &::before {
-            content: "\25BA";
-            color: var(--accent);
-            position: absolute;
-            margin-left: -1.5em;
-        }
-    }
-
-    & ul, & ol {
-        margin: 1rem;
-        margin-left: 1.2rem;
-    }
-}
-
-ol {
-    li {
-        margin-bottom: 1rem;
-    }
-
-    & ul, & ol {
-        margin: 1rem;
-        margin: 1.2rem;
-    }
-}
-
 // Table
 table { 
     border-collapse: collapse;
-    display: block;
-    margin: 2rem 0;
+    margin: var(--verticalRhythm) 0;
     overflow: auto;
     table-layout: fixed;
     width: 100%;
 }
 
 table, td, th {
-	border: var(--secondaryBorder) var(--accent);
-	padding: 1.2rem;
+	border: var(--primaryBorder) var(--accent);
+    padding: calc(var(--verticalRhythm) / 2);
+}
+
+thead {
+    background: var(--accent);
+    color: var(--background-light);
+    font-weight: bolder;
+}
+
+tbody {
+    tr {
+        &:nth-child(odd) {
+            background: var(--background-dark);
+        }
+    
+        &:nth-child(even) {
+            background: var(--background-light);
+        }
+    }
 }
 
 // Document structure
@@ -176,25 +149,72 @@ nav {
     & > * { margin: 1rem; }
 }
 
+article[data-use-content-counters="true"] {
+    // Named after the LaTeX counters after `chapter` counter. 
+    counter-reset: section subsection subsubsection paragraph subparagraph; 
+
+    $counter-spacing: 0.5rem;
+
+    // <h2> is used as a section header since <h1> is the main title
+    h2 { 
+        counter-reset: subsection;
+        counter-increment: section;
+
+        &::before {
+            content: counter(section) ".";
+            margin-right: $counter-spacing;
+        }
+    }
+
+    h3 {
+        counter-reset: subsubsection;
+        counter-increment: subsection;
+
+        &::before {
+            content: counter(section) "." counter(subsection) ".";
+            margin-right: $counter-spacing;
+        }
+    }
+
+    h4 {
+        counter-reset: paragraph;
+        counter-increment: subsubsection;
+
+        &::before {
+            content: counter(section) "." counter(subsection) "." counter(subsubsection) ".";
+            margin-right: $counter-spacing;
+        }
+    }
+
+    h5 {
+        counter-reset: subparagraph;
+        counter-increment: paragraph;
+
+        &::before {
+            content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) ".";
+            margin-right: $counter-spacing;
+        }
+    }
+
+    h6 {
+        counter-increment: subparagraph;
+
+        &::before {
+            content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) "." counter(subparagraph);
+            margin-right: $counter-spacing;
+        }
+    }
+}
+
 main {
     & > * {
-        margin-bottom: 1rem;
+        margin-bottom: var(--verticalRhythm);
         &:first-child { margin-top: 0; }
         &:last-child { margin-bottom: 0; }
     }
 
-    & h1 {
-        padding-bottom: 0.25rem;
-        border-bottom: var(--primaryBorder) var(--accent);
-    }
-
-    & h1:first-child {
+    & h1:first-of-type {
         margin-top: 0;
-    }
-
-    & h2 {
-        padding-bottom: 0.25rem;
-        border-bottom: var(--primaryBorder) var(--foreground);
     }
 }
 

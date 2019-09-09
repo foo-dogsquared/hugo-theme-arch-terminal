@@ -1,24 +1,24 @@
-// Importing the default config
-@import "default";
-
 // Importing the user-defined config.
 @import "config";
+
+// Importing the default config
+@import "default";
 
 :root {
     // Core appearance options
     --background: #{$background};
-    --background-dark: #{darken($background, 15%)};
-    --background-light: #{lighten($background, 15%)};
+    --background-dark: #{scale-color($background, $saturation: 10%, $lightness: -15%)};
+    --background-light: #{scale-color($background, $saturation: 10%, $lightness: 10%)};
 
     --foreground: #{$foreground};
-    --foreground-dark: #{darken($foreground, 25%)};
-    --foreground-light: #{lighten($foreground, 25%)};
+    --foreground-dark: #{scale-color($foreground, $saturation: 10%, $lightness: -15%)};
+    --foreground-light: #{scale-color($foreground, $saturation: 10%, $lightness: 10%)};
 
     --borderColor: #{$borderColor};
     
     --accent: #{$accent};
-    --accent-light: #{lighten($accent, 40%)};
-    --accent-dark: #{darken($accent, 40%)};
+    --accent-light: #{scale-color($accent, $saturation: -10%, $lightness: 20%)};
+    --accent-dark: #{scale-color($accent, $saturation: 20%, $lightness: -15%)};
     
     --fontFamily: #{$fontFamily};
     --fontSize: #{$fontSize};
@@ -32,6 +32,7 @@
     --maxWidth: #{$maxWidth};
     --sidePadding: #{$sidePadding};
     --contentPadding: #{$contentPadding};
+    --verticalRhythm: #{$verticalRhythm};
     
     // Border options
     // It only missing the color so you should provide one.
@@ -41,16 +42,16 @@
 
 .theme-2:root {
     --background: #{$background-2nd};
-    --background-dark: #{darken($background-2nd, 15%)};
-    --background-light: #{lighten($background-2nd, 15%)};
+    --background-dark: #{scale-color($background-2nd, $saturation: 10%, $lightness: -15%)};
+    --background-light: #{scale-color($background-2nd, $saturation: 10%, $lightness: 15%)};
 
     --foreground: #{$foreground-2nd};
-    --foreground-dark: #{darken($foreground-2nd, 25%)};
-    --foreground-light: #{lighten($foreground-2nd, 25%)};
+    --foreground-dark: #{scale-color($foreground-2nd, $saturation: 10%, $lightness: -15%)};
+    --foreground-light: #{scale-color($foreground-2nd, $saturation: 10%, $lightness: 15%)};
     
     --accent: #{$accent-2nd};
-    --accent-light: #{lighten($accent-2nd, 40%)};
-    --accent-dark: #{darken($accent-2nd, 40%)};
+    --accent-dark: #{scale-color($accent-2nd, $saturation: 10%, $lightness: -15%)};
+    --accent-light: #{scale-color($accent-2nd, $saturation: 10%, $lightness: 15%)};
 
     --fontFamily: #{$fontFamily-2nd};
 }
@@ -63,10 +64,8 @@
     "asciidoctor"
 ;
 
-// Importing the Prism theme and other PrismJS-related styles
-@import 
-    "mathjax"
-;    
+// Importing the custom styles for the third-libraries this theme offers
+@import "libraries"; 
 
 // The main stylesheets.
 @import 

@@ -1,5 +1,5 @@
 // The default configuration of the theme.
-// If you want to customize it, create a similarly named file
+// If you want to customize it, create a file named "config.scss" 
 // in the `assets/scss` of your Hugo directory.
 
 // Also take note that the default config uses the !default flag for the fallback values.
@@ -8,17 +8,17 @@
 
 // Core appearance options
 $background: #080a0e !default;
-$foreground: #dbdbdb !default;
+$foreground: #ffffff !default;
 $borderColor: $foreground !default;
-$accent: #d59783 !default; 
-$fontFamily: "Fira Code","Monaco","Consolas","Ubuntu Mono","Bitstream Vera Sans Mono",monospace !default;
-$fontSize: 1.1rem !default;
+$accent: $foreground !default; 
+$fontFamily: sans-serif !default;
+$fontSize: 1.2rem !default;
 $iconSize: 1.5rem !default; 
 
 // 2nd theme variables
 $background-2nd: $foreground !default;
 $foreground-2nd: $background !default;
-$accent-2nd: complement($accent) !default;
+$accent-2nd: invert($accent, $weight: 100%) !default;
 $fontFamily-2nd: $fontFamily !default;
 
 // Main breakpoints
@@ -29,6 +29,7 @@ $desktopWidth: 1024px !default;
 $maxWidth: 900px !default;
 $sidePadding: 1.25rem !default;
 $contentPadding: 1rem !default;
+$verticalRhythm: 2rem !default;
 
 // Border options
 // It only missing the color so you should provide one.

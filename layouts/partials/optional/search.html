@@ -1,6 +1,6 @@
 <section class="site__search">
     <label class="site__form">
-        <p class="form__label">Search around the site</p> 
+        <p class="form__label">{{ with $.Site.Params.searchLabel }}{{ . }}{{ else }}{{ i18n "search_label" }}{{ end }}</p> 
         <input class="site__search-bar form__input" type="text">
     </label>
     <div class="site__search-bar-results"></div>

@@ -6,13 +6,13 @@
   {{- if .Paginator.HasPrev -}}
     <a class="pagination__button previous" rel="first" href="{{ .Paginator.First.URL }}">
       <span class="button icon">&lt;&lt;</span>
-      <span class="button text">First page</span>
+      <span class="button text">{{ i18n "page_first" }}</span>
     </a>
 
     {{- if not (eq .Paginator.First .Paginator.Prev) -}}  
     <a class="pagination__button previous" rel="next" href="{{ .Paginator.Prev.URL }}">
       <span class="button icon">&lt;</span>
-      <span class="button text">Newer posts</span>
+      <span class="button text">{{ i18n "page_next" }}</span>
     </a>
     {{- end -}}
   {{- end -}}
@@ -21,13 +21,13 @@
   {{- if .Paginator.HasNext -}}
     {{- if not (eq .Paginator.Last .Paginator.Next) -}}
     <a class="pagination__button next" rel="prev" href="{{ .Paginator.Next.URL }}">
-      <span class="button text">Older posts</span>
+      <span class="button text">{{ i18n "page_prev" }}</span>
       <span class="button icon">&gt;</span>
     </a>
     {{- end -}}
 
     <a class="pagination__button next" rel="last" href="{{ .Paginator.Last.URL }}">
-      <span class="button text">Last page</span>
+      <span class="button text">{{ i18n "page_last" }}</span>
       <span class="button icon">&gt;&gt;</span>
     </a>
   {{- end -}}

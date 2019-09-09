@@ -1,15 +1,33 @@
-= Terminal Plus-Minus
+= Arch Terminal
 :toc:
+
+:prog_version: 2.0.0
+
+// Zoom image
+:zoom_image_css_selector: .page__content img
+:zoom_image_default_bg: rgba(0, 0, 0, 0.4)
 
 A fork of the 
 original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme] 
 with some of its original feature set being removed to 
 be replaced for new ones.
 
-Aimed for technical writers, programmers, and tech enthusiasts. 
-This theme combines retro vibes with modern-looking styles. 
+Aimed for technical writers, programmers, tech enthusiasts, and 
+people with a do-it-yourself (DIY) spirit. 
+This theme provides a minimal and readable base theme while providing a lot 
+of ways to customize it. 
 When settling with this theme, you should be prepared for some 
-tweaking of the settings. 
+tweaking of the settings like how you customize your precious 
+text editors and OS configs. 
+
+On an unrelated note, 
+https://github.com/foo-dogsquared/dotfiles[here are my dotfiles]. 
+
+This manual is for Arch Terminal version {prog_version} and above.
+
+NOTE: Some of the features are only possible (such as applying and editing SCSS) 
+with Hugo extended version. 
+Please make sure that you have it installed. 
 
 
 
@@ -39,25 +57,58 @@ documentation.
 
 
 
-== Differences from the original
+== Feature highlights
 
-Being a fork of a theme, there are some differences.
-Here are the feature highlights (and removals) that 
+Here are the different feature highlights that 
 the theme offers:
 
-* A recreation of the original theme, almost built from scratch
-* Easy configuration and customization with https://sass-lang.com/[SCSS]
-* Aims on supporting engineering and technical content
-* Different approach of content organization 
-* Support RSS, Atom, and JSON feeds
-* Suitable for creating a quick single homepage template and blogging
-* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor] 
-* Includes https://www.mathjax.org/[MathJax] support
-* Retained syntax highlighting support from https://highlightjs.org/[highlight.js] 
-and https://prismjs.com/[PrismJS]
-* Reduced internationalization (i18n) support (for now, anyway)
-* Removed selection of available themes 
-* Removed https://nodejs.org/[Node] dependencies from the original theme 
+* A recreation of the original theme, built from scratch.
+* Focuses on being minimal while being customizable enough for you. 
+The choice of bloating your website is in your hands! :) 
+* Easy configuration and customization with https://sass-lang.com/[SCSS]. footnote:requires_hugo_extended[Requires Hugo extended version.]
+* Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor]. 
+* Different approach of content organization. 
+* Removed https://nodejs.org/[Node] dependencies from the original theme. 
+
+The theme aims to be minimal but provides a variety of customizability like 
+having a set of building blocks. 
+This also holds the philosophy of (almost) full customization to the user, 
+allowing them to express themselves which is why the theme provides lots of 
+optional stuff. 
+Even if you start with no options at all, it can be usable. 
+Though what's the fun if you can't tweak some settings, right? 
+
+Here's a general list of options that you can set and experiment with this theme. 
+(Note that all of the listed features needs to be manually activated. 
+It's supposed to be minimal, after all.)
+
+* Support RSS, Atom, and JSON feeds. 
+* Suitable for creating a quick single homepage portfolio and/or blogging. 
+* https://www.mathjax.org/[MathJax] support. 
+* Offline MathJax usage. footnote:[Exclusive for MathJax v3.0.0] 
+* Lazy syntax highlighting support with https://highlightjs.org/[highlight.js] 
+or https://prismjs.com/[PrismJS]. footnote:requires_hugo_extended[] 
+* Multilingual mode support. 
+* Theme switch toggle (also known as dark mode).
+* Customizable normal and alternate theme appearance. The theme will also set 
+the alternate theme even if you didn't customize it yourself! 
+(Though, may result in ugly colors.) footnote:requires_hugo_extended[]
+* Site breadcrumbs. 
+* LaTeX-like content counters. 
+* Customizable social links. 
+* Custom 404 messages. 
+* Detailed or compact list for your posts on the homepage. 
+* Custom content reader mode for easier readability for your readers. 
+* Twitter cards, OpenGraph schema, and JSON+LD schema. 
+* Image zoom feature for your content. footnote:requires_hugo_extended[]
+* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. footnote:requires_hugo_extended[]
+* Quick taxonomy search query list. 
+* Adding custom JS libraries for the whole site or for specific posts. 
+* Google Analytics integration. 
+* Disqus integration. 
+
+Interested to know more? 
+Please take a gander at the whole document to know your options. 
 
 
 
@@ -75,7 +126,7 @@ branch (`develop`) and you can view the pending changes there.
 
 == Installation
 
-Since this theme uses SASS/SCSS asset bundling, it requires 
+Since this theme uses Hugo Pipes and asset bundling, it requires 
 the extended version of Hugo. 
 In order to check whether or not you have the extended 
 version installed, just run `hugo version` and check for 
@@ -85,7 +136,11 @@ For future references and safety purposes, make sure that
 the version is at least `v0.57.2`.
 
 If you're using Asciidoctor, make sure that the version is at 
-least `v2.0.10`.
+least `v2.0.10`. 
+
+
+TIP: Harnessing the full feature set such as editing and applying 
+SCSS and JavaScript files requires Hugo extended version. 
 
 
 
@@ -126,11 +181,11 @@ git submodule add https://github.com/foo-dogsquared/hugo-theme-terminal-plus-min
 For future references, here is the list for the libraries 
 included with this theme along with their version:
 
-* https://www.mathjax.org/[MathJax] v2.7.6 
-* https://highlightjs.org/[highlight.js] v9.15.10 
-* https://prismjs.com/[PrismJS] v1.17.1 
-* https://fusejs.io/[Fuse.js] v3.4.5 
-
+* https://www.mathjax.org/[MathJax] v2.7.6 and v3.0.0 under Apache License Version 2.0 (all versions) 
+* https://highlightjs.org/[highlight.js] v9.15.10 under MIT License (with additional terms) 
+* https://prismjs.com/[PrismJS] v1.17.1 under MIT License 
+* https://fusejs.io/[Fuse.js] v3.4.5 under Apache License Version 2.0 
+* https://github.com/francoischalifour/medium-zoom[medium-zoom] v1.0.4 under MIT License 
 
 
 
@@ -143,15 +198,15 @@ https://gohugo.io/getting-started/configuration/[Default configuration settings]
 also apply here. 
 
 NOTE: From this point, this assumes that you want to create the 
-config as a TOML file.
+config as a TOML file. 
 Please change the format according to your chosen data format for 
-your configuration file.
+your configuration file. 
 
 [source,toml]
 ----
 baseURL = "https://example.com/"
 languageCode = "en-us"
-title = "Terminal Plus-Minus"
+title = "Arch Terminal"
 description = "Generic description!"
 summaryLength = 15
 paginate = 5
@@ -193,14 +248,14 @@ copyright = "Unless explicitly stated, all content released here are licensed un
     tagline = "Making near destructive blogs all around the world."
         
     # Show posts on home. :)
-    showPostsOnHome = true
+    hidePostsOnHome = true
     
     # Indicates if the site sections should be listed instead.
-    # Requires `showPostsOnHome` to be enabled.
+    # Requires `hidePostsOnHome` to be disabled.
     # listSiteSectionsOnHome = true 
 
     # Enables syntax highlighting. ;p
-    enableSyntaxHighlighting = true
+    enableLazySyntaxHighlighting = true
 
     # Set the syntax highlighter to be used. 
     # Only valid options are "highlighterjs" or "prismjs".
@@ -208,7 +263,7 @@ copyright = "Unless explicitly stated, all content released here are licensed un
     # syntaxHighlighter = "prismjs"
     
     # Indicates to show the icon whether the link leads to a page or a section. 
-    # The effect is visible if `showPostsOnHome` is at least enabled. 
+    # The effect is visible if `hidePostsOnHome` is at least disabled. 
     # showPageTypeIcon = true
     
     # Shows breadcrumbs in the post.
@@ -220,13 +275,17 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 
 
 
-=== Changing appearance
+=== Changing appearance 
+
+NOTE: Editing and applying SCSS files is only possible with Hugo extended version. 
+If you are using the basic version, override the styles with a CSS stylesheet at 
+`static/scss/main.min.css` (or the equivalent `static` location at the assets folder). 
 
 If you want to change common styles like the background color, 
 text color, or the main color, you can add a `config.scss` file 
 in `assets/scss` in your Hugo project directory.
 You can view the link:assets/scss/default.scss[default SCSS config file] 
-for a reference to what variables should be filled.
+for a reference to what variables should be filled. 
 
 If you want to override the styles, you can create a file named 
 `extend.scss` in `assets/scss` of your Hugo project directory. 
@@ -293,11 +352,51 @@ can be put in the file.
 | Yes 
 | 
 
+| `params.enableMathjax`
+| boolean
+| Enables MathJax in the page. 
+| Yes (but not for me) 
+| For performance reasons, it'll be used through a CDN. 
+Also uses version 3. 
+If you want to use the previous major version (2.7.6), 
+you can set `setMathjaxToV2` to `true`.
+
+| `params.enableThemeToggle` 
+| boolean 
+| Enables theme toggling. 
+Puts an additional theme toggle button at the header logo. 
+| Yes (but no for others) 
+| 
+
 | `params.keywords`
 | array[string]
 | A list of keywords related to your site. 
 | Yes
-| Quite important if you consider search engine optimization (SEO).
+| Quite important if you consider search engine optimization (SEO). 
+
+| `params.notFoundHeader`
+| string 
+| The message of the 404 header. 
+| Yes 
+| 
+
+| `params.notFoundLinkMessage`
+| string 
+| The message of the 404 link message. 
+| Yes 
+| 
+
+| `params.notFoundMessage`
+| string
+| The message of the 404 text. 
+| Yes 
+| 
+
+| `params.setMathjaxToV2`
+| boolean
+| Set MathJax version to v2.  
+| Yes 
+| 
 
 | `params.subtitle`
 | string
@@ -314,12 +413,12 @@ whatever.
 | Yes
 | 
 
-| `params.enableThemeToggle` 
+| `params.useLocalMathjax`
 | boolean 
-| Enables theme toggling. 
-Puts an additional theme toggle button at the header logo. 
-| Yes (but no for others) 
-| 
+| Enables offline usage of MathJax. 
+This only works for MathJax v3.
+| Yes 
+| For convenience and to avoid using web fonts, it uses SVG as the renderer. 
 
 |===
 
@@ -336,7 +435,6 @@ the specified fields.
 When there's at least one project, a projects section will 
 be added into your homepage and the data added in the 
 appropriate folder is added under it.
-
 
 Anyhow, here's the following keys/fields that the theme 
 look for:
@@ -521,15 +619,59 @@ in the posts (single page templates) that'll appear at the top of the post.
 | Yes
 | 
 
-| `params.enableSiteSearch`
+| `params.enableContentImageZoom` footnote:requires_hugo_extended[]
+| boolean 
+| Adds a Medium-like image zoom functionality in your content with the 
+https://github.com/francoischalifour/medium-zoom/[medium-zoom] library. 
+| Yes 
+| You can set the background color with `params.setContentImageZoomBackground`. 
+
+| `params.enableContentPagination` 
+| boolean 
+| Enables the content pagination section in your single page templates 
+that is found at the bottom of the content section. 
+| Yes 
+| 
+
+| `params.enableContentReaderMode`
+| boolean 
+| Previews single page templates in the theme's custom reader mode by 
+showing less post metadata and cutting off the site header.  
+| Yes 
+| Doesn't affect top-level pages. 
+
+| `params.enableCompactListMode`
+| boolean 
+| Sets the homepage content list in compact mode, allowing more posts to 
+be listed at a time (with less information, if that's okay with you). 
+| Yes 
+| 
+
+| `params.enableJsonLdSchema` 
+| boolean 
+| Creates a https://www.w3.org/TR/json-ld/[JSON+LD] schema for additional SEO 
+capabilities. 
+| Yes 
+| 
+
+| `params.enableSiteSearch` footnote:requires_hugo_extended[]
 | boolean
 | Enables navigation through searching. 
 The search widget is located at the bottom of the page. 
 | Yes
-| This feature is experimental. 
-Don't expect a lot of stability with this. 
-If your site is large enough, I recommend to integrate with stronger tools 
-such as Algolia. 
+| To enable built-in site-wide search widget, it requires a 
+two-step setup. 
+This is only half of the step. 
+You can find out more on the related section. 
+
+| `params.enableLazySyntaxHighlighting` footnote:requires_hugo_extended[]
+| boolean
+| Enables lazy syntax highlighting without relying to the 
+built-in highlight shortcode.
+This uses https://prismjs.com/[PrismJS] for the highlight feature.
+| Yes
+| This also enables native syntax highlighting for Asciidoctor! 
+Hallejulah! 
 
 | `params.enableMathjax`
 | boolean
@@ -537,14 +679,24 @@ such as Algolia.
 | Yes (but not for me) 
 | For performance reasons, it'll be used through a CDN. 
 
-| `params.enableSyntaxHighlighting`
-| boolean
-| Enables "native" syntax highlighting without relying to the 
-built-in highlight shortcode.
-This uses https://prismjs.com/[PrismJS] for the highlight feature.
-| Yes
-| This also enables native syntax highlighting for Asciidoctor! 
-Hallejulah! 
+| `params.enableOpenGraphSchema` 
+| boolean 
+| Adds OpenGraph meta tags to the site for improved SEO. 
+| Yes 
+| 
+
+| `params.enableThemeToggle` 
+| boolean 
+| Enables theme toggling. 
+Puts an additional theme toggle button at the header logo. 
+| Yes (but no for others) 
+| 
+
+| `params.enableTwitterCard` 
+| boolean 
+| Adds the appropriate meta tags to be shareable for Twitter. 
+| Yes 
+| 
 
 | `params.feedLimit` 
 | boolean 
@@ -555,14 +707,53 @@ Values less than or equal to 0 is also considered to the default value.
 | Yes 
 | 
 
+| `params.hidePostsOnHome`
+| boolean
+| Indicates if the homepage should hide the pages 
+from the content folder.
+| Yes
+| 
+
 | `params.listSiteSectionsOnHome`
 | boolean
 | Indicates if the homepage should list the 
 site sections (top-level directories of the site)
 instead of the pages 
 | Yes
-| You need to have `showPostsOnHome` set to `true` to 
-make have this effect visible.
+| You need to have `hidePostsOnHome` disabled to 
+make have this effect visible. 
+
+| `params.readMoreLabel` 
+| string 
+| Replaces the "Read more" text at the very end of the summary of each post.
+| Absolutely 
+| 
+
+| `params.readOtherPostsLabel`
+| string 
+| Replaces the label of the content pagination header. 
+| Yuparoo
+| 
+
+| `params.searchLabel`
+| string 
+| Replaces the search label in the search widget (if activated).
+| Yessir
+| 
+
+| `params.setContentImageZoomBackground` footnote:requires_hugo_extended[]
+| string 
+| Sets the background of 
+https://github.com/francoischalifour/medium-zoom/[medium-zoom] image overlay. 
+Accepts any valid CSS color string including `rgb(a)`, `hsl(a)`, or hex codes. 
+| Yes 
+| 
+
+| `params.setMathjaxToV2`
+| boolean
+| Set the MathJax version to v2.  
+| Yes 
+| 
 
 | `params.showPageTypeIcon`
 | boolean
@@ -571,14 +762,7 @@ the content folder) in the home page.
 | Yes, completely
 | For the theme, a page is a "folder" if its base filename is `_index`. 
 
-| `params.showPostsOnHome`
-| boolean
-| Indicates if the homepage should show the pages 
-from the content folder.
-| Yes
-| 
-
-| `params.syntaxHighlighter` 
+| `params.syntaxHighlighter` footnote:requires_hugo_extended[]
 | string 
 | Sets the syntax highlighter to be used. 
 Valid options include `highlightjs` and `prismjs`. 
@@ -589,29 +773,21 @@ syntax highlighter.
 differences in results. 
 See the "Issues in Asciidoctor and other stuff" section. 
 
-| `params.enableBreadcrumbs`
-| boolean
-| Enables 
-https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/[site breadcrumbs] 
-in the posts (single page templates) that'll appear at the top of the post.
-| Yes
-| 
+| `params.useContentCounters`
+| boolean 
+| Puts a counter similar to 
+https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] for your content. 
+| Oh yes 
+| Only has a depth of 5 counters (`<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`). 
+Anything after that means you need to rethink your document structure (unless you're 
+writing technical standards/specifications). 
 
-| `params.enableSiteSearch`
-| boolean
-| Enables navigation through searching. 
-The search widget is located at the bottom of the page. 
-| Yes
-| This feature is experimental. 
-Don't expect a lot of stability with this. 
-If your site is large enough, I recommend to integrate with stronger tools 
-such as Algolia.
-
-| `params.readMore` 
-| string 
-| Replaces the "Read more" text at the very end of the summary of each post.
-| Absolutely 
-| 
+| `params.useLocalMathjax` footnote:requires_hugo_extended[]
+| boolean 
+| Enables offline usage of MathJax. 
+This only works for MathJax v3.
+| Yes 
+| For convenience and to avoid using web fonts, it uses SVG as the renderer. 
 
 |===
 
@@ -623,24 +799,18 @@ is simple.
 The theme considers all of the pages and sections except for 
 the top-level pages. 
 
-By default, the theme does not list posts in the homepage. 
-In order to do so, set the `params.showPostsOnHome` to `true` on 
-your site config file. 
-All of the posts (except for the top-level pages) are now 
-listed in the homepage. 
+By default, the theme list posts in the homepage. 
+If you want to disable it, have the `params.hidePostsOnHome` set to `true`.  
 
 NOTE: Folders with an `_index` file is considered a 
 section so it'll be listed. Make sure any pages that shouldn't 
 normally appear in the post list be a single page. 
 
-.`showPostsOnHome` set as `true`
-image::docs/show-posts-on-home-enabled.png[width=100%]
-
 If you want to list sections instead of the page, you should 
 enable the `params.listSiteSectionsOnHome` to `true` on the site 
 config file. 
-Take note that the `params.showPostsOnHome` also needs to be 
-enabled for this setting to work.
+Take note that the `params.hidePostsOnHome` also needs to be 
+disabled for this setting to work.
 
 .`listSiteSectionsOnHome` set as `true` 
 image::docs/list-site-sections-on-home-enabled.png[width=100%] 
@@ -712,7 +882,18 @@ Also used for the output format feeds (RSS, Atom, JSON feed).
 | Accepts URL or a relative path to the image.
 | `http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
 
-|===
+|=== 
+
+
+
+=== Content pagination 
+
+The theme offers an optional pagination section on single page templates where 
+the previous and next entries are shown. 
+
+To enable this feature, set `params.enableContentPagination` to `true`. 
+
+image::docs/enable-content-pagination.png[Content pagination has been enabled, width=100%]
 
 
 
@@ -753,13 +934,27 @@ image::docs/archive-sample-page.png[width:100%]
 
 
 
+=== Content counters 
 
-=== Other tidbits
+You can enable content counters that behave similarly to 
+https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] by setting 
+`params.useContentCounters` to `true`. 
 
-There are a couple of options for miscellaneous stuff and info that you 
-might want to find out.
+.Content counters 
+image::docs/use-content-counters-enabled.png[width:100%]
 
-==== Site breadcrumbs in post
+This is mostly helpful to quickly establish hierarchy 
+and not to make it confusing for your readers. 
+
+The counters are only enough to support the HTML tags `<h2>`--`<h6>` 
+(`<h1>` is assumed to be the main document title). 
+Any more than that (if that's even possible) is not supported 
+anymore and can only go through some more tweaking. 
+
+
+
+=== Site breadcrumbs in post
+
 The most useful one is the breadcrumbs feature that'll appear in 
 the top of your posts.
 
@@ -768,6 +963,108 @@ image::docs/post-breadcrumbs-enabled.png[]
 
 In order to be able to use it, set the `params.enableBreadcrumbs` to 
 `true` in your site config file. 
+
+
+
+=== Content reader mode 
+
+You can set your content (single page templates) to the theme's custom 
+reader mode to declutter your posts and to make reading experience more 
+soothing. 
+
+Enable it by setting `params.enableContentReaderMode` to `true`. 
+
+Here's the default look of the content page of the theme:
+
+image::docs/content-reader-mode-disabled.png[Content reader mode disabled, width=100%]
+
+And here's the content reader mode in action:
+
+image::docs/content-reader-mode-enabled.png[Content reader mode enabled, width=100%]
+
+NOTE: This doesn't apply to top-level pages. 
+
+
+
+=== Content image zoom  
+
+You can add an image zoom feature similar to the image zoom function 
+in Medium articles. footnote:requires_hugo_extended[]
+
+Of course, it's disabled by default and should be manually enabled with 
+`params.enableContentImageZoom`. 
+
+It relies on https://github.com/francoischalifour/medium-zoom/[medium-zoom] for the 
+functionality and its script can be found on `assets/js/lib/medium-zoom.js`. 
+The script is modified to only add the zoom functionality to the valid elements in 
+the CSS selector string `{zoom_image_css_selector}` which can only be found on 
+single page templates. 
+
+NOTE: The version used in the theme is at v1.0.4. 
+
+The theme offers one way of customizing the background color with 
+`params.setContentImageZoomBackground`. 
+It accepts a valid CSS color string such as a hexadecimal code, 
+RGB (and RGBA), HSL (and HSLA), and the color name. 
+The default background of the overlay is `{zoom_image_default_bg}`. 
+
+
+
+=== Quick taxonomy search list
+
+This featured is inspired from 
+https://www.ii.com/[this site's taxonomy pages]. 
+It provides a quick list of search queries of different sites when 
+in a https://gohugo.io/content-management/taxonomies/[taxonomy page] 
+located at the bottom of the page. 
+
+It can be customized by providing a data file named `query` which 
+holds a list of objects/dictionaries with the following keys:
+
+[cols="5*",options="header"]
+|===
+| Key
+| Data type
+| Description 
+| Optional
+| Additional notes
+
+| `id`
+| string
+| The name of the site. 
+| 
+| The list will be sorted alphabetically based from this key. 
+
+| `url`
+| string
+| The URL of the site that leads to a search results page. 
+| 
+| Requires the pattern `${{\\__DATA__}}` somewhere in the string 
+to denote the taxonomy term. 
+
+|===
+
+
+
+=== Other tidbits
+
+There are a couple of options for miscellaneous stuff and info that you 
+might want to find out. 
+
+==== "Back to top" button 
+
+You can simply put a simple back to top button with `params.enableBackToTopLink`. 
+It's located at the footer just before your contact links. 
+
+==== Compact list mode 
+
+Simply makes the lists in sections (list templates and taxonomy templates) to have a 
+more compact look, allowing for more posts to be seen on the screen. 
+It also removes the unnecessary information and just leaves with the title and 
+the publication date of the content. 
+
+To have this feature on your site, switch the `params.enableCompactListMode` to 
+`true`. 
 
 ==== Icon on post list
 
@@ -788,7 +1085,7 @@ In order to enable it, set the `params.showPageTypeIcon` to `true`.
 
 This might be the most useless feature I've ever done. 
 Anyways, this'll make certain header types to have some sort 
-of style put into them.
+of style put into them. 
 
 .Stylized content headers
 image::docs/content-is-styled-enabled.png[width=100%]
@@ -797,6 +1094,142 @@ In order to enable it, set `contentIsStyled`
 
 .`contentIsStyled` set as `false`
 image::docs/content-is-styled-disabled.png[width=100%]
+
+
+
+
+== Multilingual mode support 
+
+This theme supports 
+https://gohugo.io/content-management/multilingual/[multilingual mode] 
+for your site. 
+Please see the linked documentation and 
+https://regisphilibert.com/blog/2018/08/hugo-multilingual-part-1-managing-content-translation/[this featured blog post] 
+to get started. 
+
+In order to get started, add the language(s) that you'll be hosting 
+your content with the `languages` object in your site configuration. 
+For consistency, the theme requires a language code based from 
+https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[IANA Language Subtag Registry] 
+as defined from the 
+https://www.w3.org/International/questions/qa-choosing-language-tags[W3 documentation]. 
+
+The language selector can be found at the very bottom of the site. 
+Any content with translations are also introduced along with the content metadata and 
+the title. 
+
+The theme should be able to support changing the tiny details such as the 
+title and the menu as long as you provided the appropriate data. 
+
+You can find the translations files at link:./i18n[`i18n`] folder with the 
+available languages. 
+If the language you find is not available, you can help translating 
+it and add it into the supported language list. 
+
+NOTE: Personally, I recommend to make your site config into a 
+https://gohugo.io/getting-started/configuration/#configuration-directory[`config` folder]. 
+It's going to make site config management more organized. 
+
+
+
+
+== Adding your own JS libraries 
+
+=== Adding it sitewide 
+
+TIP: If you want finer control, I recommend to modify the script partial of the theme 
+instead (at `theme/arch-terminal/layouts/partials/scripts.html`). 
+By doing it this way, you can add some additional scripts such as configuration 
+of your library or rearranging it. 
+However, s
+
+This theme supports adding your own libraries to your site quickly by 
+utilizing a data file named `libraries`. 
+
+By providing this feature, you can quickly add some features such as supporting 
+engineering-oriented content with https://mermaidjs.github.io/[Mermaid], 
+https://www.chartjs.org/[Chart.js], and similar libraries. 
+Or you could replace the syntax highlighters here. 
+
+Similar to adding your projects and contact links, the data file should hold a list 
+of objects with certain keys/fields. 
+
+[cols="5*",options="header"]
+|===
+| Key 
+| Data type
+| Description
+| Optional
+| Additional notes
+
+| `url` 
+| string 
+| The URL of the JS file to be loaded. 
+| 
+| 
+
+| `weight` 
+| number 
+| The order which the script will be loaded. 
+Similar to the `weight` field from Hugo menu object, 
+the less weight, the higher the precedence. 
+Make sure the more important scripts have the least weight value. 
+| 
+| 
+
+| `sync` 
+| boolean 
+| Makes the script a part of the DOM rendering. 
+Removing the `async` attribute on the process. 
+| Yes 
+| By default, custom scripts have the attribute of `async` on the 
+`<script>` element. 
+
+| `defer` 
+| boolean 
+| Adds the `defer` attribute to the corresponding `<script>` element. 
+| Yes
+| If the value is `true`, the script will be deferred no matter what. 
+
+|===
+
+
+
+=== Adding it for a specific post 
+
+TIP: If you plan on future-proofing your content, I recommend to 
+embed it on the document itself than relying on the frontmatter since this is 
+a theme-specific feature and may present some problems if you migrate it somewhere else. 
+For Markdown, you can simply write raw HTML with it. 
+On Asciidoctor, you can simply embed it with a 
+https://asciidoctor.org/docs/user-manual/#passthroughs[passthrough block]. 
+You also gain finer control on embedding your scripts this way. 
+
+You can also add a JS file to a specific document by adding a 
+`libs` object with `js` nested object on the frontmatter. 
+
+Let's say you're writing an article on https://p5js.org/[p5.js]. 
+Rather than adding the library site-wide (which is very inefficient), you can 
+add it for that specific page. 
+Here's how you can add it to your frontmatter.
+
+[source,asciidoc]
+----
+---
+title: "Testing out p5.js"
+date: 2019-09-07T02:55:46+08:00
+
+libs:
+    js:
+        - "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"
+---
+----
+
+Libraries and scripts imported this way are loaded first before the site-wide scripts. 
+Also, all of them are loaded asynchronously (with the `async` attribute) and you 
+have no way of controlling them. 
+If you're looking for finer control, I recommend to embed them into the document 
+itself instead. 
 
 
 
@@ -820,18 +1253,33 @@ in order for it to work.
 Like most of the highlighted features here, it's disabled by default. 
 You can enable by setting `params.enableMathjax` to `true`. 
 
-NOTE: For performance reasons, it'll rely on a CDN instead of saving it 
-locally. 
+For performance reasons, it'll rely on a CDN instead of saving it 
+locally. If you want to use it based on your own web server, you 
+can set `params.useLocalMathjax` footnote:requires_hugo_extended[] to `true`. No need to worry about the 
+fonts since the local MathJax script uses SVG instead for the rendering. 
 
-By default, it uses v2.7.6 which is the latest production 
-version as of 2019-09-05. 
-If you're feeling adventurous, you can use MathJax v3 which is under 
-beta (as of 2019-09-05) with this theme by setting `params.setMathjaxToV3` to `true`. 
+NOTE: `params.useLocalMathjax` is exclusive for v3. 
+Also, the generated script will be 2.5MiB larger. 
+Choose wisely for the sake of your readers. 
+
+TIP: For a quick decision, if you don't have a way of configuring your 
+server to cache or compress it (like on GitHub Pages), use the online 
+version since it also caches and can be used by other websites. 
+Thus, performance can be improved and don't have a large payload for your visitors. 
+
+By default, it uses v3.0.0 which is the latest production 
+version as of 2019-09-06. 
+You can still use the previous major version from v2.7.6 with this theme 
+by setting `params.setMathjaxToV2` to `true`. 
 
 Take note that it uses the default configuration so there 
 might be some need to configure it. 
 In case that you do need configuration, you can create a file in 
-`layouts/partials/config/mathjax.html` and do your stuff there.
+`layouts/partials/config/mathjax.html` and do your stuff there. 
+
+NOTE: Read the 
+https://docs.mathjax.org/en/latest/[official MathJax documentation for more information] 
+and to understand more how this theme integrates MathJax. 
 
 Assuming you didn't change the configuration or anything, here are 
 the breakdown for writing LaTeX in the web according to the 
@@ -852,7 +1300,8 @@ You may have to escape it with a backslash (\).
 For inline math, you could make dollar signs-delimited content blocks like
 the following example and it'll appear like $a_{1}^{2} + a_{2}^{2} = b_{1}^{2} + b_{1}^{2}$.
 
-For display/block math mode, make the content block delimited with two dollar signs.
+For display/block math mode, make the content block delimited with two dollar signs 
+or a pair of brackets.
 
 \[\LaTeX\]
 ----
@@ -888,9 +1337,12 @@ For display/block math mode, make a stem block.
 
 
 
-== Syntax highlighting (without the `highlight` shortcode)
+== Lazy syntax highlighting 
 
-Syntax highlighting is supported through https://prismjs.com/[PrismJS] 
+NOTE: This requires Hugo extended version in order to work. 
+
+Lazt syntax highlighting (enabling it without the `highlight` shortcode) 
+is supported through https://prismjs.com/[PrismJS] 
 and https://highlightjs.org/[highlight.js]. 
 Both of the syntax highlighters follows the
 https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] 
@@ -899,9 +1351,9 @@ in order to color the syntax.
 Fortunately, both of the default Markdown parsers and Asciidoctor 
 outputs semantic HTML for code listings so both of them are supported. 
 
-By default, the native syntax highlighting is disabled. 
-To enable native syntax highlighting, enable the `enableSyntaxHighlighting` under 
-`params` in your site config file. 
+By default, the lazy syntax highlighting is disabled. 
+To enable it, set the `enableLazySyntaxHighlighting` under 
+`params` to `true` in your site config file. 
 This uses highlight.js by default. 
 In order to use PrismJS, set `params.syntaxHighlighter` with the value 
 `"prismjs"`. 
@@ -912,14 +1364,36 @@ Assuming you're using a TOML as your config file.
 ----
 [params]
     # ...
-    enableSyntaxHighlighting = true
+    enableLazySyntaxHighlighting = true
 
     # if you want to set PrismJS as the syntax highlighter
     # syntaxHighlighter = "prismjs"
 ----
 
-If you're curious to the files being used, the script for 
+NOTE: If you're curious to the files being used, the script for 
 the syntax highlighters is at `assets/js/lib` of the theme folder. 
+
+Now that lazy syntax highlighting is enabled, you can simply use the 
+normal code listings with Markdown or Asciidoctor (other formats are yet to be 
+tested) like so:
+
+.Markdown source code listing
+[source,markdown]
+----
+```js
+console.log("Hello world");
+```
+----
+
+.Asciidoctor source code listing
+[source,asciidoc]
+....
+[source,js]
+----
+console.log("Hello world");
+----
+....
+
 
 
 === Changing themes 
@@ -1031,7 +1505,8 @@ In order to prevent diving into complexity, there is a set of limitations you
 have to keep in mind.
 
 * No pagination. 
-Only the first 10 (or given `params.feedLimit`) shall be shown at any time. 
+Only the first 10 (or given `params.feedLimit`) shall be shown at any time to 
+prevent excessive bandwidth usage. 
 * It doesn't support multiple site authors. 
 It always assumed that the site only has one author. 
 * The same deal for posts. 
@@ -1041,7 +1516,9 @@ it'll only support one author, not an array of them.
 
 
 
-== Site search widget
+== Site search widget 
+
+NOTE: This requires Hugo extended version in order to work. 
 
 This theme offers a site-wide search navigation widget with 
 https://fusejs.io/[Fuse.js] as the search engine. 
@@ -1125,6 +1602,18 @@ bring out some problems regarding to rendering the highlighted syntax with
 https://prismjs.com/[PrismJS], it is advised to use 
 https://highlightjs.org/[highlight.js] instead.
 
+* Using highlight.js as the syntax highlighter doesn't style well. 
+I tried my best to style it but manual styling will be required. 
+If you're sure with using it as the syntax highlighter, 
+just add the following CSS syntax:
+
+[source,css]
+----
+pre.highlight {
+    padding: 0;
+}
+----
+
 
 
 
@@ -1152,6 +1641,12 @@ theme = "terminal-plus-minus"
 If you spot some bugs or want to suggest a feature, feel 
 free to file an issue in the issue tracker. 
 
+Any feature requests are heavily considered since starting at v2.0.0, a 
+feature freeze is observed for the sake of improving user experience 
+(including the documentations), bug fixes, and content readability for the theme 
+as much as possible. 
+It also avoids the problem of over-engineering and gold plating since the 
+theme already has a lot of options/parameters to offer. 
 
 
 === Setting up for development
@@ -1201,10 +1696,6 @@ Any help with this task list by pull requests are very
 appreciated. 
 
 * Algolia integration
-* Focus support for engineering and technical content 
-* Internationalization (i18n) support
-* Different https://gohugo.io/content-management/archetypes/[archetypes] 
-and content organization
 * Easy GitHub projects integration (for quickly creating your portfolio site)
 
 
@@ -1212,6 +1703,9 @@ and content organization
 
 == Inspirations
 
+* https://bestmotherfucking.website/[Best Motherfucking Website] :) 
+* https://practicaltypography.com/[Practical Typography] for a reference in 
+typography 
 * https://github.com/panr/hugo-theme-terminal[Terminal theme], of course
 * https://github.com/achary/engimo[Engimo theme] for the focus in engineering content 
 * https://sourcethemes.com/academic[Hugo Academic theme] for the focus in academic content 

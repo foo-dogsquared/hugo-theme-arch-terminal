@@ -3,3 +3,22 @@
 
 // To know what variables you should modify, take a 
 // look at `default.scss`.
+
+// Here's a sample custom config with pretty colors and everything 
+// (at least for me) and try with the theme toggle switch. 
+// If there's no alternative palette given, it will set the 
+// alternate theme automatically for you.
+
+// For those who cares about using font stacks, I've provided a quick list for you 
+// It's a mixed combination of free and open source fonts and system fonts, 
+// feel free to modify it as you wish
+// Monospace: "Fira Code","Source Code Pro","IBM Plex","Monaco","Consolas","Ubuntu Mono","Bitstream Vera Sans Mono",monospace
+// Sans: "Fira Sans","Copper Hewitt","IBM Plex",sans
+// Serif: "Source Serif Pro","Charter","IBM Plex","Georgia",serif
+
+// Here's a quick sample config for you. Try it out and enable theme toggling for a bit. 
+// $background: #080a0e;
+// $foreground: #dbdbdb;
+// $accent: #d59783;
+// $fontFamily: "Fira Code","Monaco","Consolas","Ubuntu Mono","Bitstream Vera Sans Mono",monospace;
+// $fontSize: 1.2rem;

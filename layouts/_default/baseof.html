@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ $.Site.Language }}" >
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{ block "title" . }}
-    <title>{{ if .IsHome }}{{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ else }}{{ .Title }} :: {{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ end }}</title>
-  {{ end }}
-  {{ partialCached "head.html" . }}
+  {{ partialCached "head.html" . -}}
 </head>
 <body class="site">
+  {{- $isNotTopLevelPage := and (eq .Kind "page") (ne .File.Dir "/") -}}
+  {{- if not (and $isNotTopLevelPage ($.Site.Params.enableContentReaderMode)) -}}
   {{ partialCached "header.html" . }}
+  {{- end }}
   <main class="site__content">
-    {{ block "main" . }}
-    {{ end }}
+    {{ block "main" . -}}
+    {{- end }}
   </main>
   {{- if .Site.Params.enableSiteSearch -}}
     {{ partialCached "optional/search" . }}
-  {{- end -}}
+  {{- end }}
   
-  {{ partialCached "footer.html" . }}
+  {{ partialCached "footer.html" . -}}
 
 {{ partialCached "scripts.html" . }}
 </body>
