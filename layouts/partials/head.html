@@ -70,6 +70,7 @@
 {{- end -}}
 
 {{ $style := resources.Get "scss/main.scss" | toCSS | minify }}
+{{ if (ne hugo.Environment "development")}}{{ $style = $style | resources.Fingerprint "sha512" }}{{ end }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 <script>
 // Checking for the 
