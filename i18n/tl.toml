@@ -30,6 +30,10 @@ other = "Balik sa taas"
 
 [site_pages_header]
 other = "Mga nilalaman"
+
+[site_sections_header]
+other = "Mga pangkat"
+
 # Author 
 [projects_header]
 other = "Mga proyekto"

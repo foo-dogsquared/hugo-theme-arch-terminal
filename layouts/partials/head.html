@@ -1,6 +1,12 @@
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ block "title" . -}}
+  <title>{{ if .IsHome }}{{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ else }}{{ .Title }} :: {{ $.Site.Title }}{{ with $.Site.Params.Subtitle }} — {{ . }}{{ end }}{{ end }}</title>
+{{ end }}
 <meta name="author" content="{{ .Site.Author.name }}">
 <meta name="application-name" content="{{ .Site.Title }}">
-<meta name="description" content="{{ .Site.Params.Description }}">
+<meta name="description" content="{{ if .IsHome }}{{ $.Site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
 <meta name="robots" content="noodp"/>
 {{ hugo.Generator }}
 <meta name="referrer" content="no-referrer" />
@@ -9,35 +15,41 @@
 {{ $keywords := delimit . ", " -}}
 <meta name="keywords" content="{{ $keywords }}">
 {{- end }}
-{{- with $.Site.Params.contact -}}
-{{- range . -}}
-<link rel="noopener me" href="{{ .url }}" />
+{{- with $.Site.Data.contacts }}
+{{ range . -}}
+  <link rel="noopener me" href="{{ .url }}" />
+{{ end }}
 {{- end }}
-{{- end }}
-<link href="{{ .Permalink }}" rel="canonical">
+<link rel="canonical" href="{{ .Permalink }}" />
 {{ range .Translations -}}
 <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Lang }}" />
-{{- end }}
+{{ end }}
 
+<link rel="icon" href="{{ "logo.png" | absURL }}" />
+
+{{ if $.Site.Params.enableTwitterCard -}}
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }}{{ else }}This ain't home{{ end }}" />
-<meta name="twitter:description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
+<meta name="twitter:description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary }}{{ end }}" />
 <meta name="twitter:site" content="{{ $.Site.BaseURL }}" />
-<meta name="twitter:creator" content="{{ .Params.Author }}" />
-<meta name="twitter:image" content="{{ with .Params.Cover }}{{ . | absURL }}{{ end }}">
+<meta name="twitter:creator" content="{{ with .Params.Author }}{{ . }}{{ else }}{{ $.Site.Author.name }}{{ end }}" />
+<meta name="twitter:image" content="{{ if .IsHome }}{{ "logo.png" | absURL }}{{ else }}{{ with .Params.Cover }}{{ . | absURL }}{{ else }}{{ "logo.png" | absURL }}{{ end }}{{ end }}">
+{{- end -}}
 
+{{- if $.Site.Params.enableOpenGraphSchema -}}
 <!-- Metadata -->
-<meta property="og:type" content="{{ if (eq .File.Dir "/") }}website{{ else }}article{{ end }}" />
+<meta property="og:type" content="{{ if (and .File (eq .File.Dir "/")) }}website{{ else }}article{{ end }}" />
 <meta property="og:locale" content="{{ .Site.Language.Lang }}" />
 <meta property="og:name" content="{{ .Site.Author.name }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:url" content="{{ .Site.BaseURL }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-<meta property="og:description" content="{{ if (and (eq .Kind "home") .IsHome) }}{{ .Site.Title }}{{ with .Site.Params.subtitle }} - {{ . }}{{ end }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
+<meta property="og:description" content="{{ if (and (eq .Kind "home") .IsHome) }}{{ .Site.Title }}{{ with .Site.Params.subtitle }} - {{ . }}{{ end }}{{ else }}{{ .Summary | safeHTML }}{{ end }}" />
+{{- end -}}
 
+{{- if $.Site.Params.enableJsonLdSchema -}}
 <!-- Schema.org -->
-{{ if $.Site.Params.enableJsonld -}}
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -69,8 +81,8 @@
 </script>
 {{- end -}}
 
-{{ $style := resources.Get "scss/main.scss" | toCSS | minify }}
-{{ if (ne hugo.Environment "development")}}{{ $style = $style | resources.Fingerprint "sha512" }}{{ end }}
+{{- $style := resources.Get "scss/main.scss" | toCSS | minify -}}
+{{- if (ne hugo.Environment "development")}}{{ $style = $style | resources.Fingerprint "sha512" }}{{ end -}}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 <script>
 // Checking for the 

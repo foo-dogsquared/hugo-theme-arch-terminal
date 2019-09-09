@@ -4,7 +4,7 @@
 
 <section class="site__pages">
     {{ if .IsHome -}}
-        <h1>{{ i18n "site_pages_header" }}</h1>
+        <h1>{{ if $.Site.Params.listSiteSectionsOnHome }}{{ i18n "site_sections_header" }}{{ else }}{{ i18n "site_pages_header" }}{{ end }}</h1>
     {{- end -}}
 
     <ul class="pages__list">
@@ -48,14 +48,23 @@
         </span>
         {{- with .Params.Author -}}<span class="page__author">::
             {{ . }}</span>{{- end -}}
+            
+            {{- if .Params.tags -}}
+            <div class="page__tags">
+                {{ range .Params.tags -}}
+                <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">#{{- . -}}</a>
+                {{- end }}
+            </div>
+            {{- end -}}
 
-        {{- if .Params.tags -}}
-        <div class="page__tags">
-        {{ range .Params.tags -}}
-        <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">#{{- . -}}</a>
-        {{- end }}
-        </div>
-        {{- end -}}
+        {{ if .IsTranslated }}
+        <p class="page__translations">
+            {{ i18n "content_translations" }}: 
+            {{ range .Translations }}
+            <a href="{{ .Permalink }}">{{ .Lang }}</a>
+            {{ end }}
+        </p>
+        {{ end }}
         </div>
     
         {{- with .Params.Cover -}}

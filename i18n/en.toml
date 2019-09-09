@@ -31,6 +31,9 @@ other = "Back to top"
 [site_pages_header]
 other = "Posts"
 
+[site_sections_header]
+other = "Sections"
+
 # Author 
 [projects_header]
 other = "Projects"

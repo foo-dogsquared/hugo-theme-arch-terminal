@@ -10,6 +10,6 @@
 {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 "childClass" .childClass)  }}
 {{- end -}}
 
-{{- $isCurrent := eq .p1 .p2 -}}
+{{ $isCurrent := eq .p1 .p2 -}}
 <a class="{{ .childClass }}{{ if $isCurrent }}--active{{ end }}" href="{{ .p1.Permalink }}">{{ .p1.Title }}</a> 
-{{- end -}}
+{{ end -}}

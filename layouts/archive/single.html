@@ -13,11 +13,13 @@
             <h2 class="archive__year" id="{{ .Key }}">{{ .Key }}</h2> 
             <div class="archive__posts">
             {{- range .Pages -}}
+                {{- if .File -}}
                 {{- if ne .File.Dir "/" -}}
                 <div class="archive-post">
                     <a class="archive-post__title" href="{{ .Permalink }}">{{ .Title }}</a>
                     <date class="archive-post__date">{{ .Date.Format "2006-01-02" }}</date> 
                 </div>
+                {{- end -}}
                 {{- end -}}
             {{- end -}}
             </div>

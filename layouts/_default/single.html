@@ -1,20 +1,20 @@
 {{- define "main" -}}
 
 <div class="site__page">
-  {{- if $.Site.Params.enableBreadcrumbs -}}
+  {{ if $.Site.Params.enableBreadcrumbs -}}
   {{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
-  {{- end -}}
+  {{ end -}}
 
   {{- $date := .Date.Format "2006-01-02" }}
-  {{ if (and $.Site.Params.enableContentReaderMode (ne .File.Dir "/")) }}
+  {{ if (and $.Site.Params.enableContentReaderMode (ne .File.Dir "/")) -}}
     <h1 class="page__title--reader">{{ .Title }}</h1>
     <div class="page__meta">
-      {{ with .Params.author }}
+      {{ with .Params.author -}}
       <p class="page__guest-author">{{ i18n "content_by--reader" }} {{ . }}</p> 
       {{ end }}
       <p class="page__date">
       {{ i18n "content_on--reader" }} <date datetime="{{ $date }}">{{ $date }}</date>
-      {{ if (ne .Lastmod .PublishDate) }}
+      {{ if (ne .Lastmod .PublishDate) -}}
       ({{ i18n "content_updated--reader" }} {{ .Lastmod.Format "2006-01-02" }})
       {{ end }}
       </p>
@@ -46,16 +46,16 @@
   
     {{ if .Params.tags }}
     <p class="page__tags">
-      {{ range .Params.tags }}
-      #<a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
-      {{ end }}
+      {{- range .Params.tags -}}
+      <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+      {{- end -}}
     </p>
     {{ end }}
 
-    {{ if .IsTranslated }}
+    {{ if .IsTranslated -}}
     <p class="page__translations">
       {{ i18n "content_translations" }}: 
-      {{ range .Translations }}
+      {{ range .Translations -}}
       <a href="{{ .Permalink }}">{{ .Lang }}</a>
       {{ end }}
     </p>
@@ -79,7 +79,7 @@
 </article>
 
 {{- if $.Site.Params.enableContentPagination -}}
-{{ if or .NextInSection .PrevInSection }}
+{{ if or .NextInSection .PrevInSection -}}
 <div class="pagination">
   <div class="pagination__header">
     {{ with $.Site.Params.readOtherPostsLabel }}{{ . }}{{ else }}{{ i18n "read_more" }}{{ end }}
@@ -113,8 +113,8 @@
 {{- end -}}
 
 <!-- Page-wide user-included libraries (from the content) -->
-{{ with .Params.libs }}
-{{ range .js }}
+{{ with .Params.libs -}}
+{{ range .js -}}
 <script type="text/javascript" src="{{ . }}" defer></script>
 {{ end }}
 {{ end }}
