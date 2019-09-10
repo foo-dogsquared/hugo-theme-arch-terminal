@@ -11,8 +11,9 @@
     {{- range $socialLinks -}}
     <a rel="me" class="footer__link" href="{{ .url }}">
         {{- if $willUseIcons -}}
-        <svg class="icon">
-            <use xlink:href="{{ $socialIcons }}#{{ .id }}"></use></svg>
+        {{ if .img -}}
+            <img class="icon" src="{{ .img }}" alt="{{ .id }}" />
+        {{ end }}
         {{- else -}}
         {{- if .name -}}{{ .name }}{{- else -}}{{ .id }}{{- end -}}
         {{- end -}}
