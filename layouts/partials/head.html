@@ -6,7 +6,7 @@
 {{ end }}
 <meta name="author" content="{{ .Site.Author.name }}">
 <meta name="application-name" content="{{ .Site.Title }}">
-<meta name="description" content="{{ if .IsHome }}{{ $.Site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
+<meta name="description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary }}{{ end }}">
 <meta name="robots" content="noodp"/>
 {{ hugo.Generator }}
 <meta name="referrer" content="no-referrer" />
@@ -30,7 +30,7 @@
 {{ if $.Site.Params.enableTwitterCard -}}
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }}{{ else }}This ain't home{{ end }}" />
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $.Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
 <meta name="twitter:description" content="{{ if .IsHome }}{{ $.Site.Params.tagline }}{{ else }}{{ .Summary }}{{ end }}" />
 <meta name="twitter:site" content="{{ $.Site.BaseURL }}" />
 <meta name="twitter:creator" content="{{ with .Params.Author }}{{ . }}{{ else }}{{ $.Site.Author.name }}{{ end }}" />
@@ -63,7 +63,7 @@
       "image": ["{{ . }}"],
       {{- end }}
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
-      "dateModified": "{{ .Lastmod }}",
+      "dateModified": "{{ if .IsHome }}{{ .Date.Format "2006-01-02" }}{{ else }}{{ .Lastmod }}{{ end }}",
       "author": {
         "@type": "Person",
         "name": "{{ with .Params.author.name }}{{ . }}{{ else }}{{ $.Site.Author.name }}{{ end }}"

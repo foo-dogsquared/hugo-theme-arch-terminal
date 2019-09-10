@@ -13,7 +13,7 @@
       <p class="page__guest-author">{{ i18n "content_by--reader" }} {{ . }}</p> 
       {{ end }}
       <p class="page__date">
-      {{ i18n "content_on--reader" }} <date datetime="{{ $date }}">{{ $date }}</date>
+      {{ i18n "content_on--reader" }} <time datetime="{{ $date }}">{{ $date }}</time>
       {{ if (ne .Lastmod .PublishDate) -}}
       ({{ i18n "content_updated--reader" }} {{ .Lastmod.Format "2006-01-02" }})
       {{ end }}
@@ -34,9 +34,9 @@
 
   <div class="page__meta">
     {{ if .Params.Date }}
-    <date class="page__date" datetime="{{ .Date.Format "2006-01-02" }}">
+    <time class="page__date" datetime="{{ .Date.Format "2006-01-02" }}">
     {{ .Date.Format "2006-01-02" }}
-    </date>
+    </time>
     {{ end }}
     {{ with .Params.Author }}
     <span class="page__author">::
@@ -78,33 +78,7 @@
   {{ .Content }}
 </article>
 
-{{- if $.Site.Params.enableContentPagination -}}
-{{ if or .NextInSection .PrevInSection -}}
-<div class="pagination">
-  <div class="pagination__header">
-    {{ with $.Site.Params.readOtherPostsLabel }}{{ . }}{{ else }}{{ i18n "read_more" }}{{ end }}
-  </div>
-  <div class="pagination__buttons">
-    {{ if .NextInSection }}
-    <a class="pagination__button previous" rel="prev" href="{{ .NextInSection.Permalink }}">
-      <span class="button icon">←</span>
-      <span class="button text">{{ .NextInSection.Title }}</span>
-    </a>
-    {{ else }}
-    <span></span>
-    {{ end }}
-    {{ if .PrevInSection }}
-    <a class="pagination__button next" rel="next" href="{{ .PrevInSection.Permalink }}">
-      <span class="button text">{{ .PrevInSection.Title }}</span>
-      <span class="button icon">→</span>
-    </a>
-    {{ else }}
-    <span></span>
-    {{ end }}
-  </div>
-</div>
-{{ end }}
-{{- end -}}
+{{ partial "pagination.html" . }}
 
 {{- with .File -}}
   {{ if ne .Dir "/" }}

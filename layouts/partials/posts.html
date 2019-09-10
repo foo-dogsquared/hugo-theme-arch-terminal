@@ -1,6 +1,13 @@
 {{- $blogIcons := "blog-icons.svg" | absURL -}}
+
+{{ $pages := .Pages }}
 {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
-{{- $pages := cond ($isListSectionsOnHome) .Pages (cond .IsHome .Site.RegularPages .RegularPages) -}}
+
+{{ if $isListSectionsOnHome }}
+{{- $pages = .Site.Sections -}}
+{{ else if .IsHome }}
+{{ $pages = where $.Site.RegularPages "Type" "in" $.Site.Params.mainSections }}
+{{ end }}
 
 <section class="site__pages">
     {{ if .IsHome -}}
@@ -18,7 +25,7 @@
         <div class="page__meta--compact">
             <date class="page__date" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</date>
             {{ if ne .PublishDate .Lastmod -}}
-            (updated on <date class="page__modified-date" datetime="{{ .Lastmod }}">{{ .Lastmod.Format "2006-01-02" }}</date>)
+            (updated on <time class="page__modified-date" datetime="{{ .Lastmod }}">{{ .Lastmod.Format "2006-01-02" }}</time>)
             {{- end -}}
         </div>
     </article>
@@ -43,9 +50,9 @@
         </div>
 
         <div class="page__meta">
-        <span class="page__date">
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="page__date">
             {{ .Date.Format "2006-01-02" }}
-        </span>
+        </time>
         {{- with .Params.Author -}}<span class="page__author">::
             {{ . }}</span>{{- end -}}
             
@@ -79,9 +86,7 @@
         {{ end }}
         </div>
     
-        {{- if not .Params.showFullContent -}}
         <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMoreLabel }}{{ . }}{{ else }}Read more{{ end }} →</a>
-        {{- end -}}
     </article>
     {{- end -}}
     </li>
