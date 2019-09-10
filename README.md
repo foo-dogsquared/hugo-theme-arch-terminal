@@ -1,8 +1,24 @@
 # Arch Terminal 
 
+Table of Contents
+
+* [Demo](#demo)
+* [Manual](#manual)
+* [Features](#features)
+* [Installation](#installation)
+* [Building with the theme](#building-with-the-theme)
+* [Making it as a portfolio site](#making-it-as-a-portfolio-site)
+* [Making it as a blogging theme](#making-it-as-a-blogging-theme)
+* [Adding your own JS libraries](#adding-your-own-js-libraries)
+* [Lazy syntax highlighting](#lazy-syntax-highlighting)
+* [MathJax support](#mathjax-support)
+* [How to contribute](#how-to-contribute)
+* [License](#license)
+
 A complete remake of the original [Hugo Terminal theme](https://github.com/panr/hugo-theme-terminal) 
 with additional features, new development build, and a totally different 
-philosophy.  
+philosophy. 
+Also focuses on including support for Asciidoctor content. 
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
@@ -18,9 +34,11 @@ Nonetheless, with minimal configuration should be still enough to get started wr
 
 Demo is available 
 [here](https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/). 
+The demo features more posts, serves as a documentation of some sort, and highlights with a 
+detailed configuration. 
+
 You can also look for a real-life example on [my frontpage](https://foo-dogsquared.github.io/) and 
 [my blog](https://foo-dogsquared.github.io/blog). 
-The demo features more posts and also has a documentation of some sort. 
 
 The raw files of the demo is available in 
 [a GitHub repo](https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/). 
@@ -29,7 +47,17 @@ I also recommend to see the
 used in the demo. 
 It's also well-commented so you can use it as a starter configuration for this theme. 
 
-This is more like a mini-README so please read the [manual](./MANUAL.adoc) for more details. 
+
+
+
+## Manual  
+
+This is more like a "Getting Started" guide so please read the 
+[manual](./MANUAL.adoc) for more details. 
+This document only opens up a part of the things that you can do with 
+this theme. 
+
+You think you can escape the manual? Not a chance. 
 
 
 
@@ -69,9 +97,10 @@ the alternate theme even if you didn't customize it yourself!
 
 ## Installation 
 
-Since the theme uses Hugo Pipes, it'll require Hugo extended. 
-To check whether you have it installed, run `hugo version` and search for the 
-`extended` keyword. Minimum Hugo version required is v0.58.0. 
+This theme requires Hugo v0.58.0 and above. 
+However, some of the features of this theme can only be used with the extended version 
+(such as applying edited SCSS files) so make sure you have it installed 
+if you want the full package. 
 
 Also, the remote repo of this project is hosted on GitHub. 
 Thus, it uses Git as the version control system. 
@@ -88,7 +117,6 @@ git clone https://github.com/foo-dogsquared/hugo-theme-arch-terminal.git themes/
 ```
 
 This is a good option if you don't to modify the base theme too much. 
-This also provides the advantage of easier updating. 
 
 
 ### Installing with submodule 
@@ -101,6 +129,8 @@ git submodule add https://github.com/foo-dogsquared/hugo-theme-arch-terminal.git
 
 If you want to make major changes to the theme, then this might be the option 
 you're looking for. 
+
+
 
 
 ## Building with the theme 
@@ -138,19 +168,22 @@ title = "Arch Terminal"
 
 Seriously, that's it. :) 
 You just completed the "Hello World" of making a Hugo site. 
-[Enjoy the view of your Hugo site with **T R U E M I N I M A L I S M** and no bloat. Shareable on Twitter and all that (maybe I'll disable that by default too in the patch)](./docs/true-hugo-minimalism.png)
+[Enjoy the view of your Hugo site with **T R U E M I N I M A L I S M** and no bloat.](./docs/true-hugo-minimalism.png)
 
 Ignore my rambling and let's continue on to the README, shall we. 
 Try to follow along the README, if you wish for a more fulfilling experience 
 (of configuring a Hugo theme, that is). 
 
 
+
 ### Configuring appearance 
 
 You can change the appearance of the theme. 
-**Though, you need to have Hugo extended version installed.**
 Start by copying `themes/arch-terminal/assets/scss/config.scss` to your own assets 
 with similar directory structure (`assets/scss/config.scss`). 
+**Note that you need to have Hugo extended version installed to apply edited SCSS stylesheets.** 
+Otherwise, you would have to overwrite with a CSS stylesheet (at `scss/main.min.css`) instead and the 
+following section does not apply anymore. 
 
 Also, please open `themes/arch-terminal/assets/scss/default.scss` to see the 
 variables needed. 
@@ -188,6 +221,7 @@ It's empty. You can try to uncomment the comments for a start or open up the
 `default.scss` file from the theme folder to see the available variables. 
 
 
+
 ### Setting alternative themes 
 
 Here's the best part, it can generate an alternative theme (dark mode or whatever) 
@@ -204,11 +238,9 @@ in your site configuration like so:
 
 And see the magic alternative toggle! 
 
-<video width="100%" height="auto" controls>
-  <source src="docs/theme-toggle-magic.mp4" type="video/mp4">
-</video> 
-
 Go on and change the colors and believe! 
+
+
 
 
 ## Making it as a portfolio site 
@@ -321,12 +353,13 @@ And another thing... it'll be in JSON format again.
 Now, the list of keys. Thankfully, it's a lot shorter this time. 
 
 * `id` - The identifer of the contact. Similar to the `id` key from 
-the `projects` data. _Also required._ 
+the `projects` data. 
 
-* `url` - The URL of the contact link. _Also required._ 
+* `url` - The URL of the contact link. 
 
 * `name` - The name that'll appear in the output. Similar to the `name` key 
-from the `projects` data, it'll use the `id` key if it's absent. _Optional._
+from the `projects` data, it'll use the `id` key if it's absent. 
+**This key is optional.**
 
 The results from the previous example? A list of contact links in the footer. 
 
@@ -389,6 +422,7 @@ or how you could add a quick support section where you can e-beg for stuff.
 
 
 
+
 ## Making it as a blogging theme 
 
 Let's say you want to make it as a blogging theme as well. 
@@ -425,6 +459,25 @@ in that website for hours on end!
 If those situations happened to you previously, 
 [you should've read the manual more](./MANUAL.adoc) and check the _Making a blog site_ section 
 to see the available options. 
+
+
+
+### Content frontmatter 
+
+The theme doesn't have much options for the frontmatter since it goes out of its 
+way as much as possible to future-proofing your content with less frontmatter. 
+
+But here's the list of the fields that the theme covers:
+
+* `title`, `author`, and `date` which is the usual stuff. 
+
+* `tags` and `categories` which is also the usual stuff. 
+They are the [default taxonomies](https://gohugo.io/content-management/taxonomies/#default-taxonomies). 
+
+* `cover` which is the featured cover image in the post. 
+I think this is the only custom field (aside from the `libs` which is discussed below). 
+
+
 
 ### Starter configuration 
 
@@ -594,6 +647,7 @@ canonifyURLs = true
 ```
 
 
+
 ### RSS, Atom, and JSON feeds support 
 
 For those who are looking to find more ways of distributing their content into the 
@@ -644,13 +698,211 @@ For specific site sections, you can visit them through the following template li
 ```
 
 
-## Manual  
 
-This is mentioned multiple times already but be sure to 
-read the [extensive manual](./MANUAL.adoc) of this theme to know more options. 
-This document only opens up a part of the things that you can do with 
-this theme. 
 
-You think you can escape the manual? Not a chance. RTFM, boisengirls. 
+## Adding your own JS libraries 
+
+### Adding it sitewide
+
+This theme supports adding your own set of third-party (or your own) libraries to 
+your site. 
+Thus, it can bring some features you want such as additional support for 
+engineering-focused content with third-party libraries such as 
+[Mermaid](https://mermaidjs.github.io/) and [Chart.js](https://www.chartjs.org/). 
+You can also replace MathJax with [KaTeX](https://katex.org/) or replace 
+the syntax highlighter libraries used here. 
+
+It can be done by utilizing a data file named `libraries` that holds a list of 
+objects with the following keys:
+
+* `url` (string) which is the source of the script. 
+Also accepts relative links from your site which you can bring through 
+the [static folder](https://gohugo.io/content-management/static-files/). 
+
+* `weight` (number) dictates the importance of the script. 
+The less weight, the higher the precedence so make sure the important scripts 
+have the least weight value. 
+
+* `sync` (boolean) indicates that the script shall be included with the 
+page rendering. 
+All scripts will be asynchronously delivered (with `async` attribute). 
+Also, it'll bring down the perceived performance so make sure the 
+script you'll be setting with this `key` is quite important to be loaded first. 
+**This key is optional.** 
+
+* `defer` (boolean) indicates that the script will be deferred. 
+Once the value is `true`, the script will be deferred no matter what. 
+**This key is optional.** 
+
+If you want finer control, I recommend to copy the script partial of this theme 
+(at `themes/$THEME_NAME/layouts/partials/scripts.html`) and modify it. 
+
+
+### Adding it for specific posts 
+
+| Tip |
+| --- |
+| If you plan on future-proofing your content, I recommend to embed them in the document instead. This is a theme-specific feature and may pose some problems in the future when you're going to migrate it. |
+
+You can also add libraries for specific posts by providing the `libs` in the 
+content frontmatter. 
+It is based on one of the content from the [basic example](https://github.com/gohugoio/hugoBasicExample/blob/master/content/sketch/lines-from-center.html). 
+
+It is more or less the same. 
+The `libs` key is an object/dictionary where it describes CSS and JS libraries. 
+
+Here's the frontmatter from the previously linked example. 
+
+```yaml
+---
+title: "Lines from center"
+date: 2019-03-04T22:15:42-03:00
+description: "this is a p5js sketch"
+libs:
+  js:
+    - https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js
+---
+```
+
+When the page is built, it'll have the p5.js library on the page specifically for 
+that post. 
+
+Take note that all of the scripts included in this way are deferred. 
+If you want finer control (with the added benefit of future-proofing your content 
+since this is theme-specific feature), you can embed them on the document itself, 
+instead. 
+
+For Markdown files, you can simply write raw HTML. 
+For Asciidoctor documents, you can write the HTML inside of a 
+[passthrough block](https://asciidoctor.org/docs/user-manual/#passthroughs). 
+
+
+
+
+## Lazy syntax highlighting 
+
+**This feature is only possible with Hugo extended verison.** 
+You can get around this with using the `libraries` data file. 
+
+The theme supports lazy syntax highlighting (that doesn't rely on the 
+`highlight` shortcode) by setting `params.enableLazySyntaxHighlighting` 
+to `true`. 
+
+This theme utilizes two syntax highlighting libraries for this which are 
+[highlight.js](https://highlightjs.org/) and [PrismJS](https://prismjs.com/). 
+By default, it relies on highlight.js library. 
+You can set the theme to use PrismJS library by setting `params.syntaxHighlighter` 
+to `prismjs`. 
+
+Take note that all of the syntax highlighters used here has all of the 
+languages as the packages. 
+For PrismJS, it also has the "Keep Markup" plugin. 
+If you want to replace the files, the scripts are located at `assets/js/lib` 
+of the theme folder. 
+
+
+
+
+## MathJax support 
+
+This theme supports mathematical typesetting with [MathJax](https://www.mathjax.org/). 
+Like any of the features here, you have to manually activate it with 
+`params.enableMathjax` with a `true` value. 
+
+By default, the theme use MathJax v3.0.0 (as of 2019-09-10). 
+If you want to use the previous major version for some reason, you can simply set 
+`params.setMathjaxToV2` to `true`. 
+
+If you want to configure MathJax, you can create a file in `layouts/partials/config/mathjax.html` 
+in the root folder and write it there. 
+
+Unlike most of the features that relies on the third-party libraries, this feature 
+specifically links through a CDN for performance reasons (and easy web caching for 
+other websites to use). 
+If by any chance repulsed from this idea, you can use a local copy of MathJax by 
+setting `params.useLocalMathjax` on. 
+**Take note this only works when you have Hugo extended version installed and only works with MathJax v3.** 
+Also, take extreme consideration and caution when enabling this since it'll 
+cause a 2.5MiB increase of the bandwidth to be used by your site. 
+
+
+
+
+## How to contribute
+
+If you spot some bugs or want to suggest a feature, feel 
+free to file an issue in the issue tracker. 
+
+Any feature requests are heavily considered since starting at v2.0.0, a 
+feature freeze is observed for the sake of improving user experience 
+(including the documentations), bug fixes, and content readability for the theme 
+as much as possible. 
+It also avoids the problem of over-engineering and gold plating since the 
+theme already has a lot of options/parameters to offer. 
+
+
+### Setting up for development
+
+If you want to contribute through code, you can do the following 
+to set up the repo into your computer:
+
+* Fork this repository 
+* Clone the forked repository 
+* Checkout to the development branch (`develop`) 
+* Create another branch from the development branch which you can 
+freely implement your own stuff 
+
+Make sure the new branch name is appropriately named. 
+
+If creating a pull request, you have to pass it through the 
+development branch. 
+
+
+
+### Project style guides
+
+If you're going to update the codebase, make sure you mind the 
+following guidelines:
+
+* The documentations have to be written in [Asciidoctor](https://asciidoctor.org/). 
+If you're not familiar with it, here's the 
+[quick reference page](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) for 
+a rundown and their [user manual](https://asciidoctor.org/docs/user-manual/) for 
+deep details. 
+* The codebase follows the [BEM naming convention](http://getbem.com/naming/) 
+for the CSS naming.
+* Using [semantic HTML](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines) 
+should be observed.
+* Not really a requirement but use the [EditorConfig](https://editorconfig.org/) 
+plugin for your text editor. 
+If you don't have any, try to follow according to the `.editorconfig` rules. 
+
+
+
+
+## License
+
+For the original theme, copyright goes to Radosław Kozieł 
+([@panr](https://twitter.com/panr)).
+
+The original theme is released under the MIT License. 
+Check the 
+[original theme license](https://github.com/panr/hugo-theme-terminal/blob/master/LICENSE.md)
+for additional licensing information.
+
+This fork is maintained by [foo-dogsquared](https://foo-dogsquared.github.io/) 
+and the extended theme is released under MIT license. 
+Copyright applies to my own modifications of the project. 
+Please see the previously linked license of the theme for more 
+information on how to properly include copyright notices.
+
+In other words:
+
+© 2019 panr - for the original theme
+
+© 2019 foo-dogsquared - for the modification and extended 
+parts of the theme 
+
+(IDK how to proceed with licensing so feel free to correct me pls -_-)
 
 <a id="footnoteref1">[1]</a>: Requires Hugo extended version

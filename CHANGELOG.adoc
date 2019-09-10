@@ -10,6 +10,17 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+== [2.0.1] - 2019-09-10
+=== Changed 
+* Change the execution of the MathJax (through CDN) script to be deferred instead of
+asynchronously executed to increase perceived page performance. 
+
+=== Fixed 
+* Fix the incorrect values inserted into the `<head>`. (Big mistake to use `partialCached` 
+since it dynamically changes. Whoops.)
+
+
+
 == [2.0.0] - 2019-09-10 
 === Added 
 * https://gohugo.io/content-management/multilingual/[Multilingual mode] support. 
