@@ -1,6 +1,7 @@
 = Arch Terminal
 :toc:
 
+:theme_name: Arch Terminal
 :prog_version: 2.0.0
 
 // Zoom image
@@ -14,16 +15,20 @@ be replaced for new ones.
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
+
 This theme provides a minimal and readable base theme while providing a lot 
 of ways to customize it. 
+
 When settling with this theme, you should be prepared for some 
 tweaking of the settings like how you customize your precious 
 text editors and OS configs. 
+Also have some prerequisite knowledge of the web languages (HTML, CSS, and JavaScript) 
+for an easier time. 
 
 On an unrelated note, 
 https://github.com/foo-dogsquared/dotfiles[here are my dotfiles]. 
 
-This manual is for Arch Terminal version {prog_version} and above.
+This manual is for {theme_name} version {prog_version} and above.
 
 NOTE: Some of the features are only possible (such as applying and editing SCSS) 
 with Hugo extended version. 
@@ -32,23 +37,59 @@ Please make sure that you have it installed.
 
 
 
+== Objectives 
+
+The author of this extended theme (@foo-dogsquared) has several objectives 
+in creating this theme. 
+
+Reading this might make you understand the limitations and the strength of this 
+theme. 
+
+Here are the following objectives the theme aims to do: 
+
+* Provide an Asciidoctor-supported Hugo theme for those who are writing with 
+Asciidoctor. 
+
+* Maintain consistent and readable format for your content. 
+
+* Provide the theme as a UI/skin for your content. 
+Nothing more, nothing less. 
+Meaning no custom shortcodes and minimal custom frontmatter for your content. 
+This also enables easy migration and future-proofing your content 
+as much as possible. 
+
+* Go out of its way as much as possible for your content while providing 
+customization options in order to fit your general needs. 
+You focus on implementing the more advanced and more specific stuff. 
+
+* Be as easy as possible to be able to modify the source files of the theme. 
+This theme will not be able to cover all possible (or even common) use cases. 
+This encourages creating your own solution if you aren't able to find what you're 
+looking for. 
+
+
+
+
 == Demo 
 
 Here's a 
-https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/[demo] 
+https://foo-dogsquared.github.io/hugo-theme-arch-terminal-demo/[demo] 
 of the theme. 
+It features a fairly customized version showing off what you can do once 
+you invested a bit of your time to experiment and explore the options with this 
+theme. 
 
 The raw files can be easily seen in 
-https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/[my GitHub repo]. 
+https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/[my GitHub repo]. 
 It should give you an idea of using it in a real-life example. 
 The demo also utilizes 
 https://travis-ci.com/[Travis CI] as the deployment tool. 
 Check out the 
-https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/.travis.yml[config file] 
+https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/.travis.yml[config file] 
 of it to get an example. 
 
 You can also get the 
-https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/config.toml[configuration] 
+https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/config.toml[configuration] 
 of the theme used from the demo. 
 It should be usable and can be a great starting point to explore 
 the available options and can be used to experiment along reading through the 
@@ -513,6 +554,12 @@ Here's a table of the following key/fields that theme looks for:
 The social icons are extracted from 
 https://github.com/simple-icons/simple-icons[Simple Icons set]. 
 
+| `url`
+| string
+| The hyperlink of the additional contact.
+| 
+| 
+
 | `name`
 | string
 | The name of the contact link.
@@ -521,11 +568,13 @@ https://github.com/simple-icons/simple-icons[Simple Icons set].
 Otherwise, if the links are set to be text and there's no value to this 
 key, the `id` will be used, instead.
 
-| `url`
-| string
-| The hyperlink of the additional contact.
-| 
-| 
+| `img` 
+| string 
+| The URL of the image to be used. 
+This'll be only used if `useLinkIcons` is set to `true`. 
+| Yes 
+| Any contact with the missing key will not appear in the footer so make sure 
+all of the contacts have this key. 
 
 |===
 
@@ -534,18 +583,12 @@ If you want to make it into an icon, you could set the
 parameter `params.useLinkIcons` to `true` in the site config file.
 Be cautious of using this, since any unavailable icons will 
 not be rendered. 
-In order to see how this works, it basically relies on using 
-https://css-tricks.com/svg-symbol-good-choice-icons/[SVG spritesheets] 
-in `static/social-icons.svg` (in the theme folder) with symbols.
 
 .`useLinkIcons` set to `true`
 image::docs/show-link-icons-enabled.png[width=100%]
 
 .`useLinkIcons` set to `false` (recommended)
 image::docs/show-link-icons-disabled.png[width=100%]
-
-NOTE: The whole spritesheet is extracted from the 
-https://github.com/simple-icons/simple-icons/[Simple Icons icon set].
 
 
 
@@ -723,6 +766,13 @@ instead of the pages
 | You need to have `hidePostsOnHome` disabled to 
 make have this effect visible. 
 
+| `params.mainSections` 
+| array[string] 
+| Lists the sections you want to be featured on the homepage. 
+If absent, it just lists from all sections (except the top-level pages). 
+| Yes 
+| 
+
 | `params.readMoreLabel` 
 | string 
 | Replaces the "Read more" text at the very end of the summary of each post.
@@ -798,6 +848,9 @@ The way how the theme organizes content (and encourages)
 is simple. 
 The theme considers all of the pages and sections except for 
 the top-level pages. 
+
+You can also specify to list only certain sections by setting 
+https://gohugo.io/functions/where/#mainsections[`params.mainSections`]. 
 
 By default, the theme list posts in the homepage. 
 If you want to disable it, have the `params.hidePostsOnHome` set to `true`.  
@@ -1133,7 +1186,7 @@ It's going to make site config management more organized.
 
 
 
-== Adding your own JS libraries 
+== Adding your own libraries 
 
 === Adding it sitewide 
 
@@ -1141,10 +1194,9 @@ TIP: If you want finer control, I recommend to modify the script partial of the 
 instead (at `theme/arch-terminal/layouts/partials/scripts.html`). 
 By doing it this way, you can add some additional scripts such as configuration 
 of your library or rearranging it. 
-However, s
 
-This theme supports adding your own libraries to your site quickly by 
-utilizing a data file named `libraries`. 
+This theme supports adding your own JS libraries and CSS stylesheets to your site 
+quickly by utilizing a data file named `libraries`. 
 
 By providing this feature, you can quickly add some features such as supporting 
 engineering-oriented content with https://mermaidjs.github.io/[Mermaid], 
@@ -1160,7 +1212,14 @@ of objects with certain keys/fields.
 | Data type
 | Description
 | Optional
-| Additional notes
+| Additional notes 
+
+| `type` 
+| string 
+| Specifies what type of resource the item will be. 
+Only accepts possible values which are `js` and `css`. 
+| 
+| 
 
 | `url` 
 | string 
@@ -1195,7 +1254,7 @@ Removing the `async` attribute on the process.
 
 
 
-=== Adding it for a specific post 
+=== Adding JS libraries for a specific post 
 
 TIP: If you plan on future-proofing your content, I recommend to 
 embed it on the document itself than relying on the frontmatter since this is 
@@ -1274,8 +1333,9 @@ by setting `params.setMathjaxToV2` to `true`.
 
 Take note that it uses the default configuration so there 
 might be some need to configure it. 
-In case that you do need configuration, you can create a file in 
-`layouts/partials/config/mathjax.html` and do your stuff there. 
+In case that you do need configuration, you can copy the script partial 
+(at `theme/{theme_name}/layouts/partials/scripts.html`) and add the configuration 
+at the appropriate location (there should be a comment telling you where to put it). 
 
 NOTE: Read the 
 https://docs.mathjax.org/en/latest/[official MathJax documentation for more information] 
@@ -1372,6 +1432,10 @@ Assuming you're using a TOML as your config file.
 
 NOTE: If you're curious to the files being used, the script for 
 the syntax highlighters is at `assets/js/lib` of the theme folder. 
+Both of them have high filesize (about ~800KiB for highlight.js and 
+~400KiB for PrismJS). 
+I recommend to replace them with the same file over at your assets folder. 
+Or you could also modify the scripts partial and link them through a CDN. 
 
 Now that lazy syntax highlighting is enabled, you can simply use the 
 normal code listings with Markdown or Asciidoctor (other formats are yet to be 

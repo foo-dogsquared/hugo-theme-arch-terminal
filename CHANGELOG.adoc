@@ -10,6 +10,28 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+== [2.1.0] - 2019-09-11
+=== Added 
+* Utilize https://gohugo.io/functions/where/#mainsections[`params.mainSections`] 
+for the homepage posts list. 
+
+=== Changed 
+* **BREAKING CHANGE**: The `libraries` data file now requires a `type` key for supporting custom CSS stylesheets. 
+Possible values for this key includes only `js` and `css`. 
+* Change the implementation of `useLinkIcons` that relies from a static SVG spritesheet to 
+the user's custom definition with the `img` key. 
+That said, an additional key is added for the `contacts` item which is the `img` key. 
+
+=== Fixed 
+* Label with appropriate markup of the buttons included. 
+* Make all scripts to be deferred (except for the custom libraries where they have 
+to be explicitly defined to be deferred). 
+* Fix layout stylesheets and the metadata in the `<head>`.
+* Refactor the code for the layouts. 
+
+
+
+
 == [2.0.1] - 2019-09-10
 === Changed 
 * Change the execution of the MathJax (through CDN) script to be deferred instead of
