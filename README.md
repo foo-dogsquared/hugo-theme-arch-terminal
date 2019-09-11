@@ -22,10 +22,18 @@ Also focuses on including support for Asciidoctor content.
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
+It also aims to be a portfolio and/or blog of a single author. 
+If it's supposed to be a site for multiple author, then this is not 
+for you (or you could hack it yourself). 
+
 This theme provides a minimal base theme while providing a lot 
 of ways to customize it. 
+It also goes out of its way as much as possible as a UI component  
+for your content. 
+(Meaning no custom shortcodes and frontmatter to deal with this theme.) 
+
 Be sure to read the [manual](./MANUAL.adoc) for more details. 
-Nonetheless, with minimal configuration should be still enough to get started writing  content. 
+Nonetheless, with minimal configuration, it should be still enough to get started writing  content. 
 
 
 
@@ -33,7 +41,7 @@ Nonetheless, with minimal configuration should be still enough to get started wr
 ## Demo 
 
 Demo is available 
-[here](https://foo-dogsquared.github.io/hugo-theme-terminal-plus-minus-demo/). 
+[here](https://foo-dogsquared.github.io/hugo-theme-arch-terminal-demo/). 
 The demo features more posts, serves as a documentation of some sort, and highlights with a 
 detailed configuration. 
 
@@ -41,9 +49,9 @@ You can also look for a real-life example on [my frontpage](https://foo-dogsquar
 [my blog](https://foo-dogsquared.github.io/blog). 
 
 The raw files of the demo is available in 
-[a GitHub repo](https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/). 
+[a GitHub repo](https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/). 
 I also recommend to see the 
-[config file](https://github.com/foo-dogsquared/hugo-theme-terminal-plus-minus-demo/blob/master/config.toml) 
+[config file](https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/config.toml) 
 used in the demo. 
 It's also well-commented so you can use it as a starter configuration for this theme. 
 
@@ -700,7 +708,7 @@ For specific site sections, you can visit them through the following template li
 
 
 
-## Adding your own JS libraries 
+## Adding your own CSS and JS libraries 
 
 ### Adding it sitewide
 
@@ -714,6 +722,9 @@ the syntax highlighter libraries used here.
 
 It can be done by utilizing a data file named `libraries` that holds a list of 
 objects with the following keys:
+
+* `type` (string) indicates the type whether it's a CSS or a JS library. 
+Can only accept possible values, `css` and `js`. 
 
 * `url` (string) which is the source of the script. 
 Also accepts relative links from your site which you can bring through 
