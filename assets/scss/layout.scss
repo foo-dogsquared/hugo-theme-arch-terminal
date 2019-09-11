@@ -366,7 +366,7 @@
 
     .button.icon { 
         background: var(--accent);
-        border-radius: 1em;
+        border-radius: 2em;
         color: var(--background);
         padding: 1rem;
     }
@@ -400,24 +400,14 @@
 }
 
 // Custom classes
-svg.icon {
-    --size: 2.2rem;
-    width: var(--size);
-    height: var(--size);
+svg.icon, img.icon {
+    width: var(--iconSize);
+    height: var(--iconSize);
     fill: currentColor;
 
     &:hover {
         color: var(--accent);
     }
-}
-
-// PrismJS style override
-pre[class*="language-"] {
-    margin: 0;
-}
-
-code[class*="language-"] {
-    border: 0;
 }
 
 // Forms
@@ -447,14 +437,15 @@ code[class*="language-"] {
 }
 
 .site__search-bar-results {
-    border: var(--primaryBorder) var(--accent);
-    border-top: 0;
     background: var(--background);
+    border-top: 0;
+    border: var(--primaryBorder) var(--accent);
+    max-height: 10rem;
+    overflow: auto;
     position: absolute;
     top: 100%;
     width: inherit;
-    max-height: 10rem;
-    overflow: auto;
+    z-index: 999;
 
     & > * {
         &:hover {
@@ -465,8 +456,8 @@ code[class*="language-"] {
 }
 
 .search-results__item {
-    padding: 0.75rem;
     display: block;
+    padding: 0.75rem;
 }
 
 // taxonomy search list

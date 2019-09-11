@@ -8,3 +8,12 @@
 .medium-zoom-overlay {
     height: 100%;
 }
+
+// PrismJS style override
+pre[class*="language-"] {
+    margin: 0;
+}
+
+code[class*="language-"] {
+    border: 0;
+}
