@@ -1,36 +1,19 @@
 {{ $array := slice }}
 
 {{- if $.Site.Params.enableLazySyntaxHighlighting -}}
-    {{- if (eq $.Site.Params.syntaxHighlighter "prismjs") }}
-        {{ $highlighter := resources.Get "js/lib/prism.js" }}
-        {{ $highlighterStyle := resources.Get "css/prism.css" | minify }}
+    {{ $highlighter := resources.Get "js/lib/prism.js" }}
+    {{ $highlighterStyle := resources.Get "css/prism.css" | minify }}
 
-        <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}"> 
-        {{ $array = $array | append $highlighter }}    
-    {{- else -}}
-        {{ $highlighter := resources.Get "js/lib/highlight.pack.js" }}
-        {{ $highlighterStyle := resources.Get "css/highlightjs.css" | minify }}
-    
-        <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}">
-        {{ $array = $array | append $highlighter }}
-    {{- end -}}
+    <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}"> 
+    {{ $array = $array | append $highlighter }}
 {{- end -}}
 
 {{ if $.Site.Params.enableMathjax -}}
     <!-- MathJax -->
     <!-- Put your custom MathJax configuration over here. -->
 
-    {{ if $.Site.Params.setMathjaxToV2 -}}
-        <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
-    {{- else -}}
-        <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        {{- if $.Site.Params.useLocalMathjax -}}
-            {{ $mathjaxLib := resources.Get "js/lib/mathjax.js" | minify }}
-            {{ $array = $array | append $mathjaxLib }}
-        {{- else -}}
-            <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        {{- end -}}
-    {{- end -}}
+    <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {{- end -}}
 
 {{ if $.Site.Params.enableContentImageZoom -}}
@@ -52,14 +35,6 @@
 {{ $script := $array | resources.Concat "js/script.js" }}
 {{ if (ne hugo.Environment "development")}}{{ $script = $script | resources.Fingerprint "sha512" }}{{ end }}
 <script defer type="text/javascript" src="{{ $script.Permalink }}" {{ with $script.Data.Integrity }}integrity="{{ . }}"{{ end }}></script>
-
-{{ if (and (or (eq $.Site.Params.syntaxHighlighter "highlighterjs") (not $.Site.Params.syntaxHighlighter)) $.Site.Params.enableLazySyntaxHighlighting) -}}
-<script>
-    window.addEventListener("DOMContentLoaded", function() {
-        hljs.initHighlightingOnLoad();
-    });
-</script>
-{{- end -}}
 
 <!-- Site-wide user-included libraries -->
 {{ with $.Site.Data.libraries }}
