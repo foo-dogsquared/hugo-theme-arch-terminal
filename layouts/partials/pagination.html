@@ -1,44 +1,33 @@
 {{- if eq .Kind "page" -}}
   {{- if $.Site.Params.enableContentPagination -}}
   {{ if or .NextInSection .PrevInSection -}}
-  <div class="pagination">
-    <div class="pagination__header">
-      {{ with $.Site.Params.readOtherPostsLabel }}{{ . }}{{ else }}{{ i18n "read_more" }}{{ end }}
-    </div>
-    <div class="pagination__buttons">
-      {{ if .NextInSection }}
-      <a class="pagination__button previous" rel="prev" href="{{ .NextInSection.Permalink }}">
-        <span class="button icon">←</span>
-        <span class="button text">{{ .NextInSection.Title }}</span>
-      </a>
-      {{ else }}
-      <span></span>
-      {{ end }}
-      {{ if .PrevInSection }}
-      <a class="pagination__button next" rel="next" href="{{ .PrevInSection.Permalink }}">
-        <span class="button text">{{ .PrevInSection.Title }}</span>
-        <span class="button icon">→</span>
-      </a>
-      {{ else }}
-      <span></span>
-      {{ end }}
-    </div>
-  </div>
+  <nav class="pagination">
+    {{ if .NextInSection }}
+    <p>
+      <b>{{ i18n "page_next" }}</b>
+      <a class="pagination__page" rel="next" href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a>
+    </p>
+    {{ end }}
+      
+    {{ if .PrevInSection }}
+    <p>
+      <b>{{ i18n "page_prev" }}</b>
+      <a class="pagination__page" rel="prev" href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a>
+    </p>
+    {{ end }}
+  </nav>
   {{ end }}
   {{- end -}}
 {{- else -}}
   {{- if or .Paginator.HasNext .Paginator.HasPrev -}}
-  {{- $isListSectionsOnHome := (and .IsHome (eq $.Site.Params.listSiteSectionsOnHome true)) -}}
-  {{- $pages := cond ($isListSectionsOnHome) (.Paginate .Site.Sections).Pages .Data.Pages -}}
   <section class="pagination">
-    <div class="pagination__buttons">
     {{- if .Paginator.HasPrev -}}
       <a class="pagination__button previous" rel="first" href="{{ .Paginator.First.URL }}">
         <span class="button icon">&lt;&lt;</span>
         <span class="button text">{{ i18n "page_first" }}</span>
       </a>
 
-      {{- if not (eq .Paginator.First .Paginator.Prev) -}}  
+      {{- if ne .Paginator.First .Paginator.Prev -}}  
       <a class="pagination__button previous" rel="next" href="{{ .Paginator.Prev.URL }}">
         <span class="button icon">&lt;</span>
         <span class="button text">{{ i18n "page_next" }}</span>
@@ -48,7 +37,7 @@
 
     
     {{- if .Paginator.HasNext -}}
-      {{- if not (eq .Paginator.Last .Paginator.Next) -}}
+      {{- if ne .Paginator.Last .Paginator.Next -}}
       <a class="pagination__button next" rel="prev" href="{{ .Paginator.Next.URL }}">
         <span class="button text">{{ i18n "page_prev" }}</span>
         <span class="button icon">&gt;</span>
@@ -60,7 +49,6 @@
         <span class="button icon">&gt;&gt;</span>
       </a>
     {{- end -}}
-    </div>
   </section>
   {{- end -}}
 {{- end -}}

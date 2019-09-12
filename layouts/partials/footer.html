@@ -6,7 +6,6 @@
     {{- with $.Site.Data.contacts -}}
     <div class="footer__links">
     {{- $willUseIcons := (eq $.Site.Params.useLinkIcons true) -}}
-    {{- $socialIcons := "social-icons.svg" | absURL -}}
     {{- $socialLinks := (sort . "id" "asc") -}}
     {{- range $socialLinks -}}
     <a rel="me" class="footer__link" href="{{ .url }}">

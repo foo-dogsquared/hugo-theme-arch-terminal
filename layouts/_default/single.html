@@ -5,67 +5,30 @@
   {{- partial "optional/breadcrumbs.html" (dict "context" . "class" "site__breadcrumbs" "childClass" "site__breadcrumb") -}}
   {{ end -}}
 
-  {{- $date := .Date.Format "2006-01-02" }}
-  {{ if (and $.Site.Params.enableContentReaderMode (ne .File.Dir "/")) -}}
-    <h1 class="page__title--reader">{{ .Title }}</h1>
-    <div class="page__meta">
-      {{ with .Params.author -}}
-      <p class="page__guest-author">{{ i18n "content_by--reader" }} {{ . }}</p> 
-      {{ end }}
-      <p class="page__date">
-      {{ i18n "content_on--reader" }} <time datetime="{{ $date }}">{{ $date }}</time>
-      {{ if (ne .Lastmod .PublishDate) -}}
-      ({{ i18n "content_updated--reader" }} {{ .Lastmod.Format "2006-01-02" }})
-      {{ end }}
-      </p>
-      {{ if .IsTranslated }}
-      <p class="page__translations">
-        {{ i18n "content_translations" }}: 
-        {{ range .Translations }}
-        <a href="{{ .Permalink }}">{{ .Lang }}</a>
-        {{ end }}
-      </p>
-      {{ end }}
-    </div>
-  {{ else }}
-  <h1 class="page__title">
-      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-  </h1>
-
+  <h1 class="page__title">{{ .Title }}</h1>
   <div class="page__meta">
-    {{ if .Params.Date }}
-    <time class="page__date" datetime="{{ .Date.Format "2006-01-02" }}">
-    {{ .Date.Format "2006-01-02" }}
-    </time>
+    <p>
+    {{ with .Params.author -}}<span class="page__author">{{ i18n "content_by--reader" }} {{ . }}{{ end }}
+    <span class="page__date">
+    {{ i18n "content_on--reader" }} <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+    {{ if (ne .Lastmod .PublishDate) -}}
+    ({{ i18n "content_updated--reader" }} <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Lastmod.Format "2006-01-02" }}</time>)
     {{ end }}
-    {{ with .Params.Author }}
-    <span class="page__author">::
-      {{ . }}
     </span>
-    {{ end }}
-  
-    {{ if .Params.tags }}
-    <p class="page__tags">
-      {{- range .Params.tags -}}
-      <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
-      {{- end -}}
     </p>
-    {{ end }}
 
-    {{ if .IsTranslated -}}
+    <!-- If you want to enable tags, this is the suitable place for it. -->
+
+    {{ if .IsTranslated }}
     <p class="page__translations">
       {{ i18n "content_translations" }}: 
-      {{ range .Translations -}}
+      {{ range .Translations }}
       <a href="{{ .Permalink }}">{{ .Lang }}</a>
       {{ end }}
     </p>
     {{ end }}
-  </div>
-{{ end }}
-
-{{- with .Params.Cover -}}
-<img src="{{ . | absURL }}" class="page__cover" />
-{{- end -}}
+    </div>
+</div>
 
 {{ if .Params.toc }}
 <div class="page__toc">
@@ -74,7 +37,11 @@
 {{ end }}
 </div>
 
-<article class="page__content" {{ with $.Site.Params.contentIsStyled }}data-is-styled="true"{{ end }} {{ with $.Site.Params.useContentCounters }}data-use-content-counters="true"{{ end }}>
+<article class="page__content" {{ with $.Site.Params.useContentCounters }}data-use-content-counters="true"{{ end }}>
+  {{- with .Params.Cover -}}
+  <img src="{{ . | absURL }}" class="page__cover" />
+  {{- end -}}
+
   {{ .Content }}
 </article>
 

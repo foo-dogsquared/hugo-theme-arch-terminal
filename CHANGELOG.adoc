@@ -9,6 +9,22 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+== [2.2.0] - 2019-09-12
+=== Removed 
+* Remove the syntax highlighter choices and make PrismJS as the primary syntax highlighter. 
+The user can easily include their own library, anyways. 
+Thus, `params.syntaxHighlighter` will be removed from the site config options. 
+* Remove the choice of using MathJax v2. 
+Thus, `params.setMathjaxToV2` will be removed from the site config options. 
+* Remove the choice of using local MathJax. 
+The script is too big and composes overwhelmingly majority of the repo size. 
+Thus, `params.useLocalMathjax` is removed. 
+* Remove `params.enableCompactListMode` and make it as the default list view instead. 
+* Remove `params.enableContentReaderMode` and make it as the default content view instead. 
+* Remove `params.contentIsStyled`.
+
+
+
 
 == [2.1.0] - 2019-09-11
 === Added 

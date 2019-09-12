@@ -5,7 +5,7 @@
 </head>
 <body class="site">
   {{- $isNotTopLevelPage := and (eq .Kind "page") (ne .File.Dir "/") -}}
-  {{- if not (and $isNotTopLevelPage ($.Site.Params.enableContentReaderMode)) -}}
+  {{- if not $isNotTopLevelPage -}}
   {{ partialCached "header.html" . }}
   {{- end }}
   <main class="site__content">

@@ -28,10 +28,6 @@ body {
 }
 
 // Text formatting
-p { 
-    margin: var(--verticalRhythm) auto; 
-}
-
 a { 
     position: relative;
     color: currentColor; 
@@ -75,37 +71,7 @@ code {
 
 h1, h2, h3, 
 h4, h5, h6 {
-    margin-bottom: var(--verticalRhythm);
-}
-
-h1 { 
-    font-size: 2rem;
-    margin-top: calc(var(--verticalRhythm) * 2);
-    line-height: calc(var(--verticalRhythm) * 2);
-}
-
-h2, h3, h4, h5, h6 {
-    margin-top: var(--verticalRhythm);
-}
-
-h2 { 
-    font-size: 1.85rem;
-}
-
-h3 { 
-    font-size: 1.5rem;
-}
-
-h4 { 
-    font-size: 1.4rem;
-}
-
-h5 {
-    font-size: 1.25rem; 
-}
-
-h6 { 
-    font-size: 1.1rem;
+    margin: var(--verticalRhythm) auto;
 }
 
 blockquote {
@@ -118,14 +84,14 @@ blockquote {
 // Table
 table { 
     border-collapse: collapse;
-    margin: var(--verticalRhythm) 0;
+    display: block;
+    margin: var(--verticalRhythm) auto;
     overflow: auto;
-    table-layout: fixed;
     width: 100%;
 }
 
-table, td, th {
-	border: var(--primaryBorder) var(--accent);
+td, th {
+    border: var(--primaryBorder) var(--accent);
     padding: calc(var(--verticalRhythm) / 2);
 }
 
@@ -145,11 +111,6 @@ tbody {
             background: var(--background-light);
         }
     }
-}
-
-// Document structure
-nav {
-    & > * { margin: 1rem; }
 }
 
 article[data-use-content-counters="true"] {
@@ -211,34 +172,14 @@ article[data-use-content-counters="true"] {
 
 main {
     & > * {
-        margin-bottom: var(--verticalRhythm);
         &:first-child { margin-top: 0; }
         &:last-child { margin-bottom: 0; }
-    }
-
-    & h1:first-of-type {
-        margin-top: 0;
     }
 }
 
 
 // Multimedia
-iframe {
-    width: 100%;
-    height: auto;
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-video {
-    width: 100%;
-    height: auto;
-}
-
-audio {
+iframe, img, video, audio {
     width: 100%;
     height: auto;
 }
@@ -253,7 +194,7 @@ button {
     border: var(--primaryBorder) currentColor;
     color: var(--accent);
     font-family: var(--fontFamily);
-    font-size: 1.1rem;
+    font-size: var(--fontSize);
     padding: 0.75rem;
 
     &:hover {
