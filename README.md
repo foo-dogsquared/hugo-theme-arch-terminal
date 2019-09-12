@@ -79,8 +79,7 @@ It's supposed to be minimal, after all.)
 * Support RSS, Atom, and JSON feeds. 
 * Suitable for creating a quick single homepage portfolio and/or blogging. 
 * [MathJax](https://www.mathjax.org/) support. 
-* Lazy syntax highlighting support with [highlight.js](https://highlightjs.org/) 
-or [PrismJS](https://prismjs.com/). <sup>[[1](#footnoteref1)]</sup>
+* Lazy syntax highlighting support with [PrismJS](https://prismjs.com/). <sup>[[1](#footnoteref1)]</sup>
 * Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
 * Customizable normal and alternate theme appearance. The theme will also set 
@@ -90,7 +89,6 @@ the alternate theme even if you didn't customize it yourself!
 * LaTeX-like content counters. 
 * Customizable social links. 
 * Custom 404 messages. 
-* Detailed or compact list for your posts on the homepage. 
 * Custom content reader mode for easier readability for your readers. 
 * JSON+LD schema. 
 * Image zoom feature for your content. <sup>[[1](#footnoteref1)]</sup>
@@ -612,23 +610,12 @@ canonifyURLs = true
     # Puts a pagination section on the posts linking to the previous and next posts.
     # enableContentPagination = true
 
-    # Enable content reader mode for decluttered interface for your visitors 
-    # enableContentReaderMode = true
-
     # Include image zoom feature similar to Medium articles
     # enableContentImageZoom = true
-
-    # Enable compact list view for your post lists
-    # enableCompactListMode = true
 
     # Enables syntax highlighting. ;p
     # enableLazySyntaxHighlighting = true
 
-    # Set the syntax highlighter to be used. 
-    # Only valid options are "highlighterjs" or "prismjs".
-    # By default, it uses highlighter.js as the syntax highlighter if there's no set value. 
-    # syntaxHighlighter = "prismjs"
-    
     # Indicates to show the icon whether the link leads to a page or a section. 
     # The effect is visible if `hidePostsOnHome` is at least disabled. 
     # showPageTypeIcon = true
@@ -641,9 +628,6 @@ canonifyURLs = true
 
     # Enable MathJax support
     # enableMathjax = true
-
-    # If you want to use MathJax v2
-    # setMathjaxToV2 = true
 
     # 404
     # notFoundHeader = "404 Not Found :("
@@ -800,13 +784,8 @@ The theme supports lazy syntax highlighting (that doesn't rely on the
 to `true`. 
 
 This theme utilizes two syntax highlighting libraries for this which are 
-[highlight.js](https://highlightjs.org/) and [PrismJS](https://prismjs.com/). 
-By default, it relies on highlight.js library. 
-You can set the theme to use PrismJS library by setting `params.syntaxHighlighter` 
-to `prismjs`. 
+[PrismJS](https://prismjs.com/). 
 
-Take note that all of the syntax highlighters used here has all of the 
-languages as the packages. 
 For PrismJS, it also has the "Keep Markup" plugin. 
 If you want to replace the files, the scripts are located at `assets/js/lib` 
 of the theme folder. 
@@ -821,20 +800,9 @@ Like any of the features here, you have to manually activate it with
 `params.enableMathjax` with a `true` value. 
 
 By default, the theme use MathJax v3.0.0 (as of 2019-09-10). 
-If you want to use the previous major version for some reason, you can simply set 
-`params.setMathjaxToV2` to `true`. 
 
-If you want to configure MathJax, you can create a file in `layouts/partials/config/mathjax.html` 
-in the root folder and write it there. 
-
-Unlike most of the features that relies on the third-party libraries, this feature 
-specifically links through a CDN for performance reasons (and easy web caching for 
-other websites to use). 
-If by any chance repulsed from this idea, you can use a local copy of MathJax by 
-setting `params.useLocalMathjax` on. 
-**Take note this only works when you have Hugo extended version installed and only works with MathJax v3.** 
-Also, take extreme consideration and caution when enabling this since it'll 
-cause a 2.5MiB increase of the bandwidth to be used by your site. 
+If you want to configure MathJax, you can edit the script partial in 
+`layouts/partials/scripts.html` in the root folder and write it there. 
 
 
 
