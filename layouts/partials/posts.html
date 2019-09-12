@@ -17,78 +17,17 @@
     <ul class="pages__list">
     {{- range (.Paginate (where $pages "File.Dir" "!=" "/")).Pages -}}
     <li>
-    {{- if $.Site.Params.enableCompactListMode -}}
-    <article class="site__page--compact">
-        <h1 class="page__title--compact">
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h1>
-        <div class="page__meta--compact">
-            <date class="page__date" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</date>
-            {{ if ne .PublishDate .Lastmod -}}
-            (updated on <time class="page__modified-date" datetime="{{ .Lastmod }}">{{ .Lastmod.Format "2006-01-02" }}</time>)
-            {{- end -}}
-        </div>
-    </article>
-    {{- else -}}
-    <article class="site__page">
-        <div class="page__header">
-        <h1 class="page__title">
-            <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-        </h1>
-
-        {{- if $.Site.Params.showPageTypeIcon -}}
-            <svg class="page__icon">
-            {{- with .File -}}
-                {{- $isFolder := or (eq .BaseFileName "_index") (eq .BaseFileName nil) -}}
-                {{- $contentType := cond $isFolder "folder" "file" -}}
-                <use xlink:href="{{ $blogIcons }}#{{ $contentType }}"></use>
-            {{- else -}}
-                <use xlink:href="{{ $blogIcons }}#folder"></use>
-            {{- end -}}
-            </svg>
-        {{- end -}}
-        </div>
-
-        <div class="page__meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}" class="page__date">
-            {{ .Date.Format "2006-01-02" }}
-        </time>
-        {{- with .Params.Author -}}<span class="page__author">::
-            {{ . }}</span>{{- end -}}
-            
-            {{- if .Params.tags -}}
-            <div class="page__tags">
-                {{ range .Params.tags -}}
-                <a class="page__tag" rel="tag" href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">#{{- . -}}</a>
-                {{- end }}
+        <article class="site__page--compact">
+            <h1 class="page__title--compact">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h1>
+            <div class="page__meta--compact">
+                <date class="page__date" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</date>
+                {{ if ne .PublishDate .Lastmod -}}
+                (updated on <time class="page__modified-date" datetime="{{ .Lastmod }}">{{ .Lastmod.Format "2006-01-02" }}</time>)
+                {{- end -}}
             </div>
-            {{- end -}}
-
-        {{ if .IsTranslated }}
-        <p class="page__translations">
-            {{ i18n "content_translations" }}: 
-            {{ range .Translations }}
-            <a href="{{ .Permalink }}">{{ .Lang }}</a>
-            {{ end }}
-        </p>
-        {{ end }}
-        </div>
-    
-        {{- with .Params.Cover -}}
-        <img src="{{ . | absURL }}" class="page__cover" />
-        {{- end -}}
-    
-        <div class="page__content">
-        {{ if .Description }}
-        {{ .Description | safeHTML }}
-        {{ else }}
-        {{ .Summary | safeHTML }}
-        {{ end }}
-        </div>
-    
-        <a class="read-more button" href="{{.RelPermalink}}">{{ with $.Site.Params.readMoreLabel }}{{ . }}{{ else }}Read more{{ end }} →</a>
-    </article>
-    {{- end -}}
+        </article>
     </li>
     {{- end -}}
     </ul>

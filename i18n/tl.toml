@@ -49,13 +49,13 @@ other = "Maaari mo akong suportahan sa pamamagitan ng mga sumusunod na link."
 other = "Mga pagsasalin"
 
 [content_by--reader]
-other = "Mula kay"
+other = "mula kay"
 
 [content_on--reader]
-other = "Noong"
+other = "noong"
 
 [content_updated--reader]
-other = "Na-iupdate sa" 
+other = "na-iupdate sa" 
 
 # 404
 [404_header]

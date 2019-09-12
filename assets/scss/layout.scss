@@ -46,7 +46,7 @@
 }
 
 .site__breadcrumbs {
-    margin: 2rem 0;
+    margin: var(--verticalRhythm) 0;
 
     & > * { 
         margin: 0;
@@ -105,13 +105,6 @@
     padding-bottom: var(--verticalRhythm);
     text-align: center;
 
-    & > * {
-        margin: var(--verticalRhythm) 0;
-
-        &:first-child { margin-top: 0; }
-        &:last-child { margin-bottom: 0; }
-    }
-
     &::before {
         background-image: repeating-linear-gradient(-45deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
         display: block;
@@ -156,21 +149,17 @@
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
-
-    & > * { margin: 1rem; }
 }
 
 .footer__link {
+    margin: 1rem;
+
     &:hover { color: var(--accent); }
 }
 
 // Posts
 .site__pages {
     margin: 3rem 0;
-
-    & > .site__page:first-child {
-        margin-top: 0;
-    }
 }
 
 .pages__list {
@@ -179,16 +168,6 @@
 }
 
 .site__page {
-    margin-bottom: var(--verticalRhythm);
-
-    & > * { 
-        margin-bottom: calc(var(--verticalRhythm) / 2); 
-    }
-
-    & > *:first-child {
-        margin-top: 0;
-    }
-
     &--compact {
         display: flex;
         flex-flow: column wrap; 
@@ -202,57 +181,24 @@
     }
 }
 
-.page--regulation {
-    h1 {
-      justify-content: center;
-    }
-  
-    h2 {
-      justify-content: center;
-      margin-bottom: 10px;
-  
-      &+ h2 {
-        margin-top: -10px;
-        margin-bottom: 20px;
-      }
-    }
-  }
-
 .page__header {
     display: flex; 
     align-items: center;
 }
 
-.page__title {
-    border-bottom: dotted var(--accent) 0.25rem;
-    flex-grow: 10;
-    margin: 0;
-    margin-bottom: inherit;
-    text-decoration: none;
-    
-    & > * {
-        text-decoration: none;
-        padding: 0;
-    }
-
+.page__title { 
     &--compact {
         width: 100%;
         font-size: calc(var(--fontSize) * 1.2);
         margin: 0;
         line-height: calc(var(--verticalRhythm));
     }
-
-    &--reader {
-        margin-bottom: 0;
-    }
 }
 
 .page__meta {
     font-size: calc(var(--fontSize) * 0.9); 
 
-    & > * {
-        margin: 0;
-    }
+    & > * { margin: 0; }
 }
 
 .page__icon {
@@ -274,14 +220,11 @@
 
 .page__tags {
     color: var(--foreground-dark);
-
-    & > * {
-        margin-right: calc(var(--verticalRhythm) * 0.4);
-    }
 }
 
 .page__tag {
     text-decoration: none;
+    margin-right: calc(var(--verticalRhythm) * 0.4);
 }
 
 .page__cover {
@@ -294,96 +237,15 @@
     }
 }
 
-.page__toc {
-    margin: 2.2rem;
-}
-
-.page__content {
-    a {
-        color: var(--accent);
-    }
-
-    &[data-is-styled="true"] h4::before {
-        content: "> ";
-        color: var(--accent);
-    }
-
-    &[data-is-styled="true"] h5::before {
-        content: ">> ";
-        color: var(--accent);
-    }
-
-    &[data-is-styled="true"] h6::before {
-        content: ">>> ";
-        color: var(--accent);
-    }
-
-    & > * {
-        margin: var(--verticalRhythm) 0;
-    }
-}
-
 // Pagination
 .pagination {
+    border: var(--primaryBorder) var(--foreground);;
     margin-top: calc(var(--verticalRhythm) * 2);
-
-    & > * { 
-        margin-bottom: var(--verticalRhythm);
-        width: 100%; 
-    }
+    padding: 1rem;
 }
 
-.pagination__header {
-    font-size: 0.9rem;
-    margin: 5rem 0 0.25rem;
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.pagination__buttons {
-    $size: 2.75rem;
-    border-bottom: var(--primaryBorder) var(--foreground);
-    border-top: var(--primaryBorder) var(--foreground);
-    display: inline-flex;
-    flex-flow: row nowrap;
-    padding: ($size - 2rem) 0;
-
-    @media screen and (min-width: $phoneWidth) {
-        justify-content: space-evenly;
-    }
-}
-
-.pagination__button {
-    align-items: center;
-    display: inline-flex;
-    justify-content: space-evenly;
-    margin: 1rem auto;
-    text-align: center;
-    text-decoration: none;
-    width: none;
-    word-wrap: break-word;
-
-    .button.icon { 
-        background: var(--accent);
-        border-radius: 2em;
-        color: var(--background);
-        padding: 1rem;
-    }
-
-    .button.text {
-        display: none;
-        text-decoration: underline;
-    }
-
-    @media screen and (min-width: $phoneWidth) {
-        width: unset;
-        margin: 2rem auto;
-
-        & > * { margin: 0.5rem; }
-
-        .button.text { display: unset; }
-    }
+.pagination__page {
+    display: block;
 }
 
 // Archives

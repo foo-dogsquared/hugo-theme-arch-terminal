@@ -49,13 +49,13 @@ other = "You can support me through the following links."
 other = "Available translations"
 
 [content_by--reader]
-other = "By"
+other = "by"
 
 [content_updated--reader]
-other = "Updated on" 
+other = "updated on" 
 
 [content_on--reader]
-other = "On"
+other = "on"
 
 # 404
 [404_header]
