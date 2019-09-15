@@ -8,12 +8,20 @@
     {{ $array = $array | append $highlighter }}
 {{- end -}}
 
-{{ if $.Site.Params.enableMathjax -}}
+{{ if $.Site.Params.enableMathSupport -}}
     <!-- MathJax -->
     <!-- Put your custom MathJax configuration over here. -->
 
-    <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
 {{- end -}}
 
 {{ if $.Site.Params.enableContentImageZoom -}}
@@ -49,5 +57,9 @@
 
 <!-- If you're modifying to add your own thing, I recommend to start here. -->
 <!-- Otherwise, you do you. :) -->
+
+{{- if $.Site.GoogleAnalytics -}}
+{{- template "_internal/google_analytics.html" . -}}
+{{- end -}}
 
 {{- end -}}

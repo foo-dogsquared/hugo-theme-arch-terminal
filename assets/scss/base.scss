@@ -69,6 +69,8 @@ code {
     font-size: 0.95rem; 
 }
 
+h1 { line-height: initial; }
+
 h1, h2, h3, 
 h4, h5, h6 {
     margin: var(--verticalRhythm) auto;
