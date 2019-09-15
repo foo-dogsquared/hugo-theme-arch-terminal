@@ -9,6 +9,15 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+
+== [2.2.1] - 2019-09-15
+=== Changed
+* Revise the MathJax script loading mechanism.
+* Polish the stylesheets and layouts. 
+
+
+
+
 == [2.2.0] - 2019-09-12
 === Removed 
 * Remove the syntax highlighter choices and make PrismJS as the primary syntax highlighter. 

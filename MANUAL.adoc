@@ -562,12 +562,6 @@ There are some parameters in the site configuration you might want to try out if
 | Yes 
 | 
 
-| `params.enableContentReaderMode`
-| boolean 
-| Previews single page templates in the theme's custom reader mode by showing less post metadata and cutting off the site header.  
-| Yes 
-| Doesn't affect top-level pages. 
-
 | `params.enableJsonLdSchema` 
 | boolean 
 | Creates a https://www.w3.org/TR/json-ld/[JSON+LD] schema for additional SEO capabilities. 
@@ -839,23 +833,6 @@ image::docs/post-breadcrumbs-enabled.png[]
 
 In order to be able to use it, set the `params.enableBreadcrumbs` to `true` in your site config file. 
 
-
-
-=== Content reader mode 
-
-You can set your content (single page templates) to the theme's custom reader mode to declutter your posts and to make reading experience more soothing. 
-
-Enable it by setting `params.enableContentReaderMode` to `true`. 
-
-Here's the default look of the content page of the theme:
-
-image::docs/content-reader-mode-disabled.png[Content reader mode disabled, width=100%]
-
-And here's the content reader mode in action:
-
-image::docs/content-reader-mode-enabled.png[Content reader mode enabled, width=100%]
-
-NOTE: This doesn't apply to top-level pages. 
 
 
 
