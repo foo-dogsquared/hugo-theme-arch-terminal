@@ -3,7 +3,7 @@
 <head>
   {{ partial "head.html" . -}}
 </head>
-<body class="site">
+<body>
   {{- $isNotTopLevelPage := and (eq .Kind "page") (ne .File.Dir "/") -}}
   {{- if not $isNotTopLevelPage -}}
   {{ partialCached "header.html" . }}

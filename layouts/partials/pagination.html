@@ -20,7 +20,7 @@
   {{- end -}}
 {{- else -}}
   {{- if or .Paginator.HasNext .Paginator.HasPrev -}}
-  <section class="pagination">
+  <section class="pagination-list">
     {{- if .Paginator.HasPrev -}}
       <a class="pagination__button previous" rel="first" href="{{ .Paginator.First.URL }}">
         <span class="button icon">&lt;&lt;</span>
