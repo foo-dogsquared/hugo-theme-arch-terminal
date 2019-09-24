@@ -6,15 +6,6 @@ html, body {
 
 html {
     box-sizing: border-box;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-}
-
-body {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--fontFamily);
@@ -27,15 +18,34 @@ body {
     }
 }
 
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: var(--maxWidth);
+    height: inherit;
+    margin: 0 auto;
+
+    padding: 1rem;
+
+    & > *:not(:last-child) {
+        margin: 0;
+        margin-bottom: 1.25rem;
+    }
+}
+
 // Text formatting
 a { 
     position: relative;
     color: currentColor; 
-
-    code { 
-        border: dashed 0.15rem var(--accent-light);
-    }
 }
+
+p { margin: var(--verticalRhythm) 0; }
 
 kbd {
     padding: 0.2rem;
@@ -62,17 +72,16 @@ pre {
   }
 }
 
-code {
-    background: var(--accent);
-    color: var(--background-light);
-    padding: 0.25rem; 
-    font-size: 0.95rem; 
-}
-
 h1 { line-height: initial; }
 
 h1, h2, h3, 
 h4, h5, h6 {
+    margin: var(--verticalRhythm) auto;
+}
+
+h2 { margin-top: calc(var(--verticalRhythm) * 2); }
+
+ul, ol {
     margin: var(--verticalRhythm) auto;
 }
 
