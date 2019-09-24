@@ -10,6 +10,16 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
+== [2.2.2] - 2019-09-24 
+=== Changed 
+* Update the pagination layout 
+* Update the stylesheets 
+
+=== Fixed 
+* Revert the math support parameter name to `params.enableMathjax` (that was a leftover, sorry) 
+
+
+
 == [2.2.1] - 2019-09-15
 === Changed
 * Revise the MathJax script loading mechanism.
