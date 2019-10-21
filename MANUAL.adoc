@@ -11,6 +11,7 @@
 A fork of the original https://github.com/panr/hugo-theme-terminal[Hugo Terminal theme] with some of its original feature set being removed to be replaced for new ones.
 
 Aimed for technical writers, programmers, tech enthusiasts, and people with a do-it-yourself (DIY) spirit. 
+As such, some IKEA-style assembly will be required. 
 
 This theme provides a minimal and readable base theme while providing a lot of ways to customize it. 
 
@@ -29,11 +30,9 @@ Please make sure that you have it installed.
 
 == Objectives 
 
-The author of this extended theme (@foo-dogsquared) has several objectives 
-in creating this theme. 
+The author of this extended theme (@foo-dogsquared) has several objectives in creating this theme. 
 
-Reading this might make you understand the limitations and the strength of this 
-theme. 
+Reading this might make you understand the limitations and the strength of this theme. 
 
 Here are the following objectives the theme aims to do: 
 
@@ -48,14 +47,12 @@ Meaning no custom shortcodes and minimal custom frontmatter for your content.
 This also enables easy migration and future-proofing your content 
 as much as possible. 
 
-* Go out of its way as much as possible for your content while providing 
-customization options in order to fit your general needs. 
+* Go out of its way as much as possible for your content while providing customization options in order to fit your general needs. 
 You focus on implementing the more advanced and more specific stuff. 
 
 * Be as easy as possible to be able to modify the source files of the theme. 
 This theme will not be able to cover all possible (or even common) use cases. 
-This encourages creating your own solution if you aren't able to find what you're 
-looking for. 
+This encourages creating your own solution if you aren't able to find what you're looking for. 
 
 
 
@@ -65,9 +62,7 @@ looking for.
 Here's a 
 https://foo-dogsquared.github.io/hugo-theme-arch-terminal-demo/[demo] 
 of the theme. 
-It features a fairly customized version showing off what you can do once 
-you invested a bit of your time to experiment and explore the options with this 
-theme. 
+It features a fairly customized version showing off what you can do once you invested a bit of your time to experiment and explore the options with this theme. 
 
 The raw files can be easily seen in 
 https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/[my GitHub repo]. 
@@ -82,8 +77,7 @@ You can also get the
 https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/config.toml[configuration] 
 of the theme used from the demo. 
 It should be usable and can be a great starting point to explore 
-the available options and can be used to experiment along reading through the 
-documentation. 
+the available options and can be used to experiment along reading through the documentation. 
 
 
 
@@ -111,19 +105,16 @@ Here's a general list of options that you can set and experiment with this theme
 It's supposed to be minimal, after all.)
 
 * Support RSS, Atom, and JSON feeds. 
-* Suitable for creating a quick single homepage portfolio and/or blogging. 
 * https://www.mathjax.org/[MathJax] support. 
 * Lazy syntax highlighting support https://prismjs.com/[PrismJS]. footnote:requires_hugo_extended[] 
 * Multilingual mode support. 
 * Theme switch toggle (also known as dark mode).
-* Customizable normal and alternate theme appearance. The theme will also set 
 the alternate theme even if you didn't customize it yourself! 
 (Though, may result in ugly colors.) footnote:requires_hugo_extended[]
 * Site breadcrumbs. 
 * LaTeX-like content counters. 
 * Customizable social links. 
 * Custom 404 messages. 
-* Custom content reader mode for easier readability for your readers. 
 * Twitter cards, OpenGraph schema, and JSON+LD schema. 
 * Image zoom feature for your content. footnote:requires_hugo_extended[]
 * Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. footnote:requires_hugo_extended[]
@@ -271,37 +262,10 @@ copyright = "Unless explicitly stated, all content released here are licensed un
 ----
 
 
+=== Site configuration options
 
-=== Changing appearance 
-
-NOTE: Editing and applying SCSS files is only possible with Hugo extended version. 
-If you are using the basic version, override the styles with a CSS stylesheet at `static/scss/main.min.css` (or the equivalent `static` location at the assets folder). 
-
-If you want to change common styles like the background color, text color, or the main color, you can add a `config.scss` file in `assets/scss` in your Hugo project directory.
-You can view the link:assets/scss/default.scss[default SCSS config file] for a reference to what variables should be filled. 
-
-If you want to override the styles, you can create a file named `extend.scss` in `assets/scss` of your Hugo project directory. 
-From there, you can simply add/modify/remove some styling rules yourself. 
-
-If you want to add some custom fonts, make sure you'll define them through https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face[`@font-face`] rule. 
-For placing font files, you can put them in the `static/fonts` folder. 
-
-For those who haven't encountered SCSS yet, it's almost like a superset of CSS but with additional stuff. 
-Here's a https://sass-lang.com/guide[guide] and the https://sass-lang.com/documentation/[documentation] page to get started. 
-
-
-
-
-== Making a portfolio site
-
-This theme is suitable for creating a single portfolio page.
-Please continue to the following sections for the available options and other stuff you might need to know.
-
-
-
-=== Related configuration options 
-
-Here are the main site config options you may want to look out for if you want to create a single page portfolio site:
+There are some parameters in the site configuration you might want to try out. 
+Here are the options you can look out for. 
 
 [cols="5*",options="header"]
 |===
@@ -336,213 +300,6 @@ Also appears in the `<title>` of the web page.
 It'll be converted to Markdown so valid Markdown string can be put in the file.
 | Yes 
 | 
-
-| `params.enableMathjax`
-| boolean
-| Enables MathJax in the page. 
-| Yes (but not for me) 
-| For performance reasons, it'll be used through a CDN. 
-Also uses version 3. 
-If you want to use the previous major version (2.7.6), you can set `setMathjaxToV2` to `true`.
-
-| `params.enableThemeToggle` 
-| boolean 
-| Enables theme toggling. 
-Puts an additional theme toggle button at the header logo. 
-| Yes (but no for others) 
-| 
-
-| `params.keywords`
-| array[string]
-| A list of keywords related to your site. 
-| Yes
-| Quite important if you consider search engine optimization (SEO). 
-
-| `params.notFoundHeader`
-| string 
-| The message of the 404 header. 
-| Yes 
-| 
-
-| `params.notFoundLinkMessage`
-| string 
-| The message of the 404 link message. 
-| Yes 
-| 
-
-| `params.notFoundMessage`
-| string
-| The message of the 404 text. 
-| Yes 
-| 
-
-| `params.subtitle`
-| string
-| The subtitle for your blog.
-Usually, this is where you put your position, occupation, or whatever. 
-| Yes
-| Also appears in the `<title>` of the web page in the format `<TITLE> - <SUBTITLE>` in the homepage.
-
-| `params.tagline`
-| string
-| This will appear in the homepage as the first header to be seen.
-| Yes
-| 
-
-|===
-
-
-
-=== Adding projects
-
-You can also add some projects to your data by adding a data file named `projects` (i.e. `projects.json`, `projects.yaml`, etc.) into your https://gohugo.io/templates/data-templates/[data folder].
-Make sure that the data file holds an array/list of objects/dictionaries with the specified fields.
-
-When there's at least one project, a projects section will be added into your homepage and the data added in the appropriate folder is added under it.
-
-Anyhow, here's the following keys/fields that the theme look for:
-
-[cols="5*",options="header"]
-|===
-| Key
-| Data type
-| Description
-| Optional
-| Additional notes
-
-| `id`
-| string
-| The identifier for the project.
-| 
-| 
-
-| `name`
-| string
-| The name of the project. 
-This is the name that'll appear in the homepage. 
-| 
-| 
-
-| `description`
-| string
-| The description of the project.
-| Yes
-| 
-
-| `link`
-| string
-| The website/homepage of the working project. 
-| Yes
-| This is not where the link to the remote repository of the project. 
-
-| `repo`
-| string
-| The link to the repo of the project.
-| Yes 
-| 
-
-|===
-
-If you want to see a live example of it, you can check out my https://github.com/foo-dogsquared/foo-dogsquared.github.io[the repo of my own site] and check the output of it in https://foo-dogsquared.github.io/[my site].
-
-
-=== Adding contact
-
-If you want to add some links to your other stuff like GitHub, GitLab, Twitter, and whatnot, you can add a data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) in the https://gohugo.io/templates/data-templates/[data folder].
-Like the `projects` data file, make sure that it contains an array/list of objects/dictionaries with the specified fields. 
-
-Here's a table of the following key/fields that theme looks for:
-
-[cols="5*",options="header"]
-|===
-| Key
-| Data type
-| Description
-| Optional
-| Additional notes
-
-| `id`
-| string
-| The identifier for the object.
-| 
-| This ID will be used as the `symbol` in the SVG spritesheet file in `static/social-icons.svg` in the theme folder. 
-The social icons are extracted from https://github.com/simple-icons/simple-icons[Simple Icons set]. 
-
-| `url`
-| string
-| The hyperlink of the additional contact.
-| 
-| 
-
-| `name`
-| string
-| The name of the contact link.
-| Yes
-| If the links are set to be text, the value of this key will be used.
-Otherwise, if the links are set to be text and there's no value to this key, the `id` will be used, instead.
-
-| `img` 
-| string 
-| The URL of the image to be used. 
-This'll be only used if `useLinkIcons` is set to `true`. 
-| Yes 
-| Any contact with the missing key will not appear in the footer so make sure all of the contacts have this key. 
-
-|===
-
-By default, the hyperlinks for your contacts are in text. 
-If you want to make it into an icon, you could set the parameter `params.useLinkIcons` to `true` in the site config file.
-Be cautious of using this, since any unavailable icons will not be rendered. 
-
-.`useLinkIcons` set to `true`
-image::docs/show-link-icons-enabled.png[width=100%]
-
-.`useLinkIcons` set to `false` (recommended)
-image::docs/show-link-icons-disabled.png[width=100%]
-
-
-
-=== Color scheme toggle configuration 
-
-You can have theme toggling (or dark mode as others might call it) for your site. 
-It is disabled by default but you can enable it by setting `params.enableThemeToggle` on your site configuration. 
-
-You can also customize your second theme from its background to its font (actually, I think that's it). 
-See the link:assets/scss/default.scss[`assets/scss/default.scss`] file to see the variables needed for the second theme. 
-
-If the second theme is not explicitly configured, it'll be derived from the first theme. 
-Beware as it will usually get ugly results. 
-Manually configuring it yourself is still the best way. 
-
-
-
-
-== Making a blog site
-
-This theme is also suitable to be a blogging theme. 
-Most of the stuff from making a single homepage site also applies here.
-
-With the focus on blogging, content organization should be a breeze.
-(Of course, as long as it follows the way of https://gohugo.io/content-management/organization/[organizing content from Hugo].)
-
-Unlike the original theme, it doesn't find a name of the folder to list its pages. 
-Instead, all of the files and directories under `content/` should be able to be listed (except for the top-level files probably).
-
-If you want to make a post series, you could either put the content files under `posts/` and assign the same category to all of them or simply make a folder named after the series and put the content files there.
-
-
-
-=== Related configuration options 
-
-There are some parameters in the site configuration you might want to try out if you're using it for blogging. 
-
-[cols="5*",options="header"]
-|===
-| Key
-| Data type
-| Description
-| Optional
-| Additional notes
 
 | `params.enableBreadcrumbs`
 | boolean
@@ -625,6 +382,12 @@ from the content folder.
 | Yes
 | 
 
+| `params.keywords`
+| array[string]
+| A list of keywords related to your site. 
+| Yes
+| Quite important if you consider search engine optimization (SEO). 
+
 | `params.listSiteSectionsOnHome`
 | boolean
 | Indicates if the homepage should list the site sections (top-level directories of the site) instead of the pages 
@@ -636,6 +399,25 @@ make have this effect visible.
 | array[string] 
 | Lists the sections you want to be featured on the homepage. 
 If absent, it just lists from all sections (except the top-level pages). 
+| Yes 
+| 
+
+
+| `params.notFoundHeader`
+| string 
+| The message of the 404 header. 
+| Yes 
+| 
+
+| `params.notFoundLinkMessage`
+| string 
+| The message of the 404 link message. 
+| Yes 
+| 
+
+| `params.notFoundMessage`
+| string
+| The message of the 404 text. 
 | Yes 
 | 
 
@@ -671,6 +453,19 @@ the content folder) in the home page.
 | Yes, completely
 | For the theme, a page is a "folder" if its base filename is `_index`. 
 
+| `params.subtitle`
+| string
+| The subtitle for your blog.
+Usually, this is where you put your position, occupation, or whatever. 
+| Yes
+| Also appears in the `<title>` of the web page in the format `<TITLE> - <SUBTITLE>` in the homepage.
+
+| `params.tagline`
+| string
+| This will appear in the homepage as the first header to be seen.
+| Yes
+| 
+
 | `params.useContentCounters`
 | boolean 
 | Puts a counter similar to 
@@ -681,6 +476,113 @@ Anything after that means you need to rethink your document structure (unless yo
 writing technical standards/specifications). 
 
 |===
+
+
+=== Changing appearance 
+
+NOTE: Editing and applying SCSS files is only possible with Hugo extended version. 
+If you are using the basic version, override the styles with a CSS stylesheet at `static/scss/main.min.css` (or the equivalent `static` location at the assets folder). 
+
+If you want to change common styles like the background color, text color, or the main color, you can add a `config.scss` file in `assets/scss` in your Hugo project directory.
+You can view the link:assets/scss/default.scss[default SCSS config file] for a reference to what variables should be filled. 
+
+If you want to override the styles, you can create a file named `extend.scss` in `assets/scss` of your Hugo project directory. 
+From there, you can simply add/modify/remove some styling rules yourself. 
+
+If you want to add some custom fonts, make sure you'll define them through https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face[`@font-face`] rule. 
+For placing font files, you can put them in the `static/fonts` folder. 
+
+For those who haven't encountered SCSS yet, it's almost like a superset of CSS but with additional stuff. 
+Here's a https://sass-lang.com/guide[guide] and the https://sass-lang.com/documentation/[documentation] page to get started. 
+
+
+
+
+== Adding contact
+
+If you want to add some links to your other stuff like GitHub, GitLab, Twitter, and whatnot, you can add a data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) in the https://gohugo.io/templates/data-templates/[data folder].
+Like the `projects` data file, make sure that it contains an array/list of objects/dictionaries with the specified fields. 
+
+Here's a table of the following key/fields that theme looks for:
+
+[cols="5*",options="header"]
+|===
+| Key
+| Data type
+| Description
+| Optional
+| Additional notes
+
+| `id`
+| string
+| The identifier for the object.
+| 
+| This ID will be used as the `symbol` in the SVG spritesheet file in `static/social-icons.svg` in the theme folder. 
+The social icons are extracted from https://github.com/simple-icons/simple-icons[Simple Icons set]. 
+
+| `url`
+| string
+| The hyperlink of the additional contact.
+| 
+| 
+
+| `name`
+| string
+| The name of the contact link.
+| Yes
+| If the links are set to be text, the value of this key will be used.
+Otherwise, if the links are set to be text and there's no value to this key, the `id` will be used, instead.
+
+| `img` 
+| string 
+| The URL of the image to be used. 
+This'll be only used if `useLinkIcons` is set to `true`. 
+| Yes 
+| Any contact with the missing key will not appear in the footer so make sure all of the contacts have this key. 
+
+|===
+
+By default, the hyperlinks for your contacts are in text. 
+If you want to make it into an icon, you could set the parameter `params.useLinkIcons` to `true` in the site config file.
+Be cautious of using this, since any unavailable icons will not be rendered. 
+
+.`useLinkIcons` set to `true`
+image::docs/show-link-icons-enabled.png[width=100%]
+
+.`useLinkIcons` set to `false` (recommended)
+image::docs/show-link-icons-disabled.png[width=100%]
+
+
+
+== Color scheme toggle configuration 
+
+You can have theme toggling (or dark mode as others might call it) for your site. 
+It is disabled by default but you can enable it by setting `params.enableThemeToggle` on your site configuration. 
+
+You can also customize your second theme from its background to its font (actually, I think that's it). 
+See the link:assets/scss/default.scss[`assets/scss/default.scss`] file to see the variables needed for the second theme. 
+
+If the second theme is not explicitly configured, it'll be derived from the first theme. 
+Beware as it will usually get ugly results. 
+Manually configuring it yourself is still the best way. 
+
+
+
+
+== Making a blog site
+
+This theme is also suitable to be a blogging theme. 
+Most of the stuff from making a single homepage site also applies here.
+
+With the focus on blogging, content organization should be a breeze.
+(Of course, as long as it follows the way of https://gohugo.io/content-management/organization/[organizing content from Hugo].)
+
+Unlike the original theme, it doesn't find a name of the folder to list its pages. 
+Instead, all of the files and directories under `content/` should be able to be listed (except for the top-level files probably).
+
+If you want to make a post series, you could either put the content files under `posts/` and assign the same category to all of them or simply make a folder named after the series and put the content files there.
+
+
 
 
 === Content organization
@@ -891,17 +793,13 @@ It can be customized by providing a data file named `query` which holds a list o
 |===
 
 
-
-=== Other tidbits
-
-There are a couple of options for miscellaneous stuff and info that you might want to find out. 
-
-==== "Back to top" button 
+=== "Back to top" button 
 
 You can simply put a simple back to top button with `params.enableBackToTopLink`. 
 It's located at the footer just before your contact links. 
 
-==== Icon on post list
+
+=== Icon on post list
 
 Another one of the features you could try it out is the icons that'll appear in the side of the post list. 
 This indicates whether or not the list item is a page or a section. 
@@ -927,11 +825,9 @@ In order to get started, add the language(s) that you'll be hosting your content
 For consistency, the theme requires a language code based from https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry[IANA Language Subtag Registry] as defined from the https://www.w3.org/International/questions/qa-choosing-language-tags[W3 documentation]. 
 
 The language selector can be found at the very bottom of the site. 
-Any content with translations are also introduced along with the content metadata and 
-the title. 
+Any content with translations are also introduced along with the content metadata and the title. 
 
-The theme should be able to support changing the tiny details such as the 
-title and the menu as long as you provided the appropriate data. 
+The theme should be able to support changing the tiny details such as the title and the menu as long as you provided the appropriate data. 
 
 You can find the translations files at link:./i18n[`i18n`] folder with the 
 available languages. 
@@ -949,17 +845,12 @@ It's going to make site config management more organized.
 
 === Adding it sitewide 
 
-TIP: If you want finer control, I recommend to modify the script partial of the theme 
-instead (at `theme/arch-terminal/layouts/partials/scripts.html`). 
-By doing it this way, you can add some additional scripts such as configuration 
-of your library or rearranging it. 
+TIP: If you want finer control, I recommend to modify the script partial of the theme instead (at `theme/arch-terminal/layouts/partials/scripts.html`). 
+By doing it this way, you can add some additional scripts such as configuration of your library or rearranging it. 
 
-This theme supports adding your own JS libraries and CSS stylesheets to your site 
-quickly by utilizing a data file named `libraries`. 
+This theme supports adding your own JS libraries and CSS stylesheets to your site quickly by utilizing a data file named `libraries`. 
 
-By providing this feature, you can quickly add some features such as supporting 
-engineering-oriented content with https://mermaidjs.github.io/[Mermaid], 
-https://www.chartjs.org/[Chart.js], and similar libraries. 
+By providing this feature, you can quickly add some features such as supporting engineering-oriented content with https://mermaidjs.github.io/[Mermaid], https://www.chartjs.org/[Chart.js], and similar libraries. 
 Or you could replace the syntax highlighters here. 
 
 Similar to adding your projects and contact links, the data file should hold a list 
@@ -1422,7 +1313,6 @@ Here are some of the features that are considered to be implemented.
 Any help with this task list by pull requests are very appreciated. 
 
 * Algolia integration
-* Easy GitHub projects integration (for quickly creating your portfolio site)
 
 
 
