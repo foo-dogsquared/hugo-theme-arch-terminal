@@ -83,6 +83,8 @@ h2 { margin-top: calc(var(--verticalRhythm) * 2); }
 
 ul, ol {
     margin: var(--verticalRhythm) auto;
+    
+    ul, ol { margin: unset; }
 }
 
 blockquote {
@@ -191,8 +193,7 @@ main {
 
 // Multimedia
 iframe, img, video, audio {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
 }
 
 svg {

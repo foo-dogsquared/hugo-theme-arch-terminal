@@ -128,3 +128,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
+.imageblock > .content {
+    display: flex;
+    justify-content: center;
+    padding: var(--verticalRhythm);
+}
