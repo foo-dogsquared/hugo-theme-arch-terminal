@@ -7,9 +7,9 @@ Table of Contents
 * [Features](#features)
 * [Installation](#installation)
 * [Building with the theme](#building-with-the-theme)
-* [Making it as a portfolio site](#making-it-as-a-portfolio-site)
+* [Adding contact](#adding-contact)
 * [Making it as a blogging theme](#making-it-as-a-blogging-theme)
-* [Adding your own JS libraries](#adding-your-own-js-libraries)
+* [Adding your own JS libraries](#adding-your-own-css-and-js-libraries)
 * [Lazy syntax highlighting](#lazy-syntax-highlighting)
 * [MathJax support](#mathjax-support)
 * [How to contribute](#how-to-contribute)
@@ -22,6 +22,8 @@ Also focuses on including support for Asciidoctor content.
 
 Aimed for technical writers, programmers, tech enthusiasts, and 
 people with a do-it-yourself (DIY) spirit. 
+As such, an IKEA-style assembly will be required. 
+
 It also aims to be a portfolio and/or blog of a single author. 
 If it's supposed to be a site for multiple author, then this is not 
 for you (or you could hack it yourself). 
@@ -249,83 +251,7 @@ Go on and change the colors and believe!
 
 
 
-## Making it as a portfolio site 
-
-If you're only using this theme as a portfolio site, the theme only requires 
-the following configuration settings in your site configuration (aside from the 
-usual): 
-
-* `title` - the title of your site
-* `author.name` - the full name of the author 
-
-That's it. 
-Of course, it'll result in a barebone portfolio page. 
-You can see more options in the [manual](./MANUAL.adoc) at the 
-*Making a portfolio site* section. 
-
-
-### Adding projects 
-
-What would a portfolio be without some featured works? 
-
-In order to show your projects, the theme requires a data file named 
-`projects` (`data/projects.{yaml,json,toml}`). 
-Make sure that the data file holds a list of objects with specific key/fields. 
-
-I'll show you an example first before showing the required keys. 
-The example will be in JSON format since it is easy to create a root array with it. 
-
-```json
-[
-    {
-        "id": "freebies-hunt",
-        "name": "Freebies Hunt",
-        "link": "https://freebies-hunt.netlify.com/",
-        "repo": "https://github.com/foo-dogsquared/freebies-hunt",
-        "description": "It's a website of free and open source resources."
-    },
-    {
-        "id": "hugo-theme-arch-terminal",
-        "name": "Arch Terminal Hugo Theme",
-        "repo": "https://github.com/foo-dogsquared/hugo-theme-arch-terminal"
-    },
-    {
-        "id": "latex-note-manager",
-        "repo": "https://github.com/foo-dogsquared/a-remote-repo-full-of-notes-of-things-i-do-not-know-about/"
-    }
-]
-``` 
-
-Here are the following keys that the theme finds and how it relates with the 
-output:
-
-* `id` - The identifier of the project. It'll be used as the basis for sorting 
-the project list. Take advantage of this if you want certain projects to be 
-featured first. _It is required._
-
-* `name` - The name of the project that'll appear in the output. This is an 
-optional key. If there's no `name` key, it'll use the `id` as the name, instead. 
-
-* `link` - The working link of the project. It could be an optional website or 
-the working version of the web app. You should not put the software repo link 
-here. Also optional. 
-
-* `repo` - The repo of the project whether be it a GitHub repo, Sourceforge page, 
-or a Subversion repo. It is an optional key. 
-
-* `description` - The description of the project. Optional as eff. 
-
-If you have a valid data at the ready and compiled it with the theme, you should 
-have a projects section at your homepage. 
-
-With the earlier example, it should show similar to the result below:
-
-![The barebones portfolio #1](./docs/barebones-portfolio-1.png) 
-
-Yeah. It's lacking something. Let's add some contact links for the porfolio. 
-
-
-### Adding contact 
+## Adding contact 
 
 What would a portfolio be without the creator's recognition? 
 

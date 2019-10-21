@@ -5,10 +5,6 @@
 
     {{- .Content -}}
 
-    {{- partial "author/projects.html" . -}}
-
-    {{- partial "author/support.html" . -}}
-
     {{- if not $.Site.Params.hidePostsOnHome -}}
         {{- partial "posts.html" . -}}
     {{- end -}}

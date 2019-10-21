@@ -10,7 +10,22 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 
 
-== [2.2.2] - 2019-09-24 
+== [2.3.0] - 2019-10-21 
+=== Removed 
+
+* Remove the portfolio layout. 
+I find it to be a to add a portfolio when you can just write it in a content file. 
+It is also more suitable to be an extension to the theme than a built-in feature. 
+
+=== Changed 
+
+* Update the stylesheets. 
+* Change the location of the output formats. 
+
+
+
+
+== [2.2.2] - 2019-09-24
 === Changed 
 * Update the pagination layout 
 * Update the stylesheets 
