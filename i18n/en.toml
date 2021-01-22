@@ -31,10 +31,7 @@ other = "Back to top"
 [site_pages_header]
 other = "Posts"
 
-[site_sections_header]
-other = "Sections"
-
-# Author 
+# Author
 [projects_header]
 other = "Projects"
 
@@ -52,7 +49,7 @@ other = "Available translations"
 other = "by"
 
 [content_updated--reader]
-other = "updated on" 
+other = "updated on"
 
 [content_on--reader]
 other = "on"

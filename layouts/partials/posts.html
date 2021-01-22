@@ -11,11 +11,11 @@
 
 <section class="site__pages">
     {{ if .IsHome -}}
-        <h1>{{ if $.Site.Params.listSiteSectionsOnHome }}{{ i18n "site_sections_header" }}{{ else }}{{ i18n "site_pages_header" }}{{ end }}</h1>
+        <h1>{{ i18n "site_pages_header" }}</h1>
     {{- end -}}
 
     <ul class="pages__list">
-    {{- range (.Paginate (where $pages "File.Dir" "!=" "/")).Pages -}}
+    {{- range (.Paginate $pages).Pages -}}
     <li>
         <article class="site__page--compact">
             <h1 class="page__title--compact">

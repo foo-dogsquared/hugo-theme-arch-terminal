@@ -31,10 +31,7 @@ other = "Balik sa taas"
 [site_pages_header]
 other = "Mga nilalaman"
 
-[site_sections_header]
-other = "Mga pangkat"
-
-# Author 
+# Author
 [projects_header]
 other = "Mga proyekto"
 
@@ -55,7 +52,7 @@ other = "mula kay"
 other = "noong"
 
 [content_updated--reader]
-other = "na-iupdate sa" 
+other = "na-iupdate sa"
 
 # 404
 [404_header]
