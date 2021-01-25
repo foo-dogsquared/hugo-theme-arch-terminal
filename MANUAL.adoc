@@ -500,10 +500,38 @@ Here's a https://sass-lang.com/guide[guide] and the https://sass-lang.com/docume
 
 == Adding contact
 
-If you want to add some links to your other stuff like GitHub, GitLab, Twitter, and whatnot, you can add a data file named `contacts` (i.e. `contacts.json`, `contacts.yaml`, etc.) in the https://gohugo.io/templates/data-templates/[data folder].
-Like the `projects` data file, make sure that it contains an array/list of objects/dictionaries with the specified fields. 
+In most cases, you may want to link your profile from other platforms to provide more ways of reaching your audience.
+Thus, you want to provide a list of links which this theme provides a way to declaratively configure that list.
 
-Here's a table of the following key/fields that theme looks for:
+Unlike link:https://themes.gohugo.io/[most themes from the community] where it only lets you configure your contacts for a handful of social platforms, this theme provides the entire link:https://simpleicons.org/[Simple Icons] set.
+footnote:[Practically a couple of hundred icons since not all are social media.]
+
+All you need to do is to create a data file at `data/{slug}/contacts.{json,toml,yaml}`.
+The following table provides the schema of the configuration you need to know.
+
+[cols="5*",options="header"]
+|===
+| Key
+| Data type
+| Description
+| Optional
+| Additional notes
+
+| `useIcon`
+| boolean
+| Use the SVG icon (from Simple Icons) instead of the text.
+| Yes
+|
+
+| `links`
+| array of objects
+| The link of your social media.
+| Technically yes but practically no :)
+|
+
+|===
+
+With the `links` array, each object also follows a schema.
 
 [cols="5*",options="header"]
 |===
@@ -516,15 +544,15 @@ Here's a table of the following key/fields that theme looks for:
 | `id`
 | string
 | The identifier for the object.
-| 
-| This ID will be used as the `symbol` in the SVG spritesheet file in `static/social-icons.svg` in the theme folder. 
-The social icons are extracted from https://github.com/simple-icons/simple-icons[Simple Icons set]. 
+|
+| This ID will be used as the `symbol` in the SVG spritesheet file in `static/social-icons.svg` in the theme folder.
+The social icons are extracted from https://github.com/simple-icons/simple-icons[Simple Icons set].
 
 | `url`
 | string
 | The hyperlink of the additional contact.
-| 
-| 
+|
+|
 
 | `name`
 | string
@@ -533,18 +561,11 @@ The social icons are extracted from https://github.com/simple-icons/simple-icons
 | If the links are set to be text, the value of this key will be used.
 Otherwise, if the links are set to be text and there's no value to this key, the `id` will be used, instead.
 
-| `img` 
-| string 
-| The URL of the image to be used. 
-This'll be only used if `useLinkIcons` is set to `true`. 
-| Yes 
-| Any contact with the missing key will not appear in the footer so make sure all of the contacts have this key. 
-
 |===
 
-By default, the hyperlinks for your contacts are in text. 
+By default, the hyperlinks for your contacts are in text.
 If you want to make it into an icon, you could set the parameter `params.useLinkIcons` to `true` in the site config file.
-Be cautious of using this, since any unavailable icons will not be rendered. 
+Be cautious of using this, since any unavailable icons will not be rendered.
 
 .`useLinkIcons` set to `true`
 image::docs/show-link-icons-enabled.png[width=100%]
@@ -588,7 +609,8 @@ If you want to make a post series, you could either put the content files under 
 === Content organization
 
 The way how the theme organizes content (and encourages) is simple.
-The theme considers all of the pages and sections except for the top-level pages.
+The theme simply considers all of the content in the content directory as-is.
+To do something with it, you can look into what Hugo offers such as link:https://gohugo.io/content-management/build-options/[their build options] allowing you to exclude a certain page or a directory.
 
 You can also specify to list only certain sections by setting https://gohugo.io/functions/where/#mainsections[`params.mainSections`].
 
@@ -680,7 +702,7 @@ Assuming that you have `content/archives.md` as the page for the archive, create
 ---
 title: "Archives"
 date: 2019-08-28T14:32:44+08:00
-layout: "archive"
+layout: "archives"
 ---
 ----
 

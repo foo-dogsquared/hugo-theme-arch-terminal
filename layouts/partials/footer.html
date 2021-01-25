@@ -10,11 +10,9 @@
     {{- range $socialLinks -}}
     <a rel="me" class="footer__link" href="{{ .url }}">
         {{- if $willUseIcons -}}
-        {{ if .img -}}
-            <img class="icon" src="{{ .img }}" alt="{{ .id }}" />
-        {{ end }}
+          {{ partial "components/simple-icon.svg" .id }}
         {{- else -}}
-        {{- if .name -}}{{ .name }}{{- else -}}{{ .id }}{{- end -}}
+          {{- if .name -}}{{ .name }}{{- else -}}{{ .id }}{{- end -}}
         {{- end -}}
     </a>
     {{- end -}}

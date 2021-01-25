@@ -1,0 +1,29 @@
+{{- /*
+Here's where all of the inline partials are defined.
+If the partial is short enough, it should be put here.
+*/ -}}
+
+
+{{- /* This is a partial that creates an icon from the icon templates.
+       It accepts a dictionary with the specified keys:
+
+       - id - The name of the resource in a specific set.
+       - output - The output location of the resource relative to the base URL.
+                  It can accept a formatted string (e.g., "icons/brand/%s.svg") where 'id' will be used.
+       - template - The template file to be used.
+                    It should relative to the asset directory.
+*/ -}}
+{{- define "partials/components/icon.html" }}
+  {{- $icon := . }}
+  {{- $res := resources.ExecuteAsTemplate (printf $icon.output $icon.id) $icon.id (resources.Get $icon.template) }}
+  <svg class="icon">
+    <use href="{{ $res.Permalink }}#{{ $icon.id }}"></use>
+  </svg>
+{{- end }}
+
+
+{{- /* A partial that aliases the Heroicon template from the icon partial */ -}}
+{{- define "partials/components/simple-icon.svg" }}
+  {{- partial "components/icon.html" (dict "id" . "output" "icons/brand/%s.svg" "template" "templates/simple-icon.svg") }}
+{{ end }}
+

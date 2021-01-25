@@ -15,6 +15,9 @@ Plus, it removes the burden of maintaining this feature only for this theme so t
 * Remove `listSiteSectionsOnHome` parameter.
 (It's kind of useless now that I think about it.)
 
+* Remove the `img` key from contacts schema as it fully relies on Simple Icons set now.
+It's there for the sake of consistency though I acknowledge not all icons can be fitted into the set.
+
 
 === Changed
 
@@ -23,6 +26,9 @@ It now requires the `layout` key in the frontmatter instead of the `type` key.
 
 * Change the included libraries to be linked from link:https://cdnjs.com/[cdnjs] instead of vendoring them.
 Despite the significance of CDNs are dwindling on personal websites in favor of client-side security features such as link:https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity[subresource integrity] and link:https://developer.mozilla.org/en-US/docs/Web/Privacy#fingerprinting[fingerprinting], a lot of the libraries are popular and it is best to make it easier for the users.
+
+* Update the Simple Icons integration by Hugo modules instead of static downloading of their assets (which is always incomplete, my mistake :>).
+This, in turn, now requires the theme to have the Go runtime to be installed in order to install it.
 
 
 
