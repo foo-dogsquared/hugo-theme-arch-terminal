@@ -21,6 +21,9 @@ Plus, it removes the burden of maintaining this feature only for this theme so t
 * Change the archives as a layout instead of a type — i.e., `layouts/_default/archives.html` instead of `layouts/archives/`.
 It now requires the `layout` key in the frontmatter instead of the `type` key.
 
+* Change the included libraries to be linked from link:https://cdnjs.com/[cdnjs] instead of vendoring them.
+Despite the significance of CDNs are dwindling on personal websites in favor of client-side security features such as link:https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity[subresource integrity] and link:https://developer.mozilla.org/en-US/docs/Web/Privacy#fingerprinting[fingerprinting], a lot of the libraries are popular and it is best to make it easier for the users.
+
 
 
 

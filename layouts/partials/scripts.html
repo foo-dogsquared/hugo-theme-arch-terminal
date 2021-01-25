@@ -1,18 +1,24 @@
 {{ $array := slice }}
 
 {{- if $.Site.Params.enableLazySyntaxHighlighting -}}
-    {{ $highlighter := resources.Get "js/lib/prism.js" }}
-    {{ $highlighterStyle := resources.Get "css/prism.css" | minify }}
+    {{- /* These are copied from cdnjs but be sure to make the script loading to defer. */ -}}
+    {{- /* This could be automated somehow with cdnjs API and get the latest version of the library.
+           Then print the resulting script tag but I'm not too sure about getting the latest version would be good practice.
+           Still, it's a thing to ponder whether this should be implemented or not.
 
-    <link rel="stylesheet" href="{{ $highlighterStyle.Permalink }}"> 
-    {{ $array = $array | append $highlighter }}
+           Take note this is possible with Hugo templates.
+           Hugo has a JSON parse function that can also fetch remote URLs so you can easily create dynamic content (e.g., GitHub repos and activities).
+        */ -}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-twilight.min.css" integrity="sha512-akb4nfKzpmhujLUyollw5waBPeohuVf0Z5+cL+4Ngc4Db+V8szzx6ZTujguFjpmD076W8LImVIbOblmQ+vZMKA==" crossorigin="anonymous" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-zc7WDnCM3aom2EziyDIRAtQg1mVXLdILE09Bo+aE1xk0AM2c2cVLfSW9NrxE5tKTX44WBY0Z2HClZ05ur9vB6A==" crossorigin="anonymous"></script>
 {{- end -}}
 
 {{ if $.Site.Params.enableMathjax -}}
     <!-- MathJax -->
     <!-- Put your custom MathJax configuration over here. -->
 
-    <!-- <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+    <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script>
         window.addEventListener("load", function () {
             const script = document.createElement("script");
@@ -24,22 +30,22 @@
     </script>
 {{- end -}}
 
-{{ if $.Site.Params.enableContentImageZoom -}}
-{{ $zoomImageLib := resources.Get "js/lib/medium-zoom.js" | resources.ExecuteAsTemplate "js/_zoom.js" . | minify }}
-{{ $array = $array | append $zoomImageLib }}
+{{- if $.Site.Params.enableContentImageZoom -}}
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous"></script>
 {{- end -}}
 
 <!-- The custom script -->
 {{ $global := resources.Get "js/toggle-node.js" | minify }}
 {{- $array = $array | append $global -}}
 
+<!-- Site-wide search component -->
 {{- if $.Site.Params.enableSiteSearch -}}
-{{ $searchEngineLib := resources.Get "js/lib/fuse.min.js" | minify  }}
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.min.js"></script>
 {{ $searchEngineSearchScript := resources.Get "js/search-post.js" | resources.ExecuteAsTemplate "js/_search.js" .| minify }}
-{{ $searchEngine := slice $searchEngineLib $searchEngineSearchScript | resources.Concat "js/_search.js" }}
-{{ $array = $array | append $searchEngine }}
+{{ $array = $array | append $searchEngineSearchScript }}
 {{- end -}}
 
+<!-- Linking the resulting custom script -->
 {{ $script := $array | resources.Concat "js/script.js" }}
 {{ if (ne hugo.Environment "development")}}{{ $script = $script | resources.Fingerprint "sha512" }}{{ end }}
 <script defer type="text/javascript" src="{{ $script.Permalink }}" {{ with $script.Data.Integrity }}integrity="{{ . }}"{{ end }}></script>
@@ -58,8 +64,6 @@
 <!-- If you're modifying to add your own thing, I recommend to start here. -->
 <!-- Otherwise, you do you. :) -->
 
-{{- if $.Site.GoogleAnalytics -}}
 {{- template "_internal/google_analytics.html" . -}}
-{{- end -}}
 
 {{- end -}}
