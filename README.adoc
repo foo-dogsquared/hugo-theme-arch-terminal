@@ -39,6 +39,7 @@ It's also well-commented so you can use it as a starter configuration for this t
 
 This is more like a "Getting Started" guide so please read the link:./MANUAL.adoc[manual] for more details.
 This document only opens up a part of the things that you can do with this theme.
+It includes more things such as snippets for various features, FAQ, and developer guidelines so you may want to take a looksies there.
 
 You think you can escape the manual?
 Not a chance.
@@ -248,108 +249,8 @@ Go on and change the colors and believe!
 
 
 
-== Adding contact
+== Customization
 
-What would a portfolio be without the creator's recognition?
-
-You can add a list of contact by providing a data file named `contacts` (`data/contacts.{json,yaml,toml}`).
-Similar to the projects data file, it should hold a list/array of objects with specific keys/fields.
-
-Like with the projects, I'll show you another example of the data in JSON format.
-
-[source,json]
-----
-[
-    {
-        "id": "github",
-        "url": "https://github.com/foo-dogsquared/",
-        "name": "GitHub"
-    },
-    {
-        "id": "keybase",
-        "url": "https://keybase.io/foo_dogsquared",
-        "name": "Keybase"
-    },
-    {
-        "id": "twitter",
-        "url": "https://twitter.com/foo_dogsquared"
-    }
-]
-----
-
-Now, the list of keys. Thankfully, it's a lot shorter this time.
-
-* `id` - The identifer of the contact. Similar to the `id` key from the `projects` data.
-* `url` - The URL of the contact link.
-* `name` - The name that'll appear in the output. Similar to the `name` key from the `projects` data, it'll use the `id` key if it's absent.
-*This key is optional.*
-
-The results from the previous example?
-A list of contact links in the footer.
-
-image:./docs/contact-links-sample.png[Contact links in the footer]
-
-
-=== Filling the rest of the content
-
-Something's missing in the portfolio.
-Oh!
-It's the description (and perhaps other stuff).
-You can simply create a new content file named `_index.{md,adoc}` and write some stuff about it.
-
-You can create another page at `content/$NAME.{md,adoc}` and write some more.
-However, the theme will not list any top-level pages.
-That's convenient.
-Though, I do need a way to make it accessible for the visitor.
-
-A simple problem requires simple answer.
-We'll just add it into the main menu at the header.
-
-Configuring menus is not different from any other themes (though, nested menus are not supported).
-
-Let's say we have the following content directory structure:
-
-[source,sh]
-----
-content
-├── about.adoc
-├── contact.adoc
-└── _index.adoc # This is your homepage content
-----
-
-To make them accessible through a menu, simply write similar configuration that follows:
-
-[source,toml]
-----
-[menu]
-    [[menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "about/"
-
-    [[menu.main]]
-        identifier = "contact"
-        name = "Contact"
-        url = "contact/"
-----
-
-Ta-da!
-Now, you have a simple and complete portfolio page with the projects, contacts, stuff, and everything!
-
-
-=== Other options
-
-You can fiddle with other options.
-Please see link:./MANUAL.adoc[the manual] for more information and options.
-
-I'm pretty sure you want to see how to configure some theme and alternative themes, or how you could add a quick support section where you can e-beg for stuff.
-
-
-
-
-== Making it as a blogging theme
-
-Let's say you want to make it as a blogging theme as well.
 This theme has you covered.
 
 Take note that most of the stuff from making the portfolio site applies to this section.
@@ -505,17 +406,10 @@ canonifyURLs = true
     # The tagline that'll appear in the homepage as the first header.
     tagline = "Making near destructive blogs all around the world."
 
-    # Hide posts on home. :)
-    # hidePostsOnHome = true
-
     # SEO improvements
     # enableTwitterCard = true
     # enableOpenGraphSchema = true
     # enableJsonLdSchema = true
-
-    # Indicates if the site sections should be listed instead.
-    # Requires `hidePostsOnHome` to be disabled.
-    # listSiteSectionsOnHome = true
 
     # Puts a pagination section on the posts linking to the previous and next posts.
     # enableContentPagination = true
@@ -525,10 +419,6 @@ canonifyURLs = true
 
     # Enables syntax highlighting. ;p
     # enableLazySyntaxHighlighting = true
-
-    # Indicates to show the icon whether the link leads to a page or a section.
-    # The effect is visible if `hidePostsOnHome` is at least disabled.
-    # showPageTypeIcon = true
 
     # Shows breadcrumbs in the post.
     # enableBreadcrumbs = true
@@ -546,152 +436,11 @@ canonifyURLs = true
 
     # Enable content counters similar to LaTeX counters
     # useContentCounters = true
+
+    # Use the icons of your contacts
+    # Take note this uses the icon from the Simple Icons set.
+    # useLinkIcons = true
 ----
-
-
-=== RSS, Atom, and JSON feeds support
-
-For those who are looking to find more ways of distributing their content into the world of crap, an output feed might fill your needs.
-
-This theme support three major output feed formats:
-
-* https://cyber.harvard.edu/rss/rss.html[RSS]
-* https://tools.ietf.org/html/rfc4287[Atom]
-* https://jsonfeed.org/[JSON feeds]
-
-The theme also support output feeds for site sections so that your visitors can subscribe to only a specific section of your site.
-
-In order to enable it, utilize https://gohugo.io/templates/output-formats[custom output formats] to your Hugo site config.
-
-Here's a sample template of enabling support of all of them.
-
-[source,toml]
-----
-[mediaTypes]
-    [mediaTypes."application/atom+xml"]
-        suffixes = ["atom"]
-
-    [mediaTypes."application/rss+xml"]
-        suffixes = ["rss"]
-
-[outputFormats]
-    [outputFormats.RSS]
-        mediaType = "application/rss+xml"
-        baseName = "index"
-        isPlainText = false
-
-    [outputFormats.Atom]
-        mediaType = "application/atom+xml"
-        baseName = "index"
-        isPlainText = false
-
-[outputs]
-    home = ["HTML", "RSS", "ATOM", "JSON"]
-    section = ["HTML", "RSS", "ATOM", "JSON"]
-----
-
-You can access them through `{{ $.Site.BaseURL }}/index.{rss,atom,json}`.
-
-For specific site sections, you can visit them through the following template link:
-
-....
-{{ $.Site.BaseURL }}/{{ section }}/index.{rss,atom,json}
-....
-
-
-
-
-== Adding your own CSS and JS libraries
-
-=== Adding it sitewide
-
-This theme supports adding your own set of third-party (or your own) libraries to your site.
-Thus, it can bring some features you want such as additional support for engineering-focused content with third-party libraries such as https://mermaidjs.github.io/[Mermaid] and https://www.chartjs.org/[Chart.js].
-You can also replace MathJax with https://katex.org/[KaTeX] or replace the syntax highlighter libraries used here.
-
-It can be done by utilizing a data file named `libraries` that holds a list of objects with the following keys:
-
-* `type` (string) indicates the type whether it's a CSS or a JS library.
-Can only accept possible values, `css` and `js`.
-
-* `url` (string) which is the source of the script.
-Also accepts relative links from your site which you can bring through the https://gohugo.io/content-management/static-files/[static folder].
-
-* `weight` (number) dictates the importance of the script.
-The less weight, the higher the precedence so make sure the important scripts have the least weight value.
-
-* `sync` (boolean) indicates that the script shall be included with the page rendering.
-All scripts will be asynchronously delivered (with `async` attribute).
-Also, it'll bring down the perceived performance so make sure the script you'll be setting with this `key` is quite important to be loaded first.
-*This key is optional.*
-
-* `defer` (boolean) indicates that the script will be deferred.
-Once the value is `true`, the script will be deferred no matter what.
-*This key is optional.*
-
-If you want finer control, I recommend to copy the script partial of this theme (at `themes/$THEME_NAME/layouts/partials/scripts.html`) and modify it.
-
-
-=== Adding it for specific posts
-
-TIP: If you plan on future-proofing your content, I recommend to embed them in the document instead.
-This is a theme-specific feature and may pose some problems in the future when you're going to migrate it.
-
-You can also add libraries for specific posts by providing the `libs` in the content frontmatter.
-It is based on one of the content from the https://github.com/gohugoio/hugoBasicExample/blob/master/content/sketch/lines-from-center.html[basic
-example].
-
-It is more or less the same.
-The `libs` key is an object/dictionary where it describes CSS and JS libraries.
-
-Here's the frontmatter from the previously linked example.
-
-[source,yaml]
-----
----
-title: "Lines from center"
-date: 2019-03-04T22:15:42-03:00
-description: "this is a p5js sketch"
-libs:
-  js:
-    - https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js
----
-----
-
-When the page is built, it'll have the p5.js library on the page specifically for that post.
-
-Take note that all of the scripts included in this way are deferred.
-If you want finer control (with the added benefit of future-proofing your content since this is theme-specific feature), you can embed them on the document itself, instead.
-
-For Markdown files, you can simply write raw HTML.
-For Asciidoctor documents, you can write the HTML inside of a https://asciidoctor.org/docs/user-manual/#passthroughs[passthrough block].
-
-
-
-
-== Lazy syntax highlighting
-
-*This feature is only possible with Hugo extended verison.*
-You can get around this with using the `libraries` data file.
-
-The theme supports lazy syntax highlighting (that doesn't rely on the `highlight` shortcode) by setting `params.enableLazySyntaxHighlighting` to `true`.
-
-This theme utilizes two syntax highlighting libraries for this which are https://prismjs.com/[PrismJS].
-
-For PrismJS, it also has the "Keep Markup" plugin.
-If you want to replace the files, the scripts are located at `assets/js/lib` of the theme folder.
-
-
-
-
-== MathJax support
-
-This theme supports mathematical typesetting with https://www.mathjax.org/[MathJax].
-Like any of the features here, you have to manually activate it with `params.enableMathjax` with a `true` value.
-
-By default, the theme use MathJax v3.0.0 (as of 2019-09-10).
-
-If you want to configure MathJax, you can edit the script partial in `layouts/partials/scripts.html` in the root folder and write it there.
 
 
 

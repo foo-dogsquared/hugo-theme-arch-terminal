@@ -60,25 +60,16 @@ This encourages creating your own solution if you aren't able to find what you'r
 
 == Demo
 
-Here's a
-https://foo-dogsquared.github.io/hugo-theme-arch-terminal-demo/[demo]
-of the theme.
+Here's a https://foo-dogsquared.github.io/hugo-theme-arch-terminal-demo/[demo] of the theme.
 It features a fairly customized version showing off what you can do once you invested a bit of your time to experiment and explore the options with this theme.
 
-The raw files can be easily seen in
-https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/[my GitHub repo].
+The raw files can be easily seen in https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/[my GitHub repo].
 It should give you an idea of using it in a real-life example.
-The demo also utilizes
-https://travis-ci.com/[Travis CI] as the deployment tool.
-Check out the
-https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/.travis.yml[config file]
-of it to get an example.
+The demo also utilizes https://travis-ci.com/[Travis CI] as the deployment tool.
+Check out the https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/.travis.yml[config file] of it to get an example.
 
-You can also get the
-https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/config.toml[configuration]
-of the theme used from the demo.
-It should be usable and can be a great starting point to explore
-the available options and can be used to experiment along reading through the documentation.
+You can also get the https://github.com/foo-dogsquared/hugo-theme-arch-terminal-demo/blob/master/config.toml[configuration] of the theme used from the demo.
+It should be usable and can be a great starting point to explore the available options and can be used to experiment along reading through the documentation.
 
 
 
@@ -89,11 +80,16 @@ Here are the different feature highlights that
 the theme offers:
 
 * A recreation of the original theme, built from scratch.
+
 * Focuses on being minimal while being customizable enough for you.
 The choice of bloating your website is in your hands! :)
+
 * Easy configuration and customization with https://sass-lang.com/[SCSS]. footnote:requires_hugo_extended[Requires Hugo extended version.]
+
 * Primarily focuses on including support for https://asciidoctor.org/[Asciidoctor].
+
 * Different approach of content organization.
+
 * Removed https://nodejs.org/[Node] dependencies from the original theme.
 
 The theme aims to be minimal but provides a variety of customizability like having a set of building blocks.
@@ -106,18 +102,18 @@ Here's a general list of options that you can set and experiment with this theme
 It's supposed to be minimal, after all.)
 
 * https://www.mathjax.org/[MathJax] support.
-* Lazy syntax highlighting support https://prismjs.com/[PrismJS]. footnote:requires_hugo_extended[]
+* Lazy syntax highlighting support https://prismjs.com/[PrismJS].
 * Multilingual mode support.
 * Theme switch toggle (also known as dark mode).
-the alternate theme even if you didn't customize it yourself!
+It will create the alternate theme even if you didn't customize it yourself!
 (Though, may result in ugly colors.) footnote:requires_hugo_extended[]
 * Site breadcrumbs.
 * LaTeX-like content counters.
 * Customizable social links.
 * Custom 404 messages.
 * Twitter cards, OpenGraph schema, and JSON+LD schema.
-* Image zoom feature for your content. footnote:requires_hugo_extended[]
-* Built-in search indexing and widget with https://fusejs.io/[Fuse.js]. footnote:requires_hugo_extended[]
+* Image zoom feature for your content.
+* Built-in search indexing and widget with https://fusejs.io/[Fuse.js].
 * Quick taxonomy search query list.
 * Adding custom JS libraries for the whole site or for specific posts.
 * Google Analytics integration.
@@ -202,10 +198,9 @@ Finally, download the theme component with `hugo mod get`.
 For future references, here is the list for the libraries included with this theme along with their version:
 
 * https://www.mathjax.org/[MathJax] v3.0.0 under Apache License Version 2.0 (all versions)
-* https://highlightjs.org/[highlight.js] v9.15.10 under MIT License (with additional terms)
-* https://prismjs.com/[PrismJS] v1.17.1 under MIT License
+* https://prismjs.com/[PrismJS] v1.23.0 under MIT License
 * https://fusejs.io/[Fuse.js] v3.4.5 under Apache License Version 2.0
-* https://github.com/francoischalifour/medium-zoom[medium-zoom] v1.0.4 under MIT License
+* https://github.com/francoischalifour/medium-zoom[medium-zoom] v1.0.6 under MIT License
 
 
 
@@ -327,7 +322,7 @@ It'll be converted to Markdown so valid Markdown string can be put in the file.
 | boolean
 | Adds a Medium-like image zoom functionality in your content with the https://github.com/francoischalifour/medium-zoom/[medium-zoom] library.
 | Yes
-| You can set the background color with `params.setContentImageZoomBackground`.
+|
 
 | `params.enableContentPagination`
 | boolean
@@ -446,13 +441,6 @@ If absent, it just lists from all sections (except the top-level pages).
 | Yessir
 |
 
-| `params.setContentImageZoomBackground` footnote:requires_hugo_extended[]
-| string
-| Sets the background of https://github.com/francoischalifour/medium-zoom/[medium-zoom] image overlay.
-Accepts any valid CSS color string including `rgb(a)`, `hsl(a)`, or hex codes.
-| Yes
-|
-
 | `params.subtitle`
 | string
 | The subtitle for your blog.
@@ -507,31 +495,7 @@ Unlike link:https://themes.gohugo.io/[most themes from the community] where it o
 footnote:[Practically a couple of hundred icons since not all are social media.]
 
 All you need to do is to create a data file at `data/{slug}/contacts.{json,toml,yaml}`.
-The following table provides the schema of the configuration you need to know.
-
-[cols="5*",options="header"]
-|===
-| Key
-| Data type
-| Description
-| Optional
-| Additional notes
-
-| `useIcon`
-| boolean
-| Use the SVG icon (from Simple Icons) instead of the text.
-| Yes
-|
-
-| `links`
-| array of objects
-| The link of your social media.
-| Technically yes but practically no :)
-|
-
-|===
-
-With the `links` array, each object also follows a schema.
+The data requires an array of objects with the following schema.
 
 [cols="5*",options="header"]
 |===
@@ -573,6 +537,30 @@ image::docs/show-link-icons-enabled.png[width=100%]
 .`useLinkIcons` set to `false` (recommended)
 image::docs/show-link-icons-disabled.png[width=100%]
 
+For completeness sake, here's an example data.
+
+[source, json]
+----
+[
+    {
+        "id": "github",
+        "url": "https://github.com/john_dodo/",
+        "name": "GitHub"
+    },
+    {
+        "id": "keybase",
+        "url": "https://keybase.io/john_dodo",
+        "name": "Keybase"
+    },
+    {
+        "id": "twitter",
+        "url": "https://twitter.com/john_dodo",
+        "name": "Twitter"
+    }
+]
+----
+
+
 
 
 == Color scheme toggle configuration
@@ -590,20 +578,10 @@ Manually configuring it yourself is still the best way.
 
 
 
-== Making a blog site
-
-This theme is also suitable to be a blogging theme.
-Most of the stuff from making a single homepage site also applies here.
+== Customization
 
 With the focus on blogging, content organization should be a breeze.
 (Of course, as long as it follows the way of https://gohugo.io/content-management/organization/[organizing content from Hugo].)
-
-Unlike the original theme, it doesn't find a name of the folder to list its pages.
-Instead, all of the files and directories under `content/` should be able to be listed (except for the top-level files probably).
-
-If you want to make a post series, you could either put the content files under `posts/` and assign the same category to all of them or simply make a folder named after the series and put the content files there.
-
-
 
 
 === Content organization
@@ -613,14 +591,12 @@ The theme simply considers all of the content in the content directory as-is.
 To do something with it, you can look into what Hugo offers such as link:https://gohugo.io/content-management/build-options/[their build options] allowing you to exclude a certain page or a directory.
 
 You can also specify to list only certain sections by setting https://gohugo.io/functions/where/#mainsections[`params.mainSections`].
-
-By default, the theme list posts in the homepage.
-If you want to disable it, have the `params.hidePostsOnHome` set to `true`.
+It requires an array of directories relative to the content directory where it will list all of the content under those specified folders — e.g., `mainSections = [ "articles" "projects" ]`.
 
 
 === Content frontmatter
 
-Assuming you didn't modify the theme in any way, here are some of the keys in the content frontmatter used by the theme:
+Here are some of the keys in the content frontmatter used by the theme:
 
 [cols="5*",options="header"]
 |===
@@ -681,7 +657,6 @@ Also used for the output format feeds (RSS, Atom, JSON feed).
 |===
 
 
-
 === Content pagination
 
 The theme offers an optional pagination section on single page templates where the previous and next entries are shown.
@@ -689,7 +664,6 @@ The theme offers an optional pagination section on single page templates where t
 To enable this feature, set `params.enableContentPagination` to `true`.
 
 image::docs/enable-content-pagination.png[Content pagination has been enabled, width=100%]
-
 
 
 === Post archive page
@@ -724,7 +698,6 @@ Here's a sample of the archive page in the site.
 image::docs/archive-sample-page.png[width:100%]
 
 
-
 === Content counters
 
 You can enable content counters that behave similarly to https://en.wikibooks.org/wiki/LaTeX/Counters[LaTeX counters] by setting `params.useContentCounters` to `true`.
@@ -738,7 +711,6 @@ The counters are only enough to support the HTML tags `<h2>`–`<h6>` (`<h1>` is
 Any more than that (if that's even possible) is not supported anymore and can only go through some more tweaking.
 
 
-
 === Site breadcrumbs in post
 
 The most useful one is the breadcrumbs feature that'll appear in the top of your posts.
@@ -748,7 +720,8 @@ image::docs/post-breadcrumbs-enabled.png[]
 
 In order to be able to use it, set the `params.enableBreadcrumbs` to `true` in your site config file.
 
-
+NOTE: Each segment is extracted from the title of each section (i.e., `title` key from the frontmatter).
+Be sure to have the title set in the frontmatter for each section (e.g., create a file named `_index.md` and write the frontmatter there).
 
 
 === Content image zoom
@@ -759,20 +732,9 @@ in Medium articles. footnote:requires_hugo_extended[]
 Of course, it's disabled by default and should be manually enabled with
 `params.enableContentImageZoom`.
 
-It relies on https://github.com/francoischalifour/medium-zoom/[medium-zoom] for the
-functionality and its script can be found on `assets/js/lib/medium-zoom.js`.
-The script is modified to only add the zoom functionality to the valid elements in
-the CSS selector string `{zoom_image_css_selector}` which can only be found on
-single page templates.
+It relies on https://github.com/francoischalifour/medium-zoom/[medium-zoom] for the functionality.
 
 NOTE: The version used in the theme is at v1.0.4.
-
-The theme offers one way of customizing the background color with
-`params.setContentImageZoomBackground`.
-It accepts a valid CSS color string such as a hexadecimal code,
-RGB (and RGBA), HSL (and HSLA), and the color name.
-The default background of the overlay is `{zoom_image_default_bg}`.
-
 
 
 === Quick taxonomy search list
@@ -955,27 +917,18 @@ different ports for your `localhost`).
 
 == MathJax support
 
-MathJax is included with the theme and needs almost no configuration
-in order for it to work.
+MathJax is included with the theme and needs almost no configuration in order for it to work.
 Like most of the highlighted features here, it's disabled by default.
 You can enable by setting `params.enableMathjax` to `true`.
 
-By default, it uses v3.0.0 which is the latest production
-version as of 2019-09-06.
+By default, it uses v3.0.0 which is the latest production version as of 2019-09-06.
 
-Take note that it uses the default configuration so there
-might be some need to configure it.
-In case that you do need configuration, you can copy the script partial
-(at `theme/{theme_name}/layouts/partials/scripts.html`) and add the configuration
-at the appropriate location (there should be a comment telling you where to put it).
+Take note that it uses the default configuration so there might be some need to configure it.
+In case that you do need configuration, you can copy the script partial (at `theme/{theme_name}/layouts/partials/scripts.html`) and add the configuration at the appropriate location (there should be a comment telling you where to put it).
 
-NOTE: Read the
-https://docs.mathjax.org/en/latest/[official MathJax documentation for more information]
-and to understand more how this theme integrates MathJax.
+NOTE: Read the https://docs.mathjax.org/en/latest/[official MathJax documentation for more information] and to understand more how this theme integrates MathJax.
 
-Assuming you didn't change the configuration or anything, here are
-the breakdown for writing LaTeX in the web according to the
-https://docs.mathjax.org/en/latest/start.html#tex-and-latex-input[MathJax documentation].
+Assuming you didn't change the configuration or anything, here are the breakdown for writing LaTeX in the web according to the https://docs.mathjax.org/en/latest/start.html#tex-and-latex-input[MathJax documentation].
 
 
 === Markdown content
@@ -1031,39 +984,21 @@ For display/block math mode, make a stem block.
 
 == Lazy syntax highlighting
 
-NOTE: This requires Hugo extended version in order to work.
+Lazy syntax highlighting (enabling it without the `highlight` shortcode) is supported through https://prismjs.com/[PrismJS].
+The syntax highlighter encourages the https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings] in order to color the syntax.
 
-Lazy syntax highlighting (enabling it without the `highlight` shortcode)
-is supported through https://prismjs.com/[PrismJS].
-The syntax highlighter encourages the
-https://www.w3.org/TR/html52/textlevel-semantics.html#the-code-element[semantic HTML for code listings]
-in order to color the syntax.
-
-Fortunately, both of the default Markdown parsers and Asciidoctor
-outputs semantic HTML for code listings so both of them are supported.
+Fortunately, both of the default Markdown parsers and Asciidoctor outputs semantic HTML for code listings so both of them are supported.
 
 By default, the lazy syntax highlighting is disabled.
-To enable it, set the `enableLazySyntaxHighlighting` under
-`params` to `true` in your site config file.
-
-Assuming you're using a TOML as your config file.
+To enable it, set the value of `params.enableLazySyntaxHighlighting` to `true` in your site config.
 
 [source,toml]
 ----
 [params]
-    # ...
     enableLazySyntaxHighlighting = true
 ----
 
-NOTE: If you're curious to the files being used, the script for
-the syntax highlighters is at `assets/js/lib` of the theme folder.
-It has a high filesize (~400KiB for PrismJS).
-I recommend to replace them with the same file over at your assets folder.
-Or you could also modify the scripts partial and link them through a CDN.
-
-Now that lazy syntax highlighting is enabled, you can simply use the
-normal code listings with Markdown or Asciidoctor (other formats are yet to be
-tested) like so:
+Now that lazy syntax highlighting is enabled, you can simply use the normal code listings with Markdown or Asciidoctor (other formats are yet to be tested) like so:
 
 .Markdown source code listing
 [source,markdown]
@@ -1082,67 +1017,51 @@ console.log("Hello world");
 ----
 ....
 
-
-=== Changing themes
-
-The CSS used for syntax highlighting is at `assets/css/` file.
-There should be separate stylesheet for each syntax highlighters with the same name (i.e. `prism.css`).
-
-You can replace the theme by having `prism.css` in the `assets/css` folder.
-You can replace the theme by going to https://prismjs.com/download.html[the PrismJS download page], select the theme you want and putting it in the aforementioned file.
-
-NOTE: The PrismJS script file contains the core, all of the languages offered as of v1.16.0, and the https://prismjs.com/plugins/keep-markup/[Keep Markup plugin] (this plugin is important if you want to use https://asciidoctor.org/docs/user-manual/#callouts[callouts in Asciidoctor]).
-In order to update PrismJS, you need to download the script file yourself at https://prismjs.com/download.html[the PrismJS download page] and select the languages it'll support.
+If you want to have control of how it works, you can always modify link:layouts/partials/scripts.html[the scripts component] in the appropriate section.
 
 
 
 
-== RSS, Atom, and JSON output feed
+== RSS, Atom, and JSON feeds support
 
-This theme doesn't have web feeds support but with the use of Hugo modules, it is possible to easily install and use one.
-footnote:[It used to have until it was removed on v2.5.0 for centralizing the functionality on my link:https://github.com/foo-dogsquared/hugo-web-feeds/[custom web feed module instead].]
+For those who are looking to find more ways of distributing their content into the world of crap, an output feed might fill your needs.
 
-To start, you need to initialize your Hugo project as a Hugo module with `hugo mod init $HUGO_MOD_NAME` where `$HUGO_MOD_NAME` could be any name.
+This theme does not have web feed templates but we can make use of link:https://github.com/foo-dogsquared/hugo-web-feeds[a dedicated web feed Hugo module] that is compatible with this theme.
+Here's an example where we install the component with Hugo modules (be sure to `hugo mod init $NAME` first!).
 
-Then, edit your site configuration
+CAUTION: Also, be sure to check out the repo of the component, the following example snippet may not have up-to-date instructions.
 
 [source,toml]
 ----
-
-# Visit the following for more information:
-# https://gohugo.io/templates/output-formats
-
-# Defining the media type of the output formats
-# For JSON format, it doesn't need to be since it's already built-in into Hugo
-[mediaTypes]
-    [mediaTypes."application/atom+xml"]
-        suffixes = ["atom", "atom.xml"] # You can remove the "atom.xml" if you want
-
-    # Redefining RSS media type for the additional suffix
-    [mediaTypes."application/rss+xml"]
-        suffixes = ["rss", "rss.xml"] # You can remove the "rss.xml" if you want
-
+[module]
+    [[module.imports]]
+        path = "github.com/foo-dogsquared/hugo-web-feeds"
 
 # Including all of the feed output formats in the build
 [outputFormats]
-    [outputFormats.Rss]
+    [outputFormats.RSS]
         mediaType = "application/rss+xml"
-        baseName = "index"
+        baseName = "feed"
 
     [outputFormats.Atom]
         mediaType = "application/atom+xml"
-        baseName = "index"
+        baseName = "feed"
 
-# Indicating what output formats shall be included
-# for the following kinds
+    [outputFormats.JSON]
+        mediaType = "application/feed+json"
+        baseName = "feed"
+
+
+# Indicating what output formats shall be included for the following kinds
 [outputs]
-    # .Site.BaseURL/index.* is available
+    # .Site.BaseURL/$basename.* is available
     home = ["HTML", "JSON", "RSS", "ATOM"]
 
-    # .Site.BaseURL/$section/index.* is available
+    # .Site.BaseURL/$section/$basename.* is available
     section = ["HTML", "JSON", "RSS", "ATOM"]
 ----
 
+Then run `hugo mod get && hugo serve` footnote:[`hugo serve` can actually get the modules by itself but I included the `hugo mod get` for demonstration purposes.] and it should have published the web feeds.
 
 
 === Limitations
@@ -1226,21 +1145,23 @@ It is advised to use https://highlightjs.org/[highlight.js] instead.
 
 
 
-== How to run your site
+== Frequently asked questions (FAQ)
 
-From your Hugo root directory, run the following command:
+[qanda]
+How are my files not listed in the site?::
+You may have forgotten to unset the content as a draft (i.e., `draft` key in the frontmatter).
+Delete the specified key or set the value as `false`.
 
-[source,bash]
-----
-hugo server -t terminal-plus-minus
-----
+Why is the site breadcrumbs appear as not complete?::
+The breadcrumbs component gets the title of each section.
+Some sections may not have a title (i.e., missing `title` key in the frontmatter).
+If the section does not have a title yet, create `_index.md` and set the `title` key in the frontmatter.
 
-You can also add the following line to site config file:
-
-[source,toml]
-----
-theme = "terminal-plus-minus"
-----
+Why is there no icon for `[INSERT SOCIAL MEDIA PLATFORM HERE]`?::
+The social media icons are extracted from the link:https://simpleicons.org/[Simple Icons] set.
+`[INSERT SOCIAL MEDIA PLATFORM HERE]` may not have an icon from the set which you can link:https://github.com/simple-icons/simple-icons/issues[file an icon request] for including it (if possible).
+Or you may have given the wrong `id` which correspond to the filename from the icon set.
+To know the correct `id`, you may have to search in the link:https://github.com/simple-icons/simple-icons[repo].
 
 
 
@@ -1289,6 +1210,7 @@ Here are some of the features that are considered to be implemented.
 Any help with this task list by pull requests are very appreciated.
 
 * Algolia integration
+* Typographical improvements
 
 
 
@@ -1325,3 +1247,4 @@ In other words:
 parts of the theme
 
 (IDK how to proceed with licensing so feel free to correct me pls -_-)
+
