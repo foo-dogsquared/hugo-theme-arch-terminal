@@ -1180,14 +1180,11 @@ If you want to contribute through code, you can do the following to set up the r
 
 * Fork this repository
 * Clone the forked repository
-* Checkout to the development branch (`develop`)
-* Create another branch from the development branch which you can
-freely implement your own stuff
+* Create another branch from the development branch which you can freely implement your own stuff
 
-Make sure the new branch name is appropriately named.
+Also make sure to install the latest Go runtime since this project makes use of Hugo modules.
 
-If creating a pull request, you have to pass it through the development branch.
-
+And be sure to create an appropriate name for the new branch before creating a pull request.
 
 
 === Project style guides
